@@ -22,6 +22,16 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
    - Username: `admin`
    - Password: `adminpass123`
 
+3. **Create the Infobox template in MediaWiki:**
+
+   Before importing articles, you need to create the infobox template:
+
+   - Navigate to <http://localhost:8080/index.php?title=Template:Infobox_Deckenmalerei&action=edit>
+   - Copy the content from [Infobox_Deckenmalerei.wiki](Infobox_Deckenmalerei.wiki)
+   - Save the page
+
+   This template will display structured metadata for each article including title, images, descriptions, and related persons (authors, painters, architects, commissioners).
+
 ## Usage
 
 ### Generate Articles Only
@@ -107,21 +117,40 @@ The project structure:
 
 ```txt
 DeckenmalereiWiki/
-├── docker-compose.yml    # MediaWiki + MariaDB setup
-├── parser.py             # Core JSON parser and article generator
-├── importer.py           # MediaWiki API integration
-├── requirements.txt      # Python dependencies
-├── sources/              # Source JSON files
+├── docker-compose.yml             # MediaWiki + SQLite setup
+├── LocalSettings.php              # MediaWiki configuration
+├── parser.py                      # Core JSON parser and article generator
+├── importer.py                    # MediaWiki API integration
+├── requirements.txt               # Python dependencies
+├── Infobox_Deckenmalerei.wiki    # MediaWiki infobox template
+├── sources/                       # Source JSON files
 │   ├── entities.json
 │   ├── relations.json
 │   └── resources.json
-├── output/               # Generated .wiki files (created by parser.py)
-└── downloads/            # Downloaded images (created by importer.py)
+├── output/                        # Generated .wiki files (created by parser.py)
+└── downloads/                     # Downloaded images (created by importer.py)
 ```
+
+## MediaWiki Template
+
+The [Infobox_Deckenmalerei.wiki](Infobox_Deckenmalerei.wiki) template displays structured information at the top of each article:
+
+- **titel** - Article title
+- **beschreibung** - Short description
+- **bild** - Main image filename
+- **lizenz** - Image license information
+- **author** - Text author(s)
+- **painter** - Ceiling painting artist(s)
+- **architect** - Building architect(s)
+- **commissioner** - Patron/commissioner(s)
+
+All parameters are optional. The template must be created in MediaWiki before importing articles.
 
 ## Notes
 
-- The infobox template `{{Infobox Deckenmalerei}}` needs to be created in MediaWiki
+- Uses SQLite database for simpler setup (no separate database container)
+- By default, only 10 articles are imported for faster testing (configurable with `max_articles` parameter)
+- Image processing is disabled by default (enable with `enable_images=True`)
 - Images are named as `Deckenmalerei_{entity_id}.jpg`
 - Articles can be re-imported/overwritten by running `importer.py` again
 - Large JSON files are loaded into memory - ensure sufficient RAM

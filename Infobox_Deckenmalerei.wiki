@@ -1,0 +1,99 @@
+<includeonly><table class="infobox" style="width: 22em; text-align: left; font-size: 88%; line-height: 1.5em; border: 1px solid #aaa; background-color: #f9f9f9; padding: 0.2em; float: right; clear: right; margin: 0 0 1em 1em;">
+{{#if:{{{titel|}}}|
+<tr>
+  <th colspan="2" style="text-align: center; font-size: 125%; font-weight: bold; background-color: #cce0ff; padding: 0.5em;">{{{titel}}}</th>
+</tr>
+}}
+{{#if:{{{bild|}}}|
+<tr>
+  <td colspan="2" style="text-align: center; padding: 0.5em;">[[File:{{{bild}}}|250px]]</td>
+</tr>
+}}
+{{#if:{{{beschreibung|}}}|
+<tr>
+  <td colspan="2" style="padding: 0.5em; border-top: 1px solid #aaa;">{{{beschreibung}}}</td>
+</tr>
+}}
+{{#if:{{{author|}}}|
+<tr>
+  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top; width: 30%;">Autor:</th>
+  <td style="padding: 0.25em 0.5em;">{{{author}}}</td>
+</tr>
+}}
+{{#if:{{{painter|}}}|
+<tr>
+  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Maler:</th>
+  <td style="padding: 0.25em 0.5em;">{{{painter}}}</td>
+</tr>
+}}
+{{#if:{{{architect|}}}|
+<tr>
+  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Architekt:</th>
+  <td style="padding: 0.25em 0.5em;">{{{architect}}}</td>
+</tr>
+}}
+{{#if:{{{commissioner|}}}|
+<tr>
+  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Auftraggeber:</th>
+  <td style="padding: 0.25em 0.5em;">{{{commissioner}}}</td>
+</tr>
+}}{{#if:{{{entity_id|}}}
+<tr>
+  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Quelle:</th>
+  <td style="padding: 0.25em 0.5em;">[https://www.deckenmalerei.eu/{{{entity_id}}} deckenmalerei.eu]</td>
+</tr>
+}}{{#if:{{{lizenz|}}}|
+<tr>
+  <td colspan="2" style="padding: 0.5em; border-top: 1px solid #aaa; font-size: 85%;">'''Lizenz:''' {{{lizenz}}}</td>
+</tr>
+}}
+</table></includeonly><noinclude>
+== Verwendung ==
+
+Diese Vorlage erstellt eine Infobox für Deckenmalerei-Artikel.
+
+=== Parameter ===
+
+<pre>
+{{Infobox Deckenmalerei
+| titel = 
+| beschreibung = 
+| bild = 
+| lizenz = 
+| author = 
+| painter = 
+| architect = 
+| commissioner = 
+| entity_id = 
+}}
+</pre>
+
+* '''titel''' - Titel des Artikels
+* '''beschreibung''' - Kurzbeschreibung
+* '''bild''' - Dateiname des Hauptbildes (ohne "File:" oder "Datei:")
+* '''lizenz''' - Lizenzinformation für das Bild
+* '''author''' - Autor(en) des Textes
+* '''painter''' - Maler der Deckenmalerei
+* '''architect''' - Architekt des Gebäudes
+* '''commissioner''' - Auftraggeber
+* '''entity_id''' - UUID des Eintrags (wird automatisch zu Link auf deckenmalerei.eu)
+
+Alle Parameter sind optional.
+
+=== Beispiel ===
+
+<pre>
+{{Infobox Deckenmalerei
+| titel = Reichmannsdorf, Schloss
+| beschreibung = Barockes Schloss mit prächtiger Deckenmalerei
+| bild = Deckenmalerei_27c8e824.jpg
+| lizenz = CC BY-ND 4.0
+| painter = Johann Sebastian Müller
+| architect = Balthasar Neumann
+| commissioner = Fürstbischof Friedrich Karl von Schönborn
+| entity_id = 27c8e824-fa3d-4628-a458-d4ab059e72f5
+}}
+</pre>
+
+[[Kategorie:Vorlagen|Infobox Deckenmalerei]]
+</noinclude>
