@@ -1,0 +1,14 @@
+services:
+  mediawiki:
+    image: mediawiki:1.45.1
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - mediawiki_data:/var/www/html/images
+      - mediawiki_db:/var/www/data
+      - ./LocalSettings.php:/var/www/html/LocalSettings.php:ro
+
+volumes:
+  mediawiki_data:
+  mediawiki_db:
