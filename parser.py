@@ -95,9 +95,10 @@ class DeckenmalereiParser:
         text = html
 
         # Headers
-        text = re.sub(r"<h2>(.*?)</h2>", r"= \1 =\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h3>(.*?)</h3>", r"== \1 ==\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h4>(.*?)</h4>", r"=== \1 ===\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h1>(.*?)</h1>", r"= \1 =\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h2>(.*?)</h2>", r"== \1 ==\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h3>(.*?)</h3>", r"=== \1 ===\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h4>(.*?)</h4>", r"==== \1 ====\n", text, flags=re.DOTALL)
 
         # Bold and italic
         text = re.sub(
@@ -206,6 +207,10 @@ class DeckenmalereiParser:
         # Get and combine all text parts
         text_parts = self.get_text_parts(text_entity["ID"])
         for part in text_parts:
+            # Add section header from TEXT_PART appellation
+            if part.get("appellation"):
+                article_parts.append(f"= {part['appellation']} =")
+                article_parts.append("")
             if part.get("text"):
                 converted_text = self.html_to_mediawiki(part["text"])
                 article_parts.append(converted_text)
