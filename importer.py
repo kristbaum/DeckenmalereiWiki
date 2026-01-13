@@ -21,7 +21,7 @@ class MediaWikiImporter:
         username: str = "admin",
         password: str = "adminpass123",
         scheme: str = "http",
-        enable_images: bool = False,
+        enable_images: bool = True,
         max_articles: int = 10,
     ):
         """Initialize MediaWiki connection.
@@ -53,11 +53,57 @@ class MediaWikiImporter:
             print(f"Login failed: {e}")
             return False
 
-    def download_image(self, url: str, entity_id: str) -> Optional[Path]:
-        """Download image from URL."""
+    def download_image(
+        self, url: str, entity_id: str, resource_id: str
+    ) -> Optional[Path]:
+        """Download image from URL.
+
+        Args:
+            url: Base provider URL (e.g., https://bildindex.de)
+            entity_id: Entity ID for filename
+            resource_id: Resource ID from resources.json
+        """
         try:
+            # Construct actual image URL based on provider
+            if "bildindex.de" in url:
+                # Bildindex pattern: https://previous.bildindex.de/bilder/{ID}a.jpg
+                image_url = f"https://previous.bildindex.de/bilder/{resource_id}a.jpg"
+                ext = ".jpg"
+            elif "deckenmalerei-bilder.badw.de" in url:
+                # EasyDB: Query API first to get the actual download URL
+                print(f"  Querying EasyDB API for resource {resource_id}...")
+                api_url = f"https://deckenmalerei-bilder.badw.de/api/v1/objects/uuid/{resource_id}"
+                api_response = requests.get(api_url, timeout=30)
+                api_response.raise_for_status()
+
+                api_data = api_response.json()
+                # Extract download URL from the full version
+                versions = (
+                    api_data.get("assets", {}).get("datei", [{}])[0].get("versions", {})
+                )
+
+                # Try to get full version, fall back to huge, then preview
+                if "full" in versions and versions["full"].get("_download_allowed"):
+                    image_url = versions["full"]["download_url"]
+                elif "huge" in versions and versions["huge"].get("_download_allowed"):
+                    image_url = versions["huge"]["download_url"]
+                elif "preview" in versions and versions["preview"].get(
+                    "_download_allowed"
+                ):
+                    image_url = versions["preview"]["download_url"]
+                else:
+                    print(f"  No downloadable version found for {resource_id}")
+                    return None
+
+                ext = ".jpg"
+                time.sleep(0.5)  # Be nice to the EasyDB server
+            else:
+                # Fallback: try to use URL as-is
+                print(f"  Unknown image provider: {url}")
+                image_url = url
+                ext = Path(urlparse(url).path).suffix or ".jpg"
+
             # Create safe filename
-            ext = Path(urlparse(url).path).suffix or ".jpg"
             filename = f"Deckenmalerei_{entity_id}{ext}"
             filepath = self.downloads_dir / filename
 
@@ -66,8 +112,8 @@ class MediaWikiImporter:
                 print(f"  Image already downloaded: {filename}")
                 return filepath
 
-            print(f"  Downloading: {url}")
-            response = requests.get(url, timeout=30, stream=True)
+            print(f"  Downloading: {image_url}")
+            response = requests.get(image_url, timeout=30, stream=True)
             response.raise_for_status()
 
             with open(filepath, "wb") as f:
@@ -75,10 +121,11 @@ class MediaWikiImporter:
                     f.write(chunk)
 
             print(f"  Saved: {filename}")
+            time.sleep(0.2)  # Be nice to the server
             return filepath
 
         except Exception as e:
-            print(f"  Failed to download {url}: {e}")
+            print(f"  Failed to download from {url} (resource: {resource_id}): {e}")
             return None
 
     def upload_image(
@@ -166,7 +213,8 @@ class MediaWikiImporter:
                 lead_resource = parser.get_lead_resource(entity["ID"])
                 if lead_resource and lead_resource.get("resProvider"):
                     url = lead_resource["resProvider"]
-                    filepath = self.download_image(url, entity["ID"])
+                    resource_id = lead_resource["ID"]
+                    filepath = self.download_image(url, entity["ID"], resource_id)
 
                     if filepath:
                         description = lead_resource.get("appellation", "")
