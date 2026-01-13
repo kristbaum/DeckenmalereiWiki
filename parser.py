@@ -97,6 +97,68 @@ class DeckenmalereiParser:
                 images.append(self.resources[resource_id])
         return images
 
+    def parse_citations(self, text: str, part_id: str) -> tuple[str, Dict[str, str]]:
+        """Parse citations from text and return cleaned text with citation map.
+
+        Citations are marked as [x] in text with definitions at the end like:
+        <p>[1] Citation text</p>
+        <p>[2] Another citation</p>
+
+        Returns:
+            tuple: (cleaned_text, citation_map) where citation_map keys are like 'partid_1'
+        """
+        if not text:
+            return text, {}
+
+        # Extract citation definitions from HTML
+        # Pattern: <p>[number] citation text</p>
+        citation_pattern = r"<p>\s*\[(\d+)\]\s*(.+?)</p>"
+
+        # Find all citations
+        citations = {}
+        citation_matches = list(re.finditer(citation_pattern, text, flags=re.DOTALL))
+
+        if not citation_matches:
+            return text, {}
+
+        # Find the position where citations start
+        # Look for consecutive citation paragraphs at the end
+        citation_start = len(text)
+
+        # Check from the end - find first citation paragraph
+        for match in reversed(citation_matches):
+            num = match.group(1)
+            citation_text = match.group(2).strip()
+            citations[num] = citation_text
+            citation_start = match.start()
+
+        # Only remove citations if they are at the end of the text
+        # Check if there's substantial content after the first citation
+        text_after_first_citation = text[citation_start:]
+        non_citation_content = re.sub(
+            citation_pattern, "", text_after_first_citation, flags=re.DOTALL
+        )
+        # Remove empty paragraphs and whitespace
+        non_citation_content = re.sub(r"<p>\s*</p>", "", non_citation_content).strip()
+
+        if not non_citation_content or non_citation_content == "":
+            # Citations are at the end, remove them
+            cleaned_text = text[:citation_start].rstrip()
+            # Remove trailing empty paragraphs
+            cleaned_text = re.sub(r"(<p>\s*</p>\s*)+$", "", cleaned_text)
+        else:
+            # Citations are mixed in content, don't remove
+            cleaned_text = text
+            citations = {}
+
+        # Create citation map with part_id prefix
+        citation_map = {
+            f"{part_id}_{num}": citation_text
+            for num, citation_text in citations.items()
+        }
+
+        return cleaned_text, citation_map
+
     def html_to_mediawiki(self, html: str) -> str:
         """Convert HTML markup to MediaWiki syntax."""
         if not html:
@@ -159,6 +221,49 @@ class DeckenmalereiParser:
         items = re.findall(r"<li>(.*?)</li>", list_content, flags=re.DOTALL)
         return "\n".join(f"{marker} {item.strip()}" for item in items) + "\n\n"
 
+    def replace_citation_refs(
+        self,
+        text: str,
+        part_id: str,
+        all_citations: Dict[str, str],
+        used_refs: Dict[str, bool],
+    ) -> str:
+        """Replace [x] references with MediaWiki <ref> tags.
+
+        Args:
+            text: Text containing [x] references
+            part_id: ID of the text part
+            all_citations: All citations collected from all parts
+            used_refs: Dict tracking which refs have been used (for reuse)
+
+        Returns:
+            Text with [x] replaced by <ref> tags
+        """
+
+        def replace_ref(match):
+            num = match.group(1)
+            ref_name = f"{part_id}_{num}"
+
+            if ref_name not in all_citations:
+                # Citation not found, keep as-is
+                return match.group(0)
+
+            citation_text = all_citations[ref_name]
+
+            if ref_name in used_refs:
+                # Already used, use short form
+                return f'<ref name="{ref_name}" />'
+            else:
+                # First use, include full citation
+                used_refs[ref_name] = True
+                return f'<ref name="{ref_name}">{citation_text}</ref>'
+
+        # Replace [x] with refs, but not in citation definitions
+        # Match [number] but not at start of line
+        text = re.sub(r"(?<!^)\[(\d+)\]", replace_ref, text, flags=re.MULTILINE)
+
+        return text
+
     def generate_infobox(self, text_entity: Dict) -> str:
         """Generate MediaWiki infobox from entity metadata."""
         infobox_lines = ["{{Infobox Deckenmalerei"]
@@ -214,8 +319,22 @@ class DeckenmalereiParser:
             article_parts.append(text_entity["shortText"])
             article_parts.append("")
 
-        # Get and combine all text parts
+        # First pass: collect all citations from all text parts
         text_parts = self.get_text_parts(text_entity["ID"])
+        all_citations = {}
+        part_texts = {}  # Store cleaned text for each part
+
+        for part in text_parts:
+            if part.get("text"):
+                part_id = part["ID"]
+                text = part["text"]
+                cleaned_text, citations = self.parse_citations(text, part_id)
+                part_texts[part_id] = cleaned_text
+                all_citations.update(citations)
+
+        # Second pass: generate article with resolved citations
+        used_refs = {}  # Track which refs have been used
+
         for part in text_parts:
             # Add section header from TEXT_PART appellation
             if part.get("appellation"):
@@ -230,8 +349,13 @@ class DeckenmalereiParser:
                 article_parts.append(f"[[File:{image_name}|thumb|{caption}]]")
                 article_parts.append("")
 
-            if part.get("text"):
-                converted_text = self.html_to_mediawiki(part["text"])
+            if part.get("text") and part["ID"] in part_texts:
+                # Get cleaned text and replace citation references
+                text = part_texts[part["ID"]]
+                text = self.replace_citation_refs(
+                    text, part["ID"], all_citations, used_refs
+                )
+                converted_text = self.html_to_mediawiki(text)
                 article_parts.append(converted_text)
                 article_parts.append("")  # Empty line between sections
 
