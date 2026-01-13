@@ -22,7 +22,7 @@ class MediaWikiImporter:
         password: str = "adminpass123",
         scheme: str = "http",
         enable_images: bool = True,
-        max_articles: int = 10,
+        max_articles: int = 5,
     ):
         """Initialize MediaWiki connection.
 
@@ -209,7 +209,7 @@ class MediaWikiImporter:
                 title = entity.get("appellation", f"Untitled_{entity['ID']}")
                 print(f"\nProcessing images for: {title}")
 
-                # Get lead resource
+                # Get lead resource for main article
                 lead_resource = parser.get_lead_resource(entity["ID"])
                 if lead_resource and lead_resource.get("resProvider"):
                     url = lead_resource["resProvider"]
@@ -220,6 +220,34 @@ class MediaWikiImporter:
                         description = lead_resource.get("appellation", "")
                         license_info = lead_resource.get("resLicense", "")
                         self.upload_image(filepath, description, license_info)
+                
+                # Get images from text parts
+                text_parts = parser.get_text_parts(entity["ID"])
+                for part in text_parts:
+                    # Get lead resource for text part
+                    part_lead_resource = parser.get_lead_resource(part["ID"])
+                    if part_lead_resource and part_lead_resource.get("resProvider"):
+                        url = part_lead_resource["resProvider"]
+                        resource_id = part_lead_resource["ID"]
+                        filepath = self.download_image(url, part["ID"], resource_id)
+                        
+                        if filepath:
+                            description = part_lead_resource.get("appellation", "")
+                            license_info = part_lead_resource.get("resLicense", "")
+                            self.upload_image(filepath, description, license_info)
+                    
+                    # Get IMAGE relations for text part
+                    part_images = parser.get_images(part["ID"])
+                    for img_resource in part_images:
+                        if img_resource.get("resProvider"):
+                            url = img_resource["resProvider"]
+                            resource_id = img_resource["ID"]
+                            filepath = self.download_image(url, img_resource["ID"], resource_id)
+                            
+                            if filepath:
+                                description = img_resource.get("appellation", "")
+                                license_info = img_resource.get("resLicense", "")
+                                self.upload_image(filepath, description, license_info)
         else:
             print(
                 "\n=== Image processing disabled (use enable_images=True to enable) ==="

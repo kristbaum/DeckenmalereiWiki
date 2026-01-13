@@ -87,6 +87,16 @@ class DeckenmalereiParser:
             return self.resources.get(resource_id)
         return None
 
+    def get_images(self, entity_id: str) -> List[Dict]:
+        """Get all IMAGE resources for an entity."""
+        image_rels = self.get_relations_by_type(entity_id, "IMAGE")
+        images = []
+        for rel in image_rels:
+            resource_id = rel.get("relTar")
+            if resource_id in self.resources:
+                images.append(self.resources[resource_id])
+        return images
+
     def html_to_mediawiki(self, html: str) -> str:
         """Convert HTML markup to MediaWiki syntax."""
         if not html:
@@ -211,10 +221,30 @@ class DeckenmalereiParser:
             if part.get("appellation"):
                 article_parts.append(f"= {part['appellation']} =")
                 article_parts.append("")
+
+            # Add lead resource image for this text part (standalone)
+            part_lead_resource = self.get_lead_resource(part["ID"])
+            if part_lead_resource and part_lead_resource.get("resProvider"):
+                image_name = f"Deckenmalerei_{part['ID']}.jpg"
+                caption = part_lead_resource.get("appellation", "")
+                article_parts.append(f"[[File:{image_name}|thumb|{caption}]]")
+                article_parts.append("")
+
             if part.get("text"):
                 converted_text = self.html_to_mediawiki(part["text"])
                 article_parts.append(converted_text)
                 article_parts.append("")  # Empty line between sections
+
+            # Add image gallery for this text part
+            part_images = self.get_images(part["ID"])
+            if part_images:
+                article_parts.append("<gallery>")
+                for img in part_images:
+                    img_name = f"Deckenmalerei_{img['ID']}.jpg"
+                    img_caption = img.get("appellation", "")
+                    article_parts.append(f"File:{img_name}|{img_caption}")
+                article_parts.append("</gallery>")
+                article_parts.append("")
 
         # Add bibliography if available
         if text_entity.get("bibliography"):
