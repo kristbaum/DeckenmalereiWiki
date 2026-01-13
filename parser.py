@@ -167,10 +167,10 @@ class DeckenmalereiParser:
         text = html
 
         # Headers
-        text = re.sub(r"<h1>(.*?)</h1>", r"= \1 =\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h2>(.*?)</h2>", r"== \1 ==\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h3>(.*?)</h3>", r"=== \1 ===\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h4>(.*?)</h4>", r"==== \1 ====\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h1>(.*?)</h1>", r"== \1 ==\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h2>(.*?)</h2>", r"=== \1 ===\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h3>(.*?)</h3>", r"==== \1 ====\n", text, flags=re.DOTALL)
+        text = re.sub(r"<h4>(.*?)</h4>", r"===== \1 =====\n", text, flags=re.DOTALL)
 
         # Bold and italic
         text = re.sub(
@@ -227,14 +227,16 @@ class DeckenmalereiParser:
         part_id: str,
         all_citations: Dict[str, str],
         used_refs: Dict[str, bool],
+        ref_name_mapping: Optional[Dict[str, str]] = None,
     ) -> str:
         """Replace [x] references with MediaWiki <ref> tags.
 
         Args:
             text: Text containing [x] references
             part_id: ID of the text part
-            all_citations: All citations collected from all parts
+            all_citations: All citations collected from all parts (deduplicated)
             used_refs: Dict tracking which refs have been used (for reuse)
+            ref_name_mapping: Optional mapping from original ref names to canonical names
 
         Returns:
             Text with [x] replaced by <ref> tags
@@ -242,7 +244,13 @@ class DeckenmalereiParser:
 
         def replace_ref(match):
             num = match.group(1)
-            ref_name = f"{part_id}_{num}"
+            original_ref_name = f"{part_id}_{num}"
+
+            # Use mapping if provided, otherwise use original name
+            if ref_name_mapping:
+                ref_name = ref_name_mapping.get(original_ref_name, original_ref_name)
+            else:
+                ref_name = original_ref_name
 
             if ref_name not in all_citations:
                 # Citation not found, keep as-is
@@ -332,13 +340,33 @@ class DeckenmalereiParser:
                 part_texts[part_id] = cleaned_text
                 all_citations.update(citations)
 
+        # Deduplicate citations by content
+        # Map citation text to canonical ref name (first occurrence)
+        citation_text_to_name = {}
+        ref_name_mapping = {}  # Maps original ref names to canonical names
+
+        for ref_name, citation_text in all_citations.items():
+            if citation_text in citation_text_to_name:
+                # Duplicate citation, map to existing ref name
+                ref_name_mapping[ref_name] = citation_text_to_name[citation_text]
+            else:
+                # New citation, use as canonical
+                citation_text_to_name[citation_text] = ref_name
+                ref_name_mapping[ref_name] = ref_name
+
+        # Create deduplicated citations dict with canonical names
+        deduplicated_citations = {
+            canonical_name: citation_text
+            for citation_text, canonical_name in citation_text_to_name.items()
+        }
+
         # Second pass: generate article with resolved citations
         used_refs = {}  # Track which refs have been used
 
         for part in text_parts:
             # Add section header from TEXT_PART appellation
             if part.get("appellation"):
-                article_parts.append(f"= {part['appellation']} =")
+                article_parts.append(f"== {part['appellation']} ==")
                 article_parts.append("")
 
             # Add lead resource image for this text part (standalone)
@@ -352,8 +380,13 @@ class DeckenmalereiParser:
             if part.get("text") and part["ID"] in part_texts:
                 # Get cleaned text and replace citation references
                 text = part_texts[part["ID"]]
+                # Use deduplicated citations and mapping
                 text = self.replace_citation_refs(
-                    text, part["ID"], all_citations, used_refs
+                    text,
+                    part["ID"],
+                    deduplicated_citations,
+                    used_refs,
+                    ref_name_mapping,
                 )
                 converted_text = self.html_to_mediawiki(text)
                 article_parts.append(converted_text)
