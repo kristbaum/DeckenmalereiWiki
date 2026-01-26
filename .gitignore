@@ -13,9 +13,6 @@ ENV/
 output/
 downloads/
 
-# MediaWiki
-LocalSettings.php
-
 # IDE
 .vscode/
 .idea/
