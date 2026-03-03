@@ -4,10 +4,10 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
 
 ## Setup
 
-1. **Install dependencies:**
+1. **Install the package:**
 
    ```bash
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 2. **Start MediaWiki (optional for local testing):**
@@ -39,7 +39,7 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
 Parse the JSON files and save articles as `.wiki` files:
 
 ```bash
-python parser.py
+python -m deckenmalereiwiki parse
 ```
 
 This creates an `output/` directory with all generated MediaWiki articles.
@@ -49,7 +49,7 @@ This creates an `output/` directory with all generated MediaWiki articles.
 Parse data and automatically import articles with images to MediaWiki:
 
 ```bash
-python importer.py
+python -m deckenmalereiwiki import
 ```
 
 This will:
@@ -58,6 +58,8 @@ This will:
 2. Download images from external URLs
 3. Upload images to MediaWiki
 4. Create/update articles in MediaWiki
+
+The legacy entry points (`python parser.py` and `python importer.py`) still work as well.
 
 ## Architecture
 
@@ -80,15 +82,16 @@ The parser processes three JSON files:
 ### Example Workflow
 
 ```python
-from parser import DeckenmalereiParser
-from importer import MediaWikiImporter
+from deckenmalereiwiki.parser import DeckenmalereiParser
+from deckenmalereiwiki.generator import generate_all_articles
+from deckenmalereiwiki.importer import MediaWikiImporter
 
 # Parse data
 parser = DeckenmalereiParser()
 parser.load_data()
 
 # Generate articles
-articles = parser.generate_all_articles()
+articles = generate_all_articles(parser)
 
 # Import to MediaWiki
 importer = MediaWikiImporter(host="localhost", port=8080)
@@ -119,16 +122,24 @@ The project structure:
 DeckenmalereiWiki/
 ├── docker-compose.yml             # MediaWiki + SQLite setup
 ├── LocalSettings.php              # MediaWiki configuration
-├── parser.py                      # Core JSON parser and article generator
-├── importer.py                    # MediaWiki API integration
-├── requirements.txt               # Python dependencies
-├── Infobox_Deckenmalerei.wiki    # MediaWiki infobox template
+├── pyproject.toml                 # Project metadata and dependencies
+├── parser.py                      # Legacy wrapper (backward compat)
+├── importer.py                    # Legacy wrapper (backward compat)
+├── requirements.txt               # Legacy dependency list
+├── Infobox_Deckenmalerei.wiki     # MediaWiki infobox template
+├── src/deckenmalereiwiki/         # Main package
+│   ├── __init__.py
+│   ├── __main__.py                # CLI entry point
+│   ├── parser.py                  # Data loading and entity queries
+│   ├── converter.py               # HTML→MediaWiki conversion, citations
+│   ├── generator.py               # Article and infobox generation
+│   └── importer.py                # MediaWiki API integration
 ├── sources/                       # Source JSON files
 │   ├── entities.json
 │   ├── relations.json
 │   └── resources.json
-├── output/                        # Generated .wiki files (created by parser.py)
-└── downloads/                     # Downloaded images (created by importer.py)
+├── output/                        # Generated .wiki files
+└── downloads/                     # Downloaded images
 ```
 
 ## MediaWiki Template
