@@ -137,8 +137,12 @@ class ArticleGenerator:
                 parts_out.append("")
 
         if text_entity.get("bibliography"):
-            parts_out.append("== Literatur ==")
-            parts_out.append(self.converter.convert(text_entity["bibliography"]))
+            parts_out.append("== Bibliographie ==")
+            bibliography_text = self.converter.convert(text_entity["bibliography"])
+            # Add bullet points before each non-empty line
+            lines = bibliography_text.split("\n")
+            bulleted_lines = ["* " + line if line.strip() else line for line in lines]
+            parts_out.append("\n".join(bulleted_lines))
             parts_out.append("")
 
         return "\n".join(parts_out)
