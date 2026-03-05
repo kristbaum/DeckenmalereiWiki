@@ -52,7 +52,7 @@ class ArticleGenerator:
                 ]
                 if names:
                     label = rel_type.lower().rstrip("s")
-                    lines.append(f"| {label} = {', '.join(names)}")
+                    lines.append(f"| {label} = {'; '.join(names)}")
 
         if text_entity.get("ID"):
             lines.append(f"| entity_id = {text_entity['ID']}")
@@ -144,7 +144,9 @@ class ArticleGenerator:
             bulleted_lines = ["* " + line if line.strip() else line for line in lines]
             parts_out.append("\n".join(bulleted_lines))
             parts_out.append("")
-            parts_out.append("== Einzelnachweise ==\n") # Since bibliography is the last part in texts, the footnotes/einzelnachweise should come after this
+            parts_out.append(
+                "== Einzelnachweise ==\n"
+            )  # Since bibliography is the last part in texts, the footnotes/einzelnachweise should come after this
 
         return "\n".join(parts_out)
 
@@ -174,7 +176,7 @@ class ArticleGenerator:
         return articles
 
     def save_articles_to_files(
-        self, output_dir: str = "output", max_articles: Optional[int] = 10
+        self, output_dir: str = "output", max_articles: Optional[int] = 5
     ):
         """Save generated articles as individual ``.wiki`` files.
 

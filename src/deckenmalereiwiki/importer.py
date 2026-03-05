@@ -25,7 +25,7 @@ class MediaWikiImporter:
         password: str = "adminpass123",
         scheme: str = "http",
         enable_images: bool = True,
-        max_articles: int = 10,
+        max_articles: int = 5,
     ):
         """Initialise the MediaWiki connection.
 

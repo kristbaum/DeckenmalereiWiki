@@ -9,7 +9,6 @@ from urllib.parse import urlparse
 
 import requests
 
-
 class ImageHandler:
     """Handles downloading images from providers and uploading them to MediaWiki."""
 
@@ -65,7 +64,7 @@ class ImageHandler:
                 else:
                     print(f"  No downloadable version found for {resource_id}")
                     return None
-                ext = ".jpg"
+                ext = Path(urlparse(image_url).path).suffix or ".jpg"
                 time.sleep(0.5)
             else:
                 print(f"  Unknown image provider: {url}")
@@ -83,7 +82,7 @@ class ImageHandler:
                     f.write(chunk)
 
             print(f"  Saved: {filename}")
-            time.sleep(0.2)
+            time.sleep(0.5)
             return filepath
 
         except Exception as e:

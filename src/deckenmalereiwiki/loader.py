@@ -120,8 +120,6 @@ class DataLoader:
         for rel in self.get_relations_by_type(resource_id, rel_type):
             target_id = rel.get("relTar", "")
             entity = self.entities.get(target_id)
-            if entity:
-                result.append(entity.get("appellation", target_id))
-            else:
-                result.append(target_id)
+            if entity and entity.get("appellation"):
+                result.append(entity["appellation"])
         return result
