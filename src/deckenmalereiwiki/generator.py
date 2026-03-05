@@ -144,6 +144,7 @@ class ArticleGenerator:
             bulleted_lines = ["* " + line if line.strip() else line for line in lines]
             parts_out.append("\n".join(bulleted_lines))
             parts_out.append("")
+            parts_out.append("== Einzelnachweise ==\n") # Since bibliography is the last part in texts, the footnotes/einzelnachweise should come after this
 
         return "\n".join(parts_out)
 
