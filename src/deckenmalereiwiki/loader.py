@@ -81,15 +81,47 @@ class DataLoader:
         return None
 
     def get_images(self, entity_id: str) -> List[Dict]:
-        """Get all IMAGE resources for an entity."""
-        image_rels = self.get_relations_by_type(entity_id, "IMAGE")
+        """Get all IMAGE resources for an entity.
+
+        IMAGE relations are stored on OBJECT_* entities, not directly on TEXT or
+        TEXT_PART entities.  This method follows the DOCUMENTS relation from
+        *entity_id* to the linked OBJECT_* entities and then collects every
+        IMAGE resource attached to those objects.
+        """
+        seen: set = set()
         images = []
-        for rel in image_rels:
-            resource_id = rel.get("relTar")
-            if resource_id in self.resources:
-                images.append(self.resources[resource_id])
+        # Follow DOCUMENTS relations to reach the underlying OBJECT_* entities
+        document_rels = self.get_relations_by_type(entity_id, "DOCUMENTS")
+        for doc_rel in document_rels:
+            object_id = doc_rel.get("relTar")
+            if not object_id:
+                continue
+            image_rels = self.get_relations_by_type(object_id, "IMAGE")
+            for rel in image_rels:
+                resource_id = rel.get("relTar")
+                if resource_id in self.resources and resource_id not in seen:
+                    seen.add(resource_id)
+                    images.append(self.resources[resource_id])
         return images
 
+    def get_resource_actors(self, resource_id: str, rel_type: str) -> List[str]:
+        """Return a list of entity appellations linked to *resource_id* via *rel_type*.
 
-# Backward-compatible alias
-DeckenmalereiParser = DataLoader
+        Args:
+            resource_id: The ID of a resource (from resources.json).
+            rel_type:    Relation type to follow, e.g. ``'RIGHTS_HOLDERS'`` or
+                         ``'ORIGINATORS'``.
+
+        Returns:
+            List of appellation strings; falls back to the raw entity ID when
+            the entity is not found in the loaded set.
+        """
+        result = []
+        for rel in self.get_relations_by_type(resource_id, rel_type):
+            target_id = rel.get("relTar", "")
+            entity = self.entities.get(target_id)
+            if entity:
+                result.append(entity.get("appellation", target_id))
+            else:
+                result.append(target_id)
+        return result

@@ -37,6 +37,14 @@ class ImageHandler:
             Local :class:`~pathlib.Path` of the downloaded file, or ``None``.
         """
         try:
+            # Check if already downloaded (any extension) before making network calls
+            existing = next(
+                self.downloads_dir.glob(f"Deckenmalerei_{entity_id}.*"), None
+            )
+            if existing:
+                print(f"  Image already downloaded: {existing.name}")
+                return existing
+
             if "bildindex.de" in url:
                 image_url = f"https://previous.bildindex.de/bilder/{resource_id}a.jpg"
                 ext = ".jpg"
@@ -67,10 +75,6 @@ class ImageHandler:
             filename = f"Deckenmalerei_{entity_id}{ext}"
             filepath = self.downloads_dir / filename
 
-            if filepath.exists():
-                print(f"  Image already downloaded: {filename}")
-                return filepath
-
             print(f"  Downloading: {image_url}")
             response = requests.get(image_url, timeout=30, stream=True)
             response.raise_for_status()
@@ -87,7 +91,12 @@ class ImageHandler:
             return None
 
     def upload_image(
-        self, filepath: Path, description: str = "", license_info: str = ""
+        self,
+        filepath: Path,
+        description: str = "",
+        license_info: str = "",
+        rights_holders: list | None = None,
+        originators: list | None = None,
     ) -> bool:
         """Upload *filepath* to MediaWiki. Returns ``True`` on success."""
         try:
@@ -97,9 +106,16 @@ class ImageHandler:
                 print(f"  Image already exists: {filename}")
                 return True
 
-            full_description = f"{description}\n\n"
+            parts = []
+            if description:
+                parts.append(description)
+            if originators:
+                parts.append("Urheber: " + ", ".join(originators))
+            if rights_holders:
+                parts.append("Rechteinhaber: " + ", ".join(rights_holders))
             if license_info:
-                full_description += f"Lizenz: {license_info}\n"
+                parts.append(f"Lizenz: {license_info}")
+            full_description = "\n".join(parts)
 
             print(f"  Uploading: {filename}")
             with open(filepath, "rb") as f:

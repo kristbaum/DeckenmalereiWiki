@@ -25,7 +25,7 @@ class MediaWikiImporter:
         password: str = "adminpass123",
         scheme: str = "http",
         enable_images: bool = True,
-        max_articles: int = 2,
+        max_articles: int = 10,
     ):
         """Initialise the MediaWiki connection.
 
@@ -163,10 +163,17 @@ class MediaWikiImporter:
                     resource["resProvider"], name_entity_id, resource["ID"]
                 )
                 if fp:
+                    resource_id = resource["ID"]
+                    rights_holders = loader.get_resource_actors(
+                        resource_id, "RIGHTS_HOLDERS"
+                    )
+                    originators = loader.get_resource_actors(resource_id, "ORIGINATORS")
                     self.image_handler.upload_image(
                         fp,
                         resource.get("appellation", ""),
                         resource.get("resLicense", ""),
+                        rights_holders=rights_holders,
+                        originators=originators,
                     )
 
         _handle(loader.get_lead_resource(entity["ID"]), entity["ID"])
