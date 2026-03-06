@@ -36,7 +36,7 @@ class ArticleGenerator:
 
         lead_resource = self.loader.get_lead_resource(text_entity["ID"])
         if lead_resource and lead_resource.get("resProvider"):
-            image_name = f"Deckenmalerei_{text_entity['ID']}.jpg"
+            image_name = f"{text_entity['ID']}.jpg"
             lines.append(f"| bild = {image_name}")
             if lead_resource.get("resLicense"):
                 lines.append(f"| lizenz = {lead_resource['resLicense']}")
@@ -111,7 +111,7 @@ class ArticleGenerator:
 
             part_lead = self.loader.get_lead_resource(part["ID"])
             if part_lead and part_lead.get("resProvider"):
-                image_name = f"Deckenmalerei_{part['ID']}.jpg"
+                image_name = f"{part['ID']}.jpg"
                 caption = part_lead.get("appellation", "")
                 parts_out.append(f"[[File:{image_name}|thumb|{caption}]]")
                 parts_out.append("")
@@ -131,7 +131,7 @@ class ArticleGenerator:
             if part_images:
                 parts_out.append("<gallery>")
                 for img in part_images:
-                    img_name = f"Deckenmalerei_{img['ID']}.jpg"
+                    img_name = f"{img['ID']}.jpg"
                     parts_out.append(f"File:{img_name}|{img.get('appellation', '')}")
                 parts_out.append("</gallery>")
                 parts_out.append("")

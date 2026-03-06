@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 import requests
 
+
 class ImageHandler:
     """Handles downloading images from providers and uploading them to MediaWiki."""
 
@@ -37,9 +38,7 @@ class ImageHandler:
         """
         try:
             # Check if already downloaded (any extension) before making network calls
-            existing = next(
-                self.downloads_dir.glob(f"Deckenmalerei_{entity_id}.*"), None
-            )
+            existing = next(self.downloads_dir.glob(f"{entity_id}.*"), None)
             if existing:
                 print(f"  Image already downloaded: {existing.name}")
                 return existing
@@ -71,7 +70,7 @@ class ImageHandler:
                 image_url = url
                 ext = Path(urlparse(url).path).suffix or ".jpg"
 
-            filename = f"Deckenmalerei_{entity_id}{ext}"
+            filename = f"{entity_id}{ext}"
             filepath = self.downloads_dir / filename
 
             print(f"  Downloading: {image_url}")
@@ -125,6 +124,7 @@ class ImageHandler:
                     ignore=False,
                 )
             print(f"  Uploaded: {filename}")
+            time.sleep(1.0)
             return True
         except Exception as e:
             print(f"  Failed to upload {filepath}: {e}")
