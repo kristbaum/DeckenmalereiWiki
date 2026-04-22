@@ -114,34 +114,6 @@ Edit [importer.py](importer.py) to change:
 - Download directory
 - Upload behavior
 
-## Development
-
-The project structure:
-
-```txt
-DeckenmalereiWiki/
-├── docker-compose.yml             # MediaWiki + SQLite setup
-├── LocalSettings.php              # MediaWiki configuration
-├── pyproject.toml                 # Project metadata and dependencies
-├── parser.py                      # Legacy wrapper (backward compat)
-├── importer.py                    # Legacy wrapper (backward compat)
-├── requirements.txt               # Legacy dependency list
-├── Infobox_Deckenmalerei.wiki     # MediaWiki infobox template
-├── src/deckenmalereiwiki/         # Main package
-│   ├── __init__.py
-│   ├── __main__.py                # CLI entry point
-│   ├── parser.py                  # Data loading and entity queries
-│   ├── converter.py               # HTML→MediaWiki conversion, citations
-│   ├── generator.py               # Article and infobox generation
-│   └── importer.py                # MediaWiki API integration
-├── sources/                       # Source JSON files
-│   ├── entities.json
-│   ├── relations.json
-│   └── resources.json
-├── output/                        # Generated .wiki files
-└── downloads/                     # Downloaded images
-```
-
 ## MediaWiki Template
 
 The [Infobox_Deckenmalerei.wiki](Infobox_Deckenmalerei.wiki) template displays structured information at the top of each article:
