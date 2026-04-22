@@ -6,14 +6,18 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
 
 1. **Install the package:**
 
+   (uv just as an example)
+
    ```bash
-   pip install -e .
+   uv sync
+   uv pip install -e .
    ```
 
 2. **Start MediaWiki (optional for local testing):**
 
    ```bash
    docker-compose up -d
+   install_extenstions.sh
    ```
 
    Access MediaWiki at: <http://localhost:8080>

@@ -129,7 +129,7 @@ class ArticleGenerator:
 
             part_images = self.loader.get_images(part["ID"])
             if part_images:
-                parts_out.append("<gallery>")
+                parts_out.append('<gallery mode="slideshow" showthumbnails>')
                 for img in part_images:
                     img_name = f"{img['ID']}.jpg"
                     parts_out.append(f"File:{img_name}|{img.get('appellation', '')}")
