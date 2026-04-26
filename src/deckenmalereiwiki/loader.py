@@ -80,6 +80,27 @@ class DataLoader:
             return self.resources.get(resource_id)
         return None
 
+    def get_lead_resource_via_documents(
+        self, entity_id: str
+    ) -> tuple[str, Optional[Dict]]:
+        """Return ``(name_entity_id, resource)`` for the lead resource.
+
+        Tries the LEAD_RESOURCE relation directly on *entity_id* first; if
+        absent, follows DOCUMENTS to the first OBJECT_* entity that carries a
+        LEAD_RESOURCE.  ``name_entity_id`` is the entity whose ID should be
+        used as the MediaWiki filename (``{name_entity_id}.jpg``).
+        """
+        lead = self.get_lead_resource(entity_id)
+        if lead:
+            return entity_id, lead
+        for doc_rel in self.get_relations_by_type(entity_id, "DOCUMENTS"):
+            object_id = doc_rel.get("relTar")
+            if object_id:
+                lead = self.get_lead_resource(object_id)
+                if lead:
+                    return object_id, lead
+        return entity_id, None
+
     def get_images(self, entity_id: str) -> List[Dict]:
         """Get all IMAGE resources for an entity.
 

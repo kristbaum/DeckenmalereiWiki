@@ -34,9 +34,11 @@ class ArticleGenerator:
         if text_entity.get("shortText"):
             lines.append(f"| beschreibung = {text_entity['shortText']}")
 
-        lead_resource = self.loader.get_lead_resource(text_entity["ID"])
+        lead_entity_id, lead_resource = self.loader.get_lead_resource_via_documents(
+            text_entity["ID"]
+        )
         if lead_resource and lead_resource.get("resProvider"):
-            image_name = f"{text_entity['ID']}.jpg"
+            image_name = f"{lead_entity_id}.jpg"
             lines.append(f"| bild = {image_name}")
             if lead_resource.get("resLicense"):
                 lines.append(f"| lizenz = {lead_resource['resLicense']}")
@@ -75,6 +77,25 @@ class ArticleGenerator:
             parts_out.append(text_entity["shortText"])
             parts_out.append("")
 
+        # --- Article-level image gallery (TEXT → DOCUMENTS → OBJECT → images) ---
+        text_lead_entity_id, text_lead = self.loader.get_lead_resource_via_documents(
+            text_entity["ID"]
+        )
+        text_images = self.loader.get_images(text_entity["ID"])
+        text_gallery: List[tuple] = []
+        if text_lead and text_lead.get("resProvider"):
+            text_gallery.append(
+                (f"{text_lead_entity_id}.jpg", text_lead.get("appellation", ""))
+            )
+        for img in text_images:
+            text_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
+        if text_gallery:
+            parts_out.append('<gallery mode="slideshow" showthumbnails>')
+            for img_filename, img_caption in text_gallery:
+                parts_out.append(f"File:{img_filename}|{img_caption}")
+            parts_out.append("</gallery>")
+            parts_out.append("")
+
         # --- First pass: collect citations from all text parts ---
         text_parts = self.loader.get_text_parts(text_entity["ID"])
         all_citations: Dict[str, str] = {}
@@ -109,13 +130,6 @@ class ArticleGenerator:
                 parts_out.append(f"== {part['appellation']} ==")
                 parts_out.append("")
 
-            part_lead = self.loader.get_lead_resource(part["ID"])
-            if part_lead and part_lead.get("resProvider"):
-                image_name = f"{part['ID']}.jpg"
-                caption = part_lead.get("appellation", "")
-                parts_out.append(f"[[File:{image_name}|thumb|{caption}]]")
-                parts_out.append("")
-
             if part.get("text") and part["ID"] in part_texts:
                 text = replace_citation_refs(
                     part_texts[part["ID"]],
@@ -127,12 +141,22 @@ class ArticleGenerator:
                 parts_out.append(self.converter.convert(text))
                 parts_out.append("")
 
+            # Per-part gallery: lead_resource first, then IMAGE resources
+            part_lead_entity_id, part_lead = (
+                self.loader.get_lead_resource_via_documents(part["ID"])
+            )
             part_images = self.loader.get_images(part["ID"])
-            if part_images:
+            part_gallery: List[tuple] = []
+            if part_lead and part_lead.get("resProvider"):
+                part_gallery.append(
+                    (f"{part_lead_entity_id}.jpg", part_lead.get("appellation", ""))
+                )
+            for img in part_images:
+                part_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
+            if part_gallery:
                 parts_out.append('<gallery mode="slideshow" showthumbnails>')
-                for img in part_images:
-                    img_name = f"{img['ID']}.jpg"
-                    parts_out.append(f"File:{img_name}|{img.get('appellation', '')}")
+                for img_filename, img_caption in part_gallery:
+                    parts_out.append(f"File:{img_filename}|{img_caption}")
                 parts_out.append("</gallery>")
                 parts_out.append("")
 

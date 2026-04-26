@@ -176,9 +176,20 @@ class MediaWikiImporter:
                         originators=originators,
                     )
 
-        _handle(loader.get_lead_resource(entity["ID"]), entity["ID"])
+        # Lead resource for the TEXT entity (follows DOCUMENTS to OBJECT if needed)
+        lead_entity_id, lead_resource = loader.get_lead_resource_via_documents(
+            entity["ID"]
+        )
+        _handle(lead_resource, lead_entity_id)
+
+        # IMAGE resources via TEXT → DOCUMENTS → OBJECT → IMAGE
+        for img in loader.get_images(entity["ID"]):
+            _handle(img if img.get("resProvider") else None, img["ID"])
 
         for part in loader.get_text_parts(entity["ID"]):
-            _handle(loader.get_lead_resource(part["ID"]), part["ID"])
+            part_lead_entity_id, part_lead = loader.get_lead_resource_via_documents(
+                part["ID"]
+            )
+            _handle(part_lead, part_lead_entity_id)
             for img in loader.get_images(part["ID"]):
                 _handle(img if img.get("resProvider") else None, img["ID"])
