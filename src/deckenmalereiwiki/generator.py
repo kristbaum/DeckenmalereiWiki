@@ -89,7 +89,12 @@ class ArticleGenerator:
             )
         for img in text_images:
             text_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
-        if text_gallery:
+            print("Text Gallery")
+        if len(text_gallery) == 1:
+            img_filename, img_caption = text_gallery[0]
+            parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
+            parts_out.append("")
+        elif text_gallery:
             parts_out.append('<gallery mode="slideshow" showthumbnails>')
             for img_filename, img_caption in text_gallery:
                 parts_out.append(f"File:{img_filename}|{img_caption}")
@@ -130,17 +135,6 @@ class ArticleGenerator:
                 parts_out.append(f"== {part['appellation']} ==")
                 parts_out.append("")
 
-            if part.get("text") and part["ID"] in part_texts:
-                text = replace_citation_refs(
-                    part_texts[part["ID"]],
-                    part["ID"],
-                    deduplicated_citations,
-                    used_refs,
-                    ref_name_mapping,
-                )
-                parts_out.append(self.converter.convert(text))
-                parts_out.append("")
-
             # Per-part gallery: lead_resource first, then IMAGE resources
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
@@ -153,11 +147,27 @@ class ArticleGenerator:
                 )
             for img in part_images:
                 part_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
-            if part_gallery:
+                print("Part Gallery")
+            if len(part_gallery) == 1:
+                img_filename, img_caption = part_gallery[0]
+                parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
+                parts_out.append("")
+            elif part_gallery:
                 parts_out.append('<gallery mode="slideshow" showthumbnails>')
                 for img_filename, img_caption in part_gallery:
                     parts_out.append(f"File:{img_filename}|{img_caption}")
                 parts_out.append("</gallery>")
+                parts_out.append("")
+
+            if part.get("text") and part["ID"] in part_texts:
+                text = replace_citation_refs(
+                    part_texts[part["ID"]],
+                    part["ID"],
+                    deduplicated_citations,
+                    used_refs,
+                    ref_name_mapping,
+                )
+                parts_out.append(self.converter.convert(text))
                 parts_out.append("")
 
         if text_entity.get("bibliography"):
