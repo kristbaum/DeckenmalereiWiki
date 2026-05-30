@@ -21,10 +21,15 @@ downloads/        Downloaded images (created at runtime)
 ## Build and Test
 
 ```bash
-pip install -e .
-python -m deckenmalereiwiki parse      # generate output/*.wiki files
-python -m deckenmalereiwiki import     # parse + upload to MediaWiki
+uv run deckenmalereiwiki               # generate output/*.wiki files (default: 5 articles)
+uv run pytest tests/ -v                # run regression tests against generated output
 docker compose up -d                   # local MediaWiki at http://localhost:8080
+```
+
+**After every code change, run both commands in order** — regenerate first so the tests reflect fresh output:
+
+```bash
+uv run deckenmalereiwiki && uv run pytest tests/ -v
 ```
 
 ## Source Data Schema

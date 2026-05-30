@@ -14,8 +14,18 @@ dependencies = [
     "mwclient>=0.11.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
 [project.scripts]
 deckenmalereiwiki = "deckenmalereiwiki.__main__:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/deckenmalereiwiki"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
