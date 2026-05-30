@@ -6,18 +6,15 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
 
 1. **Install the package:**
 
-   (uv just as an example)
-
    ```bash
    uv sync
-   uv pip install -e .
    ```
 
 2. **Start MediaWiki (optional for local testing):**
 
    ```bash
-   docker-compose up -d
    install_extenstions.sh
+   docker-compose up -d
    ```
 
    Access MediaWiki at: <http://localhost:8080>
@@ -43,7 +40,7 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
 Parse the JSON files and save articles as `.wiki` files:
 
 ```bash
-python -m deckenmalereiwiki parse
+uv run deckenmalereiwiki parse
 ```
 
 This creates an `output/` directory with all generated MediaWiki articles.
@@ -53,7 +50,7 @@ This creates an `output/` directory with all generated MediaWiki articles.
 Parse data and automatically import articles with images to MediaWiki:
 
 ```bash
-python -m deckenmalereiwiki import
+uv run deckenmalereiwiki import
 ```
 
 This will:
@@ -62,8 +59,6 @@ This will:
 2. Download images from external URLs
 3. Upload images to MediaWiki
 4. Create/update articles in MediaWiki
-
-The legacy entry points (`python parser.py` and `python importer.py`) still work as well.
 
 ## Architecture
 
