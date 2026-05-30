@@ -11,6 +11,7 @@ from typing import Dict, List, Optional
 from .loader import DataLoader
 from .converter import HtmlConverter
 from .citations import parse_citations, replace_citation_refs
+from .strukturdaten import load_wikidata_mapping, generate_strukturdaten
 
 
 class ArticleGenerator:
@@ -19,6 +20,7 @@ class ArticleGenerator:
     def __init__(self, loader: DataLoader):
         self.loader = loader
         self.converter = HtmlConverter()
+        self.wikidata_mapping = load_wikidata_mapping(str(loader.sources_dir))
 
     # ------------------------------------------------------------------
     # Infobox
@@ -134,6 +136,11 @@ class ArticleGenerator:
             if part.get("appellation"):
                 parts_out.append(f"== {part['appellation']} ==")
                 parts_out.append("")
+                documented_id = self.loader.get_documented_entity_id(part["ID"])
+                if documented_id:
+                    qid = self.wikidata_mapping.get(documented_id)
+                    parts_out.append(generate_strukturdaten(documented_id, qid))
+                    parts_out.append("")
 
             # Per-part gallery: lead_resource first, then IMAGE resources
             part_lead_entity_id, part_lead = (

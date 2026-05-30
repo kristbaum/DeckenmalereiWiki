@@ -125,6 +125,13 @@ class DataLoader:
                     images.append(self.resources[resource_id])
         return images
 
+    def get_documented_entity_id(self, entity_id: str) -> Optional[str]:
+        """Return the ID of the first entity linked via a DOCUMENTS relation."""
+        doc_rels = self.get_relations_by_type(entity_id, "DOCUMENTS")
+        if doc_rels:
+            return doc_rels[0].get("relTar")
+        return None
+
     def get_resource_actors(self, resource_id: str, rel_type: str) -> List[str]:
         """Return a list of entity appellations linked to *resource_id* via *rel_type*.
 
