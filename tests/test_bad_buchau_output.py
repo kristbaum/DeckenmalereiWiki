@@ -72,12 +72,16 @@ def test_expected_top_level_sections_present(content):
     """Key == sections must be present with exact titles."""
     sections = [
         "== Das Stift Bad Buchau ==",
-        "== Die Stiftskirche St. Cornelius und Cyprian ==",
-        "== Die Decke des Hauptschiffs ==",
-        "== Das Hauptbild ==",
-        "== Die Krönung Mariens ==",
-        "== Das Mannawunder ==",
-        "== Die Decke im Chor ==",
+        "=== Die Stiftskirche St. Cornelius und Cyprian ===",
+        "==== Die Decke des Hauptschiffs ====",
+        "===== Das Hauptbild =====",
+        "====== Die Krönung Mariens ======",
+        "===== Das Mannawunder =====",
+        "==== Die Decke im Chor ====",
+        "===== Gaudium =====",
+        "== Die Abteigebäude ==",
+        "=== Der so genannte Goldene Saal ===",
+        "==== Die Wandmalereireste im Grünen Zimmer ===="
     ]
     for section in sections:
         assert section in content, f"Missing top-level section: {section!r}"

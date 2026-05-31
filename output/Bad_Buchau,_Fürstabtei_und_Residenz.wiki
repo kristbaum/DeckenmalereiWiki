@@ -53,7 +53,7 @@ Die Stiftsgebäude bestanden aus mehreren Wirtschaftsbauten und dem fünfflügel
 === Forschungsstand zur Baugeschichte ===
 Der Forschungsstand zum Stift Buchau und seiner Architektur ist ausgesprochen gut. Bereits in den 20er und 30er Jahren des 20. Jahrhunderts hat sich Hans Klaiber umfassenden zu Buchau geäußert.<ref name="0953561d-de79-49e2-be74-1e20db3a6885_7">Matthey/Klaiber, Riedlingen, 1936; Klaiber, Buchau, 1929; Beschreibung Riedlingen, 1923.</ref> Ende des Jahrhunderts hat dann Bernhard Theil die Forschung aktualisiert.<ref name="0953561d-de79-49e2-be74-1e20db3a6885_8">Theil, Buchau, 1998; Theil, Konstanz, 1984.</ref> Zu den beiden wichtigen Architekten liegen Monographien vor.<ref name="0953561d-de79-49e2-be74-1e20db3a6885_9">Gubler, Bagnato, 1985; Franz, d’Ixnard, 1985.</ref>
 
-== Die Stiftskirche St. Cornelius und Cyprian ==
+=== Die Stiftskirche St. Cornelius und Cyprian ===
 
 <gallery mode="slideshow" showthumbnails>
 File:de11c848-ba2b-4717-9c6a-cb5519009db5.jpg|
@@ -79,7 +79,7 @@ Am Übergang zum Chor stehen zwei Seitenaltäre. Über dem rechten ist die Kanze
 
 Der um drei Stufen erhöhte Chor ist so breit wie das Mittelschiff und halbrund geschlossen. Im Gegensatz zum Langhaus sind seine Wände mit der höherwertigen korinthischen Ordnung gegliedert. Im Chorscheitel befindet sich eine Apsis, die jedoch von Altaraufbau verdeckt wird. Dieser wird von zwei Fenstern flankiert. An den Seiten des Chors steht jeweils ein Chorgestühl, über dem sich die Reliefmedaillons der Kirchenpatrone Papst Cornelius und Bischof Cyprian befinden. Die Decke des Chors ist mit einem großen Fresko Bruggers geschmückt.
 
-== Die Decke des Hauptschiffs ==
+==== Die Decke des Hauptschiffs ====
 
 [[File:6b42ed23-e0cd-4f92-88df-b4aa6e0d46fd.jpg|thumb|]]
 
@@ -92,7 +92,7 @@ Gestalterische Mittel - Komposition und Ansichtigkeit
 
 Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formalen oder inhaltlichen Bezug zum Raum oder zur Architektur. Die Ansichtigkeit der Deckgemälde ist auf die Raummitte bezogen. Das trifft auch auf das Mittebild zu, das in drei Bereiche untergliedert ist. Sein östlicher und mittlerer Bereich sind auf den Eintretenden im Westen hin ausgerichtet, der westliche auf den die Kirche wieder verlassenden Besucher.
 
-== Das Hauptbild ==
+===== Das Hauptbild =====
 
 [[File:101b8bcd-6b9d-456c-81e4-848f9e8394ad.jpg|thumb|]]
 
@@ -108,7 +108,7 @@ Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formal
 
 <h5>Programm</h5>Inhalt des Hauptbildes ist die Gründung und Erneuerung des Stifts unter göttlichen Schutz zu stellen und mit der Himmelfahrt Mariens zu verbinden.
 
-== Die Krönung Mariens ==
+====== Die Krönung Mariens ======
 
 [[File:ccf375b9-8b19-456e-a7c8-4f1bb3a2fe4d.jpg|thumb|Bad Buchau, ehem. Damensitft]]
 
@@ -118,7 +118,7 @@ Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formal
 
 Die Kirchenpatrone Cornelius und Cyprian sind seitlich rechts unten platziert. Die beiden Heiligen Papst Cornelius und Bischof Cyprian lebten in der ersten Hälfte des 3. Jahrhunderts und werden oft gemeinsam dargestellt. Sie gelten beide als Märtyrer der frühen Christenheit. Dementsprechend halten die Putten beim sitzenden Cornelius nicht nur Tiara und Patriarchenkreuz, sondern auch die Märtyrerpalme. Der stehende Cyprian hält den Bischofsstab in der Hand und trägt eine Mitra.
 
-== Die Gründung des Stiftes Buchau ==
+====== Die Gründung des Stiftes Buchau ======
 
 [[File:066deacd-de7c-4d8d-8fad-1c5893263985.jpg|thumb|Bad Buchau, ehem. Damensitft]]
 
@@ -128,7 +128,7 @@ Die Kirchenpatrone Cornelius und Cyprian sind seitlich rechts unten platziert. D
 
 Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, begleitet von einem Diener, der die gesiegelten Urkunden auf einem Kissen präsentiert sowie weiterem Gefolge mit einer Fahne, die den Doppeladler des Reiches zeigt. Der Kaiser trägt die Reichskrone und schaut den Betrachter an. 819 erhielt das Kloster von ihm verschiedene Besitzungen. Ludwig besorgte auch die Reliquien der beiden Kirchenpatrone. Er ist hier als historischer Mehrer des Stiftes zu sehen sowie in Bezug auf den gegenwärtigen Kaiser als dessen Beschützer.
 
-== Der Konvent der Fürstabtei Buchau sowie die Protektoren des Stiftes ==
+====== Der Konvent der Fürstabtei Buchau sowie die Protektoren des Stiftes ======
 
 [[File:e51c9b87-ccb7-4324-bc72-9a0507f8a9fd.jpg|thumb|Bad Buchau, ehem. Damensitft]]
 
@@ -136,7 +136,7 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 <h6>Beschreibung und Ikonographie</h6>Im Westen wird die zeitgenössische Erneuerung des Stifts präsentiert. Man erblickt die Auftraggeberin der Kirchenausstattung: Äbtissin Maria Maximiliana Esther von Stadion zu Tannhausen und Warthausen. Sie war 1775 zur Äbtissin gewählt worden und brachte die unter ihrer Vorgängerin Maria Karolina von Königsegg-Rothenfels 1773 begonnenen Arbeiten zum Abschluss. Selbstbewusst tritt die Äbtissin in Herrscherpose noch vorn. Sie weist mit ihrer rechten Hand auf ihren weiß gestickten Schuh, während sie mit der Linken auf eine zentral im Bildgeschehen präsentierte Vogelschau der neu erbauten Konventsgebäude deutet. Diese stellt einen Planzustand dar und zeigt daher auch den nicht realisierten Eingang links neben der Kirche. Die Ansicht wird von einem Engel gehalten. Das Wappen darüber ist das große Buchauer Stiftswappen. Es ist von einem Fürstenhut bekrönt und wird von Krummstab und Schwert hinterfangen – der Krummstab steht für geistliche Macht, das Schwert für die weltliche des Stiftes. Ein weiteres Wappen erblicken wir links der Äbtissin, das ebenfalls von einem Putto gehalten und von einem Fürstenhut bekrönt wird – es ist das Wappen der Auftraggeberin. Diese trägt wie die Damen des Konvents, die sich links hinter ihr befinden, Kopffächel mit weißem Schleier und Halstuch, schwarze Samtschürze und einen mit Litzen besetzten Reifrock. Ein als Stola getragenes blaues Ordensband präsentiert das Kleinod, das bei der Bemäntelung durch die Äbtissin überreicht wurde. Rechts des Plans erblickt man die Protektoren des Stiftes. Es handelt sich um den Konstanzer Fürstbischof Maximilian Augustinus Christoph von Rodt, Fürst Joseph Wenzel zu Fürstenberg-Stühlingen und den Fürstabt von Kempten, Honorius Roth von Schreckenstein. Auch deren bekrönte Wappen werden von Putten präsentiert.
 
-== Das Mannawunder ==
+===== Das Mannawunder =====
 
 [[File:b0fa66bf-80e9-4fc6-bc33-6eaa26653266.jpg|thumb|]]
 
@@ -150,7 +150,7 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 <h5>Programm</h5>Die Szene des Mannaregens gilt als prototypischer Hinweis auf die Spendung des Abendmahlssakraments und verweist damit auf das Gemälde an der Ostseite des Hauptschiffs, das das Zusammentreffen von Abraham und Melchisedek zeigt, das ebenfalls auf das Abendmahl verweist. Es bezieht sich aber auch auf die Landesfrau der Fürstabtei. Zwischen dem Deckengemälde im Osten und dem Herrschaftsstand im Westen gelegen, wird es vom Gemälde der Fürstäbtissin sowie ihrer realen Person im Stand eingefasst und verweist auf ihre Fürsorge gegenüber ihren Untertanen, die sie ebenso wenig verhungern lässt wie Gott das Volk Israel.
 
-== Abrahahm und Melchisedek ==
+===== Abrahahm und Melchisedek =====
 
 [[File:c34becc5-f906-40c7-9db3-6534cf21c279.jpg|thumb|]]
 
@@ -164,7 +164,7 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 <h5>Programm</h5>Die Szene des Zusammentreffens gilt als prototypischer Hinweis auf die Spendung des Abendmahlssakraments und verweist damit auf den realen Altar im Chor.
 
-== Die Decke im Chor ==
+==== Die Decke im Chor ====
 
 [[File:2a9c2952-05fa-4c17-af08-5325c368bbc9.jpg|thumb|]]
 
@@ -185,7 +185,7 @@ Konkrete Vorlagen sind unbekannt.
 ===== Programm =====
 Die Darstellung stellt einen Bezug zum Messopfer auf dem Altar unter dem Gemälde her.
 
-== Die Decke der Nordempore ==
+==== Die Decke der Nordempore ====
 
 [[File:607eb078-b4f6-4261-9e6e-6e36f3551eb8.jpg|thumb|]]
 
@@ -200,7 +200,7 @@ Sie verbindlichen christliche Tugenden anhand von Sezen aus dem Neuen Testament.
 ===== Gestalterische Mittel - Komposition und Ansichtigkeit =====
 Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf der Empore. Die Darstellungen sind in Untersicht gemalt, und meist findet die Handlung in einer erhöhten Zone statt, etwa auf einer Mauer oder vor einem Geländeabfall.
 
-== Oratio ==
+===== Oratio =====
 
 [[File:24bd9448-4a3d-42cf-af66-f23b2e59c248.jpg|thumb|]]
 
@@ -210,7 +210,7 @@ Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf de
 
 Sie kniet vor einer Landschaft links, während Christus rechts aufrecht vor eine Architektur steht, am Übergang zur Natur.
 
-== Gratitudo ==
+===== Gratitudo =====
 
 [[File:080eacac-774d-4824-a4c6-6030866f4e48.jpg|thumb|]]
 
@@ -220,7 +220,7 @@ Sie kniet vor einer Landschaft links, während Christus rechts aufrecht vor eine
 
 Dieser Moment ist zu sehen: Der Geheilte hat sich vor Christus auf den Boden geworfen und dankt ihm. Die übrigen neun sind rechts vor einer angedeuteten Natur zu sehen, Christus steht mit seinen Jüngern vor einer Architektur, annähernd in der Bildmitte am Übergang zwischen beiden.
 
-== Dolor ==
+===== Dolor =====
 
 [[File:f17b1037-7388-4c2e-bab3-dd64b6f02be7.jpg|thumb|]]
 
@@ -230,7 +230,7 @@ Dieser Moment ist zu sehen: Der Geheilte hat sich vor Christus auf den Boden gew
 
 Die Szenerie findet in einer Architekturkulisse statt. Christus hat sich nach der dritten Verleugnung zu Petrus umgewandt. Dieser schaut entsetzt auf den krähenden Hahn rechts und erkennt sein Versagen. Im Hintergrund öffnet sich der nächtliche Himmel.
 
-== Zelus ==
+===== Zelus =====
 
 [[File:5b7eeffa-2ad8-484b-b841-5d0c712e667b.jpg|thumb|]]
 
@@ -240,7 +240,7 @@ Die Szenerie findet in einer Architekturkulisse statt. Christus hat sich nach de
 
 Christus steht aufrecht in der Mitte des Bildes. In seiner erhobenen Rechten hält er eine Geißel, mit der er die flüchtenden Händler aus dem Tempel hinaustreibt. Das Tempelinnere ist wie eine barocke Kirche mit Kuppel und Säulen gestaltet.
 
-== Desiderium ==
+===== Desiderium =====
 
 [[File:08e0b7ff-ad18-4db8-95fd-89dbad1a4e02.jpg|thumb|]]
 
@@ -250,7 +250,7 @@ Christus steht aufrecht in der Mitte des Bildes. In seiner erhobenen Rechten hä
 
 Zu sehen ist, wie die Eltern ihr Kind suchen. Das Paar steht in der Bildmitte. Sehnsüchtig blickt Maria zum Himmel auf.
 
-== Gaudium ==
+===== Gaudium =====
 
 [[File:bdab11eb-0027-40a6-bab4-c95b76402d25.jpg|thumb|]]
 
@@ -260,7 +260,7 @@ Zu sehen ist, wie die Eltern ihr Kind suchen. Das Paar steht in der Bildmitte. S
 
 Darstellt ist der junge Jesus im Gespräch mit den Gelehrten. Er sitzt in der Mitte vor einem sich bauschenden Vorhang. Von links kommen seine Eltern, die ihn noch nicht erblickt haben.
 
-== Die Decke der Südempore ==
+==== Die Decke der Südempore ====
 
 [[File:c7e96f2e-1b2b-48de-bd4c-494b689a5f03.jpg|thumb|]]
 
@@ -275,7 +275,7 @@ Sie stellen ebenfalls christlichen Tugenden mit biblischen Szenen dar. Es handel
 ===== Gestalterische Mittel - Komposition und Ansichtigkeit =====
 Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf der Empore. Die Darstellungen sind in Untersicht gemalt und meist findet die Handlung in einer erhöhten Zone statt, etwa über Treppen.
 
-== Fiducia ==
+===== Fiducia =====
 
 [[File:12d6f657-55d6-4c47-a09c-8a4611c6dd1c.jpg|thumb|]]
 
@@ -285,7 +285,7 @@ Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf de
 
 Genau dieser Moment wird gezeigt. Christus wendet sich im Lauf nach links zu der hinter ihm knienden Frau um, da er bemerkt hat, dass sie sein Gewand hält.
 
-== Reverentia ==
+===== Reverentia =====
 
 [[File:243248f4-1660-40c6-aeaf-e06a0326d9b4.jpg|thumb|]]
 
@@ -295,7 +295,7 @@ Genau dieser Moment wird gezeigt. Christus wendet sich im Lauf nach links zu der
 
 Sie nahen von links um niederzuknien, während Maria ihnen – auf drei Stufen erhöht – den segnenden Säugling präsentiert. Das Geschehen findet in einem ruinösen Stall statt, über dem sich das göttliche Licht öffnet.
 
-== Humilitas ==
+===== Humilitas =====
 
 [[File:695d51f5-5c9f-4195-93bf-8a7d4b9bdbea.jpg|thumb|]]
 
@@ -305,7 +305,7 @@ Sie nahen von links um niederzuknien, während Maria ihnen – auf drei Stufen e
 
 Zu sehen ist, wie der Hauptmann demütig vor dem aufgerichteten Christus in der Bildmitte kniet. Dieser hat segnend seine linke Hand erhoben. Hinter ihm stehen sein Jünger, hinter dem Hauptmann dessen Gefolge.
 
-== Caritas ==
+===== Caritas =====
 
 [[File:497a4666-61a3-460c-9133-63fff53ac2bc.jpg|thumb|]]
 
@@ -315,7 +315,7 @@ Zu sehen ist, wie der Hauptmann demütig vor dem aufgerichteten Christus in der 
 
 Die Abendmahlsdarstellung ist durchaus ungewöhnlich. Die Jünger haben sich nicht um einen Tisch versammelt, sondern stehen teilweise an seinem Rand. Im Vordergrund bringt ein Diener Brot. Wie üblich aber ist Christus in der Mitte platziert und Johannes hat seinen Kopf in seinen Schoß gelegt.
 
-== Spes ==
+===== Spes =====
 
 [[File:6efa8105-6893-4822-9377-c43a92c9f954.jpg|thumb|]]
 
@@ -325,7 +325,7 @@ Die Abendmahlsdarstellung ist durchaus ungewöhnlich. Die Jünger haben sich nic
 
 Jesus Christus steht links von der Bildmitte und weist mit seiner Hand an den Himmel. Dieser öffnet sich, und im göttlichen Licht erblickt man ein Schloss – das Haus seines Vaters. Rechts stehen die Jünger. Sie schauen überwiegend auf Christus, einige haben aber auch das Haus Gottes erblickt.
 
-== Fides ==
+===== Fides =====
 
 [[File:a9d5f99e-a21c-48d1-a9d4-730e362c0439.jpg|thumb|]]
 
@@ -365,7 +365,7 @@ Der dreigeschossige Fürstenbau umgibt zusammen mit Damenbau und Konventsbau den
 
 Vom vermuteten malerischen Schmuck im Staatsappartement der Fürstäbtissin war bereits vor den Umbauten in den dreißiger Jahren des 20. Jahrhunderts nichts mehr erhalten.<ref name="613b1c7d-ba0a-4659-af3d-e409924333c0_6">Matthey/Klaiber, Riedlingen, 1936, S. 75; Klaiber, Buchau, 1929, S. 16.</ref> Im Spitzbau hat sich ein bemerkenswert ausstuckierter Raume erhalten, der wohl als Studier- oder Bibliothekszimmer diente.<ref name="613b1c7d-ba0a-4659-af3d-e409924333c0_7">Matthey/Klaiber, Riedlingen, 1936, S. 76; Klaiber, Buchau, 1929, S. 17.</ref> Für die Kanzlei im Erdgeschoss des Damenbaus schuf Brugger 1778 zwei kleinere Bilder unbekannten Inhalts, die verloren sind.<ref name="613b1c7d-ba0a-4659-af3d-e409924333c0_8">Hosch, Brugger, 1987, S. 112</ref> Lediglich im so genannten Grünen Zimmer hat sich ein Wandmalereirest erhalten.
 
-== Der so genannte Goldene Saal ==
+=== Der so genannte Goldene Saal ===
 
 <gallery mode="slideshow" showthumbnails>
 File:2ebb41be-c41a-4717-a4ee-32ae915aa599.jpg|
@@ -380,7 +380,7 @@ Der so genannte Goldenen Saal im Kavaliersbau wurde als Tafelzimmer erbaut, 1778
 ==== Beschreibung ====
 Der eingeschossige Goldene Saal ist im zweiten Obergeschoss des Kavaliersbaus am Westende gelegen. Er öffnet sich mit jeweils drei Fenstern nach Norden, Westen und Süden. Die Decke präsentiert in der Mitte eine große Stuckrosette. Die Wände werden von den Fenstern bzw. zwei zusätzlichen rechteckigen Wandfeldern zwischen den Fenstern der Westseite gegliedert. Die Ostseite wird von zwei seitlichen Türen und einer zentralen fingierten ehenmaligen Ofennische gegenüber den Fenstern der Westseite bestimmt. Der Raum ist in Grautönen gehalten. Die plastischen Bereiche sind teilweise in Gold gehöht. Die gemalten Ornamente sind dem hingegen teilweise mit Gold hinterlegt. Die Grisaillemalerei folgt diesem Farbkonzept. Über den äußeren Fenstern sind in einem Band unter dem abschließenden Gesims florale Ornamente mit einem zentralen Bildmedaillons zu sehen. Über den mittleren Fenstern sind es teilweise humoristische Puttenszenen. Diese finden sich auch in den Raumecken. Über den Eingangstüren erblickt man antikisierende vielfigurige Szenen. Die rechteckigen Felder zwischen Türen und Nische präsentieren zwei große Landschaftsgemälde.
 
-== Die Wandgemälde im Goldenen Saal ==
+==== Die Wandgemälde im Goldenen Saal ====
 
 <gallery mode="slideshow" showthumbnails>
 File:c35b7cb8-85be-4cc2-83c5-278db0297255.jpg|
@@ -396,7 +396,7 @@ Das südliche Bild stellt nicht den Ackerbau, sondern die Viehzucht vor. In der 
 
 Will man einen Bezug zwischen Malerei und historischer Raumfunktion herstellen, kommt man zu dem Schluss, dass an den Wänden die Produktion jener Nahrungsmittel dargestellt wird, die am im Tafelzimmer gegessen wurden.
 
-== Das so genannte Grüne Zimmer ==
+=== Das so genannte Grüne Zimmer ===
 
 [[File:1accaacb-d896-4298-bf95-27b74b6ed3e9.jpg|thumb|]]
 
@@ -405,7 +405,7 @@ Will man einen Bezug zwischen Malerei und historischer Raumfunktion herstellen, 
 ==== Bau- und Ausstattungsgeschichte ====
 Das so genannte Grüne Zimmer ist an der Nordseite des Damenbaus gelegen und wurde zu einem unbekannten Zeitpunkt in seiner Tiefe halbiert. An seiner Ostwand hat sich undatierte Wandmalerei erhalten.
 
-== Die Wandmalereireste im Grünen Zimmer ==
+==== Die Wandmalereireste im Grünen Zimmer ====
 
 [[File:ef922d2a-fd6d-4d10-96d7-6b74c31bdcc0.jpg|thumb|]]
 
