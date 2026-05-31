@@ -42,15 +42,11 @@ class ArticleGenerator:
         text_lead_entity_id, text_lead = self.loader.get_lead_resource_via_documents(
             text_entity["ID"]
         )
-        text_images = self.loader.get_images(text_entity["ID"])
         text_gallery: List[tuple] = []
         if text_lead and text_lead.get("resProvider"):
             text_gallery.append(
                 (f"{text_lead_entity_id}.jpg", text_lead.get("appellation", ""))
             )
-        for img in text_images:
-            text_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
-            print("Text Gallery")
         if len(text_gallery) == 1:
             img_filename, img_caption = text_gallery[0]
             parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
@@ -92,14 +88,13 @@ class ArticleGenerator:
         used_refs: Dict[str, bool] = {}
 
         for part in text_parts:
-            if part.get("appellation"):
-                parts_out.append(f"== {part['appellation']} ==")
+            parts_out.append(f"== {part['appellation']} ==")
+            parts_out.append("")
+            documented_id = self.loader.get_documented_entity_id(part["ID"])
+            if documented_id:
+                qid = self.wikidata_mapping.get(documented_id)
+                parts_out.append(generate_strukturdaten(documented_id, qid))
                 parts_out.append("")
-                documented_id = self.loader.get_documented_entity_id(part["ID"])
-                if documented_id:
-                    qid = self.wikidata_mapping.get(documented_id)
-                    parts_out.append(generate_strukturdaten(documented_id, qid))
-                    parts_out.append("")
 
             # Per-part gallery: lead_resource first, then IMAGE resources
             part_lead_entity_id, part_lead = (
@@ -113,7 +108,6 @@ class ArticleGenerator:
                 )
             for img in part_images:
                 part_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
-                print("Part Gallery")
             if len(part_gallery) == 1:
                 img_filename, img_caption = part_gallery[0]
                 parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
