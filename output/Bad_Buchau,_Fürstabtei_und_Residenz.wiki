@@ -13,8 +13,6 @@ In der Stiftskirche haben sich Deckenfresken von Andreas Brugger und Johann Geor
 
 == Das Stift Bad Buchau ==
 
-{{Strukturdaten|deckenmalerei.eu_id=c38d1922-cc2a-4e5f-90ad-f4c474baf2d8|wikidata_qid=Q468153}}
-
 <gallery mode="slideshow" showthumbnails>
 File:0953561d-de79-49e2-be74-1e20db3a6885.jpg|
 File:fmd10025487.jpg|
@@ -22,6 +20,8 @@ File:fmd10025489.jpg|
 File:fmd10025491.jpg|
 File:fmd10025518.jpg|
 </gallery>
+
+{{Strukturdaten|deckenmalerei.eu_id=c38d1922-cc2a-4e5f-90ad-f4c474baf2d8|wikidata_qid=Q468153}}
 
 === Kurzbeschreibung und Lage ===
 Die Abtei Buchau stand im Norden der ehemals reichsfeien Stadt Buchau. Das Stiftsgelände war um 1750 komplett von einer Mauer umgeben und wurde durch ein Tor von der Stadt aus betreten. Rund um einen Platz – heute Schlossplatz – standen die wichtigsten Regierungsgebäude und Beamtenwohnungen und an dessen Nordseite der noch heute erhaltene Stiftskomplex mit Residenz und Kirche.
@@ -55,13 +55,13 @@ Der Forschungsstand zum Stift Buchau und seiner Architektur ist ausgesprochen gu
 
 == Die Stiftskirche St. Cornelius und Cyprian ==
 
-{{Strukturdaten|deckenmalerei.eu_id=25496253-99e6-4177-b8fd-1c632fe67586}}
-
 <gallery mode="slideshow" showthumbnails>
 File:de11c848-ba2b-4717-9c6a-cb5519009db5.jpg|
 File:fmd10025511.jpg|
 File:fmd10025514.jpg|
 </gallery>
+
+{{Strukturdaten|deckenmalerei.eu_id=25496253-99e6-4177-b8fd-1c632fe67586}}
 
 ==== Bau-, Ausstattungs- und Funktionsgeschichte ====
 Die Stiftskirche<ref name="de11c848-ba2b-4717-9c6a-cb5519009db5_1">Engelberg, Renovatio, 2014, S. 72-77; Franz, d’Ixnard, 1985, S. 132-145; Theil, Konstanz, 1984, S. 18-20; Matthey/Klaiber, Riedlingen, 1936, S. 59-71; Klaiber, Buchau, 1929, S. 17-34; Beschreibung Riedlingen, 1923, S. 658-660.</ref> ist in ihrer gegenwärtigen Erscheinung weitgehend ein Ergebnis des tiefgreifenden Umbaus durch Pierre Michel d’Ixnard von 1773-75 und die im Zuge des Umbaus erfolgte Neuausstattung bis 1776. Anfänglich war nur an eine Renovierung der aus dem Mittelalter stammenden Kirche gedacht. Zuletzt blieben lediglich Mauern, Decke und Dachstuhl weitgehend erhalten. Bereits 1773 wurde der Beschluss gefasst, eine neue Flachdecke in den Raum einzuziehen und die Fenster zu vergrößern bzw. im Chor neue einzubrechen. Die Mittelschiffsarkaden sollten erhöht sowie Chor und Langhaus sichtbar voneinander getrennt werden. Faktisch wurde das Langhaus gänzlich neu erstellt. Den Bau vor Ort leitete der Buchauer Stiftsbaumeister Franz Joseph Jäger. Am 14.09.1776 wurde die die Kirche neu geweiht. Die Ausstattungsarbeiten in der Kirche zogen sich noch bis mindestens 1779 hin. Wohl 1779 wurde ein Eingangsvorbau zwischen der Kirche und dem im Westen gelegen Kavaliersbau gesetzt, der aber 1958 ersetzt wurde. Die Westwand mit einem Herrschaftsstand wurde bereits 1861 neu gestaltet. 1938 und 1940 wurde die Kirche renoviert und 1957 das Langhaus erneuert. Der Einbau einer neuen Orgel 1967 veränderte die Westseite ein weiteres Mal.
@@ -81,9 +81,9 @@ Der um drei Stufen erhöhte Chor ist so breit wie das Mittelschiff und halbrund 
 
 == Die Decke des Hauptschiffs ==
 
-{{Strukturdaten|deckenmalerei.eu_id=3d756617-ab4d-43af-afa3-337edb192f4b}}
-
 [[File:6b42ed23-e0cd-4f92-88df-b4aa6e0d46fd.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=3d756617-ab4d-43af-afa3-337edb192f4b}}
 
 ===== Beschreibung und Ikonographie =====
 Die Decke des Hauptschiffs wird durch Stuckrahmen in drei ungleiche rechtwinkelige Felder unterteilt.<ref name="6b42ed23-e0cd-4f92-88df-b4aa6e0d46fd_1">Matthey/Klaiber, Riedlingen, 1936, S. 447-448; Klaiber, Buchau, 1929, S. 27-30; Beschreibung Riedlingen, 1923, S. 659.</ref> Das Hauptbild in der Mitte bezieht sich formal auf drei Joche des Langhauses und ist dreimal so groß wie die beiden begleitenden Nebenbilder, die sich auf jeweils ein Joch beziehen. Jedes Deckenbild ist für sich gerahmt.
@@ -94,9 +94,9 @@ Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formal
 
 == Das Hauptbild ==
 
-{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
-
 [[File:101b8bcd-6b9d-456c-81e4-848f9e8394ad.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
 <h5>Befund - Entstehungs- und Erhaltungsgeschichte</h5>Das Deckenfresko<ref name="101b8bcd-6b9d-456c-81e4-848f9e8394ad_1">Hosch, Brugger, 1987, S. 103-105; Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 28-29; Beschreibung Riedlingen, 1923, S. 448.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
 
@@ -110,9 +110,9 @@ Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formal
 
 == Die Krönung Mariens ==
 
-{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
-
 [[File:ccf375b9-8b19-456e-a7c8-4f1bb3a2fe4d.jpg|thumb|Bad Buchau, ehem. Damensitft]]
+
+{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
 <h6>Beschreibung und Ikonographie</h6>Maria schwebt zum göttlichen Licht empor und blickt dabei auf ihren Sohn, der zusammen mit Gottvater eine Krone bereithält, um sie zu krönen. Während das Haupt Gottes vom Dreieck der Dreifaltigkeit hinterfangen ist, tragen Engel hinter Christus sein Kreuz und die Erdkugel. Die Maria begleitenden Engel machen der Gottesmutter eher Platz, als dass sie sie emportragen. Über allem schwebt im Licht die Taube des Heiligen Geistes, umgeben von jubelnden Engeln und betenden Putten. Es handelt sich bei der Darstellung also um die verbreitete Kombination von Himmelfahrt und Krönung Mariens.
 
@@ -120,9 +120,9 @@ Die Kirchenpatrone Cornelius und Cyprian sind seitlich rechts unten platziert. D
 
 == Die Gründung des Stiftes Buchau ==
 
-{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
-
 [[File:066deacd-de7c-4d8d-8fad-1c5893263985.jpg|thumb|Bad Buchau, ehem. Damensitft]]
+
+{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
 <h6>Beschreibung und Ikonographie</h6>An der Ostseite des Gemäldes wird die legendenhafte Gründung<ref name="066deacd-de7c-4d8d-8fad-1c5893263985_1">Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 5-6, 28; Beschreibung Riedlingen, 1923, S. 665.</ref> des Stiftes bzw. Klosters Buchau gezeigt. Im Zentrum steht auf Stufen ein Altar mit einem goldenen Weihrauchgefäß sowie Urkunden. Rechts kniet die hl. Markgräfin Adelindis, die Stifterin des Klosters, die die Urkunden gerade eben auf den Altar gelegt hat. Dies geschah wohl um 770. Hinter ihr erblickt man ihr Gefolge. Zu ihren Füßen liegen drei tote Ritter. Bei diesen handelt sich um ihre Söhne Beringer, Reginolf und Gerhard. Beim Versuch ihre Schwester Adelinids aus dem Kloster Buchau zu entführen, um sie zu verheiraten, wurden sie 902 erschlagen. Es werden hier also zwei Handlungen zusammengeführt, denn die Schwester Adelindis ist nicht mit der gleichnamigen Stifterin des Klosters identisch. Ebenso wenig war die Stifterin des Klosters die Mutter der drei. Die Legende will, dass die Mutter nach dem Tod ihrer Söhne ihr Vermögen dem Kloster vermachte.
 
@@ -130,17 +130,17 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 == Der Konvent der Fürstabtei Buchau sowie die Protektoren des Stiftes ==
 
-{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
-
 [[File:e51c9b87-ccb7-4324-bc72-9a0507f8a9fd.jpg|thumb|Bad Buchau, ehem. Damensitft]]
+
+{{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
 <h6>Beschreibung und Ikonographie</h6>Im Westen wird die zeitgenössische Erneuerung des Stifts präsentiert. Man erblickt die Auftraggeberin der Kirchenausstattung: Äbtissin Maria Maximiliana Esther von Stadion zu Tannhausen und Warthausen. Sie war 1775 zur Äbtissin gewählt worden und brachte die unter ihrer Vorgängerin Maria Karolina von Königsegg-Rothenfels 1773 begonnenen Arbeiten zum Abschluss. Selbstbewusst tritt die Äbtissin in Herrscherpose noch vorn. Sie weist mit ihrer rechten Hand auf ihren weiß gestickten Schuh, während sie mit der Linken auf eine zentral im Bildgeschehen präsentierte Vogelschau der neu erbauten Konventsgebäude deutet. Diese stellt einen Planzustand dar und zeigt daher auch den nicht realisierten Eingang links neben der Kirche. Die Ansicht wird von einem Engel gehalten. Das Wappen darüber ist das große Buchauer Stiftswappen. Es ist von einem Fürstenhut bekrönt und wird von Krummstab und Schwert hinterfangen – der Krummstab steht für geistliche Macht, das Schwert für die weltliche des Stiftes. Ein weiteres Wappen erblicken wir links der Äbtissin, das ebenfalls von einem Putto gehalten und von einem Fürstenhut bekrönt wird – es ist das Wappen der Auftraggeberin. Diese trägt wie die Damen des Konvents, die sich links hinter ihr befinden, Kopffächel mit weißem Schleier und Halstuch, schwarze Samtschürze und einen mit Litzen besetzten Reifrock. Ein als Stola getragenes blaues Ordensband präsentiert das Kleinod, das bei der Bemäntelung durch die Äbtissin überreicht wurde. Rechts des Plans erblickt man die Protektoren des Stiftes. Es handelt sich um den Konstanzer Fürstbischof Maximilian Augustinus Christoph von Rodt, Fürst Joseph Wenzel zu Fürstenberg-Stühlingen und den Fürstabt von Kempten, Honorius Roth von Schreckenstein. Auch deren bekrönte Wappen werden von Putten präsentiert.
 
 == Das Mannawunder ==
 
-{{Strukturdaten|deckenmalerei.eu_id=fe33364c-5aa9-45c7-93cb-8effba7b56cc|wikidata_qid=Q137902235}}
-
 [[File:b0fa66bf-80e9-4fc6-bc33-6eaa26653266.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=fe33364c-5aa9-45c7-93cb-8effba7b56cc|wikidata_qid=Q137902235}}
 
 <h5>Befund - Entstehungs- und Erhaltungsgeschichte</h5>Das Deckenfresko<ref name="b0fa66bf-80e9-4fc6-bc33-6eaa26653266_1">Hosch, Brugger, 1987, S. 105; Matthey/Klaiber, Riedlingen, 1936, S. 63-64; Klaiber, Buchau, 1929, S. 28.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
 
@@ -152,9 +152,9 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 == Abrahahm und Melchisedek ==
 
-{{Strukturdaten|deckenmalerei.eu_id=31339c0b-d6e6-4b0c-bd31-0e30f824673f|wikidata_qid=Q137902234}}
-
 [[File:c34becc5-f906-40c7-9db3-6534cf21c279.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=31339c0b-d6e6-4b0c-bd31-0e30f824673f|wikidata_qid=Q137902234}}
 
 <h5>Befund - Entstehungs- und Erhaltungsgeschichte</h5>Das Deckenfresko<ref name="c34becc5-f906-40c7-9db3-6534cf21c279_1">Hosch, Brugger, 1987, S. 103; Matthey/Klaiber, Riedlingen, 1936, S. 63; Klaiber, Buchau, 1929, S. 28.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
 
@@ -166,9 +166,9 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 == Die Decke im Chor ==
 
-{{Strukturdaten|deckenmalerei.eu_id=89184420-7c35-4401-ba2a-16ff63360c23|wikidata_qid=Q137902236}}
-
 [[File:2a9c2952-05fa-4c17-af08-5325c368bbc9.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=89184420-7c35-4401-ba2a-16ff63360c23|wikidata_qid=Q137902236}}
 
 ===== Befund - Entstehungs- und Erhaltungsgeschichte =====
 Das Deckenfresko<ref name="2a9c2952-05fa-4c17-af08-5325c368bbc9_1">Hosch, Burgger, 1987, S. 102-103; Matthey/Klaiber, Riedlingen, 1936, S. 63;  Beschreibung Riedlingen, 1923, S. 659.</ref> im Chor wurde 1775/76 von Andras Brugger als erstes von seinen Arbeiten in der Kirche geschaffen. 1938/39 erfolgte eine Restaurierung.
@@ -187,9 +187,9 @@ Die Darstellung stellt einen Bezug zum Messopfer auf dem Altar unter dem Gemäld
 
 == Die Decke der Nordempore ==
 
-{{Strukturdaten|deckenmalerei.eu_id=34977c83-2c61-4783-8efc-78f7e9d9a877}}
-
 [[File:607eb078-b4f6-4261-9e6e-6e36f3551eb8.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=34977c83-2c61-4783-8efc-78f7e9d9a877}}
 
 ===== Künstler =====
 Die runden Deckenfresken<ref name="607eb078-b4f6-4261-9e6e-6e36f3551eb8_1">Theil, Konstanz, 1984, S. 30; Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 30; Beschreibung Riedlingen, 1923, S. 659.</ref> über der Nordempore werden Georg Messmer aus Saulgau zugeschrieben.
@@ -202,9 +202,9 @@ Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf de
 
 == Oratio ==
 
-{{Strukturdaten|deckenmalerei.eu_id=92b607f2-3ce2-4b6b-a5e6-ea3487258f3f|wikidata_qid=Q137902223}}
-
 [[File:24bd9448-4a3d-42cf-af66-f23b2e59c248.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=92b607f2-3ce2-4b6b-a5e6-ea3487258f3f|wikidata_qid=Q137902223}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Tugend der Bitte wird durch die Darstellung der Mutter der Zebedäiden – Salome – verdeutlicht, die für ihre Söhne bei Jesus Christus um die besten Plätze zu seiner Rechten und seiner Linken bittet.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1">Klaiber, Buchau, 1929, S. 30.</ref>
 
@@ -212,9 +212,9 @@ Sie kniet vor einer Landschaft links, während Christus rechts aufrecht vor eine
 
 == Gratitudo ==
 
-{{Strukturdaten|deckenmalerei.eu_id=d62046e4-e8fb-43d0-be22-f50cdc0f7e9a|wikidata_qid=Q137902233}}
-
 [[File:080eacac-774d-4824-a4c6-6030866f4e48.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=d62046e4-e8fb-43d0-be22-f50cdc0f7e9a|wikidata_qid=Q137902233}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Dankbarkeit wird mit der Geschichte der zehn Aussätzigen dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Als Christus zehn Aussätzige um Mitleid baten, schickte er sie zu einem Priester. Bereits auf dem Weg dorthin wurden sie rein. Einer der Aussätzigen kehrte daraufhin um und bedankte sich bei Christus.
 
@@ -222,9 +222,9 @@ Dieser Moment ist zu sehen: Der Geheilte hat sich vor Christus auf den Boden gew
 
 == Dolor ==
 
-{{Strukturdaten|deckenmalerei.eu_id=60fc0216-bb13-432d-96f2-5540f78e984e|wikidata_qid=Q137902221}}
-
 [[File:f17b1037-7388-4c2e-bab3-dd64b6f02be7.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=60fc0216-bb13-432d-96f2-5540f78e984e|wikidata_qid=Q137902221}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Reue wird durch die Verleugnung des Petrus visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Trotz gegenteiliger Beteuerung zuvor verleugnete Petrus den Christus dreimal, bevor der Hahn krähte. So hatte es ihm Christus auch vorausgesagt. Und tatsächlich fürchtete sich Petrus nach der nächtlichen Gefangenahme von Christus, ebenfalls in Gefahr zu geraten und stritt eine Gefolgschaft seinerseits daher ab. Nach der dritten Verleugnung krähte ein Hahn. Petrus weinte darauf bitterlich und bereute zutiefst sein Tun.
 
@@ -232,9 +232,9 @@ Die Szenerie findet in einer Architekturkulisse statt. Christus hat sich nach de
 
 == Zelus ==
 
-{{Strukturdaten|deckenmalerei.eu_id=cdd023b2-dd0d-42e8-bacd-ba911bbe8e83|wikidata_qid=Q137902232}}
-
 [[File:5b7eeffa-2ad8-484b-b841-5d0c712e667b.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=cdd023b2-dd0d-42e8-bacd-ba911bbe8e83|wikidata_qid=Q137902232}}
 
 <h5>Beschreibung und Ikonographie</h5>Der Eifer wird durch Tempelreinigung durch Christus visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Christus vertrieb Händler und Geldwechsler aus dem Jerusalemer Tempel, da dieser als Haus Gottes dem Gottesdienst vorbehalten sein solle.
 
@@ -242,9 +242,9 @@ Christus steht aufrecht in der Mitte des Bildes. In seiner erhobenen Rechten hä
 
 == Desiderium ==
 
-{{Strukturdaten|deckenmalerei.eu_id=676502e2-4e49-4cd6-be96-b5dffbaff19f|wikidata_qid=Q137902222}}
-
 [[File:08e0b7ff-ad18-4db8-95fd-89dbad1a4e02.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=676502e2-4e49-4cd6-be96-b5dffbaff19f|wikidata_qid=Q137902222}}
 
 <h5>Beschreibung und Ikonographie</h5>Das Verlangen bzw. die Sehnsucht wird durch die Suche Marias und Josephs nach ihrem zwölfjährigen Sohn Jesus dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Maria und Joseph waren mit ihrem Sohn von Nazareth nach Jerusalem zum Paschafest gepilgert. Nach den Festtagen machten sie sich auf den Heimreise und vermuteten Jesus irgendwo in der heimreisenden Pilgergruppe. Erst nach einem Tag bemerkten sie sein Fehlen, da er in Jerusalem geblieben war.
 
@@ -252,9 +252,9 @@ Zu sehen ist, wie die Eltern ihr Kind suchen. Das Paar steht in der Bildmitte. S
 
 == Gaudium ==
 
-{{Strukturdaten|deckenmalerei.eu_id=a4b2c976-15fe-46da-bfb3-1ce0d30f6ef1|wikidata_qid=Q137902231}}
-
 [[File:bdab11eb-0027-40a6-bab4-c95b76402d25.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=a4b2c976-15fe-46da-bfb3-1ce0d30f6ef1|wikidata_qid=Q137902231}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Freude wird durch die Wiederauffindung des zwölfjährigen Jesus im Tempel durch seine Eltern dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Der Knabe war im Tempel geblieben und disputierte dort mit den Schriftgelehrten. Die Freue Mariens war groß, als sie ihn nach drei Tagen wiederfand.
 
@@ -262,9 +262,9 @@ Darstellt ist der junge Jesus im Gespräch mit den Gelehrten. Er sitzt in der Mi
 
 == Die Decke der Südempore ==
 
-{{Strukturdaten|deckenmalerei.eu_id=309f413a-c6dd-4269-a000-c8e9dc95b58b}}
-
 [[File:c7e96f2e-1b2b-48de-bd4c-494b689a5f03.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=309f413a-c6dd-4269-a000-c8e9dc95b58b}}
 
 ===== Künstler =====
 Die runden Deckenfresken<ref name="c7e96f2e-1b2b-48de-bd4c-494b689a5f03_1">Theil, Konstanz, 1984, S. 30;  Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 30; Beschreibung Riedlingen, 1923, S. 659.</ref> über der Südempore werden Georg Messmer aus Saulgau zugeschrieben.
@@ -277,9 +277,9 @@ Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf de
 
 == Fiducia ==
 
-{{Strukturdaten|deckenmalerei.eu_id=57fbe296-6112-4a22-9964-ef69856d50a2|wikidata_qid=Q137902040}}
-
 [[File:12d6f657-55d6-4c47-a09c-8a4611c6dd1c.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=57fbe296-6112-4a22-9964-ef69856d50a2|wikidata_qid=Q137902040}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Tugend des Vertrauens wird durch die Heilung der blutflüssigen Frau dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Diese war schon lange krank. Im Vertrauen auf Heilung berührte sie das Gewand von Christus, woraufhin sie sofort geheilt war.
 
@@ -287,9 +287,9 @@ Genau dieser Moment wird gezeigt. Christus wendet sich im Lauf nach links zu der
 
 == Reverentia ==
 
-{{Strukturdaten|deckenmalerei.eu_id=6385929c-9509-4ff7-8eb0-15952d1f5f25|wikidata_qid=Q137902220}}
-
 [[File:243248f4-1660-40c6-aeaf-e06a0326d9b4.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=6385929c-9509-4ff7-8eb0-15952d1f5f25|wikidata_qid=Q137902220}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Ehrfurcht wird mittels der Anbetung der heiligen drei Könige dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Die Könige sind einen weiten Weg gereist, um dem frisch geborenen Jesus ihre Ehrfurcht zu bezeugen.
 
@@ -297,9 +297,9 @@ Sie nahen von links um niederzuknien, während Maria ihnen – auf drei Stufen e
 
 == Humilitas ==
 
-{{Strukturdaten|deckenmalerei.eu_id=6edf61b9-7350-4a5f-81a9-30db67c8876c}}
-
 [[File:695d51f5-5c9f-4195-93bf-8a7d4b9bdbea.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=6edf61b9-7350-4a5f-81a9-30db67c8876c}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Demut wird mit der Erzählung vom Hauptmann von Kapernaum dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Dieser fleht Christus an, seinen gelähmten Diener zu heilen. Seine Demut ist dabei so groß, dass er Christus bittet, nicht sein unwürdiges Haus zur Heilung zu betreten, sondern lediglich ein Wort der Heilung auszusprechen.
 
@@ -307,9 +307,9 @@ Zu sehen ist, wie der Hauptmann demütig vor dem aufgerichteten Christus in der 
 
 == Caritas ==
 
-{{Strukturdaten|deckenmalerei.eu_id=d901195a-79d3-40b9-957d-483083b04571}}
-
 [[File:497a4666-61a3-460c-9133-63fff53ac2bc.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=d901195a-79d3-40b9-957d-483083b04571}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Nächstenliebe wird mit einer Darstellung des letzten Abendmahls visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Entscheidend sind mit Bezug auf die Nächstenliebe das Leib und Blut Christi, die gegeben bzw. ausgegossen werden. Dies bezieht sich auch auf die Kreuzigung von Jesus Christus, in der Gott seinen eigenen Sohn zur Erlösung der Menschheit opfert.
 
@@ -317,9 +317,9 @@ Die Abendmahlsdarstellung ist durchaus ungewöhnlich. Die Jünger haben sich nic
 
 == Spes ==
 
-{{Strukturdaten|deckenmalerei.eu_id=443e4237-4f33-44c0-82ff-3adf753b5388}}
-
 [[File:6efa8105-6893-4822-9377-c43a92c9f954.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=443e4237-4f33-44c0-82ff-3adf753b5388}}
 
 <h5>Beschreibung und Ikonographie</h5>Die Tugend der Hoffnung wird durch die Worte Jesu „Im Hause meines Vaters sind viele Wohnungen“ dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Als die Jünger Sorgen um ihre Zukunft ohne Jesus Christus haben, sagt er ihnen zu, dass er ihnen einen Platz vorbereiten wolle und sie zu gegebener Zeit holen werde. Damit gibt er ihnen wie allen Gläubigen Hoffnung.
 
@@ -327,17 +327,15 @@ Jesus Christus steht links von der Bildmitte und weist mit seiner Hand an den Hi
 
 == Fides ==
 
-{{Strukturdaten|deckenmalerei.eu_id=7d7a40cb-9d89-48da-a609-98d43a7dcf18}}
-
 [[File:a9d5f99e-a21c-48d1-a9d4-730e362c0439.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=7d7a40cb-9d89-48da-a609-98d43a7dcf18}}
 
 <h5>Beschreibung und Ikonographie</h5>Der Glaube wird durch jene Bibelstelle dargestellt, in der Petrus bekennt, dass er Jesus Christus für den Messias halte.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Hier offenbart sich der Glaube von Petrus und Jesus Christus verkündet daraufhin, dass er auf Petrus bzw. dessen Glauben seine Kirche aufbauen wolle.
 
 Christus steht rechts der Bildmitte, umgeben von seinen Jüngern. Vor ihm ist Petrus auf die Knie gefallen und bekennt seinen Glauben.
 
 == Die Abteigebäude ==
-
-{{Strukturdaten|deckenmalerei.eu_id=843e2427-35b0-41ef-9299-0b44fb61e495|wikidata_qid=Q468153}}
 
 <gallery mode="slideshow" showthumbnails>
 File:613b1c7d-ba0a-4659-af3d-e409924333c0.jpg|
@@ -346,6 +344,8 @@ File:fmd10025489.jpg|
 File:fmd10025490.jpg|
 File:fmd10025491.jpg|
 </gallery>
+
+{{Strukturdaten|deckenmalerei.eu_id=843e2427-35b0-41ef-9299-0b44fb61e495|wikidata_qid=Q468153}}
 
 === Bau-, Ausstattungs- und Funktionsgeschichte ===
 Die Stiftsgebäude<ref name="613b1c7d-ba0a-4659-af3d-e409924333c0_1">Franz, d’Ixnard, 1985, S. 41-44; Theil, Konstanz, 1984, S. 27; Matthey, Klaiber, Riedlingen, 1936, S. 71-75; Klaiber, Buchau, 1929, S. 11-13, 16; Beschreibung Riedlingen, 1923, S. 161-162.</ref> gehen, wie bereits erwähnt, auf das Mittelalter zurück. Die heute erhaltenen Bauten stammen überwiegend aus dem 18. Jahrhundert. Zuerst entstand im Rahmen umfassender Erneuerungen der Stiftsgebäude unter Fürstäbtissin Maria Theresia von Montfort in axialer Verlängerung der Stiftskirche – aber von ihr ein wenig abgesetzt – 1709 der so genannte Kavaliersbau. Er hat seinen Namen erhalten, da hier u.a. auch vornehme Gäste untergerbacht wurden. Er bildete hinfort den Zugang zur Residenz.
@@ -367,12 +367,12 @@ Vom vermuteten malerischen Schmuck im Staatsappartement der Fürstäbtissin war 
 
 == Der so genannte Goldene Saal ==
 
-{{Strukturdaten|deckenmalerei.eu_id=a3eabc7a-1a5f-4ccc-a405-8a04c7092c14}}
-
 <gallery mode="slideshow" showthumbnails>
 File:2ebb41be-c41a-4717-a4ee-32ae915aa599.jpg|
 File:fmd10025495.jpg|
 </gallery>
+
+{{Strukturdaten|deckenmalerei.eu_id=a3eabc7a-1a5f-4ccc-a405-8a04c7092c14}}
 
 ==== Bau- und Ausstattungsgeschichte ====
 Der so genannte Goldenen Saal im Kavaliersbau wurde als Tafelzimmer erbaut, 1778 neu ausgestattet und bereits 1790 erneuert.<ref name="2ebb41be-c41a-4717-a4ee-32ae915aa599_1">Hosch, Brugger, 1987, S. 25; Franz, d’Ixnard, 1985, S. 44; Matthey/Klaiber, Riedlingen, 1936, S. 75; Klaiber, Buchau, 1929, S. 15.</ref> Die Malerei stammt von Joseph Anton Reiser, der Stuck und das erhabene Schnitzwerk vom „Bildhauer Christian“, womit wohl Joseph Christian oder dessen Sohn Franz Joseph Friedrich gemeint ist.<ref name="2ebb41be-c41a-4717-a4ee-32ae915aa599_2">Franz, d’Ixnard, 1985, S. 44.</ref>
@@ -382,12 +382,12 @@ Der eingeschossige Goldene Saal ist im zweiten Obergeschoss des Kavaliersbaus am
 
 == Die Wandgemälde im Goldenen Saal ==
 
-{{Strukturdaten|deckenmalerei.eu_id=6427a156-a1d2-4744-a089-16aaed8ab724|wikidata_qid=Q137902239}}
-
 <gallery mode="slideshow" showthumbnails>
 File:c35b7cb8-85be-4cc2-83c5-278db0297255.jpg|
 File:fmd10025492.jpg|
 </gallery>
+
+{{Strukturdaten|deckenmalerei.eu_id=6427a156-a1d2-4744-a089-16aaed8ab724|wikidata_qid=Q137902239}}
 
 ===== Beschreibung und Ikonographie =====
 Die Malerei zeigt zwei südländische Ruinenlandschaften mit sparsam verteiltem Personal. Das nördliche Gemälde zeigt Menschen bei der Feldarbeit. Eine Frau hat gerade das Pflügen vollendet und steht im Begriff, die Pferde auszuspannen, während ein Mann hinter ihr mit Säen beschäftigt ist. Ein weiterer Mann mit Hacke hat sich rechts vorn niedergelassen, um seinen Durst zu löschen.
@@ -398,18 +398,18 @@ Will man einen Bezug zwischen Malerei und historischer Raumfunktion herstellen, 
 
 == Das so genannte Grüne Zimmer ==
 
-{{Strukturdaten|deckenmalerei.eu_id=8d21fc0a-b36c-4ba2-bedb-b66df5870c60}}
-
 [[File:1accaacb-d896-4298-bf95-27b74b6ed3e9.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=8d21fc0a-b36c-4ba2-bedb-b66df5870c60}}
 
 ==== Bau- und Ausstattungsgeschichte ====
 Das so genannte Grüne Zimmer ist an der Nordseite des Damenbaus gelegen und wurde zu einem unbekannten Zeitpunkt in seiner Tiefe halbiert. An seiner Ostwand hat sich undatierte Wandmalerei erhalten.
 
 == Die Wandmalereireste im Grünen Zimmer ==
 
-{{Strukturdaten|deckenmalerei.eu_id=9269b37e-ef4a-4a0c-9083-14142f6bd88c|wikidata_qid=Q137902237}}
-
 [[File:ef922d2a-fd6d-4d10-96d7-6b74c31bdcc0.jpg|thumb|]]
+
+{{Strukturdaten|deckenmalerei.eu_id=9269b37e-ef4a-4a0c-9083-14142f6bd88c|wikidata_qid=Q137902237}}
 
 ===== Befund - Entstehungs- und Erhaltungsgeschichte =====
 Entstehungszeit und Künstler der Malerei sind unbekannt. Sehr wahrscheinlich stammt die Malerei aus der letzten Ausstattungsphase von 1790. Es wäre denkbar, dass auch hier der Maler Joseph Anton Reiser war.
