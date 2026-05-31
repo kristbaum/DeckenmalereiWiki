@@ -38,24 +38,13 @@ class ArticleGenerator:
             parts_out.append(text_entity["shortText"])
             parts_out.append("")
 
-        # --- Article-level image gallery (TEXT → DOCUMENTS → OBJECT → images) ---
         text_lead_entity_id, text_lead = self.loader.get_lead_resource_via_documents(
             text_entity["ID"]
         )
-        text_gallery: List[tuple] = []
         if text_lead and text_lead.get("resProvider"):
-            text_gallery.append(
-                (f"{text_lead_entity_id}.jpg", text_lead.get("appellation", ""))
+            parts_out.append(
+                f"[[File:{text_lead_entity_id}.jpg|thumb|{text_lead.get('appellation', '')}]]"
             )
-        if len(text_gallery) == 1:
-            img_filename, img_caption = text_gallery[0]
-            parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
-            parts_out.append("")
-        elif text_gallery:
-            parts_out.append('<gallery mode="slideshow" showthumbnails>')
-            for img_filename, img_caption in text_gallery:
-                parts_out.append(f"File:{img_filename}|{img_caption}")
-            parts_out.append("</gallery>")
             parts_out.append("")
 
         # --- First pass: collect citations from all text parts ---
