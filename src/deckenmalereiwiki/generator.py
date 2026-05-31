@@ -12,6 +12,7 @@ from .loader import DataLoader
 from .converter import HtmlConverter
 from .citations import parse_citations, replace_citation_refs
 from .strukturdaten import load_wikidata_mapping, generate_strukturdaten
+from .infobox import generate_infobox
 
 
 class ArticleGenerator:
@@ -23,48 +24,6 @@ class ArticleGenerator:
         self.wikidata_mapping = load_wikidata_mapping(str(loader.sources_dir))
 
     # ------------------------------------------------------------------
-    # Infobox
-    # ------------------------------------------------------------------
-
-    def generate_infobox(self, text_entity: Dict) -> str:
-        """Build the ``{{Infobox Deckenmalerei}}`` wikitext block."""
-        lines = ["{{Infobox Deckenmalerei"]
-
-        if text_entity.get("appellation"):
-            lines.append(f"| titel = {text_entity['appellation']}")
-
-        if text_entity.get("shortText"):
-            lines.append(f"| beschreibung = {text_entity['shortText']}")
-
-        lead_entity_id, lead_resource = self.loader.get_lead_resource_via_documents(
-            text_entity["ID"]
-        )
-        if lead_resource and lead_resource.get("resProvider"):
-            image_name = f"{lead_entity_id}.jpg"
-            lines.append(f"| bild = {image_name}")
-            if lead_resource.get("resLicense"):
-                lines.append(f"| lizenz = {lead_resource['resLicense']}")
-
-        for rel_type in ["AUTHORS", "PAINTERS", "ARCHITECTS", "COMMISSIONERS"]:
-            related = self.loader.get_relations_by_type(text_entity["ID"], rel_type)
-            if related:
-                names = [
-                    self.loader.entities[rel["relTar"]]["appellation"]
-                    for rel in related
-                    if rel.get("relTar") in self.loader.entities
-                    and self.loader.entities[rel["relTar"]].get("appellation")
-                ]
-                if names:
-                    label = rel_type.lower().rstrip("s")
-                    lines.append(f"| {label} = {'; '.join(names)}")
-
-        if text_entity.get("ID"):
-            lines.append(f"| entity_id = {text_entity['ID']}")
-
-        lines.append("}}")
-        return "\n".join(lines)
-
-    # ------------------------------------------------------------------
     # Article
     # ------------------------------------------------------------------
 
@@ -72,7 +31,7 @@ class ArticleGenerator:
         """Generate a complete MediaWiki article for *text_entity*."""
         parts_out: List[str] = []
 
-        parts_out.append(self.generate_infobox(text_entity))
+        parts_out.append(generate_infobox(self.loader, text_entity))
         parts_out.append("")
 
         if text_entity.get("shortText"):
