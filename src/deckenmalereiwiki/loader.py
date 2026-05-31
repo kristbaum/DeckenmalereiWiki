@@ -57,7 +57,7 @@ class DataLoader:
         """Get all TEXT_PART entities for a TEXT entity, ordered by relOrd.
         Recursively collects nested TEXT_PART entities."""
 
-        def collect_parts_recursive(entity_id: str) -> List[Dict]:
+        def collect_parts_recursive(entity_id: str, depth: int = 1) -> List[Dict]:
             part_relations = self.get_relations_by_type(entity_id, "PART")
             part_relations.sort(key=lambda r: r.get("relOrd", 0))
 
@@ -65,8 +65,9 @@ class DataLoader:
             for rel in part_relations:
                 target_id = rel.get("relTar")
                 if target_id in self.entities:
-                    parts.append(self.entities[target_id])
-                    sub_parts = collect_parts_recursive(target_id)
+                    part = {**self.entities[target_id], "_depth": depth}
+                    parts.append(part)
+                    sub_parts = collect_parts_recursive(target_id, depth + 1)
                     parts.extend(sub_parts)
             return parts
 

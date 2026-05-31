@@ -33,10 +33,8 @@ class ArticleGenerator:
 
         parts_out.append(generate_infobox(self.loader, text_entity))
         parts_out.append("")
-
-        if text_entity.get("shortText"):
-            parts_out.append(text_entity["shortText"])
-            parts_out.append("")
+        parts_out.append(text_entity["shortText"])
+        parts_out.append("")
 
         text_lead_entity_id, text_lead = self.loader.get_lead_resource_via_documents(
             text_entity["ID"]
@@ -77,7 +75,8 @@ class ArticleGenerator:
         used_refs: Dict[str, bool] = {}
 
         for part in text_parts:
-            parts_out.append(f"== {part['appellation']} ==")
+            eq = "=" * min(part.get("_depth", 1) + 1, 6)
+            parts_out.append(f"{eq} {part['appellation']} {eq}")
             parts_out.append("")
 
             # Per-part gallery: lead_resource first, then IMAGE resources
