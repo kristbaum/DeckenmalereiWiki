@@ -16,8 +16,11 @@ class HtmlConverter:
         text = html
 
         def replace_header(m):
+            content = m.group(2).strip()
+            if not content:
+                return ""
             eq = "=" * min(int(m.group(1)) + 1, 6)
-            return f"{eq} {m.group(2)} {eq}\n"
+            return f"{eq} {content} {eq}\n"
 
         text = re.sub(r"<h([1-6])>(.*?)</h\1>", replace_header, text, flags=re.DOTALL)
 

@@ -43,3 +43,8 @@ def test_no_unconverted_strong_tags(any_article):
 
 def test_has_einzelnachweise_section(any_article):
     assert "== Einzelnachweise ==" in any_article
+
+
+def test_no_empty_headings(any_article):
+    empty = re.findall(r"^={1,6}\s*={1,6}$", any_article, re.MULTILINE)
+    assert not empty, f"Empty headings found: {empty}"
