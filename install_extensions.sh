@@ -35,6 +35,12 @@ echo "Setting up database with installPreConfigured.php..."
 sudo docker compose exec mediawiki php ./maintenance/run.php installPreConfigured
 echo "✓ Database setup complete"
 
+# Fix permissions on the SQLite data directory so www-data can create lock files
+echo ""
+echo "Fixing permissions on /var/www/data..."
+sudo docker compose exec mediawiki chown -R www-data:www-data /var/www/data
+echo "✓ Permissions fixed"
+
 # Create admin user account
 echo ""
 echo "Creating admin user account..."
