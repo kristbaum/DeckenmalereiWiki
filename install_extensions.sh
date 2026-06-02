@@ -46,4 +46,3 @@ echo ""
 echo "Creating admin user account..."
 sudo docker compose exec mediawiki php ./maintenance/run.php createAndPromote --bureaucrat --sysop --force admin adminpass123
 echo "✓ Admin user created (username: admin, password: adminpass123)"
-

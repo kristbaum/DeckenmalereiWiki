@@ -108,16 +108,15 @@ class ArticleGenerator:
                 parts_out.append(generate_strukturdaten(documented_id, qid))
                 parts_out.append("")
 
-            if part.get("text") and part["ID"] in part_texts:
-                text = replace_citation_refs(
-                    part_texts[part["ID"]],
-                    part["ID"],
-                    deduplicated_citations,
-                    used_refs,
-                    ref_name_mapping,
-                )
-                parts_out.append(self.converter.convert(text))
-                parts_out.append("")
+            text = replace_citation_refs(
+                part_texts[part["ID"]],
+                part["ID"],
+                deduplicated_citations,
+                used_refs,
+                ref_name_mapping,
+            )
+            parts_out.append(self.converter.convert(text))
+            parts_out.append("")
 
         if text_entity.get("bibliography"):
             parts_out.append("== Bibliographie ==")
