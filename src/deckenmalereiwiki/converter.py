@@ -15,11 +15,11 @@ class HtmlConverter:
 
         text = html
 
-        # Headers
-        text = re.sub(r"<h1>(.*?)</h1>", r"== \1 ==\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h2>(.*?)</h2>", r"=== \1 ===\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h3>(.*?)</h3>", r"==== \1 ====\n", text, flags=re.DOTALL)
-        text = re.sub(r"<h4>(.*?)</h4>", r"===== \1 =====\n", text, flags=re.DOTALL)
+        def replace_header(m):
+            eq = "=" * min(int(m.group(1)) + 1, 6)
+            return f"{eq} {m.group(2)} {eq}\n"
+
+        text = re.sub(r"<h([1-6])>(.*?)</h\1>", replace_header, text, flags=re.DOTALL)
 
         # Bold and italic
         text = re.sub(

@@ -98,15 +98,20 @@ Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formal
 
 {{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
-<h5>Befund - Entstehungs- und Erhaltungsgeschichte</h5>Das Deckenfresko<ref name="101b8bcd-6b9d-456c-81e4-848f9e8394ad_1">Hosch, Brugger, 1987, S. 103-105; Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 28-29; Beschreibung Riedlingen, 1923, S. 448.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
+====== Befund - Entstehungs- und Erhaltungsgeschichte ======
+Das Deckenfresko<ref name="101b8bcd-6b9d-456c-81e4-848f9e8394ad_1">Hosch, Brugger, 1987, S. 103-105; Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 28-29; Beschreibung Riedlingen, 1923, S. 448.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
 
-<h5>Beschreibung und Ikonographie</h5>Das Fresko vereint drei unterschiedliche Szenen. In der Mitte erblickt man die Himmelfahrt und Krönung Mariens. Rechts unter der Szenerie befinden sich die Kirchenpatrone Kornelius und Cyprian auf Wolken. Während der stehende Cyprian Blickkontakt mit dem Betrachter herstellt, schaut der sitzende Kornelius der Himmelfahrt zu, verweist aber mit seiner linken Hand auf die Szene am unteren Bildrand an der Ostseite. Dort wird die – sozusagen unter ihrem Schutz stattfindende – legendenhafte Gründung des Klosters bzw. Stiftes Buchau gezeigt. Gegenüber auf der Westseite erblickt man die zeitgenössische bauliche Erneuerung des Stifts.
+====== Beschreibung und Ikonographie ======
+Das Fresko vereint drei unterschiedliche Szenen. In der Mitte erblickt man die Himmelfahrt und Krönung Mariens. Rechts unter der Szenerie befinden sich die Kirchenpatrone Kornelius und Cyprian auf Wolken. Während der stehende Cyprian Blickkontakt mit dem Betrachter herstellt, schaut der sitzende Kornelius der Himmelfahrt zu, verweist aber mit seiner linken Hand auf die Szene am unteren Bildrand an der Ostseite. Dort wird die – sozusagen unter ihrem Schutz stattfindende – legendenhafte Gründung des Klosters bzw. Stiftes Buchau gezeigt. Gegenüber auf der Westseite erblickt man die zeitgenössische bauliche Erneuerung des Stifts.
 
-<h5>Gestalterische Mittel - Komposition und Ansichtigkeit</h5>In der Mitte des dreigeteilten Bildes befindet sich Maria. Betritt man die Kirche jedoch von Westen, zieht die kreisrunde Schreibe des göttlichen Lichtes um die Taube des Heiligen Geistes den Blick auf sich. Die Krone, die von Gottvater und Jesus Christus gehalten wird, erscheint als Mittelpunkt. Dieser Bildteil nimmt ungefähr die Hälfte des Freskos ein. Ein blaues Stück Himmel trennt es formal von der unteren Gründungsszene. Den Bildteil mit der Erneuerung des Klosters nimmt man erst beim Verlassen des Raumes wirklich wahr. Insgesamt herrscht ein harmonisches Gleichgewicht zwischen der Lokal- und Erscheinungsfarbigkeit, so Hubert Hosch.<ref name="101b8bcd-6b9d-456c-81e4-848f9e8394ad_2">Hosch, Brugger, 1987, S. 61.</ref>
+====== Gestalterische Mittel - Komposition und Ansichtigkeit ======
+In der Mitte des dreigeteilten Bildes befindet sich Maria. Betritt man die Kirche jedoch von Westen, zieht die kreisrunde Schreibe des göttlichen Lichtes um die Taube des Heiligen Geistes den Blick auf sich. Die Krone, die von Gottvater und Jesus Christus gehalten wird, erscheint als Mittelpunkt. Dieser Bildteil nimmt ungefähr die Hälfte des Freskos ein. Ein blaues Stück Himmel trennt es formal von der unteren Gründungsszene. Den Bildteil mit der Erneuerung des Klosters nimmt man erst beim Verlassen des Raumes wirklich wahr. Insgesamt herrscht ein harmonisches Gleichgewicht zwischen der Lokal- und Erscheinungsfarbigkeit, so Hubert Hosch.<ref name="101b8bcd-6b9d-456c-81e4-848f9e8394ad_2">Hosch, Brugger, 1987, S. 61.</ref>
 
-<h5>Entwürfe</h5>Für die einzelnen Bildteile sind keine Vorlagen bekannt.
+====== Entwürfe ======
+Für die einzelnen Bildteile sind keine Vorlagen bekannt.
 
-<h5>Programm</h5>Inhalt des Hauptbildes ist die Gründung und Erneuerung des Stifts unter göttlichen Schutz zu stellen und mit der Himmelfahrt Mariens zu verbinden.
+====== Programm ======
+Inhalt des Hauptbildes ist die Gründung und Erneuerung des Stifts unter göttlichen Schutz zu stellen und mit der Himmelfahrt Mariens zu verbinden.
 
 ====== Die Krönung Mariens ======
 
@@ -114,7 +119,8 @@ Die Gemälde sind gleich Tafelbildern an die Decke gemalt. Es gibt keinen formal
 
 {{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
-<h6>Beschreibung und Ikonographie</h6>Maria schwebt zum göttlichen Licht empor und blickt dabei auf ihren Sohn, der zusammen mit Gottvater eine Krone bereithält, um sie zu krönen. Während das Haupt Gottes vom Dreieck der Dreifaltigkeit hinterfangen ist, tragen Engel hinter Christus sein Kreuz und die Erdkugel. Die Maria begleitenden Engel machen der Gottesmutter eher Platz, als dass sie sie emportragen. Über allem schwebt im Licht die Taube des Heiligen Geistes, umgeben von jubelnden Engeln und betenden Putten. Es handelt sich bei der Darstellung also um die verbreitete Kombination von Himmelfahrt und Krönung Mariens.
+====== Beschreibung und Ikonographie ======
+Maria schwebt zum göttlichen Licht empor und blickt dabei auf ihren Sohn, der zusammen mit Gottvater eine Krone bereithält, um sie zu krönen. Während das Haupt Gottes vom Dreieck der Dreifaltigkeit hinterfangen ist, tragen Engel hinter Christus sein Kreuz und die Erdkugel. Die Maria begleitenden Engel machen der Gottesmutter eher Platz, als dass sie sie emportragen. Über allem schwebt im Licht die Taube des Heiligen Geistes, umgeben von jubelnden Engeln und betenden Putten. Es handelt sich bei der Darstellung also um die verbreitete Kombination von Himmelfahrt und Krönung Mariens.
 
 Die Kirchenpatrone Cornelius und Cyprian sind seitlich rechts unten platziert. Die beiden Heiligen Papst Cornelius und Bischof Cyprian lebten in der ersten Hälfte des 3. Jahrhunderts und werden oft gemeinsam dargestellt. Sie gelten beide als Märtyrer der frühen Christenheit. Dementsprechend halten die Putten beim sitzenden Cornelius nicht nur Tiara und Patriarchenkreuz, sondern auch die Märtyrerpalme. Der stehende Cyprian hält den Bischofsstab in der Hand und trägt eine Mitra.
 
@@ -124,7 +130,8 @@ Die Kirchenpatrone Cornelius und Cyprian sind seitlich rechts unten platziert. D
 
 {{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
-<h6>Beschreibung und Ikonographie</h6>An der Ostseite des Gemäldes wird die legendenhafte Gründung<ref name="066deacd-de7c-4d8d-8fad-1c5893263985_1">Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 5-6, 28; Beschreibung Riedlingen, 1923, S. 665.</ref> des Stiftes bzw. Klosters Buchau gezeigt. Im Zentrum steht auf Stufen ein Altar mit einem goldenen Weihrauchgefäß sowie Urkunden. Rechts kniet die hl. Markgräfin Adelindis, die Stifterin des Klosters, die die Urkunden gerade eben auf den Altar gelegt hat. Dies geschah wohl um 770. Hinter ihr erblickt man ihr Gefolge. Zu ihren Füßen liegen drei tote Ritter. Bei diesen handelt sich um ihre Söhne Beringer, Reginolf und Gerhard. Beim Versuch ihre Schwester Adelinids aus dem Kloster Buchau zu entführen, um sie zu verheiraten, wurden sie 902 erschlagen. Es werden hier also zwei Handlungen zusammengeführt, denn die Schwester Adelindis ist nicht mit der gleichnamigen Stifterin des Klosters identisch. Ebenso wenig war die Stifterin des Klosters die Mutter der drei. Die Legende will, dass die Mutter nach dem Tod ihrer Söhne ihr Vermögen dem Kloster vermachte.
+====== Beschreibung und Ikonographie ======
+An der Ostseite des Gemäldes wird die legendenhafte Gründung<ref name="066deacd-de7c-4d8d-8fad-1c5893263985_1">Matthey/Klaiber, Riedlingen, 1936, S. 64; Klaiber, Buchau, 1929, S. 5-6, 28; Beschreibung Riedlingen, 1923, S. 665.</ref> des Stiftes bzw. Klosters Buchau gezeigt. Im Zentrum steht auf Stufen ein Altar mit einem goldenen Weihrauchgefäß sowie Urkunden. Rechts kniet die hl. Markgräfin Adelindis, die Stifterin des Klosters, die die Urkunden gerade eben auf den Altar gelegt hat. Dies geschah wohl um 770. Hinter ihr erblickt man ihr Gefolge. Zu ihren Füßen liegen drei tote Ritter. Bei diesen handelt sich um ihre Söhne Beringer, Reginolf und Gerhard. Beim Versuch ihre Schwester Adelinids aus dem Kloster Buchau zu entführen, um sie zu verheiraten, wurden sie 902 erschlagen. Es werden hier also zwei Handlungen zusammengeführt, denn die Schwester Adelindis ist nicht mit der gleichnamigen Stifterin des Klosters identisch. Ebenso wenig war die Stifterin des Klosters die Mutter der drei. Die Legende will, dass die Mutter nach dem Tod ihrer Söhne ihr Vermögen dem Kloster vermachte.
 
 Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, begleitet von einem Diener, der die gesiegelten Urkunden auf einem Kissen präsentiert sowie weiterem Gefolge mit einer Fahne, die den Doppeladler des Reiches zeigt. Der Kaiser trägt die Reichskrone und schaut den Betrachter an. 819 erhielt das Kloster von ihm verschiedene Besitzungen. Ludwig besorgte auch die Reliquien der beiden Kirchenpatrone. Er ist hier als historischer Mehrer des Stiftes zu sehen sowie in Bezug auf den gegenwärtigen Kaiser als dessen Beschützer.
 
@@ -134,7 +141,8 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 {{Strukturdaten|deckenmalerei.eu_id=c6232d77-4ee9-45be-8235-9ed65ed3dce7}}
 
-<h6>Beschreibung und Ikonographie</h6>Im Westen wird die zeitgenössische Erneuerung des Stifts präsentiert. Man erblickt die Auftraggeberin der Kirchenausstattung: Äbtissin Maria Maximiliana Esther von Stadion zu Tannhausen und Warthausen. Sie war 1775 zur Äbtissin gewählt worden und brachte die unter ihrer Vorgängerin Maria Karolina von Königsegg-Rothenfels 1773 begonnenen Arbeiten zum Abschluss. Selbstbewusst tritt die Äbtissin in Herrscherpose noch vorn. Sie weist mit ihrer rechten Hand auf ihren weiß gestickten Schuh, während sie mit der Linken auf eine zentral im Bildgeschehen präsentierte Vogelschau der neu erbauten Konventsgebäude deutet. Diese stellt einen Planzustand dar und zeigt daher auch den nicht realisierten Eingang links neben der Kirche. Die Ansicht wird von einem Engel gehalten. Das Wappen darüber ist das große Buchauer Stiftswappen. Es ist von einem Fürstenhut bekrönt und wird von Krummstab und Schwert hinterfangen – der Krummstab steht für geistliche Macht, das Schwert für die weltliche des Stiftes. Ein weiteres Wappen erblicken wir links der Äbtissin, das ebenfalls von einem Putto gehalten und von einem Fürstenhut bekrönt wird – es ist das Wappen der Auftraggeberin. Diese trägt wie die Damen des Konvents, die sich links hinter ihr befinden, Kopffächel mit weißem Schleier und Halstuch, schwarze Samtschürze und einen mit Litzen besetzten Reifrock. Ein als Stola getragenes blaues Ordensband präsentiert das Kleinod, das bei der Bemäntelung durch die Äbtissin überreicht wurde. Rechts des Plans erblickt man die Protektoren des Stiftes. Es handelt sich um den Konstanzer Fürstbischof Maximilian Augustinus Christoph von Rodt, Fürst Joseph Wenzel zu Fürstenberg-Stühlingen und den Fürstabt von Kempten, Honorius Roth von Schreckenstein. Auch deren bekrönte Wappen werden von Putten präsentiert.
+====== Beschreibung und Ikonographie ======
+Im Westen wird die zeitgenössische Erneuerung des Stifts präsentiert. Man erblickt die Auftraggeberin der Kirchenausstattung: Äbtissin Maria Maximiliana Esther von Stadion zu Tannhausen und Warthausen. Sie war 1775 zur Äbtissin gewählt worden und brachte die unter ihrer Vorgängerin Maria Karolina von Königsegg-Rothenfels 1773 begonnenen Arbeiten zum Abschluss. Selbstbewusst tritt die Äbtissin in Herrscherpose noch vorn. Sie weist mit ihrer rechten Hand auf ihren weiß gestickten Schuh, während sie mit der Linken auf eine zentral im Bildgeschehen präsentierte Vogelschau der neu erbauten Konventsgebäude deutet. Diese stellt einen Planzustand dar und zeigt daher auch den nicht realisierten Eingang links neben der Kirche. Die Ansicht wird von einem Engel gehalten. Das Wappen darüber ist das große Buchauer Stiftswappen. Es ist von einem Fürstenhut bekrönt und wird von Krummstab und Schwert hinterfangen – der Krummstab steht für geistliche Macht, das Schwert für die weltliche des Stiftes. Ein weiteres Wappen erblicken wir links der Äbtissin, das ebenfalls von einem Putto gehalten und von einem Fürstenhut bekrönt wird – es ist das Wappen der Auftraggeberin. Diese trägt wie die Damen des Konvents, die sich links hinter ihr befinden, Kopffächel mit weißem Schleier und Halstuch, schwarze Samtschürze und einen mit Litzen besetzten Reifrock. Ein als Stola getragenes blaues Ordensband präsentiert das Kleinod, das bei der Bemäntelung durch die Äbtissin überreicht wurde. Rechts des Plans erblickt man die Protektoren des Stiftes. Es handelt sich um den Konstanzer Fürstbischof Maximilian Augustinus Christoph von Rodt, Fürst Joseph Wenzel zu Fürstenberg-Stühlingen und den Fürstabt von Kempten, Honorius Roth von Schreckenstein. Auch deren bekrönte Wappen werden von Putten präsentiert.
 
 ===== Das Mannawunder =====
 
@@ -142,13 +150,17 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 {{Strukturdaten|deckenmalerei.eu_id=fe33364c-5aa9-45c7-93cb-8effba7b56cc|wikidata_qid=Q137902235}}
 
-<h5>Befund - Entstehungs- und Erhaltungsgeschichte</h5>Das Deckenfresko<ref name="b0fa66bf-80e9-4fc6-bc33-6eaa26653266_1">Hosch, Brugger, 1987, S. 105; Matthey/Klaiber, Riedlingen, 1936, S. 63-64; Klaiber, Buchau, 1929, S. 28.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
+====== Befund - Entstehungs- und Erhaltungsgeschichte ======
+Das Deckenfresko<ref name="b0fa66bf-80e9-4fc6-bc33-6eaa26653266_1">Hosch, Brugger, 1987, S. 105; Matthey/Klaiber, Riedlingen, 1936, S. 63-64; Klaiber, Buchau, 1929, S. 28.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
 
-<h5>Beschreibung und Ikonographie</h5>Es zeigt das Wunder des Mannaregens. Damit das Volk Israel nicht verhungerte, ließ Gott des Nachts Manna regnen, das am nächsten Morgen eingesammelt werden konnte. Es durfte nicht aufgespart werden, da es über Nacht verdarb. Brugger zeigt, wie das  Volk Israel am Boden lagert, gerahmt von seinen Zelten. Über ihm öffnet sich der Himmel zum göttlichen Licht. Links steht Moses mit seinem Stab in der Hand und zwei göttlichen Lichtstrahlen (statt der bisher üblichen Hörner) auf dem Haupt, neben ihm Aron. In der Mitte lagert eine zum Himmel blickende Frau mit Kind. Rechts neben ihr kniet ein Mann, der auf Moses verweist. Weiter rechts sammelt eine Frau bereits das Manna ein, währende andere noch untätig sitzen.
+====== Beschreibung und Ikonographie ======
+Es zeigt das Wunder des Mannaregens. Damit das Volk Israel nicht verhungerte, ließ Gott des Nachts Manna regnen, das am nächsten Morgen eingesammelt werden konnte. Es durfte nicht aufgespart werden, da es über Nacht verdarb. Brugger zeigt, wie das  Volk Israel am Boden lagert, gerahmt von seinen Zelten. Über ihm öffnet sich der Himmel zum göttlichen Licht. Links steht Moses mit seinem Stab in der Hand und zwei göttlichen Lichtstrahlen (statt der bisher üblichen Hörner) auf dem Haupt, neben ihm Aron. In der Mitte lagert eine zum Himmel blickende Frau mit Kind. Rechts neben ihr kniet ein Mann, der auf Moses verweist. Weiter rechts sammelt eine Frau bereits das Manna ein, währende andere noch untätig sitzen.
 
-<h5>Vorlagen und Vergleiche</h5>Für die Darstellung sind keine Vorbilder bekannt.
+====== Vorlagen und Vergleiche ======
+Für die Darstellung sind keine Vorbilder bekannt.
 
-<h5>Programm</h5>Die Szene des Mannaregens gilt als prototypischer Hinweis auf die Spendung des Abendmahlssakraments und verweist damit auf das Gemälde an der Ostseite des Hauptschiffs, das das Zusammentreffen von Abraham und Melchisedek zeigt, das ebenfalls auf das Abendmahl verweist. Es bezieht sich aber auch auf die Landesfrau der Fürstabtei. Zwischen dem Deckengemälde im Osten und dem Herrschaftsstand im Westen gelegen, wird es vom Gemälde der Fürstäbtissin sowie ihrer realen Person im Stand eingefasst und verweist auf ihre Fürsorge gegenüber ihren Untertanen, die sie ebenso wenig verhungern lässt wie Gott das Volk Israel.
+====== Programm ======
+Die Szene des Mannaregens gilt als prototypischer Hinweis auf die Spendung des Abendmahlssakraments und verweist damit auf das Gemälde an der Ostseite des Hauptschiffs, das das Zusammentreffen von Abraham und Melchisedek zeigt, das ebenfalls auf das Abendmahl verweist. Es bezieht sich aber auch auf die Landesfrau der Fürstabtei. Zwischen dem Deckengemälde im Osten und dem Herrschaftsstand im Westen gelegen, wird es vom Gemälde der Fürstäbtissin sowie ihrer realen Person im Stand eingefasst und verweist auf ihre Fürsorge gegenüber ihren Untertanen, die sie ebenso wenig verhungern lässt wie Gott das Volk Israel.
 
 ===== Abrahahm und Melchisedek =====
 
@@ -156,13 +168,17 @@ Auf der linken Seite steht aufrecht im Harnisch Kaiser Ludwig der Fromme, beglei
 
 {{Strukturdaten|deckenmalerei.eu_id=31339c0b-d6e6-4b0c-bd31-0e30f824673f|wikidata_qid=Q137902234}}
 
-<h5>Befund - Entstehungs- und Erhaltungsgeschichte</h5>Das Deckenfresko<ref name="c34becc5-f906-40c7-9db3-6534cf21c279_1">Hosch, Brugger, 1987, S. 103; Matthey/Klaiber, Riedlingen, 1936, S. 63; Klaiber, Buchau, 1929, S. 28.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
+====== Befund - Entstehungs- und Erhaltungsgeschichte ======
+Das Deckenfresko<ref name="c34becc5-f906-40c7-9db3-6534cf21c279_1">Hosch, Brugger, 1987, S. 103; Matthey/Klaiber, Riedlingen, 1936, S. 63; Klaiber, Buchau, 1929, S. 28.</ref> wurde von Andreas Brugger 1775/76 geschaffen und hat sich gut erhalten.
 
-<h5>Beschreibung und Ikonographie</h5>Brugger zeigt das Zusammentreffen von Abraham und Melchisedek. Abraham traf nach einem erfolgreichen Kriegszug auf der Rückkehr auf Melchisedek von Salem, mit dem er einen Bund schloss. Man sieht, wie Melchisedek von links kommt und Abraham Brot überreicht, während Diener hinter ihm Wein herbeitragen. Rechts nimmt Abraham das Brot entgegen. Hinter ihm steht eine gekrönte Person, bei der es sich eventuell um den König von Sodom handelt. Weiter rechts erblickt man Lot und seine Familie, die von Abraham auf dem Kriegszug befreit wurden. Abraham entrichtete Melchisedek den Zehnten. Ähnlich dem Bild mit dem Mannawunder öffnet sich auch hier der Himmel.
+====== Beschreibung und Ikonographie ======
+Brugger zeigt das Zusammentreffen von Abraham und Melchisedek. Abraham traf nach einem erfolgreichen Kriegszug auf der Rückkehr auf Melchisedek von Salem, mit dem er einen Bund schloss. Man sieht, wie Melchisedek von links kommt und Abraham Brot überreicht, während Diener hinter ihm Wein herbeitragen. Rechts nimmt Abraham das Brot entgegen. Hinter ihm steht eine gekrönte Person, bei der es sich eventuell um den König von Sodom handelt. Weiter rechts erblickt man Lot und seine Familie, die von Abraham auf dem Kriegszug befreit wurden. Abraham entrichtete Melchisedek den Zehnten. Ähnlich dem Bild mit dem Mannawunder öffnet sich auch hier der Himmel.
 
-<h5>Vorlagen und Vergleiche</h5>Für die Darstellung sind keine Vorbilder bekannt.
+====== Vorlagen und Vergleiche ======
+Für die Darstellung sind keine Vorbilder bekannt.
 
-<h5>Programm</h5>Die Szene des Zusammentreffens gilt als prototypischer Hinweis auf die Spendung des Abendmahlssakraments und verweist damit auf den realen Altar im Chor.
+====== Programm ======
+Die Szene des Zusammentreffens gilt als prototypischer Hinweis auf die Spendung des Abendmahlssakraments und verweist damit auf den realen Altar im Chor.
 
 ==== Die Decke im Chor ====
 
@@ -206,7 +222,8 @@ Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf de
 
 {{Strukturdaten|deckenmalerei.eu_id=92b607f2-3ce2-4b6b-a5e6-ea3487258f3f|wikidata_qid=Q137902223}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Tugend der Bitte wird durch die Darstellung der Mutter der Zebedäiden – Salome – verdeutlicht, die für ihre Söhne bei Jesus Christus um die besten Plätze zu seiner Rechten und seiner Linken bittet.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1">Klaiber, Buchau, 1929, S. 30.</ref>
+====== Beschreibung und Ikonographie ======
+Die Tugend der Bitte wird durch die Darstellung der Mutter der Zebedäiden – Salome – verdeutlicht, die für ihre Söhne bei Jesus Christus um die besten Plätze zu seiner Rechten und seiner Linken bittet.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1">Klaiber, Buchau, 1929, S. 30.</ref>
 
 Sie kniet vor einer Landschaft links, während Christus rechts aufrecht vor eine Architektur steht, am Übergang zur Natur.
 
@@ -216,7 +233,8 @@ Sie kniet vor einer Landschaft links, während Christus rechts aufrecht vor eine
 
 {{Strukturdaten|deckenmalerei.eu_id=d62046e4-e8fb-43d0-be22-f50cdc0f7e9a|wikidata_qid=Q137902233}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Dankbarkeit wird mit der Geschichte der zehn Aussätzigen dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Als Christus zehn Aussätzige um Mitleid baten, schickte er sie zu einem Priester. Bereits auf dem Weg dorthin wurden sie rein. Einer der Aussätzigen kehrte daraufhin um und bedankte sich bei Christus.
+====== Beschreibung und Ikonographie ======
+Die Dankbarkeit wird mit der Geschichte der zehn Aussätzigen dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Als Christus zehn Aussätzige um Mitleid baten, schickte er sie zu einem Priester. Bereits auf dem Weg dorthin wurden sie rein. Einer der Aussätzigen kehrte daraufhin um und bedankte sich bei Christus.
 
 Dieser Moment ist zu sehen: Der Geheilte hat sich vor Christus auf den Boden geworfen und dankt ihm. Die übrigen neun sind rechts vor einer angedeuteten Natur zu sehen, Christus steht mit seinen Jüngern vor einer Architektur, annähernd in der Bildmitte am Übergang zwischen beiden.
 
@@ -226,7 +244,8 @@ Dieser Moment ist zu sehen: Der Geheilte hat sich vor Christus auf den Boden gew
 
 {{Strukturdaten|deckenmalerei.eu_id=60fc0216-bb13-432d-96f2-5540f78e984e|wikidata_qid=Q137902221}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Reue wird durch die Verleugnung des Petrus visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Trotz gegenteiliger Beteuerung zuvor verleugnete Petrus den Christus dreimal, bevor der Hahn krähte. So hatte es ihm Christus auch vorausgesagt. Und tatsächlich fürchtete sich Petrus nach der nächtlichen Gefangenahme von Christus, ebenfalls in Gefahr zu geraten und stritt eine Gefolgschaft seinerseits daher ab. Nach der dritten Verleugnung krähte ein Hahn. Petrus weinte darauf bitterlich und bereute zutiefst sein Tun.
+====== Beschreibung und Ikonographie ======
+Die Reue wird durch die Verleugnung des Petrus visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Trotz gegenteiliger Beteuerung zuvor verleugnete Petrus den Christus dreimal, bevor der Hahn krähte. So hatte es ihm Christus auch vorausgesagt. Und tatsächlich fürchtete sich Petrus nach der nächtlichen Gefangenahme von Christus, ebenfalls in Gefahr zu geraten und stritt eine Gefolgschaft seinerseits daher ab. Nach der dritten Verleugnung krähte ein Hahn. Petrus weinte darauf bitterlich und bereute zutiefst sein Tun.
 
 Die Szenerie findet in einer Architekturkulisse statt. Christus hat sich nach der dritten Verleugnung zu Petrus umgewandt. Dieser schaut entsetzt auf den krähenden Hahn rechts und erkennt sein Versagen. Im Hintergrund öffnet sich der nächtliche Himmel.
 
@@ -236,7 +255,8 @@ Die Szenerie findet in einer Architekturkulisse statt. Christus hat sich nach de
 
 {{Strukturdaten|deckenmalerei.eu_id=cdd023b2-dd0d-42e8-bacd-ba911bbe8e83|wikidata_qid=Q137902232}}
 
-<h5>Beschreibung und Ikonographie</h5>Der Eifer wird durch Tempelreinigung durch Christus visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Christus vertrieb Händler und Geldwechsler aus dem Jerusalemer Tempel, da dieser als Haus Gottes dem Gottesdienst vorbehalten sein solle.
+====== Beschreibung und Ikonographie ======
+Der Eifer wird durch Tempelreinigung durch Christus visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Christus vertrieb Händler und Geldwechsler aus dem Jerusalemer Tempel, da dieser als Haus Gottes dem Gottesdienst vorbehalten sein solle.
 
 Christus steht aufrecht in der Mitte des Bildes. In seiner erhobenen Rechten hält er eine Geißel, mit der er die flüchtenden Händler aus dem Tempel hinaustreibt. Das Tempelinnere ist wie eine barocke Kirche mit Kuppel und Säulen gestaltet.
 
@@ -246,7 +266,8 @@ Christus steht aufrecht in der Mitte des Bildes. In seiner erhobenen Rechten hä
 
 {{Strukturdaten|deckenmalerei.eu_id=676502e2-4e49-4cd6-be96-b5dffbaff19f|wikidata_qid=Q137902222}}
 
-<h5>Beschreibung und Ikonographie</h5>Das Verlangen bzw. die Sehnsucht wird durch die Suche Marias und Josephs nach ihrem zwölfjährigen Sohn Jesus dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Maria und Joseph waren mit ihrem Sohn von Nazareth nach Jerusalem zum Paschafest gepilgert. Nach den Festtagen machten sie sich auf den Heimreise und vermuteten Jesus irgendwo in der heimreisenden Pilgergruppe. Erst nach einem Tag bemerkten sie sein Fehlen, da er in Jerusalem geblieben war.
+====== Beschreibung und Ikonographie ======
+Das Verlangen bzw. die Sehnsucht wird durch die Suche Marias und Josephs nach ihrem zwölfjährigen Sohn Jesus dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Maria und Joseph waren mit ihrem Sohn von Nazareth nach Jerusalem zum Paschafest gepilgert. Nach den Festtagen machten sie sich auf den Heimreise und vermuteten Jesus irgendwo in der heimreisenden Pilgergruppe. Erst nach einem Tag bemerkten sie sein Fehlen, da er in Jerusalem geblieben war.
 
 Zu sehen ist, wie die Eltern ihr Kind suchen. Das Paar steht in der Bildmitte. Sehnsüchtig blickt Maria zum Himmel auf.
 
@@ -256,7 +277,8 @@ Zu sehen ist, wie die Eltern ihr Kind suchen. Das Paar steht in der Bildmitte. S
 
 {{Strukturdaten|deckenmalerei.eu_id=a4b2c976-15fe-46da-bfb3-1ce0d30f6ef1|wikidata_qid=Q137902231}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Freude wird durch die Wiederauffindung des zwölfjährigen Jesus im Tempel durch seine Eltern dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Der Knabe war im Tempel geblieben und disputierte dort mit den Schriftgelehrten. Die Freue Mariens war groß, als sie ihn nach drei Tagen wiederfand.
+====== Beschreibung und Ikonographie ======
+Die Freude wird durch die Wiederauffindung des zwölfjährigen Jesus im Tempel durch seine Eltern dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Der Knabe war im Tempel geblieben und disputierte dort mit den Schriftgelehrten. Die Freue Mariens war groß, als sie ihn nach drei Tagen wiederfand.
 
 Darstellt ist der junge Jesus im Gespräch mit den Gelehrten. Er sitzt in der Mitte vor einem sich bauschenden Vorhang. Von links kommen seine Eltern, die ihn noch nicht erblickt haben.
 
@@ -281,7 +303,8 @@ Die Ansichtigkeit ist auf das Kirchenschiff bezogen und nicht einen Platz auf de
 
 {{Strukturdaten|deckenmalerei.eu_id=57fbe296-6112-4a22-9964-ef69856d50a2|wikidata_qid=Q137902040}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Tugend des Vertrauens wird durch die Heilung der blutflüssigen Frau dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Diese war schon lange krank. Im Vertrauen auf Heilung berührte sie das Gewand von Christus, woraufhin sie sofort geheilt war.
+====== Beschreibung und Ikonographie ======
+Die Tugend des Vertrauens wird durch die Heilung der blutflüssigen Frau dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Diese war schon lange krank. Im Vertrauen auf Heilung berührte sie das Gewand von Christus, woraufhin sie sofort geheilt war.
 
 Genau dieser Moment wird gezeigt. Christus wendet sich im Lauf nach links zu der hinter ihm knienden Frau um, da er bemerkt hat, dass sie sein Gewand hält.
 
@@ -291,7 +314,8 @@ Genau dieser Moment wird gezeigt. Christus wendet sich im Lauf nach links zu der
 
 {{Strukturdaten|deckenmalerei.eu_id=6385929c-9509-4ff7-8eb0-15952d1f5f25|wikidata_qid=Q137902220}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Ehrfurcht wird mittels der Anbetung der heiligen drei Könige dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Die Könige sind einen weiten Weg gereist, um dem frisch geborenen Jesus ihre Ehrfurcht zu bezeugen.
+====== Beschreibung und Ikonographie ======
+Die Ehrfurcht wird mittels der Anbetung der heiligen drei Könige dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Die Könige sind einen weiten Weg gereist, um dem frisch geborenen Jesus ihre Ehrfurcht zu bezeugen.
 
 Sie nahen von links um niederzuknien, während Maria ihnen – auf drei Stufen erhöht – den segnenden Säugling präsentiert. Das Geschehen findet in einem ruinösen Stall statt, über dem sich das göttliche Licht öffnet.
 
@@ -301,7 +325,8 @@ Sie nahen von links um niederzuknien, während Maria ihnen – auf drei Stufen e
 
 {{Strukturdaten|deckenmalerei.eu_id=6edf61b9-7350-4a5f-81a9-30db67c8876c}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Demut wird mit der Erzählung vom Hauptmann von Kapernaum dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Dieser fleht Christus an, seinen gelähmten Diener zu heilen. Seine Demut ist dabei so groß, dass er Christus bittet, nicht sein unwürdiges Haus zur Heilung zu betreten, sondern lediglich ein Wort der Heilung auszusprechen.
+====== Beschreibung und Ikonographie ======
+Die Demut wird mit der Erzählung vom Hauptmann von Kapernaum dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Dieser fleht Christus an, seinen gelähmten Diener zu heilen. Seine Demut ist dabei so groß, dass er Christus bittet, nicht sein unwürdiges Haus zur Heilung zu betreten, sondern lediglich ein Wort der Heilung auszusprechen.
 
 Zu sehen ist, wie der Hauptmann demütig vor dem aufgerichteten Christus in der Bildmitte kniet. Dieser hat segnend seine linke Hand erhoben. Hinter ihm stehen sein Jünger, hinter dem Hauptmann dessen Gefolge.
 
@@ -311,7 +336,8 @@ Zu sehen ist, wie der Hauptmann demütig vor dem aufgerichteten Christus in der 
 
 {{Strukturdaten|deckenmalerei.eu_id=d901195a-79d3-40b9-957d-483083b04571}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Nächstenliebe wird mit einer Darstellung des letzten Abendmahls visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Entscheidend sind mit Bezug auf die Nächstenliebe das Leib und Blut Christi, die gegeben bzw. ausgegossen werden. Dies bezieht sich auch auf die Kreuzigung von Jesus Christus, in der Gott seinen eigenen Sohn zur Erlösung der Menschheit opfert.
+====== Beschreibung und Ikonographie ======
+Die Nächstenliebe wird mit einer Darstellung des letzten Abendmahls visualisiert.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Entscheidend sind mit Bezug auf die Nächstenliebe das Leib und Blut Christi, die gegeben bzw. ausgegossen werden. Dies bezieht sich auch auf die Kreuzigung von Jesus Christus, in der Gott seinen eigenen Sohn zur Erlösung der Menschheit opfert.
 
 Die Abendmahlsdarstellung ist durchaus ungewöhnlich. Die Jünger haben sich nicht um einen Tisch versammelt, sondern stehen teilweise an seinem Rand. Im Vordergrund bringt ein Diener Brot. Wie üblich aber ist Christus in der Mitte platziert und Johannes hat seinen Kopf in seinen Schoß gelegt.
 
@@ -321,7 +347,8 @@ Die Abendmahlsdarstellung ist durchaus ungewöhnlich. Die Jünger haben sich nic
 
 {{Strukturdaten|deckenmalerei.eu_id=443e4237-4f33-44c0-82ff-3adf753b5388}}
 
-<h5>Beschreibung und Ikonographie</h5>Die Tugend der Hoffnung wird durch die Worte Jesu „Im Hause meines Vaters sind viele Wohnungen“ dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Als die Jünger Sorgen um ihre Zukunft ohne Jesus Christus haben, sagt er ihnen zu, dass er ihnen einen Platz vorbereiten wolle und sie zu gegebener Zeit holen werde. Damit gibt er ihnen wie allen Gläubigen Hoffnung.
+====== Beschreibung und Ikonographie ======
+Die Tugend der Hoffnung wird durch die Worte Jesu „Im Hause meines Vaters sind viele Wohnungen“ dargestellt.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Als die Jünger Sorgen um ihre Zukunft ohne Jesus Christus haben, sagt er ihnen zu, dass er ihnen einen Platz vorbereiten wolle und sie zu gegebener Zeit holen werde. Damit gibt er ihnen wie allen Gläubigen Hoffnung.
 
 Jesus Christus steht links von der Bildmitte und weist mit seiner Hand an den Himmel. Dieser öffnet sich, und im göttlichen Licht erblickt man ein Schloss – das Haus seines Vaters. Rechts stehen die Jünger. Sie schauen überwiegend auf Christus, einige haben aber auch das Haus Gottes erblickt.
 
@@ -331,7 +358,8 @@ Jesus Christus steht links von der Bildmitte und weist mit seiner Hand an den Hi
 
 {{Strukturdaten|deckenmalerei.eu_id=7d7a40cb-9d89-48da-a609-98d43a7dcf18}}
 
-<h5>Beschreibung und Ikonographie</h5>Der Glaube wird durch jene Bibelstelle dargestellt, in der Petrus bekennt, dass er Jesus Christus für den Messias halte.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Hier offenbart sich der Glaube von Petrus und Jesus Christus verkündet daraufhin, dass er auf Petrus bzw. dessen Glauben seine Kirche aufbauen wolle.
+====== Beschreibung und Ikonographie ======
+Der Glaube wird durch jene Bibelstelle dargestellt, in der Petrus bekennt, dass er Jesus Christus für den Messias halte.<ref name="24bd9448-4a3d-42cf-af66-f23b2e59c248_1" /> Hier offenbart sich der Glaube von Petrus und Jesus Christus verkündet daraufhin, dass er auf Petrus bzw. dessen Glauben seine Kirche aufbauen wolle.
 
 Christus steht rechts der Bildmitte, umgeben von seinen Jüngern. Vor ihm ist Petrus auf die Knie gefallen und bekennt seinen Glauben.
 

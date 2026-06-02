@@ -3,15 +3,14 @@ Regression tests for the generated "Bad Buchau, Fürstabtei und Residenz" articl
 
 Run with:  uv run pytest tests/
 """
+
 import re
 from pathlib import Path
 
 import pytest
 
 OUTPUT_FILE = (
-    Path(__file__).parent.parent
-    / "output"
-    / "Bad_Buchau,_Fürstabtei_und_Residenz.wiki"
+    Path(__file__).parent.parent / "output" / "Bad_Buchau,_Fürstabtei_und_Residenz.wiki"
 )
 
 
@@ -69,7 +68,7 @@ def test_headings_have_no_italic_markup(content):
 
 
 def test_expected_top_level_sections_present(content):
-    """Key == sections must be present with exact titles."""
+    """Key sections must be present with exact titles."""
     sections = [
         "== Das Stift Bad Buchau ==",
         "=== Die Stiftskirche St. Cornelius und Cyprian ===",
@@ -81,10 +80,24 @@ def test_expected_top_level_sections_present(content):
         "===== Gaudium =====",
         "== Die Abteigebäude ==",
         "=== Der so genannte Goldene Saal ===",
-        "==== Die Wandmalereireste im Grünen Zimmer ===="
+        "==== Die Wandmalereireste im Grünen Zimmer ====",
     ]
     for section in sections:
         assert section in content, f"Missing top-level section: {section!r}"
+
+
+def test_expected_lower_level_sections_present(content):
+    """Key olwer-level sections must be present with exact titles."""
+    sections = [
+        "=== Kurzbeschreibung und Lage ===",
+        "=== Bau-, Ausstattungs- und Nutzungsgeschichte ===",
+        "=== Auftraggeber ===",
+        "===== Das Hauptbild =====",
+        "====== Vorlagen und Vergleiche ======",
+        "===== Gestalterische Mittel - Komposition und Ansichtigkeit =====",
+    ]
+    for section in sections:
+        assert section in content, f"Missing lower-level section: {section!r}"
 
 
 # ---------------------------------------------------------------------------
