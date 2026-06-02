@@ -160,7 +160,8 @@ class MediaWikiImporter:
         def _handle(resource: Optional[Dict], name_entity_id: str):
             if resource and resource.get("resProvider"):
                 fp = self.image_handler.download_image(
-                    resource["resProvider"], name_entity_id, resource["ID"]
+                    resource["resProvider"], name_entity_id, resource["ID"],
+                    license=resource.get("resLicense", ""),
                 )
                 if fp:
                     resource_id = resource["ID"]

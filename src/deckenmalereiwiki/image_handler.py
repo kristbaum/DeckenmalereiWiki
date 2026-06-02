@@ -23,8 +23,12 @@ class ImageHandler:
         self.site = site
         self.downloads_dir = downloads_dir
 
+    @staticmethod
+    def _is_cc_license(license: str) -> bool:
+        return license.strip().upper().startswith("CC")
+
     def download_image(
-        self, url: str, entity_id: str, resource_id: str
+        self, url: str, entity_id: str, resource_id: str, license: str = ""
     ) -> Optional[Path]:
         """Download an image from *url* and save it locally.
 
@@ -32,10 +36,15 @@ class ImageHandler:
             url:         Provider base URL (used to determine download strategy).
             entity_id:   Entity ID used in the output filename.
             resource_id: Resource ID from resources.json.
+            license:     License string from resources.json. Only CC licenses are downloaded.
 
         Returns:
             Local :class:`~pathlib.Path` of the downloaded file, or ``None``.
         """
+        if not self._is_cc_license(license):
+            print(f"  Skipping {entity_id}: non-CC license ({license!r})")
+            return None
+
         try:
             # Check if already downloaded (any extension) before making network calls
             existing = next(self.downloads_dir.glob(f"{entity_id}.*"), None)
