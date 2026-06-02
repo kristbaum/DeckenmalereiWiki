@@ -35,3 +35,9 @@ echo "Setting up database with installPreConfigured.php..."
 sudo docker compose exec mediawiki php ./maintenance/run.php installPreConfigured
 echo "✓ Database setup complete"
 
+# Create admin user account
+echo ""
+echo "Creating admin user account..."
+sudo docker compose exec mediawiki php ./maintenance/run.php createAndPromote --bureaucrat --sysop --force admin adminpass123
+echo "✓ Admin user created (username: admin, password: adminpass123)"
+
