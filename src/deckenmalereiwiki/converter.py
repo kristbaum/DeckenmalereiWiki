@@ -13,7 +13,7 @@ class HtmlConverter:
         if not html:
             return ""
 
-        text = html
+        text = html.replace("­", "")  # strip soft hyphens
 
         def replace_header(m):
             content = m.group(2).strip()

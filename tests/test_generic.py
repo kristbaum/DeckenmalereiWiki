@@ -48,3 +48,7 @@ def test_has_einzelnachweise_section(any_article):
 def test_no_empty_headings(any_article):
     empty = re.findall(r"^={1,6}\s*={1,6}$", any_article, re.MULTILINE)
     assert not empty, f"Empty headings found: {empty}"
+
+
+def test_no_soft_hyphens(any_article):
+    assert "­" not in any_article, "Soft hyphen (U+00AD) found in output"
