@@ -1,0 +1,54 @@
+<includeonly><table class="wikitable fileinfotpl-type-information" style="width: 100%; margin: 0;">
+<tr>
+<th style="width: 25%;">Beschreibung</th>
+<td class="fileinfotpl_desc">{{{beschreibung|}}}</td>
+</tr>
+{{#if:{{{urheber|}}}|
+<tr>
+<th>Urheber</th>
+<td class="fileinfotpl_author">{{{urheber|}}}</td>
+</tr>}}{{#if:{{{rechteinhaber|}}}|
+<tr>
+<th>Rechteinhaber</th>
+<td>{{{rechteinhaber|}}}</td>
+</tr>}}{{#if:{{{lizenz|}}}|
+<tr>
+<th>Lizenz</th>
+<td class="fileinfotpl_license">{{{lizenz|}}}</td>
+</tr>}}
+</table></includeonly><noinclude>
+== Verwendung ==
+
+Diese Vorlage beschreibt eine Bilddatei im Deckenmalerei-Wiki und ist kompatibel mit der MediaViewer-Erweiterung.
+
+=== Parameter ===
+
+<pre>
+{{BildMeta
+| beschreibung =
+| urheber =
+| rechteinhaber =
+| lizenz =
+}}
+</pre>
+
+* '''beschreibung''' – Beschreibung des Bildinhalts
+* '''urheber''' – Urheber / Fotograf
+* '''rechteinhaber''' – Inhaber der Bildrechte
+* '''lizenz''' – Lizenz, z.B. CC BY-ND 4.0
+
+Alle Parameter sind optional.
+
+=== Beispiel ===
+
+<pre>
+{{BildMeta
+| beschreibung = Deckenfresko im Hauptschiff
+| urheber = Laß, Heiko
+| rechteinhaber = Leibniz-Institut für Kunstgeschichte
+| lizenz = CC BY-ND 4.0
+}}
+</pre>
+
+[[Kategorie:Vorlagen|BildMeta]]
+</noinclude>

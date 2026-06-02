@@ -88,6 +88,29 @@ class ImageHandler:
             print(f"  Failed to download from {url} (resource: {resource_id}): {e}")
             return None
 
+    @staticmethod
+    def _build_description(
+        description: str,
+        license_info: str,
+        rights_holders: list | None,
+        originators: list | None,
+    ) -> str:
+        """Build a {{BildMeta}} template call for the file description page."""
+        params: dict[str, str] = {}
+        if description:
+            params["beschreibung"] = description
+        if originators:
+            params["urheber"] = ", ".join(originators)
+        if rights_holders:
+            params["rechteinhaber"] = ", ".join(rights_holders)
+        if license_info:
+            params["lizenz"] = license_info
+        lines = ["{{BildMeta"]
+        for key, value in params.items():
+            lines.append(f"| {key} = {value}")
+        lines.append("}}")
+        return "\n".join(lines)
+
     def upload_image(
         self,
         filepath: Path,
@@ -104,16 +127,9 @@ class ImageHandler:
                 print(f"  Image already exists: {filename}")
                 return True
 
-            parts = []
-            if description:
-                parts.append(description)
-            if originators:
-                parts.append("Urheber: " + ", ".join(originators))
-            if rights_holders:
-                parts.append("Rechteinhaber: " + ", ".join(rights_holders))
-            if license_info:
-                parts.append(f"Lizenz: {license_info}")
-            full_description = "\n".join(parts)
+            full_description = self._build_description(
+                description, license_info, rights_holders, originators
+            )
 
             print(f"  Uploading: {filename}")
             with open(filepath, "rb") as f:
