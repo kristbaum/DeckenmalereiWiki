@@ -15,15 +15,20 @@ else
     echo "✓ Purge extension already installed"
 fi
 
-# Download source data files
+# Download source data files (skip any that already exist)
 echo ""
 echo "Downloading source data files..."
 mkdir -p sources
 BASE_URL="https://raw.githubusercontent.com/arthist-lmu/plafond3d/main/dumps/deckenmalerei.eu/2026_04"
-curl -fsSL "$BASE_URL/entities.json"  -o sources/entities.json
-curl -fsSL "$BASE_URL/relations.json" -o sources/relations.json
-curl -fsSL "$BASE_URL/resources.json" -o sources/resources.json
-echo "✓ Source data downloaded"
+for f in entities.json relations.json resources.json; do
+    if [ -f "sources/$f" ]; then
+        echo "  sources/$f already exists, skipping"
+    else
+        curl -fsSL "$BASE_URL/$f" -o "sources/$f"
+        echo "  Downloaded sources/$f"
+    fi
+done
+echo "✓ Source data ready"
 
 echo ""
 echo "Extensions installed successfully!"
