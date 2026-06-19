@@ -15,6 +15,14 @@
 <tr>
 <th>Lizenz</th>
 <td class="fileinfotpl_license">{{{lizenz|}}}</td>
+</tr>}}{{#if:{{{cc|}}}|
+<tr>
+<th>CC-Lizenz</th>
+<td>{{{cc|}}}</td>
+</tr>}}{{#if:{{{quelle|}}}|
+<tr>
+<th>Quelle</th>
+<td>{{{quelle|}}}</td>
 </tr>}}
 </table></includeonly><noinclude>
 == Verwendung ==
@@ -29,6 +37,8 @@ Diese Vorlage beschreibt eine Bilddatei im Deckenmalerei-Wiki und ist kompatibel
 | urheber =
 | rechteinhaber =
 | lizenz =
+| cc =
+| quelle =
 }}
 </pre>
 
@@ -36,6 +46,8 @@ Diese Vorlage beschreibt eine Bilddatei im Deckenmalerei-Wiki und ist kompatibel
 * '''urheber''' – Urheber / Fotograf
 * '''rechteinhaber''' – Inhaber der Bildrechte
 * '''lizenz''' – Lizenz, z.B. CC BY-ND 4.0
+* '''cc''' – ''ja'' wenn die Lizenz eine Creative-Commons-Lizenz ist, sonst ''nein''
+* '''quelle''' – Link zum Originalbild beim Anbieter
 
 Alle Parameter sind optional.
 
@@ -47,6 +59,8 @@ Alle Parameter sind optional.
 | urheber = Laß, Heiko
 | rechteinhaber = Leibniz-Institut für Kunstgeschichte
 | lizenz = CC BY-ND 4.0
+| cc = ja
+| quelle = https://previous.bildindex.de/bilder/fmd123456a.jpg
 }}
 </pre>
 

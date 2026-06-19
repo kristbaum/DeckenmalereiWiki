@@ -158,8 +158,7 @@ class MediaWikiImporter:
         """Download and upload all images associated with *entity*."""
         for name_entity_id, resource in loader.get_entity_image_resources(entity["ID"]):
             fp = self.image_handler.download_image(
-                resource["resProvider"], name_entity_id, resource["ID"],
-                license=resource.get("resLicense", ""),
+                resource["resProvider"], name_entity_id, resource["ID"]
             )
             if fp:
                 resource_id = resource["ID"]
@@ -167,10 +166,14 @@ class MediaWikiImporter:
                     resource_id, "RIGHTS_HOLDERS"
                 )
                 originators = loader.get_resource_actors(resource_id, "ORIGINATORS")
+                source_url = self.image_handler.source_url(
+                    resource["resProvider"], resource_id
+                )
                 self.image_handler.upload_image(
                     fp,
                     resource.get("appellation", ""),
                     resource.get("resLicense", ""),
                     rights_holders=rights_holders,
                     originators=originators,
+                    source_url=source_url,
                 )

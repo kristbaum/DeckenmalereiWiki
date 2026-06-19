@@ -26,6 +26,7 @@ REQUIRED_KEYS = {
     "description",
     "rights_holders",
     "originators",
+    "source_url",
     "downloaded",
     "image_file",
 }
@@ -98,13 +99,28 @@ def test_metadata_cc_flag_matches_license(metadata: tuple[str, dict]):
     )
 
 
-def test_non_cc_images_not_downloaded(metadata: tuple[str, dict]):
+def test_non_cc_images_are_downloaded():
+    """Downloading must not be gated by license: non-CC images download too."""
+    _require_downloads()
+    non_cc = [_load(p) for p in _sidecars()]
+    non_cc = [m for m in non_cc if not m["is_cc"]]
+    if not non_cc:
+        pytest.skip("No non-CC images in downloads/ to check")
+    assert any(m["downloaded"] for m in non_cc), (
+        "No non-CC image was downloaded — license gating may have been "
+        "re-introduced into download_image()"
+    )
+
+
+def test_metadata_source_url(metadata: tuple[str, dict]):
+    """The original-image link is recorded and points at a real URL when set."""
     stem, meta = metadata
-    if not meta["is_cc"]:
-        assert meta["downloaded"] is False, (
-            f"{stem} has a non-CC license but was downloaded"
-        )
-        assert meta["image_file"] is None
+    src = meta["source_url"]
+    assert src is None or (
+        isinstance(src, str) and src.startswith(("http://", "https://"))
+    ), f"{stem}.json has an invalid source_url: {src!r}"
+    if meta["downloaded"]:
+        assert src, f"{stem} was downloaded but has no source_url"
 
 
 def test_downloaded_image_file_exists(metadata: tuple[str, dict]):

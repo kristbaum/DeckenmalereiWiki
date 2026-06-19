@@ -119,24 +119,35 @@ class ImageHandler:
             return existing.name
         return f"{entity_id}{self.resolve_extension(url, resource_id)}"
 
+    def source_url(self, url: str, resource_id: str) -> Optional[str]:
+        """Return the direct URL of the original image, or ``None``.
+
+        This is the URL the image is downloaded from (e.g. the bildindex image
+        or the BADW EasyDB download URL) and is recorded in ``{{BildMeta}}`` as
+        a link back to the original. Never raises.
+        """
+        try:
+            return self._resolve_source(url, resource_id)[0]
+        except Exception:
+            return None
+
     def download_image(
-        self, url: str, entity_id: str, resource_id: str, license: str = ""
+        self, url: str, entity_id: str, resource_id: str
     ) -> Optional[Path]:
         """Download an image from *url* and save it locally.
+
+        Images are downloaded regardless of license; the license is recorded in
+        the ``{{BildMeta}}`` metadata at upload time instead of gating the
+        download.
 
         Args:
             url:         Provider base URL (used to determine download strategy).
             entity_id:   Entity ID used in the output filename.
             resource_id: Resource ID from resources.json.
-            license:     License string from resources.json. Only CC licenses are downloaded.
 
         Returns:
             Local :class:`~pathlib.Path` of the downloaded file, or ``None``.
         """
-        if not self._is_cc_license(license):
-            print(f"  Skipping {entity_id}: non-CC license ({license!r})")
-            return None
-
         try:
             # Check if already downloaded before making network calls.
             existing = self._existing_download(entity_id)
@@ -173,8 +184,14 @@ class ImageHandler:
         license_info: str,
         rights_holders: list | None,
         originators: list | None,
+        source_url: str | None = None,
     ) -> str:
-        """Build a {{BildMeta}} template call for the file description page."""
+        """Build a {{BildMeta}} template call for the file description page.
+
+        Always records a ``cc`` flag (``ja``/``nein``) classifying whether the
+        license is a Creative Commons license, and—when known—a ``quelle`` link
+        to the original image.
+        """
         params: dict[str, str] = {}
         if description:
             params["beschreibung"] = description
@@ -184,6 +201,9 @@ class ImageHandler:
             params["rechteinhaber"] = ", ".join(rights_holders)
         if license_info:
             params["lizenz"] = license_info
+        params["cc"] = "ja" if ImageHandler._is_cc_license(license_info) else "nein"
+        if source_url:
+            params["quelle"] = source_url
         lines = ["{{BildMeta"]
         for key, value in params.items():
             lines.append(f"| {key} = {value}")
@@ -197,6 +217,7 @@ class ImageHandler:
         license_info: str = "",
         rights_holders: list | None = None,
         originators: list | None = None,
+        source_url: str | None = None,
     ) -> bool:
         """Upload *filepath* to MediaWiki. Returns ``True`` on success."""
         try:
@@ -207,7 +228,7 @@ class ImageHandler:
                 return True
 
             full_description = self._build_description(
-                description, license_info, rights_holders, originators
+                description, license_info, rights_holders, originators, source_url
             )
 
             print(f"  Uploading: {filename}")
@@ -261,7 +282,6 @@ class ImageDownloader:
                 resource["resProvider"],
                 name_entity_id,
                 resource["ID"],
-                license=resource.get("resLicense", ""),
             )
             metadata = self._build_metadata(name_entity_id, resource, filepath)
             self._write_metadata(name_entity_id, metadata)
@@ -285,6 +305,9 @@ class ImageDownloader:
                 resource_id, "RIGHTS_HOLDERS"
             ),
             "originators": self.loader.get_resource_actors(resource_id, "ORIGINATORS"),
+            "source_url": self.handler.source_url(
+                resource.get("resProvider", ""), resource_id
+            ),
             "downloaded": filepath is not None,
             "image_file": filepath.name if filepath else None,
         }

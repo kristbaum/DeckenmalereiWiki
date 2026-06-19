@@ -115,7 +115,7 @@ Array of image resource objects:
 | `creationDate` | number | Unix ms timestamp |
 | `modificationDate` | number | Unix ms timestamp |
 
-Images are saved locally as `downloads/{entity_ID}.{ext}` and uploaded to MediaWiki under the same name. The extension is resolved per provider (bildindex → `.jpg`; BADW EasyDB → from the API, often `.png`) by `ImageHandler`, and the generator/infobox use the same resolver so `File:` references always match the uploaded file. `download-images` also writes a `downloads/{entity_ID}.json` metadata sidecar next to each image.
+Images are saved locally as `downloads/{entity_ID}.{ext}` and uploaded to MediaWiki under the same name. The extension is resolved per provider (bildindex → `.jpg`; BADW EasyDB → from the API, often `.png`) by `ImageHandler`, and the generator/infobox use the same resolver so `File:` references always match the uploaded file. All images are downloaded regardless of license; the `{{BildMeta}}` page records a `cc` flag (`ja`/`nein`) classifying the license and a `quelle` link to the original image. `download-images` also writes a `downloads/{entity_ID}.json` metadata sidecar (incl. `source_url`) next to each image.
 
 ## Key Conventions
 
