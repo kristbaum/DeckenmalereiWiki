@@ -126,6 +126,39 @@ class DataLoader:
                     images.append(self.resources[resource_id])
         return images
 
+    def get_entity_image_resources(self, entity_id: str) -> List[tuple]:
+        """Return ``[(name_entity_id, resource), ...]`` for a TEXT entity.
+
+        Collects every downloadable image resource associated with the TEXT
+        entity and its (recursive) TEXT_PART children, in the same order the
+        importer processes them: the entity lead resource, the entity's IMAGE
+        resources, then for each part its lead resource and IMAGE resources.
+
+        ``name_entity_id`` is the entity whose ID is used as the image filename
+        (``{name_entity_id}.jpg``). Only resources that carry a ``resProvider``
+        (i.e. are actually downloadable) are included.
+        """
+        results: List[tuple] = []
+
+        def _add(name_entity_id: str, resource: Optional[Dict]):
+            if resource and resource.get("resProvider"):
+                results.append((name_entity_id, resource))
+
+        lead_entity_id, lead_resource = self.get_lead_resource_via_documents(entity_id)
+        _add(lead_entity_id, lead_resource)
+        for img in self.get_images(entity_id):
+            _add(img["ID"], img)
+
+        for part in self.get_text_parts(entity_id):
+            part_lead_entity_id, part_lead = self.get_lead_resource_via_documents(
+                part["ID"]
+            )
+            _add(part_lead_entity_id, part_lead)
+            for img in self.get_images(part["ID"]):
+                _add(img["ID"], img)
+
+        return results
+
     def get_documented_entity_id(self, entity_id: str) -> Optional[str]:
         """Return the ID of the first entity linked via a DOCUMENTS relation."""
         doc_rels = self.get_relations_by_type(entity_id, "DOCUMENTS")

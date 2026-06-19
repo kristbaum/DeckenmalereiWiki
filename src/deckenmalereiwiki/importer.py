@@ -5,7 +5,7 @@ Uploads articles and images to a MediaWiki instance via the API.
 
 import time
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict
 
 import mwclient
 
@@ -156,41 +156,21 @@ class MediaWikiImporter:
 
     def _process_entity_images(self, loader: DataLoader, entity: Dict):
         """Download and upload all images associated with *entity*."""
-
-        def _handle(resource: Optional[Dict], name_entity_id: str):
-            if resource and resource.get("resProvider"):
-                fp = self.image_handler.download_image(
-                    resource["resProvider"], name_entity_id, resource["ID"],
-                    license=resource.get("resLicense", ""),
-                )
-                if fp:
-                    resource_id = resource["ID"]
-                    rights_holders = loader.get_resource_actors(
-                        resource_id, "RIGHTS_HOLDERS"
-                    )
-                    originators = loader.get_resource_actors(resource_id, "ORIGINATORS")
-                    self.image_handler.upload_image(
-                        fp,
-                        resource.get("appellation", ""),
-                        resource.get("resLicense", ""),
-                        rights_holders=rights_holders,
-                        originators=originators,
-                    )
-
-        # Lead resource for the TEXT entity (follows DOCUMENTS to OBJECT if needed)
-        lead_entity_id, lead_resource = loader.get_lead_resource_via_documents(
-            entity["ID"]
-        )
-        _handle(lead_resource, lead_entity_id)
-
-        # IMAGE resources via TEXT → DOCUMENTS → OBJECT → IMAGE
-        for img in loader.get_images(entity["ID"]):
-            _handle(img if img.get("resProvider") else None, img["ID"])
-
-        for part in loader.get_text_parts(entity["ID"]):
-            part_lead_entity_id, part_lead = loader.get_lead_resource_via_documents(
-                part["ID"]
+        for name_entity_id, resource in loader.get_entity_image_resources(entity["ID"]):
+            fp = self.image_handler.download_image(
+                resource["resProvider"], name_entity_id, resource["ID"],
+                license=resource.get("resLicense", ""),
             )
-            _handle(part_lead, part_lead_entity_id)
-            for img in loader.get_images(part["ID"]):
-                _handle(img if img.get("resProvider") else None, img["ID"])
+            if fp:
+                resource_id = resource["ID"]
+                rights_holders = loader.get_resource_actors(
+                    resource_id, "RIGHTS_HOLDERS"
+                )
+                originators = loader.get_resource_actors(resource_id, "ORIGINATORS")
+                self.image_handler.upload_image(
+                    fp,
+                    resource.get("appellation", ""),
+                    resource.get("resLicense", ""),
+                    rights_holders=rights_holders,
+                    originators=originators,
+                )

@@ -60,6 +60,21 @@ This will:
 3. Upload images to MediaWiki
 4. Create/update articles in MediaWiki
 
+### Download Images Only (debugging)
+
+Download the images for the articles already in `output/` without touching
+MediaWiki — useful for inspecting image handling:
+
+```bash
+uv run deckenmalereiwiki download-images
+```
+
+For every image referenced by an `output/*.wiki` file this downloads the file
+into `downloads/{entity_id}.{ext}` and writes a `downloads/{entity_id}.json`
+metadata sidecar recording the provider, license, description and rights/
+originator actors that *would* be uploaded. `tests/test_images.py` validates
+these against the article references.
+
 ## Architecture
 
 ### Data Structure

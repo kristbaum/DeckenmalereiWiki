@@ -1,10 +1,12 @@
 """CLI entry point: python -m deckenmalereiwiki [parse|import]"""
 
 import sys
+from pathlib import Path
 
 from deckenmalereiwiki.loader import DataLoader
-from deckenmalereiwiki.generator import ArticleGenerator
+from deckenmalereiwiki.generator import ArticleGenerator, title_to_filename
 from deckenmalereiwiki.importer import MediaWikiImporter
+from deckenmalereiwiki.image_handler import ImageDownloader
 
 
 def parse_command():
@@ -44,6 +46,41 @@ def import_images_command():
     print("\n✓ Image import complete!")
 
 
+def download_images_command(output_dir: str = "output"):
+    """Download (no upload) images for the articles in *output_dir*.
+
+    Debugging aid: requires no MediaWiki connection. For every ``.wiki`` file
+    in the output folder it downloads the associated images into ``downloads/``
+    and writes a ``{entity_id}.json`` metadata sidecar next to each one.
+    """
+    output_path = Path(output_dir)
+    wiki_stems = {p.stem for p in output_path.glob("*.wiki")}
+    if not wiki_stems:
+        print(f"No .wiki files found in {output_path}/ — run 'parse' first.")
+        return
+
+    loader = DataLoader()
+    loader.load_data()
+
+    downloads_dir = Path("downloads")
+    downloads_dir.mkdir(exist_ok=True)
+    downloader = ImageDownloader(loader, downloads_dir)
+
+    entities = [
+        e
+        for e in loader.get_text_entities()
+        if title_to_filename(e.get("appellation", f"Untitled_{e['ID']}")) in wiki_stems
+    ]
+    print(
+        f"\n=== Downloading images for {len(entities)} article(s) from {output_path}/ ==="
+    )
+    for entity in entities:
+        title = entity.get("appellation", f"Untitled_{entity['ID']}")
+        print(f"\nDownloading images for: {title}")
+        downloader.download_entity_images(entity)
+    print("\n✓ Image download complete!")
+
+
 def main():
     """Main entry point with subcommand support."""
     if len(sys.argv) > 1:
@@ -54,12 +91,19 @@ def main():
             import_command()
         elif command == "import-images":
             import_images_command()
+        elif command == "download-images":
+            download_images_command()
         else:
             print(f"Unknown command: {command}")
-            print("Usage: python -m deckenmalereiwiki [parse|import|import-images]")
+            print(
+                "Usage: python -m deckenmalereiwiki "
+                "[parse|import|import-images|download-images]"
+            )
             sys.exit(1)
     else:
-        # Default: parse only (safe, no network needed)
+        # Default: parse only (no wiki upload). Resolving image extensions may
+        # query the BADW EasyDB API for not-yet-downloaded images; bildindex
+        # images and already-downloaded files resolve offline.
         parse_command()
 
 

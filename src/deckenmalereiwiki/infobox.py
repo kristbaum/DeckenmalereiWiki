@@ -3,9 +3,12 @@
 from typing import Dict
 
 from .loader import DataLoader
+from .image_handler import ImageHandler
 
 
-def generate_infobox(loader: DataLoader, text_entity: Dict) -> str:
+def generate_infobox(
+    loader: DataLoader, text_entity: Dict, image_handler: ImageHandler
+) -> str:
     lines = ["{{Infobox Deckenmalerei"]
 
     if text_entity.get("appellation"):
@@ -18,7 +21,9 @@ def generate_infobox(loader: DataLoader, text_entity: Dict) -> str:
         text_entity["ID"]
     )
     if lead_resource and lead_resource.get("resProvider"):
-        image_name = f"{lead_entity_id}.jpg"
+        image_name = image_handler.image_filename(
+            lead_entity_id, lead_resource.get("resProvider", ""), lead_resource["ID"]
+        )
         lines.append(f"| bild = {image_name}")
         if lead_resource.get("resLicense"):
             lines.append(f"| lizenz = {lead_resource['resLicense']}")

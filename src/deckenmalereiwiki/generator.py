@@ -13,6 +13,19 @@ from .converter import HtmlConverter
 from .citations import parse_citations, replace_citation_refs
 from .strukturdaten import load_wikidata_mapping, generate_strukturdaten
 from .infobox import generate_infobox
+from .image_handler import ImageHandler
+
+
+def title_to_filename(title: str) -> str:
+    """Convert an article *title* to its ``.wiki`` filename stem.
+
+    Mirrors the sanitisation used when writing files in
+    :meth:`ArticleGenerator.save_articles_to_files` so callers can map an
+    output filename back to the entity that produced it.
+    """
+    safe_title = re.sub(r"[^\w\s,\-]", "", title).strip()
+    safe_title = re.sub(r"[-\s]+", "_", safe_title)
+    return safe_title
 
 
 class ArticleGenerator:
@@ -22,6 +35,15 @@ class ArticleGenerator:
         self.loader = loader
         self.converter = HtmlConverter()
         self.wikidata_mapping = load_wikidata_mapping(str(loader.sources_dir))
+        # No MediaWiki site needed: used only to resolve image filenames so the
+        # ``File:`` references match the downloaded/uploaded files' extensions.
+        self.image_handler = ImageHandler(site=None, downloads_dir=Path("downloads"))
+
+    def _image_filename(self, entity_id: str, resource: Dict) -> str:
+        """Resolve the ``File:`` filename for *resource* (matching the upload)."""
+        return self.image_handler.image_filename(
+            entity_id, resource.get("resProvider", ""), resource["ID"]
+        )
 
     # ------------------------------------------------------------------
     # Article
@@ -31,7 +53,7 @@ class ArticleGenerator:
         """Generate a complete MediaWiki article for *text_entity*."""
         parts_out: List[str] = []
 
-        parts_out.append(generate_infobox(self.loader, text_entity))
+        parts_out.append(generate_infobox(self.loader, text_entity, self.image_handler))
         parts_out.append("")
         parts_out.append(text_entity["shortText"])
         parts_out.append("")
@@ -40,8 +62,9 @@ class ArticleGenerator:
             text_entity["ID"]
         )
         if text_lead and text_lead.get("resProvider"):
+            lead_file = self._image_filename(text_lead_entity_id, text_lead)
             parts_out.append(
-                f"[[File:{text_lead_entity_id}.jpg|thumb|{text_lead.get('appellation', '')}]]"
+                f"[[File:{lead_file}|thumb|{text_lead.get('appellation', '')}]]"
             )
             parts_out.append("")
 
@@ -87,10 +110,15 @@ class ArticleGenerator:
             part_gallery: List[tuple] = []
             if part_lead and part_lead.get("resProvider"):
                 part_gallery.append(
-                    (f"{part_lead_entity_id}.jpg", part_lead.get("appellation", ""))
+                    (
+                        self._image_filename(part_lead_entity_id, part_lead),
+                        part_lead.get("appellation", ""),
+                    )
                 )
             for img in part_images:
-                part_gallery.append((f"{img['ID']}.jpg", img.get("appellation", "")))
+                part_gallery.append(
+                    (self._image_filename(img["ID"], img), img.get("appellation", ""))
+                )
             if len(part_gallery) == 1:
                 img_filename, img_caption = part_gallery[0]
                 parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
@@ -172,8 +200,7 @@ class ArticleGenerator:
         articles = self.generate_all_articles(max_articles=max_articles)
 
         for title, content in articles.items():
-            safe_title = re.sub(r"[^\w\s,\-]", "", title).strip()
-            safe_title = re.sub(r"[-\s]+", "_", safe_title)
+            safe_title = title_to_filename(title)
             with open(output_path / f"{safe_title}.wiki", "w", encoding="utf-8") as f:
                 f.write(content)
 

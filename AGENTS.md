@@ -12,8 +12,8 @@ src/deckenmalereiwiki/
   citations.py    Footnote extraction and deduplication
   generator.py    Assembles infoboxes + article wikitext
   importer.py     MediaWiki API upload via mwclient
-  image_handler.py Download images and upload to wiki
-  __main__.py     CLI: `parse` (write .wiki files) or `import` (push to wiki)
+  image_handler.py Download images and upload to wiki (ImageDownloader: download-only + metadata sidecars)
+  __main__.py     CLI: `parse`, `import`, `import-images`, `download-images` (debug: download + metadata, no wiki)
 output/           Generated .wiki files (created at runtime)
 downloads/        Downloaded images (created at runtime)
 ```
@@ -115,7 +115,7 @@ Array of image resource objects:
 | `creationDate` | number | Unix ms timestamp |
 | `modificationDate` | number | Unix ms timestamp |
 
-Images are saved locally as `downloads/{resource_ID}.jpg` and uploaded to MediaWiki as `{entity_ID}.jpg`.
+Images are saved locally as `downloads/{entity_ID}.{ext}` and uploaded to MediaWiki under the same name. The extension is resolved per provider (bildindex → `.jpg`; BADW EasyDB → from the API, often `.png`) by `ImageHandler`, and the generator/infobox use the same resolver so `File:` references always match the uploaded file. `download-images` also writes a `downloads/{entity_ID}.json` metadata sidecar next to each image.
 
 ## Key Conventions
 
