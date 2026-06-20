@@ -1,7 +1,7 @@
-<includeonly><table class="infobox" style="width: 22em; text-align: left; font-size: 88%; line-height: 1.5em; border: 1px solid #aaa; background-color: #f9f9f9; padding: 0.2em; float: right; clear: right; margin: 0 0 1em 1em;">
+<includeonly><table class="infobox" style="width: 22em; text-align: left; font-size: 88%; line-height: 1.5em; border: 1px solid var(--border-color-base, #a2a9b1); background-color: var(--background-color-neutral-subtle, #f8f9fa); color: var(--color-base, inherit); padding: 0.2em; float: right; clear: right; margin: 0 0 1em 1em;">
 {{#if:{{{titel|}}}|
 <tr>
-  <th colspan="2" style="text-align: center; font-size: 125%; font-weight: bold; background-color: #cce0ff; padding: 0.5em;">{{{titel}}}</th>
+  <th colspan="2" style="text-align: center; font-size: 125%; font-weight: bold; background-color: var(--background-color-progressive-subtle, #cce0ff); color: var(--color-base, inherit); padding: 0.5em;">{{{titel}}}</th>
 </tr>
 }}
 {{#if:{{{bild|}}}|
@@ -11,40 +11,40 @@
 }}
 {{#if:{{{beschreibung|}}}|
 <tr>
-  <td colspan="2" style="padding: 0.5em; border-top: 1px solid #aaa;">{{{beschreibung}}}</td>
+  <td colspan="2" style="padding: 0.5em; border-top: 1px solid var(--border-color-base, #a2a9b1);">{{{beschreibung}}}</td>
 </tr>
 }}
 {{#if:{{{author|}}}|
 <tr>
-  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top; width: 30%;">Autor:</th>
+  <th style="padding: 0.25em 0.5em; background-color: var(--background-color-neutral, #eaecf0); vertical-align: top; width: 30%;">Autor:</th>
   <td style="padding: 0.25em 0.5em;">{{{author}}}</td>
 </tr>
 }}
 {{#if:{{{painter|}}}|
 <tr>
-  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Maler:</th>
+  <th style="padding: 0.25em 0.5em; background-color: var(--background-color-neutral, #eaecf0); vertical-align: top;">Maler:</th>
   <td style="padding: 0.25em 0.5em;">{{{painter}}}</td>
 </tr>
 }}
 {{#if:{{{architect|}}}|
 <tr>
-  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Architekt:</th>
+  <th style="padding: 0.25em 0.5em; background-color: var(--background-color-neutral, #eaecf0); vertical-align: top;">Architekt:</th>
   <td style="padding: 0.25em 0.5em;">{{{architect}}}</td>
 </tr>
 }}
 {{#if:{{{commissioner|}}}|
 <tr>
-  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Auftraggeber:</th>
+  <th style="padding: 0.25em 0.5em; background-color: var(--background-color-neutral, #eaecf0); vertical-align: top;">Auftraggeber:</th>
   <td style="padding: 0.25em 0.5em;">{{{commissioner}}}</td>
 </tr>
 }}{{#if:{{{entity_id|}}}
 <tr>
-  <th style="padding: 0.25em 0.5em; background-color: #f0f0f0; vertical-align: top;">Quelle:</th>
+  <th style="padding: 0.25em 0.5em; background-color: var(--background-color-neutral, #eaecf0); vertical-align: top;">Quelle:</th>
   <td style="padding: 0.25em 0.5em;">[https://www.deckenmalerei.eu/{{{entity_id}}} deckenmalerei.eu]</td>
 </tr>
 }}{{#if:{{{lizenz|}}}|
 <tr>
-  <td colspan="2" style="padding: 0.5em; border-top: 1px solid #aaa; font-size: 85%;">'''Lizenz:''' {{{lizenz}}}</td>
+  <td colspan="2" style="padding: 0.5em; border-top: 1px solid var(--border-color-base, #a2a9b1); font-size: 85%;">'''Lizenz:''' {{{lizenz}}}</td>
 </tr>
 }}
 </table></includeonly><noinclude>
