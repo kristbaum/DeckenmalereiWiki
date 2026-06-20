@@ -102,6 +102,12 @@ class ArticleGenerator:
             parts_out.append(f"{eq} {part['appellation']} {eq}")
             parts_out.append("")
 
+            documented_id = self.loader.get_documented_entity_id(part["ID"])
+            if documented_id:
+                qid = self.wikidata_mapping.get(documented_id)
+                parts_out.append(generate_strukturdaten(documented_id, qid))
+                parts_out.append("")
+
             # Per-part gallery: lead_resource first, then IMAGE resources
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
@@ -128,12 +134,6 @@ class ArticleGenerator:
                 for img_filename, img_caption in part_gallery:
                     parts_out.append(f"File:{img_filename}|{img_caption}")
                 parts_out.append("</gallery>")
-                parts_out.append("")
-
-            documented_id = self.loader.get_documented_entity_id(part["ID"])
-            if documented_id:
-                qid = self.wikidata_mapping.get(documented_id)
-                parts_out.append(generate_strukturdaten(documented_id, qid))
                 parts_out.append("")
 
             text = replace_citation_refs(

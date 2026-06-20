@@ -19,9 +19,10 @@ class HtmlConverter:
             content = m.group(2).strip()
             if not content:
                 return ""
+            # Don't make them headers for now
             # eq = "=" * min(int(m.group(1)) + 1, 6)
             # return f"{eq} {content} {eq}\n"
-            return f"'''{content}'''\n"
+            return f"'''{content}'''\n\n"
 
         text = re.sub(r"<h([1-6])>(.*?)</h\1>", replace_header, text, flags=re.DOTALL)
 
