@@ -27,7 +27,7 @@ def generate_strukturdaten(
     wikidata_qid: Optional[str] = None,
 ) -> str:
     """Return the ``{{Strukturdaten}}`` wikitext for a section."""
-    params = [f"deckenmalerei.eu_id={deckenmalerei_eu_id}"]
+    params = [f"entity_id={deckenmalerei_eu_id}"]
     if wikidata_qid:
         params.append(f"wikidata_qid={wikidata_qid}")
     return "{{Strukturdaten|" + "|".join(params) + "}}"

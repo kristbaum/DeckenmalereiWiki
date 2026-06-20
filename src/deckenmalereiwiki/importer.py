@@ -83,6 +83,37 @@ class MediaWikiImporter:
             print(f"  Failed to update {title}: {e}")
             return False
 
+    # ------------------------------------------------------------------
+    # Template handling
+    # ------------------------------------------------------------------
+
+    def import_templates(self, templates_dir: str = "templates"):
+        """Upload/update every ``.wiki`` template in *templates_dir*.
+
+        Each file is published to ``Template:<title>`` where the title is the
+        filename stem with underscores turned into spaces (e.g.
+        ``Infobox_Deckenmalerei.wiki`` → ``Template:Infobox Deckenmalerei``).
+        """
+        folder = Path(templates_dir)
+        if not folder.is_dir():
+            print(f"Templates folder not found: {folder}")
+            return
+
+        template_files = sorted(folder.glob("*.wiki"))
+        if not template_files:
+            print(f"No .wiki templates found in {folder}")
+            return
+
+        print(f"\n=== Importing {len(template_files)} templates from {folder}/ ===")
+        success = 0
+        for tf in template_files:
+            title = f"Template:{tf.stem.replace('_', ' ')}"
+            content = tf.read_text(encoding="utf-8")
+            if self.create_or_update_page(title, content, summary="Vorlagen-Import"):
+                success += 1
+            time.sleep(0.05)
+        print(f"Successfully imported {success}/{len(template_files)} templates")
+
     def import_articles(self, articles: Dict[str, str]):
         """Push *articles* dict ``{title: wikitext}`` to MediaWiki."""
         print(f"\nImporting {len(articles)} articles...")
@@ -122,6 +153,8 @@ class MediaWikiImporter:
             title = wf.stem.replace("_", " ")
             articles[title] = wf.read_text(encoding="utf-8")
 
+        self.import_templates()
+
         print(f"\n=== Importing {len(articles)} articles from {folder}/ ===")
         self.import_articles(articles)
 
@@ -133,6 +166,8 @@ class MediaWikiImporter:
         """
         generator = ArticleGenerator(loader)
         print("Starting import process...")
+
+        self.import_templates()
 
         text_entities = loader.get_text_entities()[: self.max_articles]
         print(

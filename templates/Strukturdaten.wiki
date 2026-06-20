@@ -1,0 +1,27 @@
+<includeonly><div class="strukturdaten" style="font-size: 80%; opacity: 0.6; line-height: 1.4; margin: 0.2em 0;">{{#if:{{{entity_id|}}}|[https://www.deckenmalerei.eu/{{{entity_id}}} deckenmalerei.eu]}}{{#if:{{{wikidata_qid|}}}|{{#if:{{{entity_id|}}}| · }}[https://www.wikidata.org/wiki/{{{wikidata_qid}}} Wikidata]}}</div></includeonly><noinclude>
+== Verwendung ==
+
+Diese Vorlage zeigt kleine, unaufdringliche Strukturdaten-Links zu einem Abschnitt an: einen Link zu [https://www.deckenmalerei.eu deckenmalerei.eu] und – falls angegeben – einen Link zum zugehörigen Wikidata-Objekt.
+
+Die Links werden bewusst klein und mit reduzierter Deckkraft dargestellt. Es werden keine festen Text- oder Hintergrundfarben gesetzt, damit die Darstellung sowohl im hellen als auch im dunklen Modus funktioniert.
+
+=== Parameter ===
+
+<pre>
+{{Strukturdaten
+| entity_id =
+| wikidata_qid =
+}}
+</pre>
+
+* '''entity_id''' – UUID des Eintrags (wird zu einem Link auf deckenmalerei.eu)
+* '''wikidata_qid''' – Wikidata-Q-ID (optional; erzeugt einen Link auf wikidata.org)
+
+=== Beispiel ===
+
+<pre>
+{{Strukturdaten|entity_id=6f825be5-b796-4585-9ae2-75ea3d04cd5c|wikidata_qid=Q468153}}
+</pre>
+
+[[Kategorie:Vorlagen|Strukturdaten]]
+</noinclude>

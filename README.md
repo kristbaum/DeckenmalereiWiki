@@ -23,15 +23,17 @@ Parsed version of Deckenmalerei.eu texts for MediaWiki.
    - Username: `admin`
    - Password: `adminpass123`
 
-3. **Create the Infobox template in MediaWiki:**
+3. **Templates**
 
-   Before importing articles, you need to create the infobox template:
+   The MediaWiki templates live as `.wiki` files in [templates/](templates/) and are
+   uploaded/updated automatically by the `import` command — no manual setup needed.
+   Each file is published to `Template:<title>`, where the title is the filename stem
+   with underscores turned into spaces (e.g. `Infobox_Deckenmalerei.wiki` →
+   `Template:Infobox Deckenmalerei`). Dropping a new `.wiki` file into the folder is
+   enough for it to be imported.
 
-   - Navigate to <http://localhost:8080/index.php?title=Template:Infobox_Deckenmalerei&action=edit>
-   - Copy the content from [Infobox_Deckenmalerei.wiki](Infobox_Deckenmalerei.wiki)
-   - Save the page
-
-   This template will display structured metadata for each article including title, images, descriptions, and related persons (authors, painters, architects, commissioners).
+   To create or update them manually instead, copy a file's content into the matching
+   `Template:` page in MediaWiki.
 
 ## Usage
 
@@ -55,10 +57,11 @@ uv run deckenmalereiwiki import
 
 This will:
 
-1. Load and parse JSON data from `sources/`
-2. Download images from external URLs
-3. Upload images to MediaWiki
-4. Create/update articles in MediaWiki
+1. Upload/update the templates from `templates/`
+2. Load and parse JSON data from `sources/`
+3. Download images from external URLs
+4. Upload images to MediaWiki
+5. Create/update articles in MediaWiki
 
 ### Download Images Only (debugging)
 
@@ -128,20 +131,21 @@ Edit [importer.py](importer.py) to change:
 - Download directory
 - Upload behavior
 
-## MediaWiki Template
+## MediaWiki Templates
 
-The [Infobox_Deckenmalerei.wiki](Infobox_Deckenmalerei.wiki) template displays structured information at the top of each article:
+The templates in [templates/](templates/) are uploaded automatically by the `import`
+command:
 
-- **titel** - Article title
-- **beschreibung** - Short description
-- **bild** - Main image filename
-- **lizenz** - Image license information
-- **author** - Text author(s)
-- **painter** - Ceiling painting artist(s)
-- **architect** - Building architect(s)
-- **commissioner** - Patron/commissioner(s)
+- **[Infobox_Deckenmalerei.wiki](templates/Infobox_Deckenmalerei.wiki)** – structured
+  metadata box at the top of each article (titel, beschreibung, bild, lizenz, author,
+  painter, architect, commissioner, entity_id).
+- **[Strukturdaten.wiki](templates/Strukturdaten.wiki)** – small, unobtrusive
+  structured-data links per section (entity_id → deckenmalerei.eu, optional
+  wikidata_qid → Wikidata).
+- **[BildMeta.wiki](templates/BildMeta.wiki)** – metadata box on file description pages
+  (MediaViewer-compatible).
 
-All parameters are optional. The template must be created in MediaWiki before importing articles.
+All parameters are optional.
 
 ## Notes
 
