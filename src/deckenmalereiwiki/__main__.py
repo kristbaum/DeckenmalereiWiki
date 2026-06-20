@@ -39,6 +39,7 @@ def import_images_command():
 
     text_entities = loader.get_text_entities()[: importer.max_articles]
     print(f"\n=== Processing images for {len(text_entities)} articles ===")
+    importer.image_handler.load_existing_filenames()
     for entity in text_entities:
         title = entity.get("appellation", f"Untitled_{entity['ID']}")
         print(f"\nProcessing images for: {title}")

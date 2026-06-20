@@ -25,6 +25,10 @@ class ImageHandler:
         self.downloads_dir = downloads_dir
         # Cache of EasyDB resolutions: resource_id -> (download_url, extension).
         self._easydb_cache: dict[str, tuple[Optional[str], str]] = {}
+        # Normalised set of file names that exist on the wiki, fetched once via
+        # ``load_existing_filenames``. ``None`` means "not loaded": uploads then
+        # fall back to a per-file check.
+        self._existing_filenames: Optional[set[str]] = None
 
     @staticmethod
     def _is_cc_license(license: str) -> bool:
@@ -210,6 +214,81 @@ class ImageHandler:
         lines.append("}}")
         return "\n".join(lines)
 
+    @staticmethod
+    def _normalize_filename(name: str) -> str:
+        """Normalise *name* the way MediaWiki normalises file page titles.
+
+        MediaWiki treats spaces and underscores as equivalent in titles and,
+        with the default ``$wgCapitalLinks``, upper-cases the first character.
+        ``allimages`` returns titles with spaces (e.g. ``Fmb28989 20.jpg``)
+        while our local files use underscores (``fmb28989_20.jpg``), so both
+        sides must be canonicalised before comparison.
+        """
+        name = name.replace(" ", "_")
+        return name[:1].upper() + name[1:] if name else name
+
+    def fetch_existing_filenames(self) -> set[str]:
+        """Return the normalised set of file names currently on the wiki.
+
+        Queries the MediaWiki ``allimages`` list so uploads can be reconciled
+        against what actually exists, instead of trusting per-file checks or
+        earlier log output (an upload may have been logged without the file
+        ever landing on the wiki).
+        """
+        names: set[str] = set()
+        try:
+            for image in self.site.allimages():
+                title = image.name
+                if ":" in title:  # strip the "File:"/"Datei:" namespace prefix
+                    title = title.split(":", 1)[1]
+                names.add(self._normalize_filename(title))
+        except Exception as e:
+            print(f"  Could not fetch existing wiki images: {e}")
+        return names
+
+    def load_existing_filenames(self) -> set[str]:
+        """Fetch and cache the wiki's file list for this handler.
+
+        Subsequent :meth:`upload_image` calls reconcile against this set rather
+        than doing a per-file existence check.
+        """
+        self._existing_filenames = self.fetch_existing_filenames()
+        print(f"  Wiki currently holds {len(self._existing_filenames)} file(s)")
+        return self._existing_filenames
+
+    def _already_on_wiki(self, filename: str) -> bool:
+        """Whether *filename* already exists on the wiki.
+
+        Uses the cached :attr:`_existing_filenames` set when it has been loaded
+        (authoritative reconciliation); otherwise falls back to a per-file API
+        check.
+        """
+        if self._existing_filenames is not None:
+            return self._normalize_filename(filename) in self._existing_filenames
+        return bool(self.site.images[filename].imageinfo)
+
+    @staticmethod
+    def _upload_payload(result) -> dict:
+        """Return the ``upload`` payload from a ``site.upload`` result.
+
+        Normal uploads return the payload directly, while chunked uploads
+        (large files) return it wrapped under an ``"upload"`` key. This
+        flattens both shapes so callers can read ``result``/``warnings``.
+        """
+        if isinstance(result, dict):
+            return result.get("upload", result)
+        return {}
+
+    def _do_upload(self, filepath: Path, description: str, ignore: bool):
+        """Issue a single ``site.upload`` call and return its raw result."""
+        with open(filepath, "rb") as f:
+            return self.site.upload(
+                file=f,
+                filename=filepath.name,
+                description=description,
+                ignore=ignore,
+            )
+
     def upload_image(
         self,
         filepath: Path,
@@ -219,11 +298,21 @@ class ImageHandler:
         originators: list | None = None,
         source_url: str | None = None,
     ) -> bool:
-        """Upload *filepath* to MediaWiki. Returns ``True`` on success."""
+        """Upload *filepath* to MediaWiki. Returns ``True`` on success.
+
+        ``site.upload`` does **not** raise on a ``result: "Warning"`` response —
+        it leaves the file stashed but unpublished and returns the warnings. The
+        common case here is a ``duplicate`` warning: the image is byte-for-byte
+        identical to a file already on the wiki under a different name, so
+        MediaWiki refuses to publish it. Because the articles reference each
+        image by its own ``{entity_id}`` filename, we re-issue the upload with
+        ``ignorewarnings`` so the file is actually published and the ``File:``
+        link resolves. The wiki's own ``imageinfo`` is used as the final arbiter
+        of success, since chunked-upload result shapes are inconsistent.
+        """
         try:
             filename = filepath.name
-            image = self.site.images[filename]
-            if image.imageinfo:
+            if self._already_on_wiki(filename):
                 print(f"  Image already exists: {filename}")
                 return True
 
@@ -232,19 +321,41 @@ class ImageHandler:
             )
 
             print(f"  Uploading: {filename}")
-            with open(filepath, "rb") as f:
-                self.site.upload(
-                    file=f,
-                    filename=filename,
-                    description=full_description,
-                    ignore=False,
+            payload = self._upload_payload(
+                self._do_upload(filepath, full_description, ignore=False)
+            )
+
+            if payload.get("result") != "Success":
+                warnings = payload.get("warnings", {})
+                if "exists" in warnings:  # same name already present; done
+                    print(f"  Image already exists: {filename}")
+                    self._remember_uploaded(filename)
+                    return True
+                print(
+                    f"  Upload of {filename} returned warnings "
+                    f"({', '.join(warnings) or payload.get('result')}); forcing publish"
                 )
+                self._upload_payload(
+                    self._do_upload(filepath, full_description, ignore=True)
+                )
+
+            # Final arbiter: confirm the file actually exists on the wiki.
+            if not self.site.images[filename].imageinfo:
+                print(f"  Upload did not publish {filename}")
+                return False
+
             print(f"  Uploaded: {filename}")
+            self._remember_uploaded(filename)
             time.sleep(1.0)
             return True
         except Exception as e:
             print(f"  Failed to upload {filepath}: {e}")
             return False
+
+    def _remember_uploaded(self, filename: str) -> None:
+        """Add *filename* to the cached wiki file set, if it is loaded."""
+        if self._existing_filenames is not None:
+            self._existing_filenames.add(self._normalize_filename(filename))
 
 
 class ImageDownloader:
