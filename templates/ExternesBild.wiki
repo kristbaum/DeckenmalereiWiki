@@ -1,0 +1,34 @@
+<includeonly><div class="externes-bild" style="border: 1px solid #a2a9b1; background: #f8f9fa; padding: 0.5em; max-width: 300px;">
+'''Externes Bild'''{{#if:{{{beschreibung|}}}|<br />{{{beschreibung}}}}}{{#if:{{{quelle|}}}|<br />[{{{quelle}}} Bild beim Anbieter ansehen]}}
+</div>[[Kategorie:Artikel mit externem Bild]]</includeonly><noinclude>
+== Verwendung ==
+
+Diese Vorlage verweist auf ein Bild, das beim Anbieter liegt und '''nicht''' ins Deckenmalerei-Wiki hochgeladen werden kann (z.B. Bilder des Virtuellen Kupferstichkabinetts von HAUM und HAB). Statt einer eingebundenen Datei wird ein Link zum Original angezeigt.
+
+Jeder Artikel, der diese Vorlage verwendet, wird automatisch der Kategorie ''Artikel mit externem Bild'' zugeordnet.
+
+=== Parameter ===
+
+<pre>
+{{ExternesBild
+| beschreibung =
+| quelle =
+}}
+</pre>
+
+* '''beschreibung''' – Beschreibung des Bildinhalts
+* '''quelle''' – Link zum Bild beim Anbieter
+
+Alle Parameter sind optional.
+
+=== Beispiel ===
+
+<pre>
+{{ExternesBild
+| beschreibung = Susanna Maria Sandrart nach Gerard de Lairesse: Aestas
+| quelle = http://kk.haum-bs.de/?id=s-m-v-sandrart-ab3-0015
+}}
+</pre>
+
+[[Kategorie:Vorlagen|ExternesBild]]
+</noinclude>

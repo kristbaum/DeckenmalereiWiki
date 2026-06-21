@@ -37,13 +37,40 @@ class ArticleGenerator:
         self.wikidata_mapping = load_wikidata_mapping(str(loader.sources_dir))
         # No MediaWiki site needed: used only to resolve image filenames so the
         # ``File:`` references match the downloaded/uploaded files' extensions.
-        self.image_handler = ImageHandler(site=None, downloads_dir=Path("downloads"))
+        # ``offline`` keeps ``parse`` from querying any provider API: filenames
+        # come from the local downloads and their ``{entity_id}.json`` sidecars.
+        self.image_handler = ImageHandler(
+            site=None, downloads_dir=Path("downloads"), offline=True
+        )
 
     def _image_filename(self, entity_id: str, resource: Dict) -> str:
         """Resolve the ``File:`` filename for *resource* (matching the upload)."""
         return self.image_handler.image_filename(
             entity_id, resource.get("resProvider", ""), resource["ID"]
         )
+
+    def _is_external_resource(self, resource: Dict) -> bool:
+        """Whether *resource* is a source-link-only image (not uploaded)."""
+        return self.image_handler.is_external(resource.get("resProvider", ""))
+
+    def _externes_bild(self, resource: Dict) -> str:
+        """Render an ``{{ExternesBild}}`` call for a source-link-only resource.
+
+        These providers (see :data:`~deckenmalereiwiki.image_handler.\
+EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
+        a link to the original instead of an embedded ``File:``.
+        """
+        quelle = self.image_handler.source_url(
+            resource.get("resProvider", ""), resource["ID"]
+        )
+        lines = ["{{ExternesBild"]
+        beschreibung = resource.get("appellation", "")
+        if beschreibung:
+            lines.append(f"| beschreibung = {beschreibung}")
+        if quelle:
+            lines.append(f"| quelle = {quelle}")
+        lines.append("}}")
+        return "\n".join(lines)
 
     # ------------------------------------------------------------------
     # Article
@@ -62,10 +89,14 @@ class ArticleGenerator:
             text_entity["ID"]
         )
         if text_lead and text_lead.get("resProvider"):
-            lead_file = self._image_filename(text_lead_entity_id, text_lead)
-            parts_out.append(
-                f"[[File:{lead_file}|center|border|{text_lead.get('appellation', '')}]]"
-            )
+            if self._is_external_resource(text_lead):
+                parts_out.append(self._externes_bild(text_lead))
+            else:
+                lead_file = self._image_filename(text_lead_entity_id, text_lead)
+                parts_out.append(
+                    f"[[File:{lead_file}|center|border|"
+                    f"{text_lead.get('appellation', '')}]]"
+                )
             parts_out.append("")
 
         # --- First pass: collect citations from all text parts ---
@@ -100,9 +131,14 @@ class ArticleGenerator:
         used_refs: Dict[str, bool] = {}
 
         for part in text_parts:
-            eq = "=" * min(part.get("_depth", 1) + 1, 6)
-            parts_out.append(f"{eq} {part['appellation']} {eq}")
-            parts_out.append("")
+            # Some TEXT_PART entities are empty stubs with no appellation; skip
+            # the heading for those (rather than emitting an empty "== =="),
+            # while still rendering any content they happen to carry below.
+            appellation = part.get("appellation", "")
+            if appellation:
+                eq = "=" * min(part.get("_depth", 1) + 1, 6)
+                parts_out.append(f"{eq} {appellation} {eq}")
+                parts_out.append("")
 
             documented_id = self.loader.get_documented_entity_id(part["ID"])
             if documented_id:
@@ -110,23 +146,31 @@ class ArticleGenerator:
                 parts_out.append(generate_strukturdaten(documented_id, qid))
                 parts_out.append("")
 
-            # Per-part gallery: lead_resource first, then IMAGE resources
+            # Per-part images: lead_resource first, then IMAGE resources.
+            # Uploaded images go into a gallery; source-link-only providers are
+            # referenced via {{ExternesBild}} since they have no File: page.
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
             )
-            part_images = self.loader.get_images(part["ID"])
-            part_gallery: List[tuple] = []
+            part_resources: List[tuple] = []
             if part_lead and part_lead.get("resProvider"):
-                part_gallery.append(
-                    (
-                        self._image_filename(part_lead_entity_id, part_lead),
-                        part_lead.get("appellation", ""),
+                part_resources.append((part_lead_entity_id, part_lead))
+            for img in self.loader.get_images(part["ID"]):
+                part_resources.append((img["ID"], img))
+
+            part_gallery: List[tuple] = []
+            external_resources: List[Dict] = []
+            for res_entity_id, resource in part_resources:
+                if self._is_external_resource(resource):
+                    external_resources.append(resource)
+                else:
+                    part_gallery.append(
+                        (
+                            self._image_filename(res_entity_id, resource),
+                            resource.get("appellation", ""),
+                        )
                     )
-                )
-            for img in part_images:
-                part_gallery.append(
-                    (self._image_filename(img["ID"], img), img.get("appellation", ""))
-                )
+
             if len(part_gallery) == 1:
                 img_filename, img_caption = part_gallery[0]
                 parts_out.append(f"[[File:{img_filename}|thumb|{img_caption}]]")
@@ -136,6 +180,10 @@ class ArticleGenerator:
                 for img_filename, img_caption in part_gallery:
                     parts_out.append(f"File:{img_filename}|{img_caption}")
                 parts_out.append("</gallery>")
+                parts_out.append("")
+
+            for resource in external_resources:
+                parts_out.append(self._externes_bild(resource))
                 parts_out.append("")
 
             text = replace_citation_refs(
@@ -188,7 +236,7 @@ class ArticleGenerator:
         return articles
 
     def save_articles_to_files(
-        self, output_dir: str = "output", max_articles: Optional[int] = 5
+        self, output_dir: str = "output", max_articles: Optional[int] = 500000
     ):
         """Save generated articles as individual ``.wiki`` files.
 

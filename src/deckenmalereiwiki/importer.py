@@ -3,6 +3,8 @@ MediaWiki importer for DeckenmalereiWiki.
 Uploads articles and images to a MediaWiki instance via the API.
 """
 
+import re
+import unicodedata
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -12,6 +14,25 @@ from pywikibot.site import APISite
 from .loader import DataLoader
 from .generator import ArticleGenerator
 from .image_handler import ImageHandler
+
+# Articles of the old corpus are tagged with this category and must never be
+# overwritten by the importer.
+PROTECTED_CATEGORY = "CBD"
+
+# C0 control characters MediaWiki rejects as non-normalized: everything in
+# U+0000–U+001F except HT (\t), LF (\n) and CR (\r).
+_DISALLOWED_CONTROL_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
+
+
+def sanitize_wikitext(text: str) -> str:
+    """Return *text* as valid wiki page content for the MediaWiki API.
+
+    MediaWiki requires NFC-normalized Unicode without C0 control characters
+    other than tab/newline/carriage return; otherwise ``page.save`` emits an
+    ``invalid or non-normalized data`` API warning. This normalizes to NFC and
+    drops the disallowed control characters.
+    """
+    return _DISALLOWED_CONTROL_RE.sub("", unicodedata.normalize("NFC", text))
 
 
 class MediaWikiImporter:
@@ -26,7 +47,7 @@ class MediaWikiImporter:
     def __init__(
         self,
         enable_images: bool = True,
-        max_articles: int = 5,
+        max_articles: int = 50000,
         site: Optional[APISite] = None,
     ):
         """Initialise the MediaWiki connection.
@@ -65,13 +86,38 @@ class MediaWikiImporter:
     # Article handling
     # ------------------------------------------------------------------
 
+    def _is_old_corpus(self, page: "pywikibot.Page") -> bool:
+        """Whether *page* belongs to the protected old corpus.
+
+        Old-corpus articles carry :data:`PROTECTED_CATEGORY` and must not be
+        overwritten. New pages (and any page whose categories can't be read)
+        are treated as not protected.
+        """
+        try:
+            if not page.exists():
+                return False
+            return any(
+                cat.title(with_ns=False) == PROTECTED_CATEGORY
+                for cat in page.categories()
+            )
+        except Exception as e:
+            print(f"  Could not read categories for {page.title()}: {e}")
+            return False
+
     def create_or_update_page(
         self, title: str, content: str, summary: str = "Automatischer Import"
     ) -> bool:
-        """Create or overwrite *title* with *content*. Returns ``True`` on success."""
+        """Create or overwrite *title* with *content*. Returns ``True`` on success.
+
+        Existing pages tagged with :data:`PROTECTED_CATEGORY` (the old corpus)
+        are left untouched.
+        """
         try:
             page = pywikibot.Page(self.site, title)
-            page.text = content
+            if self._is_old_corpus(page):
+                print(f"  Skipped (old corpus, Kategorie:{PROTECTED_CATEGORY}): {title}")
+                return True
+            page.text = sanitize_wikitext(content)
             page.save(summary=summary)
             print(f"  Updated: {title}")
             return True

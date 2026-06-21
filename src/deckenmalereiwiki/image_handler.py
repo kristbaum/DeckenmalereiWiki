@@ -15,11 +15,17 @@ import requests
 # server POST size limits. 0 would disable chunking.
 UPLOAD_CHUNK_SIZE = 4 * 1024 * 1024
 
+# Providers we can only link to, not download from: session-based viewers (the
+# Virtuelles Kupferstichkabinett of HAUM / HAB) with no derivable direct-image
+# URL. Their images are referenced via the {{ExternesBild}} template instead of
+# being uploaded as ``File:`` pages.
+EXTERNAL_PROVIDERS = ("haum-bs.de", "diglib.hab.de")
+
 
 class ImageHandler:
     """Handles downloading images from providers and uploading them to MediaWiki."""
 
-    def __init__(self, site, downloads_dir: Path):
+    def __init__(self, site, downloads_dir: Path, offline: bool = False):
         """Initialise the handler.
 
         Args:
@@ -27,11 +33,18 @@ class ImageHandler:
                            instance (or ``None`` for offline use, e.g. the
                            generator, which never touches the wiki).
             downloads_dir: Directory where downloaded images are cached.
+            offline:       When ``True``, never make network calls to resolve a
+                           resource (e.g. the BADW EasyDB API). Used by the
+                           article generator's ``parse`` step, which resolves
+                           ``File:`` filenames purely from the local downloads
+                           and their ``{entity_id}.json`` metadata sidecars.
         """
         self.site = site
         self.downloads_dir = downloads_dir
-        # Cache of EasyDB resolutions: resource_id -> (download_url, extension).
-        self._easydb_cache: dict[str, tuple[Optional[str], str]] = {}
+        self.offline = offline
+        # Cache of EasyDB resolutions:
+        #   resource_id -> (download_url, source_url, extension).
+        self._easydb_cache: dict[str, tuple[Optional[str], Optional[str], str]] = {}
         # Normalised set of file names that exist on the wiki, fetched once via
         # ``load_existing_filenames``. ``None`` means "not loaded": uploads then
         # fall back to a per-file check.
@@ -57,12 +70,15 @@ class ImageHandler:
             None,
         )
 
-    def _easydb_source(self, resource_id: str) -> tuple[Optional[str], str]:
-        """Resolve a BADW EasyDB resource to ``(download_url, extension)``.
+    def _easydb_source(
+        self, resource_id: str
+    ) -> tuple[Optional[str], Optional[str], str]:
+        """Resolve a BADW EasyDB resource to ``(download_url, source_url, ext)``.
 
         The result is cached per ``resource_id`` so generation and download
         share a single API call. ``download_url`` is ``None`` when no
         downloadable version exists (``extension`` then defaults to ``.jpg``).
+        For EasyDB the source link is the same as the download URL.
         """
         if resource_id in self._easydb_cache:
             return self._easydb_cache[resource_id]
@@ -84,26 +100,51 @@ class ImageHandler:
                 break
 
         ext = (Path(urlparse(image_url).path).suffix or ".jpg") if image_url else ".jpg"
-        result = (image_url, ext)
+        result = (image_url, image_url, ext)
         self._easydb_cache[resource_id] = result
         time.sleep(0.5)
         return result
 
+    @staticmethod
+    def is_external(url: str) -> bool:
+        """Whether *url*'s provider is referenced by link, not uploaded.
+
+        ``True`` for the source-link-only providers (see
+        :data:`EXTERNAL_PROVIDERS`): their images carry a ``source_url`` but no
+        downloadable binary, so the generator emits ``{{ExternesBild}}`` rather
+        than a ``File:`` reference.
+        """
+        return any(provider in url for provider in EXTERNAL_PROVIDERS)
+
     def _resolve_source(
         self, url: str, resource_id: str
-    ) -> tuple[Optional[str], str]:
-        """Return ``(image_url, extension)`` for a provider *url* and resource.
+    ) -> tuple[Optional[str], Optional[str], str]:
+        """Return ``(download_url, source_url, extension)`` for a resource.
 
-        ``image_url`` is ``None`` when the resource has no downloadable version.
-        This is the single source of truth for both the download filename and
-        the ``File:`` reference the generator emits.
+        ``download_url`` is the URL the binary is fetched from, or ``None`` when
+        the resource has no downloadable version. ``source_url`` is the link
+        recorded in ``{{BildMeta}}`` back to the original; for most providers it
+        equals ``download_url``, but for session-based viewers it is the
+        resource's canonical landing page even though no binary can be fetched.
         """
         if "bildindex.de" in url:
-            return f"https://previous.bildindex.de/bilder/{resource_id}a.jpg", ".jpg"
+            image_url = f"https://previous.bildindex.de/bilder/{resource_id}a.jpg"
+            return image_url, image_url, ".jpg"
         if "deckenmalerei-bilder.badw.de" in url:
+            if self.offline:
+                # parse must not touch the network; the sidecar/existing file is
+                # authoritative and the API extension is irrelevant here.
+                return None, None, ".jpg"
             return self._easydb_source(resource_id)
+        if self.is_external(url):
+            # Virtuelles Kupferstichkabinett (HAUM / HAB): a session-based viewer
+            # with no derivable direct-image URL, so the binary is not
+            # downloaded. The resource ID is itself the canonical landing page,
+            # recorded as the source link.
+            return None, resource_id, ".jpg"
         print(f"  Unknown image provider: {url}")
-        return url, Path(urlparse(url).path).suffix or ".jpg"
+        ext = Path(urlparse(url).path).suffix or ".jpg"
+        return url, url, ext
 
     def resolve_extension(self, url: str, resource_id: str) -> str:
         """Best-effort file extension for a resource (e.g. ``".jpg"``).
@@ -113,32 +154,53 @@ class ImageHandler:
         still succeeds.
         """
         try:
-            return self._resolve_source(url, resource_id)[1]
+            return self._resolve_source(url, resource_id)[2]
         except Exception as e:
             print(f"  Could not resolve extension for {resource_id}: {e}; using .jpg")
             return ".jpg"
 
+    def _sidecar_image_file(self, entity_id: str) -> Optional[str]:
+        """Return the ``image_file`` recorded in this entity's metadata sidecar.
+
+        The ``download-images`` step writes ``{entity_id}.json`` next to each
+        image, recording the exact filename it saved. ``parse`` reads this
+        instead of querying any provider API. Returns ``None`` when there is no
+        sidecar or it records no downloaded file.
+        """
+        path = self.downloads_dir / f"{entity_id}.json"
+        if not path.is_file():
+            return None
+        try:
+            with open(path, encoding="utf-8") as f:
+                return json.load(f).get("image_file")
+        except (json.JSONDecodeError, OSError):
+            return None
+
     def image_filename(self, entity_id: str, url: str, resource_id: str) -> str:
         """Return the MediaWiki filename (``{entity_id}{ext}``) for a resource.
 
-        Uses the same extension resolution as :meth:`download_image`, so the
-        ``File:`` reference always matches the uploaded file. An already
-        downloaded file is authoritative and avoids any network call.
+        Resolution order, all offline-friendly: an already-downloaded file, then
+        the filename recorded in the ``{entity_id}.json`` metadata sidecar, then
+        the provider's extension rule. This keeps the ``File:`` reference in step
+        with the uploaded file without forcing a network call during ``parse``.
         """
         existing = self._existing_download(entity_id)
         if existing:
             return existing.name
+        sidecar_file = self._sidecar_image_file(entity_id)
+        if sidecar_file:
+            return sidecar_file
         return f"{entity_id}{self.resolve_extension(url, resource_id)}"
 
     def source_url(self, url: str, resource_id: str) -> Optional[str]:
-        """Return the direct URL of the original image, or ``None``.
+        """Return the URL of the original image's source page, or ``None``.
 
-        This is the URL the image is downloaded from (e.g. the bildindex image
-        or the BADW EasyDB download URL) and is recorded in ``{{BildMeta}}`` as
-        a link back to the original. Never raises.
+        This is recorded in ``{{BildMeta}}`` as a link back to the original (the
+        bildindex image, the BADW EasyDB download URL, or a viewer's landing
+        page). Never raises.
         """
         try:
-            return self._resolve_source(url, resource_id)[0]
+            return self._resolve_source(url, resource_id)[1]
         except Exception:
             return None
 
@@ -166,7 +228,7 @@ class ImageHandler:
                 print(f"  Image already downloaded: {existing.name}")
                 return existing
 
-            image_url, ext = self._resolve_source(url, resource_id)
+            image_url, _, ext = self._resolve_source(url, resource_id)
             if image_url is None:
                 print(f"  No downloadable version found for {resource_id}")
                 return None
@@ -403,8 +465,16 @@ class ImageDownloader:
         for name_entity_id, resource in self.loader.get_entity_image_resources(
             entity["ID"]
         ):
+            provider = resource.get("resProvider", "")
+            # Source-link-only providers have no downloadable binary and the
+            # generator references them via {{ExternesBild}} instead of a
+            # File: page, so there is nothing to download or cache here. Their
+            # resource ID is also a full URL, which is not a valid sidecar name.
+            if self.handler.is_external(provider):
+                print(f"  Skipping external provider: {provider}")
+                continue
             filepath = self.handler.download_image(
-                resource["resProvider"],
+                provider,
                 name_entity_id,
                 resource["ID"],
             )
