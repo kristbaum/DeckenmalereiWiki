@@ -26,3 +26,10 @@ downloads/
 Thumbs.db
 
 sources/
+
+# pywikibot — local config, credentials and caches (never commit secrets)
+user-password.cfg
+apicache*/
+throttle.ctrl
+pywikibot.lwp
+*.lwp

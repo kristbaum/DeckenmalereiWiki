@@ -3,11 +3,11 @@ MediaWiki importer for DeckenmalereiWiki.
 Uploads articles and images to a MediaWiki instance via the API.
 """
 
-import time
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
-import mwclient
+import pywikibot
+from pywikibot.site import APISite
 
 from .loader import DataLoader
 from .generator import ArticleGenerator
@@ -15,37 +15,32 @@ from .image_handler import ImageHandler
 
 
 class MediaWikiImporter:
-    """Imports articles and images to a MediaWiki instance."""
+    """Imports articles and images to a MediaWiki instance.
+
+    Connection details (wiki URL, credentials, throttling) come from pywikibot's
+    configuration: the ``deckenmalerei`` family file plus ``user-config.py`` /
+    ``user-password.cfg``. pywikibot handles write throttling, ``maxlag`` and
+    retries on transient errors for us.
+    """
 
     def __init__(
         self,
-        host: str = "localhost",
-        port: int = 8080,
-        username: str = "admin",
-        password: str = "adminpass123",
-        scheme: str = "http",
         enable_images: bool = True,
         max_articles: int = 5,
+        site: Optional[APISite] = None,
     ):
         """Initialise the MediaWiki connection.
 
         Args:
-            host:          Hostname of the MediaWiki server.
-            port:          Port number (default 8080).
-            username:      Admin username.
-            password:      Admin password.
-            scheme:        ``"http"`` or ``"https"``.
             enable_images: Download and upload images when ``True``.
             max_articles:  Maximum number of articles to process.
+            site:          Optional pre-built pywikibot site; defaults to
+                           :func:`pywikibot.Site` (resolved from user-config).
         """
-        self.host = f"{host}:{port}" if port != 80 else host
-        self.username = username
-        self.password = password
-        self.scheme = scheme
         self.enable_images = enable_images
         self.max_articles = max_articles
 
-        self.site = mwclient.Site(self.host, path="/", scheme=scheme)
+        self.site = site or pywikibot.Site()
 
         self.downloads_dir = Path("downloads")
         self.downloads_dir.mkdir(exist_ok=True)
@@ -59,8 +54,8 @@ class MediaWikiImporter:
     def login(self) -> bool:
         """Log in to MediaWiki. Returns ``True`` on success."""
         try:
-            self.site.login(self.username, self.password)
-            print(f"Logged in as {self.username}")
+            self.site.login()
+            print(f"Logged in as {self.site.username()}")
             return True
         except Exception as e:
             print(f"Login failed: {e}")
@@ -75,8 +70,9 @@ class MediaWikiImporter:
     ) -> bool:
         """Create or overwrite *title* with *content*. Returns ``True`` on success."""
         try:
-            page = self.site.pages[title]
-            page.edit(content, summary=summary)
+            page = pywikibot.Page(self.site, title)
+            page.text = content
+            page.save(summary=summary)
             print(f"  Updated: {title}")
             return True
         except Exception as e:
@@ -111,7 +107,6 @@ class MediaWikiImporter:
             content = tf.read_text(encoding="utf-8")
             if self.create_or_update_page(title, content, summary="Vorlagen-Import"):
                 success += 1
-            time.sleep(0.05)
         print(f"Successfully imported {success}/{len(template_files)} templates")
 
     def import_articles(self, articles: Dict[str, str]):
@@ -121,7 +116,6 @@ class MediaWikiImporter:
         for title, content in articles.items():
             if self.create_or_update_page(title, content):
                 success += 1
-            time.sleep(0.05)
         print(f"\nSuccessfully imported {success}/{len(articles)} articles")
 
     # ------------------------------------------------------------------

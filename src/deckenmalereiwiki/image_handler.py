@@ -8,7 +8,12 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from urllib.parse import urlparse
 
+import pywikibot
 import requests
+
+# Upload files larger than this in chunks, so big images aren't rejected by
+# server POST size limits. 0 would disable chunking.
+UPLOAD_CHUNK_SIZE = 4 * 1024 * 1024
 
 
 class ImageHandler:
@@ -18,7 +23,9 @@ class ImageHandler:
         """Initialise the handler.
 
         Args:
-            site:          An authenticated :mod:`mwclient` site instance.
+            site:          An authenticated :class:`pywikibot.site.APISite`
+                           instance (or ``None`` for offline use, e.g. the
+                           generator, which never touches the wiki).
             downloads_dir: Directory where downloaded images are cached.
         """
         self.site = site
@@ -238,10 +245,8 @@ class ImageHandler:
         names: set[str] = set()
         try:
             for image in self.site.allimages():
-                title = image.name
-                if ":" in title:  # strip the "File:"/"Datei:" namespace prefix
-                    title = title.split(":", 1)[1]
-                names.add(self._normalize_filename(title))
+                # ``title(with_ns=False)`` drops the "File:"/"Datei:" prefix.
+                names.add(self._normalize_filename(image.title(with_ns=False)))
         except Exception as e:
             print(f"  Could not fetch existing wiki images: {e}")
         return names
@@ -265,29 +270,27 @@ class ImageHandler:
         """
         if self._existing_filenames is not None:
             return self._normalize_filename(filename) in self._existing_filenames
-        return bool(self.site.images[filename].imageinfo)
+        return pywikibot.FilePage(self.site, f"File:{filename}").exists()
 
-    @staticmethod
-    def _upload_payload(result) -> dict:
-        """Return the ``upload`` payload from a ``site.upload`` result.
+    def _do_upload(
+        self, filepath: Path, filepage, description: str, ignore: bool
+    ) -> bool:
+        """Issue a single pywikibot upload call and return whether it succeeded.
 
-        Normal uploads return the payload directly, while chunked uploads
-        (large files) return it wrapped under an ``"upload"`` key. This
-        flattens both shapes so callers can read ``result``/``warnings``.
+        ``ignore_warnings`` lets us force-publish a file that triggers a
+        ``duplicate`` warning. ``report_success=False`` suppresses pywikibot's
+        own success/exception handling so a warning yields ``False`` instead of
+        raising, leaving the final-arbiter existence check in control.
         """
-        if isinstance(result, dict):
-            return result.get("upload", result)
-        return {}
-
-    def _do_upload(self, filepath: Path, description: str, ignore: bool):
-        """Issue a single ``site.upload`` call and return its raw result."""
-        with open(filepath, "rb") as f:
-            return self.site.upload(
-                file=f,
-                filename=filepath.name,
-                description=description,
-                ignore=ignore,
-            )
+        return self.site.upload(
+            filepage,
+            source_filename=str(filepath),
+            comment="Automatischer Bildimport",
+            text=description,
+            ignore_warnings=ignore,
+            report_success=False,
+            chunk_size=UPLOAD_CHUNK_SIZE,
+        )
 
     def upload_image(
         self,
@@ -307,15 +310,13 @@ class ImageHandler:
         after the source data gains rights holders / originators). With
         *overwrite_existing* ``False`` an already-present image is skipped.
 
-        ``site.upload`` does **not** raise on a ``result: "Warning"`` response —
-        it leaves the file stashed but unpublished and returns the warnings. The
-        common case here is a ``duplicate`` warning: the image is byte-for-byte
+        A common case is a ``duplicate`` warning: the image is byte-for-byte
         identical to a file already on the wiki under a different name, so
         MediaWiki refuses to publish it. Because the articles reference each
-        image by its own ``{entity_id}`` filename, we re-issue the upload with
-        ``ignorewarnings`` so the file is actually published and the ``File:``
-        link resolves. The wiki's own ``imageinfo`` is used as the final arbiter
-        of success, since chunked-upload result shapes are inconsistent.
+        image by its own ``{entity_id}`` filename, the upload is re-issued with
+        ``ignore_warnings`` so the file is actually published and the ``File:``
+        link resolves. The wiki's own page existence is used as the final
+        arbiter of success.
         """
         try:
             filename = filepath.name
@@ -329,32 +330,18 @@ class ImageHandler:
                 return True
 
             print(f"  Uploading: {filename}")
-            payload = self._upload_payload(
-                self._do_upload(filepath, full_description, ignore=False)
-            )
-
-            if payload.get("result") != "Success":
-                warnings = payload.get("warnings", {})
-                if "exists" in warnings:  # same name already present; done
-                    print(f"  Image already exists: {filename}")
-                    self._remember_uploaded(filename)
-                    return True
-                print(
-                    f"  Upload of {filename} returned warnings "
-                    f"({', '.join(warnings) or payload.get('result')}); forcing publish"
-                )
-                self._upload_payload(
-                    self._do_upload(filepath, full_description, ignore=True)
-                )
+            filepage = pywikibot.FilePage(self.site, f"File:{filename}")
+            if not self._do_upload(filepath, filepage, full_description, ignore=False):
+                print(f"  Upload of {filename} returned warnings; forcing publish")
+                self._do_upload(filepath, filepage, full_description, ignore=True)
 
             # Final arbiter: confirm the file actually exists on the wiki.
-            if not self.site.images[filename].imageinfo:
+            if not pywikibot.FilePage(self.site, f"File:{filename}").exists():
                 print(f"  Upload did not publish {filename}")
                 return False
 
             print(f"  Uploaded: {filename}")
             self._remember_uploaded(filename)
-            time.sleep(1.0)
             return True
         except Exception as e:
             print(f"  Failed to upload {filepath}: {e}")
@@ -367,8 +354,9 @@ class ImageHandler:
         in place. Returns ``True`` on a successful edit.
         """
         try:
-            page = self.site.pages[f"File:{filename}"]
-            page.edit(description, summary="BildMeta-Metadaten aktualisiert")
+            page = pywikibot.FilePage(self.site, f"File:{filename}")
+            page.text = description
+            page.save(summary="BildMeta-Metadaten aktualisiert")
             print(f"  Updated description page: {filename}")
             return True
         except Exception as e:
