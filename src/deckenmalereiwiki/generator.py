@@ -64,7 +64,7 @@ class ArticleGenerator:
         if text_lead and text_lead.get("resProvider"):
             lead_file = self._image_filename(text_lead_entity_id, text_lead)
             parts_out.append(
-                f"[[File:{lead_file}|thumb|{text_lead.get('appellation', '')}]]"
+                f"[[File:{lead_file}|center|border|{text_lead.get('appellation', '')}]]"
             )
             parts_out.append("")
 
