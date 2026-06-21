@@ -1,18 +1,14 @@
 """Regression tests specific to the Egloffstein article."""
 
 
-def test_infobox(egloffstein):
+def test_artikel_modern(egloffstein):
     expected = (
-        "{{Infobox Deckenmalerei\n"
-        "| titel = Egloffstein, Schlosskirche St. Bartholomäus\n"
-        "| beschreibung = Die evangelische Schlosskirche wurde 1750 unter Albrecht Christoph"
-        " Karl Friedrich von Egloffstein neu errichtet und ausgemalt."
-        " Bibelworte begleiten die Tondi an der Decke mit dem Opfer Abrahams nach Maarten de Vos,"
-        " der Heiligen Dreifaltigkeit, dem Guten Hirten und den vier Evangelisten.\n"
-        "| bild = a2e60a1e-606f-4841-9faf-ccc2162a0f6a.jpg\n"
-        "| lizenz = CC BY-NC-ND 4.0\n"
-        "| author = Friedrich, Verena\n"
-        "| entity_id = a2e60a1e-606f-4841-9faf-ccc2162a0f6a\n"
+        "{{Artikel-modern\n"
+        "| AutorIn1 = Friedrich, Verena\n"
+        "| Titel = Egloffstein, Schlosskirche St. Bartholomäus\n"
+        "| Ort = Egloffstein\n"
+        "| Jahr = 2025\n"
+        "| ID = a2e60a1e-606f-4841-9faf-ccc2162a0f6a\n"
         "}}"
     )
     assert expected in egloffstein

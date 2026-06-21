@@ -12,7 +12,7 @@ from .loader import DataLoader
 from .converter import HtmlConverter
 from .citations import parse_citations, replace_citation_refs
 from .strukturdaten import load_wikidata_mapping, generate_strukturdaten
-from .infobox import generate_infobox
+from .artikel_modern import generate_artikel_modern
 from .image_handler import ImageHandler
 
 
@@ -53,7 +53,7 @@ class ArticleGenerator:
         """Generate a complete MediaWiki article for *text_entity*."""
         parts_out: List[str] = []
 
-        parts_out.append(generate_infobox(self.loader, text_entity, self.image_handler))
+        parts_out.append(generate_artikel_modern(self.loader, text_entity))
         parts_out.append("")
         parts_out.append(text_entity["shortText"])
         parts_out.append("")

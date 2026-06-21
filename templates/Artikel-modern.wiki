@@ -1,0 +1,53 @@
+<includeonly><div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">{{#if:{{{AutorIn2|}}}|{{#if:{{{AutorIn3|}}}|{{#if:{{{AutorIn4|}}}|{{#if:{{{AutorIn5|}}}|{{#if:{{{AutorIn6|}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}}, {{{AutorIn4}}}, {{{AutorIn5}}} und {{{AutorIn6}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}}, {{{AutorIn4}}} und {{{AutorIn5}}}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}} und {{{AutorIn4}}}}}|{{{AutorIn1}}}, {{{AutorIn2}}} und {{{AutorIn3}}}}}|{{{AutorIn1}}} und {{{AutorIn2}}}}}|{{{AutorIn1|}}}}}: {{{Titel|}}}, in: Corpus der barocken Deckenmalerei in Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München {{{Jahr|}}}, URL: [https://www.deckenmalerei.eu/{{{ID|}}} www.deckenmalerei.eu/{{{ID|}}}]</div><!--
+  Kategorien: generische CbDD-Kategorie, Ort und eine Kategorie je Autor
+-->[[Kategorie:CbDD]]{{#if:{{{Ort|}}}|[[Kategorie:{{{Ort}}}]]}}{{#if:{{{AutorIn1|}}}|[[Kategorie:{{{AutorIn1}}}]]}}{{#if:{{{AutorIn2|}}}|[[Kategorie:{{{AutorIn2}}}]]}}{{#if:{{{AutorIn3|}}}|[[Kategorie:{{{AutorIn3}}}]]}}{{#if:{{{AutorIn4|}}}|[[Kategorie:{{{AutorIn4}}}]]}}{{#if:{{{AutorIn5|}}}|[[Kategorie:{{{AutorIn5}}}]]}}{{#if:{{{AutorIn6|}}}|[[Kategorie:{{{AutorIn6}}}]]}}</includeonly><noinclude>
+== Verwendung ==
+
+Diese Vorlage erzeugt einen kompakten, hervorgehobenen Zitationssatz für einen
+Deckenmalerei-Artikel und ordnet die Seite automatisch den passenden Kategorien zu:
+die generische Kategorie ''CbDD'', den Ort sowie je eine Kategorie pro Autor.
+
+=== Parameter ===
+
+<pre>
+{{Artikel-modern
+| AutorIn1 =
+| AutorIn2 =
+| ...
+| Titel =
+| Ort =
+| Jahr =
+| ID =
+}}
+</pre>
+
+* '''AutorIn1''', '''AutorIn2''' … – Autor(en) des Textes; jeder Autor erhält eine eigene Kategorie (bis zu sechs Autoren werden unterstützt)
+* '''Titel''' – Titel des Artikels
+* '''Ort''' – Ort (wird zur Orts-Kategorie; im Generator aus dem Titel vor dem ersten Komma abgeleitet)
+* '''Jahr''' – Erscheinungsjahr (aus dem Änderungszeitstempel abgeleitet)
+* '''ID''' – UUID des Eintrags (wird zu einem Link auf deckenmalerei.eu)
+
+Alle Parameter sind optional.
+
+=== Beispiel ===
+
+<pre>
+{{Artikel-modern
+| AutorIn1 = Laß, Heiko
+| Titel = Bad Buchau, Fürstabtei und Residenz
+| Ort = Bad Buchau
+| Jahr = 2022
+| ID = d2c88b64-a55e-4048-bb06-afe91f3f34c8
+}}
+</pre>
+
+Ergibt:
+
+Laß, Heiko: Bad Buchau, Fürstabtei und Residenz, in: Corpus der barocken Deckenmalerei in
+Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München 2022,
+URL: www.deckenmalerei.eu/d2c88b64-a55e-4048-bb06-afe91f3f34c8
+
+… und setzt die Kategorien ''CbDD'', ''Bad Buchau'' und ''Laß, Heiko''.
+
+[[Kategorie:Vorlagen|Artikel-modern]]
+</noinclude>

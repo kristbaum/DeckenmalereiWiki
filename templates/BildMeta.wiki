@@ -24,10 +24,12 @@
 <th>Quelle</th>
 <td>{{{quelle|}}}</td>
 </tr>}}
-</table></includeonly><noinclude>
+</table>[[Kategorie:CbDD]]</includeonly><noinclude>
 == Verwendung ==
 
 Diese Vorlage beschreibt eine Bilddatei im Deckenmalerei-Wiki und ist kompatibel mit der MediaViewer-Erweiterung.
+
+Jede Datei, die diese Vorlage verwendet, wird automatisch der Kategorie ''CbDD'' zugeordnet.
 
 === Parameter ===
 

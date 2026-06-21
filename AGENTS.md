@@ -10,7 +10,7 @@ src/deckenmalereiwiki/
   loader.py       Loads JSON → in-memory dicts; entity/relation queries
   converter.py    HTML → MediaWiki wikitext
   citations.py    Footnote extraction and deduplication
-  generator.py    Assembles infoboxes + article wikitext
+  generator.py    Assembles templates + article wikitext
   importer.py     MediaWiki API upload via mwclient
   image_handler.py Download images and upload to wiki (ImageDownloader: download-only + metadata sidecars)
   __main__.py     CLI: `parse`, `import`, `import-images`, `download-images` (debug: download + metadata, no wiki)
@@ -115,11 +115,11 @@ Array of image resource objects:
 | `creationDate` | number | Unix ms timestamp |
 | `modificationDate` | number | Unix ms timestamp |
 
-Images are saved locally as `downloads/{entity_ID}.{ext}` and uploaded to MediaWiki under the same name. The extension is resolved per provider (bildindex → `.jpg`; BADW EasyDB → from the API, often `.png`) by `ImageHandler`, and the generator/infobox use the same resolver so `File:` references always match the uploaded file. All images are downloaded regardless of license; the `{{BildMeta}}` page records a `cc` flag (`ja`/`nein`) classifying the license and a `quelle` link to the original image. `download-images` also writes a `downloads/{entity_ID}.json` metadata sidecar (incl. `source_url`) next to each image.
+Images are saved locally as `downloads/{entity_ID}.{ext}` and uploaded to MediaWiki under the same name. The extension is resolved per provider (bildindex → `.jpg`; BADW EasyDB → from the API, often `.png`) by `ImageHandler`, and the generator/template use the same resolver so `File:` references always match the uploaded file. All images are downloaded regardless of license; the `{{BildMeta}}` page records a `cc` flag (`ja`/`nein`) classifying the license and a `quelle` link to the original image. `download-images` also writes a `downloads/{entity_ID}.json` metadata sidecar (incl. `source_url`) next to each image.
 
 ## Key Conventions
 
-- **Article pipeline**: `TEXT` entity → infobox + `shortText` + ordered `TEXT_PART` sections (HTML converted to wikitext) + bibliography + `<references />`
+- **Article pipeline**: `TEXT` entity → template + `shortText` + ordered `TEXT_PART` sections (HTML converted to wikitext) + bibliography + `<references />`
 - **Image lookup**: `TEXT/TEXT_PART` → `DOCUMENTS` → `OBJECT_*` → `IMAGE` → resource (not directly on TEXT entities)
 - **Citation handling**: Footnote markers in `TEXT_PART.text` HTML are extracted, deduplicated across parts, and re-emitted with consistent `<ref name="…">` tags
 - **Relation indexing**: `loader.py` only indexes `relDir == "->"` relations; `"<-"` relations (e.g., `RIGHTS_HOLDERS`, `ORIGINATORS`, `MEMBERS`) must be queried from the target side

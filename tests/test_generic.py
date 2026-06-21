@@ -5,20 +5,19 @@ import re
 from conftest import all_headings
 
 
-def test_infobox_present(any_article):
-    assert "{{Infobox Deckenmalerei" in any_article
+def test_artikel_modern_present(any_article):
+    assert "{{Artikel-modern" in any_article
 
 
-def test_infobox_has_required_fields(any_article):
+def test_artikel_modern_has_required_fields(any_article):
     for field in (
-        "| titel =",
-        "| beschreibung =",
-        "| bild =",
-        "| lizenz =",
-        "| author =",
-        "| entity_id =",
+        "| Titel =",
+        "| Ort =",
+        "| Jahr =",
+        "| AutorIn1 =",
+        "| ID =",
     ):
-        assert field in any_article, f"Missing infobox field: {field!r}"
+        assert field in any_article, f"Missing Artikel-modern field: {field!r}"
 
 
 def test_headings_have_no_bold_markup(any_article):
