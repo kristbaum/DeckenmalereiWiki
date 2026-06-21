@@ -278,19 +278,22 @@ class ImageHandler:
         """Issue a single pywikibot upload call and return whether it succeeded.
 
         ``ignore_warnings`` lets us force-publish a file that triggers a
-        ``duplicate`` warning. ``report_success=False`` suppresses pywikibot's
-        own success/exception handling so a warning yields ``False`` instead of
-        raising, leaving the final-arbiter existence check in control.
+        ``duplicate`` warning. When warnings are present and ``ignore`` is
+        ``False``, pywikibot raises :exc:`pywikibot.exceptions.UploadError`;
+        we catch it and return ``False`` so the caller can retry with
+        ``ignore=True``.
         """
-        return self.site.upload(
-            filepage,
-            source_filename=str(filepath),
-            comment="Automatischer Bildimport",
-            text=description,
-            ignore_warnings=ignore,
-            report_success=False,
-            chunk_size=UPLOAD_CHUNK_SIZE,
-        )
+        try:
+            return self.site.upload(
+                filepage,
+                source_filename=str(filepath),
+                comment="Automatischer Bildimport",
+                text=description,
+                ignore_warnings=ignore,
+                chunk_size=UPLOAD_CHUNK_SIZE,
+            )
+        except pywikibot.exceptions.UploadError:
+            return False
 
     def upload_image(
         self,

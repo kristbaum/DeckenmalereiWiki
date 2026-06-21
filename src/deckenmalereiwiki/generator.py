@@ -78,6 +78,8 @@ class ArticleGenerator:
                 cleaned, citations = parse_citations(part["text"], part["ID"])
                 part_texts[part["ID"]] = cleaned
                 all_citations.update(citations)
+            else:
+                part_texts[part["ID"]] = ""
 
         # Deduplicate citations by content; map duplicates to canonical name
         citation_text_to_name: Dict[str, str] = {}
@@ -190,6 +192,9 @@ class ArticleGenerator:
     ):
         """Save generated articles as individual ``.wiki`` files.
 
+        Each article is written to disk immediately after generation so that
+        progress is preserved if a later article raises an error.
+
         Args:
             output_dir:   Directory to write files into (created if absent).
             max_articles: Optional cap on the number of articles to process.
@@ -197,11 +202,23 @@ class ArticleGenerator:
         output_path = Path(output_dir)
         output_path.mkdir(exist_ok=True)
 
-        articles = self.generate_all_articles(max_articles=max_articles)
+        text_entities = self.loader.get_text_entities()
+        if max_articles:
+            text_entities = text_entities[:max_articles]
 
-        for title, content in articles.items():
+        print(f"\nGenerating {len(text_entities)} articles...")
+        saved = 0
+        for entity in text_entities:
+            title = entity.get("appellation", f"Untitled_{entity['ID']}")
+            try:
+                content = self.generate_article(entity)
+            except Exception as e:
+                print(f"  ERROR generating '{title}': {e}")
+                continue
             safe_title = title_to_filename(title)
             with open(output_path / f"{safe_title}.wiki", "w", encoding="utf-8") as f:
                 f.write(content)
+            saved += 1
+            print(f"  Generated: {title}")
 
-        print(f"\nSaved {len(articles)} articles to {output_dir}/")
+        print(f"\nSaved {saved} articles to {output_dir}/")
