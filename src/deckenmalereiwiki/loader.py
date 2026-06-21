@@ -7,6 +7,10 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from collections import defaultdict
 
+# Public base URL for actor (and other) records in the Deckenmalerei portal.
+# Actor links in {{BildMeta}} point here, using the actor's source ID.
+DECKENMALEREI_BASE_URL = "https://www.deckenmalerei.eu/"
+
 
 class DataLoader:
     """Loads and queries DeckenmalereiWiki JSON data."""
@@ -172,8 +176,21 @@ class DataLoader:
             return doc_rels[0].get("relTar")
         return None
 
+    def actor_link(self, actor_id: str) -> str:
+        """Return a MediaWiki external link to an actor's Deckenmalerei page.
+
+        The link target is always ``DECKENMALEREI_BASE_URL + actor_id``. The
+        visible label is the actor's ``appellation`` when the entity is present
+        in the loaded data, otherwise the raw ID — so actors missing from
+        entities.json (e.g. photographers only referenced by relation) are still
+        recorded as a usable link instead of being dropped.
+        """
+        entity = self.entities.get(actor_id)
+        label = (entity.get("appellation") if entity else None) or actor_id
+        return f"[{DECKENMALEREI_BASE_URL}{actor_id} {label}]"
+
     def get_resource_actors(self, resource_id: str, rel_type: str) -> List[str]:
-        """Return a list of entity appellations linked to *resource_id* via *rel_type*.
+        """Return Deckenmalerei links for the actors linked to *resource_id*.
 
         Actor relations are recorded in both directions: a forward ("->")
         relation where the resource is the source and the actor the ``relTar``,
@@ -188,7 +205,8 @@ class DataLoader:
                          ``'ORIGINATORS'``.
 
         Returns:
-            List of distinct appellation strings, in discovery order.
+            List of distinct MediaWiki external links (see :meth:`actor_link`),
+            in discovery order.
         """
         result: List[str] = []
         seen: set = set()
@@ -197,9 +215,7 @@ class DataLoader:
             if not actor_id or actor_id in seen:
                 return
             seen.add(actor_id)
-            entity = self.entities.get(actor_id)
-            if entity and entity.get("appellation"):
-                result.append(entity["appellation"])
+            result.append(self.actor_link(actor_id))
 
         # Forward: resource is the source, actor is the relation target.
         for rel in self.get_relations_by_type(resource_id, rel_type):
