@@ -17,6 +17,10 @@ class DataLoader:
         self.relations: List[Dict] = []
         self.resources: Dict[str, Dict] = {}
         self.relations_by_source: Dict[str, List[Dict]] = defaultdict(list)
+        # Relations stored in the reverse ("<-") direction, indexed by their
+        # ``relTar``. These mirror a "->" relation in most cases, but some only
+        # exist in this direction, so actor lookups must consult both indexes.
+        self.relations_by_target: Dict[str, List[Dict]] = defaultdict(list)
 
     def load_data(self):
         """Load all JSON files from sources directory."""
@@ -34,6 +38,8 @@ class DataLoader:
         for rel in self.relations:
             if rel.get("relDir") == "->":
                 self.relations_by_source[rel["ID"]].append(rel)
+            elif rel.get("relDir") == "<-" and rel.get("relTar"):
+                self.relations_by_target[rel["relTar"]].append(rel)
 
         print("Loading resources...")
         with open(self.sources_dir / "resources.json", "r", encoding="utf-8") as f:
@@ -169,19 +175,37 @@ class DataLoader:
     def get_resource_actors(self, resource_id: str, rel_type: str) -> List[str]:
         """Return a list of entity appellations linked to *resource_id* via *rel_type*.
 
+        Actor relations are recorded in both directions: a forward ("->")
+        relation where the resource is the source and the actor the ``relTar``,
+        and a reverse ("<-") relation where the actor is the source and the
+        resource the ``relTar``. Some relations exist *only* in the reverse
+        form, so both indexes are consulted to avoid dropping actors (which
+        would leave ``urheber``/``rechteinhaber`` empty in ``{{BildMeta}}``).
+
         Args:
             resource_id: The ID of a resource (from resources.json).
             rel_type:    Relation type to follow, e.g. ``'RIGHTS_HOLDERS'`` or
                          ``'ORIGINATORS'``.
 
         Returns:
-            List of appellation strings; falls back to the raw entity ID when
-            the entity is not found in the loaded set.
+            List of distinct appellation strings, in discovery order.
         """
-        result = []
-        for rel in self.get_relations_by_type(resource_id, rel_type):
-            target_id = rel.get("relTar", "")
-            entity = self.entities.get(target_id)
+        result: List[str] = []
+        seen: set = set()
+
+        def _add(actor_id: str) -> None:
+            if not actor_id or actor_id in seen:
+                return
+            seen.add(actor_id)
+            entity = self.entities.get(actor_id)
             if entity and entity.get("appellation"):
                 result.append(entity["appellation"])
+
+        # Forward: resource is the source, actor is the relation target.
+        for rel in self.get_relations_by_type(resource_id, rel_type):
+            _add(rel.get("relTar", ""))
+        # Reverse: actor is the source, resource is the relation target.
+        for rel in self.relations_by_target.get(resource_id, []):
+            if rel.get("sType") == rel_type:
+                _add(rel.get("ID", ""))
         return result

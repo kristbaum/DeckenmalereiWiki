@@ -27,8 +27,13 @@ def import_command():
         print("\n✗ Import failed - could not login")
 
 
-def import_images_command():
-    """Download and upload images for all articles to MediaWiki."""
+def import_images_command(overwrite_existing: bool = False):
+    """Download and upload images for all articles to MediaWiki.
+
+    When *overwrite_existing* is ``True``, images already present on the wiki
+    keep their binary but have their ``{{BildMeta}}`` description page rewritten
+    with freshly built metadata.
+    """
     loader = DataLoader()
     loader.load_data()
 
@@ -39,11 +44,15 @@ def import_images_command():
 
     text_entities = loader.get_text_entities()[: importer.max_articles]
     print(f"\n=== Processing images for {len(text_entities)} articles ===")
+    if overwrite_existing:
+        print("    (overwriting existing description pages)")
     importer.image_handler.load_existing_filenames()
     for entity in text_entities:
         title = entity.get("appellation", f"Untitled_{entity['ID']}")
         print(f"\nProcessing images for: {title}")
-        importer._process_entity_images(loader, entity)
+        importer._process_entity_images(
+            loader, entity, overwrite_existing=overwrite_existing
+        )
     print("\n✓ Image import complete!")
 
 
@@ -91,14 +100,19 @@ def main():
         elif command == "import":
             import_command()
         elif command == "import-images":
-            import_images_command()
+            overwrite = any(
+                arg in ("--overwrite", "--overwrite-descriptions")
+                for arg in sys.argv[2:]
+            )
+            import_images_command(overwrite_existing=overwrite)
         elif command == "download-images":
             download_images_command()
         else:
             print(f"Unknown command: {command}")
             print(
                 "Usage: python -m deckenmalereiwiki "
-                "[parse|import|import-images|download-images]"
+                "[parse|import|import-images [--overwrite-descriptions]|"
+                "download-images]"
             )
             sys.exit(1)
     else:

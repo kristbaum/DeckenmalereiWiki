@@ -297,8 +297,15 @@ class ImageHandler:
         rights_holders: list | None = None,
         originators: list | None = None,
         source_url: str | None = None,
+        overwrite_existing: bool = False,
     ) -> bool:
         """Upload *filepath* to MediaWiki. Returns ``True`` on success.
+
+        When the image is already on the wiki and *overwrite_existing* is
+        ``True``, the binary is left untouched but the file's ``{{BildMeta}}``
+        description page is rewritten with the freshly built metadata (useful
+        after the source data gains rights holders / originators). With
+        *overwrite_existing* ``False`` an already-present image is skipped.
 
         ``site.upload`` does **not** raise on a ``result: "Warning"`` response —
         it leaves the file stashed but unpublished and returns the warnings. The
@@ -312,13 +319,14 @@ class ImageHandler:
         """
         try:
             filename = filepath.name
-            if self._already_on_wiki(filename):
-                print(f"  Image already exists: {filename}")
-                return True
-
             full_description = self._build_description(
                 description, license_info, rights_holders, originators, source_url
             )
+            if self._already_on_wiki(filename):
+                if overwrite_existing:
+                    return self._update_description_page(filename, full_description)
+                print(f"  Image already exists: {filename}")
+                return True
 
             print(f"  Uploading: {filename}")
             payload = self._upload_payload(
@@ -350,6 +358,21 @@ class ImageHandler:
             return True
         except Exception as e:
             print(f"  Failed to upload {filepath}: {e}")
+            return False
+
+    def _update_description_page(self, filename: str, description: str) -> bool:
+        """Overwrite the wikitext of an existing file's description page.
+
+        Edits the ``File:`` page text only; the uploaded image binary is left
+        in place. Returns ``True`` on a successful edit.
+        """
+        try:
+            page = self.site.pages[f"File:{filename}"]
+            page.edit(description, summary="BildMeta-Metadaten aktualisiert")
+            print(f"  Updated description page: {filename}")
+            return True
+        except Exception as e:
+            print(f"  Failed to update description page for {filename}: {e}")
             return False
 
     def _remember_uploaded(self, filename: str) -> None:

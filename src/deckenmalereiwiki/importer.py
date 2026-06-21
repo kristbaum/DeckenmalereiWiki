@@ -190,8 +190,14 @@ class MediaWikiImporter:
         articles = generator.generate_all_articles(max_articles=self.max_articles)
         self.import_articles(articles)
 
-    def _process_entity_images(self, loader: DataLoader, entity: Dict):
-        """Download and upload all images associated with *entity*."""
+    def _process_entity_images(
+        self, loader: DataLoader, entity: Dict, overwrite_existing: bool = False
+    ):
+        """Download and upload all images associated with *entity*.
+
+        When *overwrite_existing* is ``True``, images already on the wiki keep
+        their binary but have their ``{{BildMeta}}`` description page refreshed.
+        """
         for name_entity_id, resource in loader.get_entity_image_resources(entity["ID"]):
             fp = self.image_handler.download_image(
                 resource["resProvider"], name_entity_id, resource["ID"]
@@ -212,4 +218,5 @@ class MediaWikiImporter:
                     rights_holders=rights_holders,
                     originators=originators,
                     source_url=source_url,
+                    overwrite_existing=overwrite_existing,
                 )
