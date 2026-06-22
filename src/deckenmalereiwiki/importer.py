@@ -167,6 +167,34 @@ class MediaWikiImporter:
                 success += 1
         print(f"Successfully imported {success}/{len(template_files)} templates")
 
+        self.import_pages()
+
+    def import_pages(self, pages_dir: str = "pages"):
+        """Upload/update every ``.wiki`` page in *pages_dir* (main namespace).
+
+        Unlike :meth:`import_templates` these are published under their bare
+        title (filename stem, underscores → spaces) with no ``Template:``
+        prefix, e.g. ``Hauptseite.wiki`` → the main page ``Hauptseite``.
+        """
+        folder = Path(pages_dir)
+        if not folder.is_dir():
+            print(f"Pages folder not found: {folder}")
+            return
+
+        page_files = sorted(folder.glob("*.wiki"))
+        if not page_files:
+            print(f"No .wiki pages found in {folder}")
+            return
+
+        print(f"\n=== Importing {len(page_files)} pages from {folder}/ ===")
+        success = 0
+        for pf in page_files:
+            title = pf.stem.replace("_", " ")
+            content = pf.read_text(encoding="utf-8")
+            if self.create_or_update_page(title, content, summary="Seiten-Import"):
+                success += 1
+        print(f"Successfully imported {success}/{len(page_files)} pages")
+
     def import_articles(self, articles: Dict[str, str]):
         """Push *articles* dict ``{title: wikitext}`` to MediaWiki."""
         print(f"\nImporting {len(articles)} articles...")
