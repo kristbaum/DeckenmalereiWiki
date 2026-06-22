@@ -63,6 +63,21 @@ This will:
 4. Upload images to MediaWiki
 5. Create/update articles in MediaWiki
 
+### Import Categories
+
+Create the category pages the `{{Artikel-modern}}` template expects:
+
+```bash
+uv run deckenmalereiwiki import-categories
+```
+
+This creates the static `CbDD` category, the `AutorInnen` and `Ort` group
+categories (both filed under `CbDD`), plus one category per author and one per
+location (the part of the title before the first comma). Per-author categories
+are filed under `AutorInnen` and per-location categories under `Ort`. Existing
+category pages are left untouched, so manually curated descriptions are
+preserved.
+
 ### Download Images Only (debugging)
 
 Download the images for the articles already in `output/` without touching

@@ -27,6 +27,17 @@ def import_command():
         print("\n✗ Import failed - could not login")
 
 
+def import_templates_command():
+    """Upload/update only the templates from ``templates/`` to MediaWiki."""
+    importer = MediaWikiImporter()
+    if not importer.login():
+        print("\n✗ Import failed - could not login")
+        return
+
+    importer.import_templates()
+    print("\n✓ Template import complete!")
+
+
 def import_categories_command():
     """Create the category pages needed by the {{Artikel-modern}} template.
 
@@ -118,6 +129,8 @@ def main():
             parse_command()
         elif command == "import":
             import_command()
+        elif command == "import-templates":
+            import_templates_command()
         elif command == "import-categories":
             import_categories_command()
         elif command == "import-images":
@@ -132,7 +145,7 @@ def main():
             print(f"Unknown command: {command}")
             print(
                 "Usage: python -m deckenmalereiwiki "
-                "[parse|import|import-categories|"
+                "[parse|import|import-templates|import-categories|"
                 "import-images [--overwrite-descriptions]|"
                 "download-images]"
             )
