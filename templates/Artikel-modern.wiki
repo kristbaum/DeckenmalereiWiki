@@ -1,4 +1,4 @@
-<includeonly><div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">{{#if:{{{AutorIn2|}}}|{{#if:{{{AutorIn3|}}}|{{#if:{{{AutorIn4|}}}|{{#if:{{{AutorIn5|}}}|{{#if:{{{AutorIn6|}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}}, {{{AutorIn4}}}, {{{AutorIn5}}} und {{{AutorIn6}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}}, {{{AutorIn4}}} und {{{AutorIn5}}}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}} und {{{AutorIn4}}}}}|{{{AutorIn1}}}, {{{AutorIn2}}} und {{{AutorIn3}}}}}|{{{AutorIn1}}} und {{{AutorIn2}}}}}|{{{AutorIn1|}}}}}: {{{Titel|}}}, in: Corpus der barocken Deckenmalerei in Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München {{{Jahr|}}}, URL: [https://www.deckenmalerei.eu/{{{ID|}}} www.deckenmalerei.eu/{{{ID|}}}]</div><!--
+<includeonly><div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">{{#if:{{{AutorIn1|}}}|'''{{#if:{{{AutorIn2|}}}|{{#if:{{{AutorIn3|}}}|{{#if:{{{AutorIn4|}}}|{{#if:{{{AutorIn5|}}}|{{#if:{{{AutorIn6|}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}}, {{{AutorIn4}}}, {{{AutorIn5}}} und {{{AutorIn6}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}}, {{{AutorIn4}}} und {{{AutorIn5}}}}}|{{{AutorIn1}}}, {{{AutorIn2}}}, {{{AutorIn3}}} und {{{AutorIn4}}}}}|{{{AutorIn1}}}, {{{AutorIn2}}} und {{{AutorIn3}}}}}|{{{AutorIn1}}} und {{{AutorIn2}}}}}|{{{AutorIn1|}}}}}''': }}{{{Titel|}}}, in: Corpus der barocken Deckenmalerei in Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München {{{Jahr|}}}, URL: [https://www.deckenmalerei.eu/{{{ID|}}} www.deckenmalerei.eu/{{{ID|}}}]<p style="margin:0.6em 0 0; font-size:0.95em;">Der Text dieses Artikels steht – ausgenommen Abbildungen – unter der Lizenz [https://creativecommons.org/licenses/by/4.0/ CC BY 4.0]. Dieser Artikel ist lediglich eine Kopie der Originalveröffentlichung auf [https://www.deckenmalerei.eu deckenmalerei.eu] und kann veraltet sein; maßgeblich ist die dortige Originalfassung.</p></div><!--
   Kategorien: generische CbDD-Kategorie, Ort und eine Kategorie je Autor
 -->[[Kategorie:CbDD]]{{#if:{{{Ort|}}}|[[Kategorie:{{{Ort}}}]]}}{{#if:{{{AutorIn1|}}}|[[Kategorie:{{{AutorIn1}}}]]}}{{#if:{{{AutorIn2|}}}|[[Kategorie:{{{AutorIn2}}}]]}}{{#if:{{{AutorIn3|}}}|[[Kategorie:{{{AutorIn3}}}]]}}{{#if:{{{AutorIn4|}}}|[[Kategorie:{{{AutorIn4}}}]]}}{{#if:{{{AutorIn5|}}}|[[Kategorie:{{{AutorIn5}}}]]}}{{#if:{{{AutorIn6|}}}|[[Kategorie:{{{AutorIn6}}}]]}}</includeonly><noinclude>
 == Verwendung ==
@@ -6,6 +6,10 @@
 Diese Vorlage erzeugt einen kompakten, hervorgehobenen Zitationssatz für einen
 Deckenmalerei-Artikel und ordnet die Seite automatisch den passenden Kategorien zu:
 die generische Kategorie ''CbDD'', den Ort sowie je eine Kategorie pro Autor.
+Die Autorennamen werden fett gesetzt; fehlen Autorenangaben, entfällt der
+einleitende Namensteil samt Doppelpunkt. Unterhalb der Zitation weist die Vorlage
+darauf hin, dass der Text (nicht die Abbildungen) unter CC BY 4.0 steht und es
+sich nur um eine Kopie der Originalveröffentlichung auf deckenmalerei.eu handelt.
 
 === Parameter ===
 
@@ -43,9 +47,13 @@ Alle Parameter sind optional.
 
 Ergibt:
 
-Laß, Heiko: Bad Buchau, Fürstabtei und Residenz, in: Corpus der barocken Deckenmalerei in
+'''Laß, Heiko''': Bad Buchau, Fürstabtei und Residenz, in: Corpus der barocken Deckenmalerei in
 Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München 2022,
 URL: www.deckenmalerei.eu/d2c88b64-a55e-4048-bb06-afe91f3f34c8
+
+Der Text dieses Artikels steht – ausgenommen Abbildungen – unter der Lizenz CC BY 4.0.
+Dieser Artikel ist lediglich eine Kopie der Originalveröffentlichung auf deckenmalerei.eu
+und kann veraltet sein; maßgeblich ist die dortige Originalfassung.
 
 … und setzt die Kategorien ''CbDD'', ''Bad Buchau'' und ''Laß, Heiko''.
 
