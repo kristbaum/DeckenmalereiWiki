@@ -44,11 +44,9 @@ Das ''Corpus der barocken Deckenmalerei in Deutschland'' (CbDD) umfasste 15 Druc
 
 ----
 
-=== KI-Zugang über MCP ===
+=== KI-Zugang mit MCP ===
 
 Diese Wiki-Instanz stellt einen [https://modelcontextprotocol.io Model Context Protocol (MCP)]-Endpunkt bereit, über den KI-Assistenten direkt auf die Artikelinhalte zugreifen können.
-
-==== MCP-Endpunkt ====
 
 <code>https://badwcbd-lab.srv.mwn.de/mcp</code>
 
@@ -75,7 +73,17 @@ Der Endpunkt erfordert keine Authentifizierung und ist öffentlich zugänglich.
 # Danach optional den Entwicklermodus wieder deaktivieren, unter '''Einstellungen → Apps'''
 # Im Chat kann nun direkt nach Artikeln, Orten oder AutorInnen gefragt werden. (Die Verwendung des Begriffs "'''Deckenmalerei-Lab'''" im Prompt ist hilfreich um das Model davon zu überzeugen das MCP-Tool auch zu verwenden!)
 
-==== Einrichtung mit dem Deckenmalerei-Lab Skill (Ergänzung zum MCP-Konnektor) ====
+==== Einrichtung mit chat-ai.academiccloud.de (GWDG) ====
+
+Auf der GWDG-Plattform [https://chat-ai.academiccloud.de chat-ai.academiccloud.de] stehen viele Modelle zur Auswahl, von denen jedoch nur wenige MCP unterstützen – beispielsweise '''Mistral Large 3 675b Instruct 2512'''. Es muss daher ein MCP-fähiges Modell gewählt sein.
+
+# Oben rechts auf das '''Einstellungs-Zahnrad''' klicken.
+# '''GWDG Tools''' aktivieren.
+# '''MCP-Server''' anklicken und die URL <code>https://badwcbd-lab.srv.mwn.de/mcp</code> eintragen.
+# Ein MCP-fähiges Modell wählen, z. B. '''Mistral Large 3 675b Instruct 2512'''.
+# Im Chat kann nun direkt nach Artikeln, Orten oder AutorInnen gefragt werden. (Die Verwendung des Begriffs "'''Deckenmalerei-Lab'''" im Prompt ist hilfreich um das Model davon zu überzeugen das MCP-Tool auch zu verwenden!)
+
+=== Deckenmalerei-Lab Skill ===
 
 Der [https://github.com/kristbaum/deckenmalerei-lab-skill Deckenmalerei-Lab Skill] enthält vorbereitete Anweisungen, die dem Sprachmodell erklären, wie es den MCP-Konnektor sinnvoll nutzt (Suchmuster, Seitenstruktur, Zitierformat). Er ersetzt den MCP-Konnektor '''nicht''', sondern ergänzt ihn – der Konnektor muss weiterhin wie oben beschrieben eingerichtet sein.
 
@@ -92,6 +100,10 @@ Der [https://github.com/kristbaum/deckenmalerei-lab-skill Deckenmalerei-Lab Skil
 # Einen neuen GPT erstellen und als Grundlage die Datei [https://github.com/kristbaum/deckenmalerei-lab-skill/raw/main/deckenmalerei-lab-skill.zip deckenmalerei-lab-skill.zip] hochladen.
 # Name '''Deckenmalerei-Lab''' vergeben und den GPT speichern.
 # Den erstellten GPT im Chat aufrufen und direkt nach Artikeln, Orten oder AutorInnen fragen.
+
+'''Für chat-ai.academiccloud.de-Nutzer (GWDG):'''
+
+Die GWDG-Plattform unterstützt keine hochladbaren Skills. Stattdessen werden die Anweisungen direkt als System-Prompt hinterlegt. Den Inhalt von [https://github.com/kristbaum/deckenmalerei-lab-skill/blob/main/SMALL_MODELS_SYSTEM_PROMPT.md SMALL_MODELS_SYSTEM_PROMPT.md] – eine für kleinere Modelle optimierte Fassung des Skills – in das System-Prompt-Feld der Plattform einfügen (in den Einstellungen des jeweiligen Chats bzw. Modells).
 
 ==== Einrichtung mit dem MediaWiki-MCP-Server (selbst gehostet) ====
 
