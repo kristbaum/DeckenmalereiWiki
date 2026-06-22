@@ -14,10 +14,20 @@ from pywikibot.site import APISite
 from .loader import DataLoader
 from .generator import ArticleGenerator
 from .image_handler import ImageHandler
+from .artikel_modern import get_author_names, get_ort
 
 # Articles of the old corpus are tagged with this category and must never be
 # overwritten by the importer.
 PROTECTED_CATEGORY = "CBD"
+
+# Static category that every modern article is filed under (see the
+# ``{{Artikel-modern}}`` template). Created once by ``import-categories``.
+ROOT_CATEGORY = "CbDD"
+
+# Root categories that group the per-author and per-location categories so the
+# wiki stays navigable. Both are themselves filed under ``ROOT_CATEGORY``.
+AUTHOR_ROOT_CATEGORY = "AutorInnen"
+LOCATION_ROOT_CATEGORY = "Ort"
 
 # C0 control characters MediaWiki rejects as non-normalized: everything in
 # U+0000–U+001F except HT (\t), LF (\n) and CR (\r).
@@ -115,7 +125,9 @@ class MediaWikiImporter:
         try:
             page = pywikibot.Page(self.site, title)
             if self._is_old_corpus(page):
-                print(f"  Skipped (old corpus, Kategorie:{PROTECTED_CATEGORY}): {title}")
+                print(
+                    f"  Skipped (old corpus, Kategorie:{PROTECTED_CATEGORY}): {title}"
+                )
                 return True
             page.text = sanitize_wikitext(content)
             page.save(summary=summary)
@@ -163,6 +175,73 @@ class MediaWikiImporter:
             if self.create_or_update_page(title, content):
                 success += 1
         print(f"\nSuccessfully imported {success}/{len(articles)} articles")
+
+    # ------------------------------------------------------------------
+    # Category handling
+    # ------------------------------------------------------------------
+
+    def create_category_if_missing(self, name: str, content: str = "") -> bool:
+        """Create ``Kategorie:<name>`` with *content* unless it already exists.
+
+        Returns ``True`` when a new page is created. Existing category pages are
+        left untouched so manually curated descriptions are never clobbered.
+        """
+        try:
+            page = pywikibot.Page(self.site, name, ns=14)
+            if page.exists():
+                print(f"  Exists, skipped: {page.title()}")
+                return False
+            page.text = sanitize_wikitext(content)
+            page.save(summary="Kategorie-Import")
+            print(f"  Created: {page.title()}")
+            return True
+        except Exception as e:
+            print(f"  Failed to create category {name}: {e}")
+            return False
+
+    def collect_category_names(self, loader: DataLoader) -> Dict[str, str]:
+        """Return ``{category_name: page_content}`` for every required category.
+
+        Gathers the static :data:`ROOT_CATEGORY`, the :data:`AUTHOR_ROOT_CATEGORY`
+        and :data:`LOCATION_ROOT_CATEGORY` group categories, plus one category
+        per author and one per location across all TEXT entities. Per-author
+        categories are filed under ``AutorInnen`` and per-location categories
+        under ``Ort``; both groups (and the descriptive root) sit under ``CbDD``
+        so the wiki stays navigable.
+        """
+        under_root = f"[[Kategorie:{ROOT_CATEGORY}]]"
+        categories: Dict[str, str] = {
+            ROOT_CATEGORY: (
+                "Artikel des Corpus der barocken Deckenmalerei in Deutschland (CbDD)."
+            ),
+            AUTHOR_ROOT_CATEGORY: (
+                "AutorInnen von Artikeln des Corpus der barocken Deckenmalerei "
+                "in Deutschland.\n" + under_root
+            ),
+            LOCATION_ROOT_CATEGORY: (
+                "Orte der im Corpus der barocken Deckenmalerei in Deutschland "
+                "behandelten Werke.\n" + under_root
+            ),
+        }
+        under_authors = f"[[Kategorie:{AUTHOR_ROOT_CATEGORY}]]"
+        under_locations = f"[[Kategorie:{LOCATION_ROOT_CATEGORY}]]"
+        for entity in loader.get_text_entities():
+            for author in get_author_names(loader, entity):
+                categories.setdefault(author, under_authors)
+            ort = get_ort(entity)
+            if ort:
+                categories.setdefault(ort, under_locations)
+        return categories
+
+    def import_categories(self, loader: DataLoader) -> None:
+        """Create all category pages derived from *loader* that are missing."""
+        categories = self.collect_category_names(loader)
+        print(f"\n=== Creating up to {len(categories)} categories ===")
+        created = 0
+        for name, content in sorted(categories.items()):
+            if self.create_category_if_missing(name, content):
+                created += 1
+        print(f"\nCreated {created} new categories ({len(categories)} total)")
 
     # ------------------------------------------------------------------
     # Orchestration

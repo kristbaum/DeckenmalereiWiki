@@ -7,9 +7,36 @@ from the title).
 """
 
 import datetime
-from typing import Dict
+from typing import Dict, List, Optional
 
 from .loader import DataLoader
+
+
+def get_author_names(loader: DataLoader, text_entity: Dict) -> List[str]:
+    """Return the appellations of the entity's authors (``AUTHORS`` relation).
+
+    Authors missing from ``entities.json`` or without an appellation are
+    skipped, mirroring how each author becomes its own ``AutorIn`` parameter.
+    """
+    authors = loader.get_relations_by_type(text_entity["ID"], "AUTHORS")
+    return [
+        loader.entities[rel["relTar"]]["appellation"]
+        for rel in authors
+        if rel.get("relTar") in loader.entities
+        and loader.entities[rel["relTar"]].get("appellation")
+    ]
+
+
+def get_ort(text_entity: Dict) -> Optional[str]:
+    """Return the location of *text_entity*: the title before the first comma.
+
+    Returns ``None`` when the entity has no title or an empty location part.
+    """
+    appellation = text_entity.get("appellation")
+    if not appellation:
+        return None
+    ort = appellation.split(",", 1)[0].strip()
+    return ort or None
 
 
 def _modification_year(text_entity: Dict) -> str:
@@ -35,20 +62,14 @@ def generate_artikel_modern(loader: DataLoader, text_entity: Dict) -> str:
     """
     lines = ["{{Artikel-modern"]
 
-    authors = loader.get_relations_by_type(text_entity["ID"], "AUTHORS")
-    names = [
-        loader.entities[rel["relTar"]]["appellation"]
-        for rel in authors
-        if rel.get("relTar") in loader.entities
-        and loader.entities[rel["relTar"]].get("appellation")
-    ]
+    names = get_author_names(loader, text_entity)
     for i, name in enumerate(names, start=1):
         lines.append(f"| AutorIn{i} = {name}")
 
     appellation = text_entity.get("appellation")
     if appellation:
         lines.append(f"| Titel = {appellation}")
-        ort = appellation.split(",", 1)[0].strip()
+        ort = get_ort(text_entity)
         if ort:
             lines.append(f"| Ort = {ort}")
 

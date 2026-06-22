@@ -27,6 +27,25 @@ def import_command():
         print("\n✗ Import failed - could not login")
 
 
+def import_categories_command():
+    """Create the category pages needed by the {{Artikel-modern}} template.
+
+    Creates the static ``CbDD`` category plus one category per author and one
+    per location (the title part before the first comma) across all articles.
+    Existing category pages are left untouched.
+    """
+    loader = DataLoader()
+    loader.load_data()
+
+    importer = MediaWikiImporter()
+    if not importer.login():
+        print("\n✗ Import failed - could not login")
+        return
+
+    importer.import_categories(loader)
+    print("\n✓ Category import complete!")
+
+
 def import_images_command(overwrite_existing: bool = False):
     """Download and upload images for all articles to MediaWiki.
 
@@ -99,6 +118,8 @@ def main():
             parse_command()
         elif command == "import":
             import_command()
+        elif command == "import-categories":
+            import_categories_command()
         elif command == "import-images":
             overwrite = any(
                 arg in ("--overwrite", "--overwrite-descriptions")
@@ -111,7 +132,8 @@ def main():
             print(f"Unknown command: {command}")
             print(
                 "Usage: python -m deckenmalereiwiki "
-                "[parse|import|import-images [--overwrite-descriptions]|"
+                "[parse|import|import-categories|"
+                "import-images [--overwrite-descriptions]|"
                 "download-images]"
             )
             sys.exit(1)
