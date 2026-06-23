@@ -4,6 +4,13 @@
 | Ort = Bad Buchau
 | Jahr = 2022
 | ID = d2c88b64-a55e-4048-bb06-afe91f3f34c8
+| Bundesland = Baden-Württemberg
+| Gemeinde = Bad Buchau
+| PLZ = 88422
+| Lat = 48.0674772
+| Lng = 9.611163
+| Funktion1 = PRINCE_ABBACY_MONASTERIES
+| Funktion2 = ROYAL_RESIDENCES
 }}
 
 In der Stiftskirche haben sich Deckenfresken von Andreas Brugger und Johann Georg Mesmer von 1775/76 erhalten. Sie kreisen u.a. um das Thema des Jüngsten Gerichts, die Himmelfahrt Mariens sowie die katholische Tugendlehre. Im ehemaligen Tafelzimmer schuf Joseph Anton Reiser 1790 Ideallandschaften.

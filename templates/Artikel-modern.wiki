@@ -1,15 +1,19 @@
-<includeonly><div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">{{#if:{{{AutorIn1|}}}|'''{{#if:{{{AutorIn2|}}}|{{#if:{{{AutorIn3|}}}|{{#if:{{{AutorIn4|}}}|{{#if:{{{AutorIn5|}}}|{{#if:{{{AutorIn6|}}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]], [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]], [[:Kategorie:{{{AutorIn4}}}|{{{AutorIn4}}}]], [[:Kategorie:{{{AutorIn5}}}|{{{AutorIn5}}}]] und [[:Kategorie:{{{AutorIn6}}}|{{{AutorIn6}}}]]|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]], [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]], [[:Kategorie:{{{AutorIn4}}}|{{{AutorIn4}}}]] und [[:Kategorie:{{{AutorIn5}}}|{{{AutorIn5}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]], [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]] und [[:Kategorie:{{{AutorIn4}}}|{{{AutorIn4}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]] und [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]] und [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]]}}''': }}{{{Titel|}}}, in: Corpus der barocken Deckenmalerei in Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München {{{Jahr|}}}, URL: [https://www.deckenmalerei.eu/{{{ID|}}} www.deckenmalerei.eu/{{{ID|}}}]<p style="margin:0.6em 0 0; font-size:0.95em;">Der Text dieses Artikels steht – ausgenommen Abbildungen – unter der Lizenz [https://creativecommons.org/licenses/by/4.0/ CC BY 4.0]. Dieser Artikel ist lediglich eine Kopie der Originalveröffentlichung auf [https://www.deckenmalerei.eu deckenmalerei.eu] und kann veraltet sein; maßgeblich ist die dortige Originalfassung.</p></div><!--
-  Kategorien: generische CbDD-Kategorie, Ort und eine Kategorie je Autor
--->[[Kategorie:CbDD]]{{#if:{{{Ort|}}}|[[Kategorie:{{{Ort}}}]]}}{{#if:{{{AutorIn1|}}}|[[Kategorie:{{{AutorIn1}}}]]}}{{#if:{{{AutorIn2|}}}|[[Kategorie:{{{AutorIn2}}}]]}}{{#if:{{{AutorIn3|}}}|[[Kategorie:{{{AutorIn3}}}]]}}{{#if:{{{AutorIn4|}}}|[[Kategorie:{{{AutorIn4}}}]]}}{{#if:{{{AutorIn5|}}}|[[Kategorie:{{{AutorIn5}}}]]}}{{#if:{{{AutorIn6|}}}|[[Kategorie:{{{AutorIn6}}}]]}}</includeonly><noinclude>
+<includeonly><div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">{{#if:{{{AutorIn1|}}}|'''{{#if:{{{AutorIn2|}}}|{{#if:{{{AutorIn3|}}}|{{#if:{{{AutorIn4|}}}|{{#if:{{{AutorIn5|}}}|{{#if:{{{AutorIn6|}}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]], [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]], [[:Kategorie:{{{AutorIn4}}}|{{{AutorIn4}}}]], [[:Kategorie:{{{AutorIn5}}}|{{{AutorIn5}}}]] und [[:Kategorie:{{{AutorIn6}}}|{{{AutorIn6}}}]]|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]], [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]], [[:Kategorie:{{{AutorIn4}}}|{{{AutorIn4}}}]] und [[:Kategorie:{{{AutorIn5}}}|{{{AutorIn5}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]], [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]] und [[:Kategorie:{{{AutorIn4}}}|{{{AutorIn4}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]], [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]] und [[:Kategorie:{{{AutorIn3}}}|{{{AutorIn3}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]] und [[:Kategorie:{{{AutorIn2}}}|{{{AutorIn2}}}]]}}|[[:Kategorie:{{{AutorIn1}}}|{{{AutorIn1}}}]]}}''': }}{{{Titel|}}}, in: Corpus der barocken Deckenmalerei in Deutschland, hg. von Stephan Hoppe, Hubert Locher und Matteo Burioni, München {{{Jahr|}}}, URL: [https://www.deckenmalerei.eu/{{{ID|}}} www.deckenmalerei.eu/{{{ID|}}}]{{#if:{{{Inventarnummer|}}}|<p style="margin:0.6em 0 0; font-size:0.95em;">Inventarnummer: {{{Inventarnummer}}}</p>}}{{#if:{{{Lat|}}}{{{Lng|}}}|<p style="margin:0.6em 0 0; font-size:0.95em;">Lage: [https://www.openstreetmap.org/?mlat={{{Lat|}}}&mlon={{{Lng|}}}#map=17/{{{Lat|}}}/{{{Lng|}}} Auf OpenStreetMap anzeigen]</p>}}<p style="margin:0.6em 0 0; font-size:0.95em;">Der Text dieses Artikels steht – ausgenommen Abbildungen – unter der Lizenz [https://creativecommons.org/licenses/by/4.0/ CC BY 4.0]. Dieser Artikel ist lediglich eine Kopie der Originalveröffentlichung auf [https://www.deckenmalerei.eu deckenmalerei.eu] und kann veraltet sein; maßgeblich ist die dortige Originalfassung.</p></div><!--
+  Kategorien: generische CbDD-Kategorie, Ort, eine Kategorie je Autor sowie
+  Bundesland und Modul aus den Gebäudedaten
+-->[[Kategorie:CbDD]]{{#if:{{{Ort|}}}|[[Kategorie:{{{Ort}}}]]}}{{#if:{{{AutorIn1|}}}|[[Kategorie:{{{AutorIn1}}}]]}}{{#if:{{{AutorIn2|}}}|[[Kategorie:{{{AutorIn2}}}]]}}{{#if:{{{AutorIn3|}}}|[[Kategorie:{{{AutorIn3}}}]]}}{{#if:{{{AutorIn4|}}}|[[Kategorie:{{{AutorIn4}}}]]}}{{#if:{{{AutorIn5|}}}|[[Kategorie:{{{AutorIn5}}}]]}}{{#if:{{{AutorIn6|}}}|[[Kategorie:{{{AutorIn6}}}]]}}{{#if:{{{Bundesland|}}}|[[Kategorie:{{{Bundesland}}}]]}}{{#if:{{{Modul|}}}|[[Kategorie:Modul {{{Modul}}}]]}}</includeonly><noinclude>
 == Verwendung ==
 
 Diese Vorlage erzeugt einen kompakten, hervorgehobenen Zitationssatz für einen
 Deckenmalerei-Artikel und ordnet die Seite automatisch den passenden Kategorien zu:
-die generische Kategorie ''CbDD'', den Ort sowie je eine Kategorie pro Autor.
+die generische Kategorie ''CbDD'', den Ort, je eine Kategorie pro Autor sowie –
+sofern aus den Gebäudedaten vorhanden – das Bundesland und das Modul.
 Die Autorennamen werden fett gesetzt; fehlen Autorenangaben, entfällt der
-einleitende Namensteil samt Doppelpunkt. Unterhalb der Zitation weist die Vorlage
-darauf hin, dass der Text (nicht die Abbildungen) unter CC BY 4.0 steht und es
-sich nur um eine Kopie der Originalveröffentlichung auf deckenmalerei.eu handelt.
+einleitende Namensteil samt Doppelpunkt. Unterhalb der Zitation gibt die Vorlage
+– sofern vorhanden – die Inventarnummer sowie einen Link auf die Lage in
+OpenStreetMap aus und weist darauf hin, dass der Text (nicht die Abbildungen)
+unter CC BY 4.0 steht und es sich nur um eine Kopie der Originalveröffentlichung
+auf deckenmalerei.eu handelt.
 
 === Parameter ===
 
@@ -22,6 +26,17 @@ sich nur um eine Kopie der Originalveröffentlichung auf deckenmalerei.eu handel
 | Ort =
 | Jahr =
 | ID =
+| Bundesland =
+| Gemeinde =
+| PLZ =
+| Strasse =
+| Lat =
+| Lng =
+| Modul =
+| Inventarnummer =
+| Funktion1 =
+| Funktion2 =
+| ...
 }}
 </pre>
 
@@ -30,6 +45,14 @@ sich nur um eine Kopie der Originalveröffentlichung auf deckenmalerei.eu handel
 * '''Ort''' – Ort (wird zur Orts-Kategorie; im Generator aus dem Titel vor dem ersten Komma abgeleitet)
 * '''Jahr''' – Erscheinungsjahr (aus dem Änderungszeitstempel abgeleitet)
 * '''ID''' – UUID des Eintrags (wird zu einem Link auf deckenmalerei.eu)
+* '''Bundesland''' – Bundesland des Gebäudes (wird zur Kategorie)
+* '''Gemeinde''' – Gemeinde/Ort des Gebäudes (addressLocality)
+* '''PLZ''' – Postleitzahl des Gebäudes
+* '''Strasse''' – Straße und Hausnummer des Gebäudes
+* '''Lat''', '''Lng''' – geografische Koordinaten; daraus wird ein OpenStreetMap-Link erzeugt
+* '''Modul''' – Modulnummer des Gebäudes (wird zur Kategorie ''Modul N'')
+* '''Inventarnummer''' – Inventarnummer des Gebäudes (wird im Zitationsblock angezeigt)
+* '''Funktion1''', '''Funktion2''' … – Funktion(en) des Gebäudes
 
 Alle Parameter sind optional.
 

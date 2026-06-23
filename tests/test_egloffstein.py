@@ -9,6 +9,13 @@ def test_artikel_modern(egloffstein):
         "| Ort = Egloffstein\n"
         "| Jahr = 2025\n"
         "| ID = a2e60a1e-606f-4841-9faf-ccc2162a0f6a\n"
+        "| Bundesland = Bayern\n"
+        "| Gemeinde = Egloffstein\n"
+        "| PLZ = 91349\n"
+        "| Strasse = Burgbergstraße 80\n"
+        "| Lat = 49.70237668235721\n"
+        "| Lng = 11.257295604069832\n"
+        "| Funktion1 = PALACE_COMPLEXES\n"
         "}}"
     )
     assert expected in egloffstein

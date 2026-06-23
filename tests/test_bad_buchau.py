@@ -9,6 +9,13 @@ def test_artikel_modern(bad_buchau):
         "| Ort = Bad Buchau\n"
         "| Jahr = 2022\n"
         "| ID = d2c88b64-a55e-4048-bb06-afe91f3f34c8\n"
+        "| Bundesland = Baden-Württemberg\n"
+        "| Gemeinde = Bad Buchau\n"
+        "| PLZ = 88422\n"
+        "| Lat = 48.0674772\n"
+        "| Lng = 9.611163\n"
+        "| Funktion1 = PRINCE_ABBACY_MONASTERIES\n"
+        "| Funktion2 = ROYAL_RESIDENCES\n"
         "}}"
     )
     assert expected in bad_buchau
