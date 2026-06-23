@@ -2,12 +2,15 @@
 HTML-to-JATS conversion.
 
 The JATS counterpart of :mod:`~deckenmalereiwiki.converter`: it turns the HTML
-fragments stored in the source data into JATS body markup (``<p>``, ``<bold>``,
-``<italic>``, ``<list>`` …) with all character data correctly XML-escaped.
+fragments stored in the source data into JATS body markup with all character
+data correctly XML-escaped.
 
-Unlike the MediaWiki converter, output is real XML, so an HTML parser is used
-to guarantee well-formed, escaped results. ``<xref>`` tags (inserted upstream
-for citations, see :mod:`~deckenmalereiwiki.jats_generator`) are passed through
+The tagging style follows the target system's JATS dialect (see the reference
+sample ``102976.xml``): ``<italic toggle="yes">``, and ``<ext-link>`` carrying
+its own inline ``xmlns:xlink`` declaration plus ``ext-link-type``/``xlink:type``
+attributes. An HTML parser is used (rather than regex) to guarantee well-formed,
+escaped output. ``<xref>`` tags (inserted upstream for footnote/figure
+references, see :mod:`~deckenmalereiwiki.jats_generator`) are passed through
 verbatim so inline references survive the conversion.
 """
 
@@ -15,12 +18,18 @@ import re
 from html.parser import HTMLParser
 from xml.sax.saxutils import escape, quoteattr
 
+XLINK_NS = "http://www.w3.org/1999/xlink"
+
 
 class _JatsBuilder(HTMLParser):
     """Streaming HTML parser that emits block-level JATS XML."""
 
-    #: HTML inline tags mapped to their JATS equivalents.
-    INLINE = {"b": "bold", "i": "italic", "em": "italic"}
+    #: HTML inline tags mapped to their (open, close) JATS markup.
+    INLINE = {
+        "b": ("<bold>", "</bold>"),
+        "i": ('<italic toggle="yes">', "</italic>"),
+        "em": ('<italic toggle="yes">', "</italic>"),
+    }
     #: Tags whose markup is dropped but whose content is kept. ``<strong>`` only
     #: ever wraps heading text in the source, where it is redundant with the
     #: heading's own bold rendering (mirrors the MediaWiki converter).
@@ -47,7 +56,7 @@ class _JatsBuilder(HTMLParser):
         if tag == "p":
             self._flush_paragraph()
         elif tag in self.INLINE:
-            self.buffer.append(f"<{self.INLINE[tag]}>")
+            self.buffer.append(self.INLINE[tag][0])
         elif tag in self.HEADERS:
             self._flush_paragraph()
             self.buffer.append("<bold>")
@@ -61,9 +70,12 @@ class _JatsBuilder(HTMLParser):
             self.buffer = []
         elif tag == "a":
             href = dict(attrs).get("href", "")
-            self.buffer.append(f"<ext-link xlink:href={quoteattr(href)}>")
+            self.buffer.append(
+                f'<ext-link xmlns:xlink="{XLINK_NS}" xlink:href={quoteattr(href)} '
+                'ext-link-type="uri" xlink:type="simple">'
+            )
         elif tag == "xref":
-            # Citation references are pre-rendered as JATS; pass through verbatim.
+            # Reference markers are pre-rendered as JATS; pass through verbatim.
             attr_str = "".join(f" {k}={quoteattr(v or '')}" for k, v in attrs)
             self.buffer.append(f"<xref{attr_str}>")
 
@@ -77,7 +89,7 @@ class _JatsBuilder(HTMLParser):
         if tag == "p":
             self._flush_paragraph()
         elif tag in self.INLINE:
-            self.buffer.append(f"</{self.INLINE[tag]}>")
+            self.buffer.append(self.INLINE[tag][1])
         elif tag in self.HEADERS:
             self.buffer.append("</bold>")
             self._flush_paragraph()
@@ -125,11 +137,11 @@ class JatsConverter:
     def convert_inline(self, html: str) -> str:
         """Convert *html* to inline JATS markup (no block ``<p>`` wrappers).
 
-        Used for contexts such as ``<mixed-citation>`` that take inline content
-        only. Paragraph breaks collapse to spaces.
+        Used for contexts such as ``<fn>``/``<mixed-citation>`` content. Block
+        breaks collapse to spaces.
         """
         blocks = self.convert(html)
-        inline = re.sub(r"</?p>", "", blocks)
+        inline = re.sub(r"</?p\b[^>]*>", "", blocks)
         inline = re.sub(r"\s*\n\s*", " ", inline)
         return inline.strip()
 
