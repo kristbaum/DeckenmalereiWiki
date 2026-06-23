@@ -1,4 +1,4 @@
-<includeonly><div class="externes-bild" style="border: 1px solid #a2a9b1; background: #f8f9fa; padding: 0.5em; max-width: 300px;">
+<includeonly><div class="externes-bild" style="border: 1px solid var(--border-color-base, #a2a9b1); background: var(--background-color-neutral-subtle, #f8f9fa); color: var(--color-base, inherit); padding: 0.5em; max-width: 300px;">
 '''Externes Bild'''{{#if:{{{beschreibung|}}}|<br />{{{beschreibung}}}}}{{#if:{{{quelle|}}}|<br />[{{{quelle}}} Bild beim Anbieter ansehen]}}
 </div>[[Kategorie:Artikel mit externem Bild]]</includeonly><noinclude>
 == Verwendung ==
