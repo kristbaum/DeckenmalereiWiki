@@ -27,13 +27,15 @@ class _JatsBuilder(HTMLParser):
     #: HTML inline tags mapped to their (open, close) JATS markup.
     INLINE = {
         "b": ("<bold>", "</bold>"),
+        "strong": ("<bold>", "</bold>"),
         "i": ('<italic toggle="yes">', "</italic>"),
         "em": ('<italic toggle="yes">', "</italic>"),
+        "u": ("<underline>", "</underline>"),
+        "ins": ("<underline>", "</underline>"),
     }
-    #: Tags whose markup is dropped but whose content is kept. ``<strong>`` only
-    #: ever wraps heading text in the source, where it is redundant with the
-    #: heading's own bold rendering (mirrors the MediaWiki converter).
-    IGNORED = {"strong"}
+    #: Bold-producing tags. Suppressed inside headings, whose own bold rendering
+    #: already covers them (mirrors the MediaWiki converter).
+    BOLD = {"b", "strong"}
     HEADERS = {"h1", "h2", "h3", "h4", "h5", "h6"}
 
     def __init__(self):
@@ -42,6 +44,7 @@ class _JatsBuilder(HTMLParser):
         self.buffer: list[str] = []  # current inline content
         self.list_type: str | None = None  # 'bullet' or 'order'
         self.items: list[str] = []  # accumulated <list> item contents
+        self.in_header = False  # suppress redundant bold inside headings
 
     # -- helpers -------------------------------------------------------
     def _flush_paragraph(self) -> None:
@@ -56,9 +59,12 @@ class _JatsBuilder(HTMLParser):
         if tag == "p":
             self._flush_paragraph()
         elif tag in self.INLINE:
+            if tag in self.BOLD and self.in_header:
+                return  # heading is already bold; skip redundant <bold>
             self.buffer.append(self.INLINE[tag][0])
         elif tag in self.HEADERS:
             self._flush_paragraph()
+            self.in_header = True
             self.buffer.append("<bold>")
         elif tag == "br":
             self.buffer.append("<break/>")
@@ -89,9 +95,12 @@ class _JatsBuilder(HTMLParser):
         if tag == "p":
             self._flush_paragraph()
         elif tag in self.INLINE:
+            if tag in self.BOLD and self.in_header:
+                return  # matching suppressed open tag inside heading
             self.buffer.append(self.INLINE[tag][1])
         elif tag in self.HEADERS:
             self.buffer.append("</bold>")
+            self.in_header = False
             self._flush_paragraph()
         elif tag == "a":
             self.buffer.append("</ext-link>")
