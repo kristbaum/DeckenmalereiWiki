@@ -5,6 +5,7 @@ from pathlib import Path
 
 from deckenmalereiwiki.loader import DataLoader
 from deckenmalereiwiki.generator import ArticleGenerator, title_to_filename
+from deckenmalereiwiki.jats_generator import JatsArticleGenerator
 from deckenmalereiwiki.importer import MediaWikiImporter
 from deckenmalereiwiki.image_handler import ImageDownloader
 
@@ -14,6 +15,18 @@ def parse_command():
     loader = DataLoader()
     loader.load_data()
     ArticleGenerator(loader).save_articles_to_files()
+    print("\nDone!")
+
+
+def parse_jats_command(output_dir: str = "output_jats"):
+    """Parse data and save articles as JATS .xml files in *output_dir*.
+
+    Same pipeline as :func:`parse_command`, but emits JATS XML instead of
+    MediaWiki wikitext and writes to ``output_jats/`` by default.
+    """
+    loader = DataLoader()
+    loader.load_data()
+    JatsArticleGenerator(loader).save_articles_to_files(output_dir=output_dir)
     print("\nDone!")
 
 
@@ -127,6 +140,8 @@ def main():
         command = sys.argv[1]
         if command == "parse":
             parse_command()
+        elif command == "parse-jats":
+            parse_jats_command()
         elif command == "import":
             import_command()
         elif command == "import-templates":
@@ -145,7 +160,7 @@ def main():
             print(f"Unknown command: {command}")
             print(
                 "Usage: python -m deckenmalereiwiki "
-                "[parse|import|import-templates|import-categories|"
+                "[parse|parse-jats|import|import-templates|import-categories|"
                 "import-images [--overwrite-descriptions]|"
                 "download-images]"
             )
