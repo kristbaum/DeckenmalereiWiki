@@ -54,9 +54,11 @@ def import_templates_command():
 def import_categories_command():
     """Create the category pages needed by the {{Artikel-modern}} template.
 
-    Creates the static ``CbDD`` category plus one category per author and one
-    per location (the title part before the first comma) across all articles.
-    Existing category pages are left untouched.
+    Creates the static ``CbDD`` category plus one category per author, per
+    location (the title part before the first comma), per federal state
+    (``Bundesland``) and per module (``Modul N``) across all articles, mirroring
+    the categories the template files each article under. Existing category
+    pages are left untouched.
     """
     loader = DataLoader()
     loader.load_data()
