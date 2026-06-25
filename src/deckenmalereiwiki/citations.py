@@ -6,12 +6,35 @@ import re
 from typing import Dict, Optional
 
 
+# Some texts wrap the [x] markers in footnote anchors instead of writing the
+# bracket directly. Definitions point at "#_ftnref<n>" and inline references at
+# "#_ftn<n>", e.g.
+#   <a href="http://.../edit/<id>#_ftnref1">[1]</a>Citation text
+#   <a href="http://.../edit/<id>#_ftn1">[1]</a>
+# Normalising these anchors back to a bare "[n]" lets the same parsing logic
+# handle both styles.
+_FOOTNOTE_ANCHOR_PATTERN = re.compile(
+    r'<a\b[^>]*?href="[^"]*#_ftn(?:ref)?\d+"[^>]*>\s*\[\s*(\d+)\s*\]\s*</a>',
+    flags=re.IGNORECASE,
+)
+
+
+def _normalize_footnote_anchors(text: str) -> str:
+    """Replace footnote anchor markers with bare "[n]" brackets."""
+    return _FOOTNOTE_ANCHOR_PATTERN.sub(r"[\1]", text)
+
+
 def parse_citations(text: str, part_id: str) -> tuple[str, Dict[str, str]]:
     """Parse citations from text and return cleaned text with citation map.
 
     Citations are marked as [x] in text with definitions at the end like:
     <p>[1] Citation text</p>
     <p>[2] Another citation</p>
+
+    The [x] markers may also appear wrapped in footnote anchors such as
+    ``<a href="...#_ftnref1">[1]</a>Citation text`` (definitions) and
+    ``<a href="...#_ftn1">[1]</a>`` (inline references); these are normalized to
+    bare brackets before parsing.
 
     Whitespace inside the brackets (e.g. "[ 1 ]") is tolerated, both for the
     inline markers and the definitions at the end. A definition may also span
@@ -25,6 +48,8 @@ def parse_citations(text: str, part_id: str) -> tuple[str, Dict[str, str]]:
     """
     if not text:
         return text, {}
+
+    text = _normalize_footnote_anchors(text)
 
     # A definition is a paragraph that *starts* with a [x] marker. Inline
     # references sit inside body paragraphs, so they never match here.
