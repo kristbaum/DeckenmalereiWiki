@@ -56,7 +56,7 @@ class ArticleGenerator:
     def _externes_bild(self, resource: Dict) -> str:
         """Render an ``{{ExternesBild}}`` call for a source-link-only resource.
 
-        These providers (see :data:`~deckenmalereiwiki.image_handler.\
+        These providers (see :data:`~deckenmalereiwiki.image_providers.\
 EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
         a link to the original instead of an embedded ``File:``.
         """

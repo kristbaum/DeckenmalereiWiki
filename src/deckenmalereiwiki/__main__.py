@@ -7,7 +7,7 @@ from deckenmalereiwiki.loader import DataLoader
 from deckenmalereiwiki.generator import ArticleGenerator, title_to_filename
 from deckenmalereiwiki.jats_generator import JatsArticleGenerator
 from deckenmalereiwiki.importer import MediaWikiImporter
-from deckenmalereiwiki.image_handler import ImageDownloader
+from deckenmalereiwiki.image_downloader import ImageDownloader
 
 
 def parse_command():

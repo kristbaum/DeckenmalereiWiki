@@ -5,21 +5,18 @@ Image download and upload handling for DeckenmalereiWiki.
 import json
 import time
 from pathlib import Path
-from typing import Dict, List, Optional
-from urllib.parse import urlparse
+from typing import Optional
 
 import pywikibot
 import requests
+
+from .image_providers import EXTERNAL_PROVIDERS, SourceResolver
 
 # Upload files larger than this in chunks, so big images aren't rejected by
 # server POST size limits. 0 would disable chunking.
 UPLOAD_CHUNK_SIZE = 4 * 1024 * 1024
 
-# Providers we can only link to, not download from: session-based viewers (the
-# Virtuelles Kupferstichkabinett of HAUM / HAB) with no derivable direct-image
-# URL. Their images are referenced via the {{ExternesBild}} template instead of
-# being uploaded as ``File:`` pages.
-EXTERNAL_PROVIDERS = ("haum-bs.de", "diglib.hab.de")
+__all__ = ["EXTERNAL_PROVIDERS", "UPLOAD_CHUNK_SIZE", "ImageHandler"]
 
 
 class ImageHandler:
@@ -41,10 +38,7 @@ class ImageHandler:
         """
         self.site = site
         self.downloads_dir = downloads_dir
-        self.offline = offline
-        # Cache of EasyDB resolutions:
-        #   resource_id -> (download_url, source_url, extension).
-        self._easydb_cache: dict[str, tuple[Optional[str], Optional[str], str]] = {}
+        self.resolver = SourceResolver(offline=offline)
         # Normalised set of file names that exist on the wiki, fetched once via
         # ``load_existing_filenames``. ``None`` means "not loaded": uploads then
         # fall back to a per-file check.
@@ -53,6 +47,14 @@ class ImageHandler:
     @staticmethod
     def _is_cc_license(license: str) -> bool:
         return license.strip().upper().startswith("CC")
+
+    def is_external(self, url: str) -> bool:
+        """Whether *url*'s provider is referenced by link, not uploaded."""
+        return self.resolver.is_external(url)
+
+    def source_url(self, url: str, resource_id: str) -> Optional[str]:
+        """Return the URL of the original image's source page, or ``None``."""
+        return self.resolver.source_url(url, resource_id)
 
     def _existing_download(self, entity_id: str) -> Optional[Path]:
         """Return the already-downloaded image for *entity_id*, if any.
@@ -69,95 +71,6 @@ class ImageHandler:
             ),
             None,
         )
-
-    def _easydb_source(
-        self, resource_id: str
-    ) -> tuple[Optional[str], Optional[str], str]:
-        """Resolve a BADW EasyDB resource to ``(download_url, source_url, ext)``.
-
-        The result is cached per ``resource_id`` so generation and download
-        share a single API call. ``download_url`` is ``None`` when no
-        downloadable version exists (``extension`` then defaults to ``.jpg``).
-        For EasyDB the source link is the same as the download URL.
-        """
-        if resource_id in self._easydb_cache:
-            return self._easydb_cache[resource_id]
-
-        print(f"  Querying EasyDB API for resource {resource_id}...")
-        api_url = (
-            f"https://deckenmalerei-bilder.badw.de/api/v1/objects/uuid/{resource_id}"
-        )
-        api_response = requests.get(api_url, timeout=30)
-        api_response.raise_for_status()
-        api_data = api_response.json()
-        versions = api_data.get("assets", {}).get("datei", [{}])[0].get("versions", {})
-
-        image_url: Optional[str] = None
-        for quality in ("full", "huge", "preview"):
-            v = versions.get(quality, {})
-            if v.get("_download_allowed"):
-                image_url = v["download_url"]
-                break
-
-        ext = (Path(urlparse(image_url).path).suffix or ".jpg") if image_url else ".jpg"
-        result = (image_url, image_url, ext)
-        self._easydb_cache[resource_id] = result
-        time.sleep(0.5)
-        return result
-
-    @staticmethod
-    def is_external(url: str) -> bool:
-        """Whether *url*'s provider is referenced by link, not uploaded.
-
-        ``True`` for the source-link-only providers (see
-        :data:`EXTERNAL_PROVIDERS`): their images carry a ``source_url`` but no
-        downloadable binary, so the generator emits ``{{ExternesBild}}`` rather
-        than a ``File:`` reference.
-        """
-        return any(provider in url for provider in EXTERNAL_PROVIDERS)
-
-    def _resolve_source(
-        self, url: str, resource_id: str
-    ) -> tuple[Optional[str], Optional[str], str]:
-        """Return ``(download_url, source_url, extension)`` for a resource.
-
-        ``download_url`` is the URL the binary is fetched from, or ``None`` when
-        the resource has no downloadable version. ``source_url`` is the link
-        recorded in ``{{BildMeta}}`` back to the original; for most providers it
-        equals ``download_url``, but for session-based viewers it is the
-        resource's canonical landing page even though no binary can be fetched.
-        """
-        if "bildindex.de" in url:
-            image_url = f"https://previous.bildindex.de/bilder/{resource_id}a.jpg"
-            return image_url, image_url, ".jpg"
-        if "deckenmalerei-bilder.badw.de" in url:
-            if self.offline:
-                # parse must not touch the network; the sidecar/existing file is
-                # authoritative and the API extension is irrelevant here.
-                return None, None, ".jpg"
-            return self._easydb_source(resource_id)
-        if self.is_external(url):
-            # Virtuelles Kupferstichkabinett (HAUM / HAB): a session-based viewer
-            # with no derivable direct-image URL, so the binary is not
-            # downloaded. The resource ID is itself the canonical landing page,
-            # recorded as the source link.
-            return None, resource_id, ".jpg"
-        print(f"  Unknown image provider: {url}")
-        ext = Path(urlparse(url).path).suffix or ".jpg"
-        return url, url, ext
-
-    def resolve_extension(self, url: str, resource_id: str) -> str:
-        """Best-effort file extension for a resource (e.g. ``".jpg"``).
-
-        Prefers an already-downloaded file, then provider rules. Never raises:
-        on a network failure it falls back to ``".jpg"`` so offline generation
-        still succeeds.
-        """
-        try:
-            return self._resolve_source(url, resource_id)[2]
-        except Exception as e:
-            print(f"  Could not resolve extension for {resource_id}: {e}; using .jpg")
-            return ".jpg"
 
     def read_sidecar(self, entity_id: str) -> Optional[dict]:
         """Return this entity's ``{entity_id}.json`` metadata sidecar, or ``None``.
@@ -201,19 +114,7 @@ class ImageHandler:
         sidecar_file = self._sidecar_image_file(entity_id)
         if sidecar_file:
             return sidecar_file
-        return f"{entity_id}{self.resolve_extension(url, resource_id)}"
-
-    def source_url(self, url: str, resource_id: str) -> Optional[str]:
-        """Return the URL of the original image's source page, or ``None``.
-
-        This is recorded in ``{{BildMeta}}`` as a link back to the original (the
-        bildindex image, the BADW EasyDB download URL, or a viewer's landing
-        page). Never raises.
-        """
-        try:
-            return self._resolve_source(url, resource_id)[1]
-        except Exception:
-            return None
+        return f"{entity_id}{self.resolver.resolve_extension(url, resource_id)}"
 
     def download_image(
         self, url: str, entity_id: str, resource_id: str
@@ -239,7 +140,7 @@ class ImageHandler:
                 print(f"  Image already downloaded: {existing.name}")
                 return existing
 
-            image_url, _, ext = self._resolve_source(url, resource_id)
+            image_url, _, ext = self.resolver.resolve_source(url, resource_id)
             if image_url is None:
                 print(f"  No downloadable version found for {resource_id}")
                 return None
@@ -443,84 +344,3 @@ class ImageHandler:
         """Add *filename* to the cached wiki file set, if it is loaded."""
         if self._existing_filenames is not None:
             self._existing_filenames.add(self._normalize_filename(filename))
-
-
-class ImageDownloader:
-    """Download images locally without uploading, for debugging image handling.
-
-    For every image associated with a TEXT entity it downloads the file into
-    ``downloads/`` (reusing :class:`ImageHandler`) and writes a JSON metadata
-    sidecar ``{entity_id}.json`` next to it. The sidecar records exactly what
-    *would* be uploaded to MediaWiki — provider, license, description and the
-    rights/originator actors — so the result can be inspected without a wiki.
-    """
-
-    def __init__(self, loader, downloads_dir: Path):
-        """Initialise the downloader.
-
-        Args:
-            loader:        A loaded :class:`~deckenmalereiwiki.loader.DataLoader`.
-            downloads_dir: Directory where images and sidecars are written.
-        """
-        self.loader = loader
-        self.downloads_dir = downloads_dir
-        # site is unused for downloading, so no MediaWiki connection is needed.
-        self.handler = ImageHandler(site=None, downloads_dir=downloads_dir)
-
-    def download_entity_images(self, entity: Dict) -> List[Dict]:
-        """Download every image for *entity* and write metadata sidecars.
-
-        Returns the list of metadata dicts that were written.
-        """
-        written: List[Dict] = []
-        for name_entity_id, resource in self.loader.get_entity_image_resources(
-            entity["ID"]
-        ):
-            provider = resource.get("resProvider", "")
-            # Source-link-only providers have no downloadable binary and the
-            # generator references them via {{ExternesBild}} instead of a
-            # File: page, so there is nothing to download or cache here. Their
-            # resource ID is also a full URL, which is not a valid sidecar name.
-            if self.handler.is_external(provider):
-                print(f"  Skipping external provider: {provider}")
-                continue
-            filepath = self.handler.download_image(
-                provider,
-                name_entity_id,
-                resource["ID"],
-            )
-            metadata = self._build_metadata(name_entity_id, resource, filepath)
-            self._write_metadata(name_entity_id, metadata)
-            written.append(metadata)
-        return written
-
-    def _build_metadata(
-        self, name_entity_id: str, resource: Dict, filepath: Optional[Path]
-    ) -> Dict:
-        """Assemble the metadata sidecar contents for one image."""
-        resource_id = resource["ID"]
-        license_info = resource.get("resLicense", "")
-        return {
-            "entity_id": name_entity_id,
-            "resource_id": resource_id,
-            "provider": resource.get("resProvider", ""),
-            "license": license_info,
-            "is_cc": ImageHandler._is_cc_license(license_info),
-            "description": resource.get("appellation", ""),
-            "rights_holders": self.loader.get_resource_actors(
-                resource_id, "RIGHTS_HOLDERS"
-            ),
-            "originators": self.loader.get_resource_actors(resource_id, "ORIGINATORS"),
-            "source_url": self.handler.source_url(
-                resource.get("resProvider", ""), resource_id
-            ),
-            "downloaded": filepath is not None,
-            "image_file": filepath.name if filepath else None,
-        }
-
-    def _write_metadata(self, name_entity_id: str, metadata: Dict) -> Path:
-        """Write *metadata* to ``{name_entity_id}.json`` in the downloads dir."""
-        path = self.downloads_dir / f"{name_entity_id}.json"
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(metadata, f, ensure_ascii=False, indent=2)
-        return path
