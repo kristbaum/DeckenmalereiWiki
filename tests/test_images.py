@@ -8,6 +8,10 @@ That command writes, for every image referenced by an article in ``output/``,
 the image file plus a ``{entity_id}.json`` metadata sidecar into ``downloads/``.
 When ``downloads/`` has not been populated yet the tests skip, mirroring the
 behaviour of the article tests when ``output/`` is empty.
+
+Scope: like the other tests, these only cover the images linked in the two
+reference articles (Bad Buchau and Egloffstein), not every article in
+``output/``.
 """
 
 import json
@@ -15,7 +19,17 @@ from pathlib import Path
 
 import pytest
 
-from conftest import OUTPUT_DIR, DOWNLOADS_DIR, image_filenames, image_stems
+from conftest import (
+    BAD_BUCHAU,
+    EGLOFFSTEIN,
+    DOWNLOADS_DIR,
+    image_filenames,
+    image_stems,
+)
+
+# These tests are scoped to the images referenced by the two reference articles
+# (Bad Buchau and Egloffstein) rather than every article in ``output/``.
+ARTICLES = [BAD_BUCHAU, EGLOFFSTEIN]
 
 REQUIRED_KEYS = {
     "entity_id",
@@ -32,10 +46,21 @@ REQUIRED_KEYS = {
 }
 
 
+def _referenced_stems() -> set[str]:
+    """Entity-id stems of every image linked in the reference articles."""
+    stems: set[str] = set()
+    for article in ARTICLES:
+        if article.exists():
+            stems |= image_stems(article.read_text(encoding="utf-8"))
+    return stems
+
+
 def _sidecars() -> list[Path]:
+    """Metadata sidecars for images linked in the reference articles."""
     if not DOWNLOADS_DIR.is_dir():
         return []
-    return sorted(DOWNLOADS_DIR.glob("*.json"))
+    referenced = _referenced_stems()
+    return sorted(p for p in DOWNLOADS_DIR.glob("*.json") if p.stem in referenced)
 
 
 def _require_downloads():
@@ -53,8 +78,10 @@ def _load(path: Path) -> dict:
 # --- Every image referenced by an article must have a metadata sidecar -------
 
 
-@pytest.fixture(params=sorted(OUTPUT_DIR.glob("*.wiki")), ids=lambda p: p.stem)
+@pytest.fixture(params=ARTICLES, ids=lambda p: p.stem)
 def article_path(request) -> Path:
+    if not request.param.exists():
+        pytest.skip(f"Output file not found: {request.param}")
     return request.param
 
 
@@ -146,8 +173,9 @@ def test_downloaded_image_referenced_by_real_filename(metadata: tuple[str, dict]
         return
 
     referenced: set[str] = set()
-    for wiki in OUTPUT_DIR.glob("*.wiki"):
-        referenced |= image_filenames(wiki.read_text(encoding="utf-8"))
+    for wiki in ARTICLES:
+        if wiki.exists():
+            referenced |= image_filenames(wiki.read_text(encoding="utf-8"))
 
     same_stem = sorted(r for r in referenced if Path(r).stem == stem)
     assert meta["image_file"] in referenced, (

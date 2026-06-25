@@ -159,6 +159,23 @@ class ImageHandler:
             print(f"  Could not resolve extension for {resource_id}: {e}; using .jpg")
             return ".jpg"
 
+    def read_sidecar(self, entity_id: str) -> Optional[dict]:
+        """Return this entity's ``{entity_id}.json`` metadata sidecar, or ``None``.
+
+        The ``download-images`` step writes one sidecar next to every image,
+        recording everything needed to upload it (license, description,
+        rights/originator actors, source link and the saved filename). Returns
+        ``None`` when there is no sidecar or it cannot be parsed.
+        """
+        path = self.downloads_dir / f"{entity_id}.json"
+        if not path.is_file():
+            return None
+        try:
+            with open(path, encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            return None
+
     def _sidecar_image_file(self, entity_id: str) -> Optional[str]:
         """Return the ``image_file`` recorded in this entity's metadata sidecar.
 
@@ -167,14 +184,8 @@ class ImageHandler:
         instead of querying any provider API. Returns ``None`` when there is no
         sidecar or it records no downloaded file.
         """
-        path = self.downloads_dir / f"{entity_id}.json"
-        if not path.is_file():
-            return None
-        try:
-            with open(path, encoding="utf-8") as f:
-                return json.load(f).get("image_file")
-        except (json.JSONDecodeError, OSError):
-            return None
+        sidecar = self.read_sidecar(entity_id)
+        return sidecar.get("image_file") if sidecar else None
 
     def image_filename(self, entity_id: str, url: str, resource_id: str) -> str:
         """Return the MediaWiki filename (``{entity_id}{ext}``) for a resource.
