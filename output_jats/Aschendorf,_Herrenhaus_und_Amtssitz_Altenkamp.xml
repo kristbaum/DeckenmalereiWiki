@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.3 20210610//EN" "https://jats.nlm.nih.gov/publishing/1.3/JATS-journalpublishing1-3-mathml3.dtd">
-<article xml:lang="de">
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.4 20241031//EN" "https://jats.nlm.nih.gov/publishing/1.4/JATS-journalpublishing1-4-mathml3.dtd">
+<article xml:lang="de" xmlns:xlink="http://www.w3.org/1999/xlink">
    <front>
+      <journal-meta>
+         <journal-id journal-id-type="publisher-id">CbDD</journal-id>
+         <journal-title-group>
+            <journal-title>Corpus der barocken Deckenmalerei in Deutschland</journal-title>
+         </journal-title-group>
+         <issn pub-type="epub">####-####</issn>
+         <publisher>
+            <publisher-name>arthistoricum.net - eJournals</publisher-name>
+            <publisher-loc>Heidelberg</publisher-loc>
+         </publisher>
+         <self-uri xlink:href="https://####" xml:lang="de">Homepage des Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>
+         <self-uri xlink:href="https://####" xml:lang="en">Homepage of the Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>
+      </journal-meta>
       <article-meta>
-         <article-id pub-id-type="other">0c728050-c5af-11e9-893a-a37e5cdc9651</article-id>
+         <article-id pub-id-type="doi">https://doi.org/###</article-id>
          <title-group>
             <article-title>Aschendorf, Herrenhaus und Amtssitz Altenkamp</article-title>
          </title-group>
@@ -18,10 +31,23 @@
          <pub-date>
             <year>2025</year>
          </pub-date>
+         <permissions>
+            <copyright-statement>Text © 2025 by the author(s).</copyright-statement>
+            <copyright-year>2025</copyright-year>
+            <license license-type="open-access" xlink:href="https://creativecommons.org/licenses/by-sa/4.0/" xml:lang="de">
+               <license-p><inline-graphic xlink:href="by-sa.svg"/>Diese Publikation ist unter der Creative Commons Lizenz 4.0 (CC BY-SA 4.0) veröffentlicht. Der Umschlagentwurf unterliegt der Creative-Commons-Lizenz CC BY-ND 4.0.</license-p>
+            </license>
+            <license license-type="open-access" xlink:href="https://creativecommons.org/licenses/by-sa/4.0/" xml:lang="en">
+               <license-p><inline-graphic xlink:href="by-sa.svg"/>This journal article is published under the Creative Commons License 4.0 (CC BY-SA 4.0). The cover is subject to the Creative Commons License CC BY-ND 4.0.</license-p>
+            </license>
+         </permissions>
          <abstract id="d1">
             <title><bold>Zusammenfassung</bold></title>
             <p id="d2">Im Vestibül hat sich Wandmalerei erhalten. Unter einer Zweitfassung von 1776-1778 mit Personendarstellungen von Casimirus Fischer scheint durch Fehlstellen und Freilegungsproben die Erstfassung von 1728/36 mit Landschaftsdarstellungen und Architekturveduten durch.</p>
          </abstract>
+         <kwd-group>
+            <kwd vocab="deckenmalerei.eu" vocab-identifier="https://deckenmalerei.eu" vocab-term-identifier="https://www.deckenmalerei.eu/0c728050-c5af-11e9-893a-a37e5cdc9651"/>
+         </kwd-group>
       </article-meta>
    </front>
    <body>
@@ -31,16 +57,11 @@
       </fig>
       <sec id="d3">
          <sec-meta>
-            <custom-meta-group>
-               <custom-meta>
-                  <meta-name>entity_id</meta-name>
-                  <meta-value>46d47900-c5ab-11e9-b229-6b499a37f581</meta-value>
-               </custom-meta>
-               <custom-meta>
-                  <meta-name>wikidata_qid</meta-name>
-                  <meta-value>Q668492</meta-value>
-               </custom-meta>
-            </custom-meta-group>
+            <kwd-group>
+               <kwd vocab="deckenmalerei.eu" vocab-identifier="https://deckenmalerei.eu" vocab-term-identifier="https://www.deckenmalerei.eu/46d47900-c5ab-11e9-b229-6b499a37f581"/>
+               <kwd vocab="Wikidata" vocab-identifier="http://www.wikidata.org" vocab-term-identifier="http://www.wikidata.org/entity/Q668492"/>
+               <kwd vocab="GND" vocab-identifier="https://d-nb.info/standards/elementset/gnd#" vocab-term-identifier="https://d-nb.info/gnd/4631513-5"/>
+            </kwd-group>
          </sec-meta>
          <title>Bauwerk</title>
          <fig id="fig_2" position="float">
@@ -69,86 +90,81 @@
       </sec>
       <sec id="d11">
          <title>Malerei</title>
-      </sec>
-      <sec id="d12">
-         <sec-meta>
-            <custom-meta-group>
-               <custom-meta>
-                  <meta-name>entity_id</meta-name>
-                  <meta-value>22ffb160-c5ac-11e9-893a-a37e5cdc9651</meta-value>
-               </custom-meta>
-               <custom-meta>
-                  <meta-name>wikidata_qid</meta-name>
-                  <meta-value>Q137903077</meta-value>
-               </custom-meta>
-            </custom-meta-group>
-         </sec-meta>
-         <title>Die Wandmalerei im Vestibül</title>
-         <fig id="fig_6" position="float">
-            <label>[Abb. 6]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="73b08e10-c5af-11e9-893a-a37e5cdc9651.jpg"/>
-         </fig>
-         <fig id="fig_7" position="float">
-            <label>[Abb. 7]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000830.jpg"/>
-         </fig>
-         <fig id="fig_8" position="float">
-            <label>[Abb. 8]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000831.jpg"/>
-         </fig>
-         <fig id="fig_9" position="float">
-            <label>[Abb. 9]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000844.jpg"/>
-         </fig>
-         <fig id="fig_10" position="float">
-            <label>[Abb. 10]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000845.jpg"/>
-         </fig>
-         <fig id="fig_11" position="float">
-            <label>[Abb. 11]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000835.jpg"/>
-         </fig>
-         <fig id="fig_12" position="float">
-            <label>[Abb. 12]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000847.jpg"/>
-         </fig>
-         <p id="d13">Das Vestibül<xref ref-type="fn" rid="fn4">4</xref> misst 9,10 auf 5,55 Meter und ist 4,3 Meter hoch. Zwei Fenster an der Westseite geben dem Raum Licht. Alle Wände sind mit Malereien versehen. Es handelt sich um zwei Fassungen übereinander. Die erste Fassung ist zur Erbauungszeit 1728/36 direkt secco auf die Wand gemalt wurden. Als das 1769/75 Vestibül umgestaltet wurde, überfasste man die Malereien, wobei Elemente der Erstfassung integriert wurden. Die alte schlichte Balkendecke wurde durch eine Stuckdecke ersetzt. Lediglich an der Westwand, der durchfensterten Außenwand, wurden die neuen Malereien auf Leinwandbespannung geschaffen. Die Erstfassung war auch hier auf die Wand aufgetragen worden und hatte stark unter Feuchtigkeit gelitten. Sie ist nur fragmentarisch erhalten. Im 19. Jahrhundert erfolgten Retuschen und Übermalungen der Malereien.</p>
-         <p id="d14">Der Raum hat vier zweiflügelige Türen: Zentral gelegen sind die Eingangstür an der Westseite sowie ihr gegenüber die Tür zum Hauptsaal an der Ostseite. Die Türen an der Nord- und Südwand sind jeweils an die Ostecke gerückt. Den Fenstern an der Westwand entsprechen flache Nischen in der Ostwand. Es ist denkbar, dass ursprünglich ein Blick durch das ganze Haus von West nach Ost möglich sein sollte oder doch zumindest die Malerei ursprünglich Öffnungen suggerieren sollte. Nachweise oder Befunde gibt es für diese Theorie nicht. Heute beginnt die Wandmalerei über einer dunklen lambrieartigen 91 Zentimeter hohen Sockelzone. Diese Zone ist ursprünglich, ihre Fassung entspricht aber dem 19. Jahrhundert und nicht einer der beiden Fassungen des 18. Jahrhunderts.</p>
-         <p id="d15"><bold>Die Erstfassung</bold></p>
-         <p id="d16">Die erste Wandmalerei ist wohl zusammen mit dem Gebäude entstanden und war spätestens 1736 vollendet.<xref ref-type="fn" rid="fn5">5</xref> Fehlstellen in der Zweitfassung und Freilegungsproben erlauben eine ansatzweise Bestimmung des Bildthemas. An den Langseiten gab es Landschaftsdarstellungen. Für die Ostseite lassen sich große Bäume nachweisen, die teilweise in die Zweitfassung integriert wurden. Hinzu kommen landschaftlich-gärtnerische Motive, Menschen und Tiere sowie Kleinarchitekturen wie etwa Brunnen. An den Schmalseiten erblickte man römisch-hochbarocke Kuppelarchitekturen und Gänge mit ausgedehnten Treppenanlagen. Die Kuppeln waren jeweils in der Mitte zwischen Tür und Westwand platziert. Im Vordergrund am unteren Bildrand lassen sich Figuren und Personengruppen in zeitgenössischer Tracht nachweisen. Die Darstellungen waren „von auffallend graphischem Gepräge“. Derartige große Panoramen können als zeittypisch gelten. Und derartige Landschaftsdarstellungen waren sowohl in Niedersachsen als in den Niederlanden weit verbreitet. Zur Decke hin wurden die Darstellungen von Festons in Grisaillemalerei abgeschlossen. Der Sockelbereich hatte eine Fassung mit bunter Blumenmalerei.</p>
-         <p id="d17"><bold>Die Zweitfassung</bold></p>
-         <p id="d18">Die Zweitfassung<xref ref-type="fn" rid="fn6">6</xref> ist gemäß der Quellen 1776-1778 entstanden und von dem Maler Casimirus Fischer aus Münster ausgeführt worden. Im Gegensatz zur Erstfassung wird nicht jede Wand von einem Gemälde eingenommen, sondern die Wandflächen sind mittels gemalter Profilleisten — oben und unten mit Rocaillen und Muschelwerk — in einzelne Felder unterteilt. Oben haben die Rahmungen einen segmentbogenförmigen Abschluss. Die Gestaltung erinnert an eine vertäfelte Wand, in die Gemälde eingelassen sind. Es gibt sieben Felder an der Ostwand, je drei an der Nord- und Südwand sowie wiederum sieben an der Westwand, wobei zwei Felder fast komplett von den beiden Fenstern eingenommen werden. Die meisten Kompartimente präsentieren Menschen in annähernd halblebensgroßer Darstellung. Es handelt sich überwiegend um Figurengruppen vor einer angedeuteten Landschaft. Der Sockel war nun mit Rocaillerahmen bemalt.</p>
-         <p id="d19">Die äußeren beiden schmalen Felder der Ostwand präsentieren jeweils einen Baum vor einer Landschaft. Die Baumkronen im oberen Drittel sind hier wie bei den anderen Bildern teilweise von der Erstfassung übernommen. Die beiden Wandfelder links der Tür zum Hauptsaal zeigen Jäger. Auf dem linken der beiden stehen zwei Jäger vor einem Baum und blasen jeder in ihr Jagdhorn. Sie tragen auffallend blaue und rote Gewänder. Auf dem rechten steht ein Jäger mit geschultertem Gewehr und zwei Hunden vor einem Baum. Er blickt nach rechts zur Tür und hat den Zeigefinger der linken Hand erhoben. Vordergründig geht es ihm um die Aufmerksamkeit seiner Hunde, er verweist aber auch auf den folgenden Raum hinter der Tür. Sein Pendant rechts blickt ebenfalls nach der Tür. Auch dieser Jäger steht vor einem Baum. Er hält ein Gewehr in seiner Rechten und hat eine Jagdtasche geschultert. Seine Hose ist von kräftigem Rot. Zu seinen Füßen liegt ein toter Hase. Auch er wird von zwei Jagdhunden begleitet. Beide Jäger geleiten den Besucher quasi in den anschließenden Hauptsaal. Das zweite Bild rechts der Tür zeigt hat keinen jagdlichen Bezug. Es zeigt einen Cavalier und eine Dame mit Laute vor einem Baum. Der Herr hat seine Hand auf die nackte Schulter der Frau gelegt. Die Dame trägt einen stark blauen Rock. Es könnte sich um eine Allegorie der Musik handeln. Die Supraporte über der Tür zum Hauptsaal hat keinen jagdlichen Bezug. Sie bildet zusammen mit den anderen drei Supraporten des Raumes eines Jahreszeitenzyklus. Es handelt es sich um eine Allegorie des Sommers. Zwei Damen und ein Herr haben sich vor einer Architektur mit Säulen niedergelassen. Auf dem Sockel ruht ein Löwe, was als Verweis auf das Tierkreiszeichen des Löwen verstanden werden kann. Eine der Damen hält eine Sichel in ihrer Hand, der Herr hat seine Sensen abgelegt und durch ein Weinglas ersetzt. Zu Füßen der Gruppe liegen Korngarben. Auf einem Gefäß am unteren Bildrand kann einen Krebs erkenne, der wohl wie der Löwe als Verweis auf das Tierkreiszeichen zu deuten ist.</p>
-         <p id="d20">An der Nordwand zeigt die Supraporte eine Allegorie des Herbstes. Ein Paar in auffallend roter und blauer Kleidung sitzt vor einer Gartenmauer, auf der Ziervasen stehen. Der Herr fasst der Dame mit seiner Linken ans Kinn; in seiner rechten hält er eine Weinrebe. Die Frau hat in ihrem Schoß einige Äpfel, einen hat sie in die Hand genommen. Mit der anderen nestelt sie an ihrem Partner. Verweise auf Tierkreiszeichen gibt es keine. Das mittlere Wandfeld der Nordwand zeigt eine Dame und einen Herren im Jagdkostüm, ebenfalls in blau und rot. Das Paar hat sich auf einem Baumstamm niedergelassen. Ein Horn ist an den linken Bildrahmen gelehnt. Über den heiteren Himmel fliegt ein Vogel. Auf ihren behandschuhten Händen halten die beiden Falken. Zwei Hunde vervollständigen die Gruppe, die wieder einen Verweis auf die Jagd darstellt — hier auf die Falkenjagd. Das linke Bild zeigt ein weiteres Paar vor einer Mauer, auf der eine Sphinx ruht. Offenbar habe sich zwei Adlige als Gärtner verkleidet: Beide tragen Schürzen mit Früchten, die Dame hält einen Spaten in der Hand und trägt ein Kleid in kräftigem blau. Rechts im Bild steht ein Zitrusbaum in einem Kübel; am Himmel fliegt auch hier ein Vogel. Eventuell soll es sich um eine Allegorie der Gärtnerei handeln. Blütenkränze, eine Egge am Boden und Frühlingsstäbe verweisen auf die Jahreszeit. Auch diese Paar trägt Kleidung in kräftigem rot und blau. Verweise auf Tierkreiszeichen gibt es keine. Die beiden weiteren Bilder sind beschädigt und die erste Wandfassung scheint stark durch. Es ist aber zu erkennen, dass das linke Paar um einen Kanone mit Kanonenkugeln gruppiert ist. Der Mann trägt ein rote, die Frau ein blaues Oberteil. Es könnte sich um eine Allegorie der Kriegskunst handeln. Das äußere Bild zeigt ebenfalls ein Paar mit roten und blauen Kleidungsstücken. Es hat eine Tanzhaltung eingenommen, ist aber aufgrund des schlechten Erhaltungszustandes nicht wirklich zu bestimmen.</p>
-         <p id="d21">Die Westwand wird von der Eingangstür und den beiden Fenstern dominiert. Im Gegensatz zu drei anderen Wänden ist die Malerei hier auf Leinwand gemalt und es scheint keine Erstfassung durch. Die beiden sehr schmalen äußeren Wandfelder zeigen Landschaften. Über den Fenstern ist in einem schmalen Streifen das Blau des Himmels zu sehen. Die zentrale Supraporte zeigt eine Allegorie des Winters. Im Gegensatz zu allen andere Darstellung blickt man in einen Innenraum. Hier hat ein Paar in bequemen Stühlen vor einem Kaminfeuer an einem Tisch Platz genommen. Es trinkt Heißgetränke, der Herr raucht eine Pfeife. Er trägt rote Schuhe und einen roten pelzverbrämte Mantel und eine ebensolche Mütze, die Dame ein blaues Kleid. Das Bild links der Tür zeigt ein Paar in roter und blauer Kleidung vor einem Hügel auf dem sich ein Schloss erhebt. Die Körperlichkeit ist sehr unbeholfen dargestellt. Rechts des Fensters hat sich ein Jäger in blauer und roter Kleidung niedergelassen. Sein Gewehr stützt der mit der linken Hand auf den Boden auf. Hier ist wieder ein Bezug zur Jagd herzustellen. Auch seine Anatomie ist ausgesprochen unbeholfen.</p>
-         <p id="d22">Mehrere Themenfelder werden in der Wandmalerei vorgestellt. Neben dem Jahreszeitenzyklus ist vor allem der Verweis auf die Jagd auffallend. Sie ist an der Hauptschauseite gleich mit drei Szenen vertreten sowie an der Nord- und Westwand mit je einer. An der Südwand scheint sie zu fehlen, doch ist dafür der Krieg selbst präsent, der in der Frühen Neuzeit auf der Engste mit der Jagd verknüpft war. Die Jagd war ein landesherrliches Regal und den Untertanen verboten. Ihre Darstellung im Vestibül weist darauf hin, dass zu Altenkamp Jagdrechte gehörten. Die Liebespaare und Schäferszenen können als Verweis auf die Nutzung des Hauses durch die neuen Besitzer vornehmlich im Sommer verstanden werden. Allegorien auf Tanz, Musik und Gärtnerei gehören in dieses Spektrum. Es geht um sommerliche Tätigkeiten des Adels auf dem Lande.</p>
-         <p id="d23">Die Gestaltung der Figuren ist teilweise etwas unausgewogen. In seltenen Fällen werden sie von den Rahmen überschnitten. Die Darstellungen an der Westwand fallen bis auf die der Supraporte bezüglich der Beherrschung der Anatomie ab. Es steht zu vermuten, dass der Künstler für seine Darstellungen Vorlagen benutzt hat, etwa an Grafiken nach Johann Elias Ridinger<italic toggle="yes">, </italic>François Boucher oder Nicolas Lancret, und er sich starr an die Vorlagen hielt. Wo er dies nicht tat wie an der Westwand, scheiterte er. Formal zusammenfassende Elemente der Bilder der zweiten Fassung sind das rot und blau der Kleidungen.</p>
-         <p id="d24">Es sind immer wieder Beziehungen zwischen den Malereien von Haus Wocklum und Haus Altenkamp hergestellt worden, ohne dass es einen belastbaren Nachweis dafür gibt, dass die Maler, die in Wocklum tätig waren, auch in Altenkamp arbeiteten.<xref ref-type="fn" rid="fn7">7</xref> Verbindendes Element ist aber die Hochzeit der Erbtochter von Altenkamp mit dem Besitzer von Wocklum sowie der Umstand, dass in Wocklum eine Ansicht von Haus Altenkamp am die Wand gebracht wurde.</p>
-      </sec>
-      <sec id="d25">
-         <sec-meta>
-            <custom-meta-group>
-               <custom-meta>
-                  <meta-name>entity_id</meta-name>
-                  <meta-value>6fb84ea0-c5ab-11e9-893a-a37e5cdc9651</meta-value>
-               </custom-meta>
-            </custom-meta-group>
-         </sec-meta>
-         <title>Die Wandmalereireste im Hauptsaal</title>
-         <fig id="fig_13" position="float">
-            <label>[Abb. 13]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="a3fb39d0-c5af-11e9-893a-a37e5cdc9651.jpg"/>
-         </fig>
-         <fig id="fig_14" position="float">
-            <label>[Abb. 14]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000849.jpg"/>
-         </fig>
-         <fig id="fig_15" position="float">
-            <label>[Abb. 15]</label>
-            <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000851.jpg"/>
-         </fig>
-         <p id="d26">Im Hauptsaal von Haus Altenkamp ist nur ein geringer Wandmalereirest erhalten.<xref ref-type="fn" rid="fn8">8</xref> An den Schmalseiten im Norden und Süden steht je ein Kamin. Am nördlichen Kamin ist ein geringer Rest der ehemaligen Malerei aus der Zeit der Erstausstattung freigelegt worden. Es handelte sich alles Wahrscheinlichkeit um eine Landschaftsdarstellung, vergleichbar der Erstfassung des Vestibüls. Die Wände selbst präsentieren Gobelins, vermutlich mit Landschaftsdarstellungen, die von zahlreichen Vögeln belebt wurden. Sie kamen erst 1891 aus dem Raum in das danach so genannten Gobelinzimmer im Obergeschoss. An den Wandstücken neben der Gartentür an der Ostseite waren Leinwandgemälde direkt auf die Wand geleimt. Es wurde im Hauptsaal also wie im Vestibül ein Außenraum suggeriert, aber auch mit hochwertigen Wirkteppichen und nicht nur mit Malerei.</p>
-         <p id="d27">Es ist wahrscheinlich, dass sich weitere textile Wandbespannungen in den Räumen waren und dass die Wände teilweise eine ornamentale Bemalung erhalten hatten.</p>
+         <sec id="d12">
+            <sec-meta>
+               <kwd-group>
+                  <kwd vocab="deckenmalerei.eu" vocab-identifier="https://deckenmalerei.eu" vocab-term-identifier="https://www.deckenmalerei.eu/22ffb160-c5ac-11e9-893a-a37e5cdc9651"/>
+                  <kwd vocab="Wikidata" vocab-identifier="http://www.wikidata.org" vocab-term-identifier="http://www.wikidata.org/entity/Q137903077"/>
+               </kwd-group>
+            </sec-meta>
+            <title>Die Wandmalerei im Vestibül</title>
+            <fig id="fig_6" position="float">
+               <label>[Abb. 6]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="73b08e10-c5af-11e9-893a-a37e5cdc9651.jpg"/>
+            </fig>
+            <fig id="fig_7" position="float">
+               <label>[Abb. 7]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000830.jpg"/>
+            </fig>
+            <fig id="fig_8" position="float">
+               <label>[Abb. 8]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000831.jpg"/>
+            </fig>
+            <fig id="fig_9" position="float">
+               <label>[Abb. 9]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000844.jpg"/>
+            </fig>
+            <fig id="fig_10" position="float">
+               <label>[Abb. 10]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000845.jpg"/>
+            </fig>
+            <fig id="fig_11" position="float">
+               <label>[Abb. 11]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000835.jpg"/>
+            </fig>
+            <fig id="fig_12" position="float">
+               <label>[Abb. 12]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000847.jpg"/>
+            </fig>
+            <p id="d13">Das Vestibül<xref ref-type="fn" rid="fn4">4</xref> misst 9,10 auf 5,55 Meter und ist 4,3 Meter hoch. Zwei Fenster an der Westseite geben dem Raum Licht. Alle Wände sind mit Malereien versehen. Es handelt sich um zwei Fassungen übereinander. Die erste Fassung ist zur Erbauungszeit 1728/36 direkt secco auf die Wand gemalt wurden. Als das 1769/75 Vestibül umgestaltet wurde, überfasste man die Malereien, wobei Elemente der Erstfassung integriert wurden. Die alte schlichte Balkendecke wurde durch eine Stuckdecke ersetzt. Lediglich an der Westwand, der durchfensterten Außenwand, wurden die neuen Malereien auf Leinwandbespannung geschaffen. Die Erstfassung war auch hier auf die Wand aufgetragen worden und hatte stark unter Feuchtigkeit gelitten. Sie ist nur fragmentarisch erhalten. Im 19. Jahrhundert erfolgten Retuschen und Übermalungen der Malereien.</p>
+            <p id="d14">Der Raum hat vier zweiflügelige Türen: Zentral gelegen sind die Eingangstür an der Westseite sowie ihr gegenüber die Tür zum Hauptsaal an der Ostseite. Die Türen an der Nord- und Südwand sind jeweils an die Ostecke gerückt. Den Fenstern an der Westwand entsprechen flache Nischen in der Ostwand. Es ist denkbar, dass ursprünglich ein Blick durch das ganze Haus von West nach Ost möglich sein sollte oder doch zumindest die Malerei ursprünglich Öffnungen suggerieren sollte. Nachweise oder Befunde gibt es für diese Theorie nicht. Heute beginnt die Wandmalerei über einer dunklen lambrieartigen 91 Zentimeter hohen Sockelzone. Diese Zone ist ursprünglich, ihre Fassung entspricht aber dem 19. Jahrhundert und nicht einer der beiden Fassungen des 18. Jahrhunderts.</p>
+            <sec id="d15">
+               <title><bold>Die Erstfassung</bold></title>
+               <p id="d16">Die erste Wandmalerei ist wohl zusammen mit dem Gebäude entstanden und war spätestens 1736 vollendet.<xref ref-type="fn" rid="fn5">5</xref> Fehlstellen in der Zweitfassung und Freilegungsproben erlauben eine ansatzweise Bestimmung des Bildthemas. An den Langseiten gab es Landschaftsdarstellungen. Für die Ostseite lassen sich große Bäume nachweisen, die teilweise in die Zweitfassung integriert wurden. Hinzu kommen landschaftlich-gärtnerische Motive, Menschen und Tiere sowie Kleinarchitekturen wie etwa Brunnen. An den Schmalseiten erblickte man römisch-hochbarocke Kuppelarchitekturen und Gänge mit ausgedehnten Treppenanlagen. Die Kuppeln waren jeweils in der Mitte zwischen Tür und Westwand platziert. Im Vordergrund am unteren Bildrand lassen sich Figuren und Personengruppen in zeitgenössischer Tracht nachweisen. Die Darstellungen waren „von auffallend graphischem Gepräge“. Derartige große Panoramen können als zeittypisch gelten. Und derartige Landschaftsdarstellungen waren sowohl in Niedersachsen als in den Niederlanden weit verbreitet. Zur Decke hin wurden die Darstellungen von Festons in Grisaillemalerei abgeschlossen. Der Sockelbereich hatte eine Fassung mit bunter Blumenmalerei.</p>
+            </sec>
+            <sec id="d17">
+               <title><bold>Die Zweitfassung</bold></title>
+               <p id="d18">Die Zweitfassung<xref ref-type="fn" rid="fn6">6</xref> ist gemäß der Quellen 1776-1778 entstanden und von dem Maler Casimirus Fischer aus Münster ausgeführt worden. Im Gegensatz zur Erstfassung wird nicht jede Wand von einem Gemälde eingenommen, sondern die Wandflächen sind mittels gemalter Profilleisten — oben und unten mit Rocaillen und Muschelwerk — in einzelne Felder unterteilt. Oben haben die Rahmungen einen segmentbogenförmigen Abschluss. Die Gestaltung erinnert an eine vertäfelte Wand, in die Gemälde eingelassen sind. Es gibt sieben Felder an der Ostwand, je drei an der Nord- und Südwand sowie wiederum sieben an der Westwand, wobei zwei Felder fast komplett von den beiden Fenstern eingenommen werden. Die meisten Kompartimente präsentieren Menschen in annähernd halblebensgroßer Darstellung. Es handelt sich überwiegend um Figurengruppen vor einer angedeuteten Landschaft. Der Sockel war nun mit Rocaillerahmen bemalt.</p>
+               <p id="d19">Die äußeren beiden schmalen Felder der Ostwand präsentieren jeweils einen Baum vor einer Landschaft. Die Baumkronen im oberen Drittel sind hier wie bei den anderen Bildern teilweise von der Erstfassung übernommen. Die beiden Wandfelder links der Tür zum Hauptsaal zeigen Jäger. Auf dem linken der beiden stehen zwei Jäger vor einem Baum und blasen jeder in ihr Jagdhorn. Sie tragen auffallend blaue und rote Gewänder. Auf dem rechten steht ein Jäger mit geschultertem Gewehr und zwei Hunden vor einem Baum. Er blickt nach rechts zur Tür und hat den Zeigefinger der linken Hand erhoben. Vordergründig geht es ihm um die Aufmerksamkeit seiner Hunde, er verweist aber auch auf den folgenden Raum hinter der Tür. Sein Pendant rechts blickt ebenfalls nach der Tür. Auch dieser Jäger steht vor einem Baum. Er hält ein Gewehr in seiner Rechten und hat eine Jagdtasche geschultert. Seine Hose ist von kräftigem Rot. Zu seinen Füßen liegt ein toter Hase. Auch er wird von zwei Jagdhunden begleitet. Beide Jäger geleiten den Besucher quasi in den anschließenden Hauptsaal. Das zweite Bild rechts der Tür zeigt hat keinen jagdlichen Bezug. Es zeigt einen Cavalier und eine Dame mit Laute vor einem Baum. Der Herr hat seine Hand auf die nackte Schulter der Frau gelegt. Die Dame trägt einen stark blauen Rock. Es könnte sich um eine Allegorie der Musik handeln. Die Supraporte über der Tür zum Hauptsaal hat keinen jagdlichen Bezug. Sie bildet zusammen mit den anderen drei Supraporten des Raumes eines Jahreszeitenzyklus. Es handelt es sich um eine Allegorie des Sommers. Zwei Damen und ein Herr haben sich vor einer Architektur mit Säulen niedergelassen. Auf dem Sockel ruht ein Löwe, was als Verweis auf das Tierkreiszeichen des Löwen verstanden werden kann. Eine der Damen hält eine Sichel in ihrer Hand, der Herr hat seine Sensen abgelegt und durch ein Weinglas ersetzt. Zu Füßen der Gruppe liegen Korngarben. Auf einem Gefäß am unteren Bildrand kann einen Krebs erkenne, der wohl wie der Löwe als Verweis auf das Tierkreiszeichen zu deuten ist.</p>
+               <p id="d20">An der Nordwand zeigt die Supraporte eine Allegorie des Herbstes. Ein Paar in auffallend roter und blauer Kleidung sitzt vor einer Gartenmauer, auf der Ziervasen stehen. Der Herr fasst der Dame mit seiner Linken ans Kinn; in seiner rechten hält er eine Weinrebe. Die Frau hat in ihrem Schoß einige Äpfel, einen hat sie in die Hand genommen. Mit der anderen nestelt sie an ihrem Partner. Verweise auf Tierkreiszeichen gibt es keine. Das mittlere Wandfeld der Nordwand zeigt eine Dame und einen Herren im Jagdkostüm, ebenfalls in blau und rot. Das Paar hat sich auf einem Baumstamm niedergelassen. Ein Horn ist an den linken Bildrahmen gelehnt. Über den heiteren Himmel fliegt ein Vogel. Auf ihren behandschuhten Händen halten die beiden Falken. Zwei Hunde vervollständigen die Gruppe, die wieder einen Verweis auf die Jagd darstellt — hier auf die Falkenjagd. Das linke Bild zeigt ein weiteres Paar vor einer Mauer, auf der eine Sphinx ruht. Offenbar habe sich zwei Adlige als Gärtner verkleidet: Beide tragen Schürzen mit Früchten, die Dame hält einen Spaten in der Hand und trägt ein Kleid in kräftigem blau. Rechts im Bild steht ein Zitrusbaum in einem Kübel; am Himmel fliegt auch hier ein Vogel. Eventuell soll es sich um eine Allegorie der Gärtnerei handeln. Blütenkränze, eine Egge am Boden und Frühlingsstäbe verweisen auf die Jahreszeit. Auch diese Paar trägt Kleidung in kräftigem rot und blau. Verweise auf Tierkreiszeichen gibt es keine. Die beiden weiteren Bilder sind beschädigt und die erste Wandfassung scheint stark durch. Es ist aber zu erkennen, dass das linke Paar um einen Kanone mit Kanonenkugeln gruppiert ist. Der Mann trägt ein rote, die Frau ein blaues Oberteil. Es könnte sich um eine Allegorie der Kriegskunst handeln. Das äußere Bild zeigt ebenfalls ein Paar mit roten und blauen Kleidungsstücken. Es hat eine Tanzhaltung eingenommen, ist aber aufgrund des schlechten Erhaltungszustandes nicht wirklich zu bestimmen.</p>
+               <p id="d21">Die Westwand wird von der Eingangstür und den beiden Fenstern dominiert. Im Gegensatz zu drei anderen Wänden ist die Malerei hier auf Leinwand gemalt und es scheint keine Erstfassung durch. Die beiden sehr schmalen äußeren Wandfelder zeigen Landschaften. Über den Fenstern ist in einem schmalen Streifen das Blau des Himmels zu sehen. Die zentrale Supraporte zeigt eine Allegorie des Winters. Im Gegensatz zu allen andere Darstellung blickt man in einen Innenraum. Hier hat ein Paar in bequemen Stühlen vor einem Kaminfeuer an einem Tisch Platz genommen. Es trinkt Heißgetränke, der Herr raucht eine Pfeife. Er trägt rote Schuhe und einen roten pelzverbrämte Mantel und eine ebensolche Mütze, die Dame ein blaues Kleid. Das Bild links der Tür zeigt ein Paar in roter und blauer Kleidung vor einem Hügel auf dem sich ein Schloss erhebt. Die Körperlichkeit ist sehr unbeholfen dargestellt. Rechts des Fensters hat sich ein Jäger in blauer und roter Kleidung niedergelassen. Sein Gewehr stützt der mit der linken Hand auf den Boden auf. Hier ist wieder ein Bezug zur Jagd herzustellen. Auch seine Anatomie ist ausgesprochen unbeholfen.</p>
+               <p id="d22">Mehrere Themenfelder werden in der Wandmalerei vorgestellt. Neben dem Jahreszeitenzyklus ist vor allem der Verweis auf die Jagd auffallend. Sie ist an der Hauptschauseite gleich mit drei Szenen vertreten sowie an der Nord- und Westwand mit je einer. An der Südwand scheint sie zu fehlen, doch ist dafür der Krieg selbst präsent, der in der Frühen Neuzeit auf der Engste mit der Jagd verknüpft war. Die Jagd war ein landesherrliches Regal und den Untertanen verboten. Ihre Darstellung im Vestibül weist darauf hin, dass zu Altenkamp Jagdrechte gehörten. Die Liebespaare und Schäferszenen können als Verweis auf die Nutzung des Hauses durch die neuen Besitzer vornehmlich im Sommer verstanden werden. Allegorien auf Tanz, Musik und Gärtnerei gehören in dieses Spektrum. Es geht um sommerliche Tätigkeiten des Adels auf dem Lande.</p>
+               <p id="d23">Die Gestaltung der Figuren ist teilweise etwas unausgewogen. In seltenen Fällen werden sie von den Rahmen überschnitten. Die Darstellungen an der Westwand fallen bis auf die der Supraporte bezüglich der Beherrschung der Anatomie ab. Es steht zu vermuten, dass der Künstler für seine Darstellungen Vorlagen benutzt hat, etwa an Grafiken nach Johann Elias Ridinger<italic toggle="yes">, </italic>François Boucher oder Nicolas Lancret, und er sich starr an die Vorlagen hielt. Wo er dies nicht tat wie an der Westwand, scheiterte er. Formal zusammenfassende Elemente der Bilder der zweiten Fassung sind das rot und blau der Kleidungen.</p>
+               <p id="d24">Es sind immer wieder Beziehungen zwischen den Malereien von Haus Wocklum und Haus Altenkamp hergestellt worden, ohne dass es einen belastbaren Nachweis dafür gibt, dass die Maler, die in Wocklum tätig waren, auch in Altenkamp arbeiteten.<xref ref-type="fn" rid="fn7">7</xref> Verbindendes Element ist aber die Hochzeit der Erbtochter von Altenkamp mit dem Besitzer von Wocklum sowie der Umstand, dass in Wocklum eine Ansicht von Haus Altenkamp am die Wand gebracht wurde.</p>
+            </sec>
+         </sec>
+         <sec id="d25">
+            <sec-meta>
+               <kwd-group>
+                  <kwd vocab="deckenmalerei.eu" vocab-identifier="https://deckenmalerei.eu" vocab-term-identifier="https://www.deckenmalerei.eu/6fb84ea0-c5ab-11e9-893a-a37e5cdc9651"/>
+               </kwd-group>
+            </sec-meta>
+            <title>Die Wandmalereireste im Hauptsaal</title>
+            <fig id="fig_13" position="float">
+               <label>[Abb. 13]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="a3fb39d0-c5af-11e9-893a-a37e5cdc9651.jpg"/>
+            </fig>
+            <fig id="fig_14" position="float">
+               <label>[Abb. 14]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000849.jpg"/>
+            </fig>
+            <fig id="fig_15" position="float">
+               <label>[Abb. 15]</label>
+               <graphic xmlns:xlink="http://www.w3.org/1999/xlink" mimetype="image/jpeg" position="float" specific-use="screen" xlink:href="fmd10000851.jpg"/>
+            </fig>
+            <p id="d26">Im Hauptsaal von Haus Altenkamp ist nur ein geringer Wandmalereirest erhalten.<xref ref-type="fn" rid="fn8">8</xref> An den Schmalseiten im Norden und Süden steht je ein Kamin. Am nördlichen Kamin ist ein geringer Rest der ehemaligen Malerei aus der Zeit der Erstausstattung freigelegt worden. Es handelte sich alles Wahrscheinlichkeit um eine Landschaftsdarstellung, vergleichbar der Erstfassung des Vestibüls. Die Wände selbst präsentieren Gobelins, vermutlich mit Landschaftsdarstellungen, die von zahlreichen Vögeln belebt wurden. Sie kamen erst 1891 aus dem Raum in das danach so genannten Gobelinzimmer im Obergeschoss. An den Wandstücken neben der Gartentür an der Ostseite waren Leinwandgemälde direkt auf die Wand geleimt. Es wurde im Hauptsaal also wie im Vestibül ein Außenraum suggeriert, aber auch mit hochwertigen Wirkteppichen und nicht nur mit Malerei.</p>
+            <p id="d27">Es ist wahrscheinlich, dass sich weitere textile Wandbespannungen in den Räumen waren und dass die Wände teilweise eine ornamentale Bemalung erhalten hatten.</p>
+         </sec>
       </sec>
    </body>
    <back>
@@ -188,51 +204,65 @@
       </fn-group>
       <ref-list>
          <title>Bibliographie</title>
-         <ref id="bib1">
-            <mixed-citation>Literatur:</mixed-citation>
-         </ref>
-         <ref id="bib2">
-            <mixed-citation>Ahlers, Restaurierung, 2000. – Ahlers, Andreas: Bestand, Veränderungen und Vorgeschichte der Restaurierung. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 72-74.</mixed-citation>
-         </ref>
-         <ref id="bib3">
-            <mixed-citation>Arnemann, Bauherr, 2000. – Arnemann, Ute: Der Bauherr, der Architekt, die Baumeister und die Architektur. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 25-27.</mixed-citation>
-         </ref>
-         <ref id="bib4">
-            <mixed-citation>Bruch, Rittersitze, 1962. – Bruch, Rudolf von: Die Rittersitze des Emslandes. Münster 1962.</mixed-citation>
-         </ref>
-         <ref id="bib5">
-            <mixed-citation>Dehio, Niedersachsen, 1992. – Dehio, Georg: Bremen - Niedersachsen (Handbuch der deutschen Kunstdenkmäler). Bearbeitet von Gerd Weiß. München/Berlin 1992.</mixed-citation>
-         </ref>
-         <ref id="bib6">
-            <mixed-citation>Guhe, Altenkamp, 2000. – Guhe, Franz: Altenkamp in einer Zeit politischer Veränderungen (1767-1856). In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 17-19.</mixed-citation>
-         </ref>
-         <ref id="bib7">
-            <mixed-citation>Heckes/Hornschuch/Moskopp, Bestandserfassung, 2000. – Heckes, Jürgen/Hornschuch, Annette/Moskopp, Maro: Fotografische/visuelle Bestanderfassung und Dokumentation. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 69-72.</mixed-citation>
-         </ref>
-         <ref id="bib8">
-            <mixed-citation>Lilge, Altenkamp, 2000. – Lilge, Rüdiger: Die historischen Raumausstattungen von Haus Altenkamp. Eine Bestandaufnahme der Archivalien. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 57-60.</mixed-citation>
-         </ref>
-         <ref id="bib9">
-            <mixed-citation>Michael, Wohnverhältnisse, 2000. – Michael, Sonja: Die Wohnverhältnisse am Ende des 18. Jahrhunderts. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 35-38.</mixed-citation>
-         </ref>
-         <ref id="bib10">
-            <mixed-citation>Schmid-Engbrodt, Entrée, 2000. – Schmid-Engbrodt, Anja: Die historische und stilistische Einordnung der Malereien im Entrée des Herrenhauses. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 28-32.</mixed-citation>
-         </ref>
-         <ref id="bib11">
-            <mixed-citation>Schomann, Altenkamp, 1996. – Schomann, Rainer: Haus Altenkamp. Kulturdenkmal im Emsland (Veröffentlichung des Niedersächsischen Landesverwaltungsamtes, Institut für Denkmalpflege). Hannover 1996.</mixed-citation>
-         </ref>
-         <ref id="bib12">
-            <mixed-citation>Thoben, Altenkamp, 2000. – Thoben, Paul: Hermann Anton Bernhard von Velen und der Altenkamp (1723-1767). In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 13-16.</mixed-citation>
-         </ref>
-         <ref id="bib13">
-            <mixed-citation>Wagner, Altenkamp, 1993. – Wagner, Eckard: Haus Altenkamp. In: Kulturführer des Landkreises Emsland. Baudenkmale. Meppen 1993, S. 91-94.</mixed-citation>
-         </ref>
-         <ref id="bib14">
-            <mixed-citation>Wagner, Schlösser, 1993. – Wagner, Eckard: Schlösser und Herrensitze im Emsland. In: Kulturführer des Landkreises Emsland. Baudenkmale. Meppen 1993, S. 35-47.</mixed-citation>
-         </ref>
-         <ref id="bib15">
-            <mixed-citation>Warnecke, Schlösser, 1980. – Warnecke, Edgar F.: Das große Buch der Burgen und Schlösser im Land von Hase und Ems. Oldenburg 1980.</mixed-citation>
-         </ref>
+         <ref-list>
+            <title>Literatur:</title>
+            <ref id="bib1">
+               <label>Ahlers, Restaurierung, 2000</label>
+               <mixed-citation>Ahlers, Andreas: Bestand, Veränderungen und Vorgeschichte der Restaurierung. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 72-74.</mixed-citation>
+            </ref>
+            <ref id="bib2">
+               <label>Arnemann, Bauherr, 2000</label>
+               <mixed-citation>Arnemann, Ute: Der Bauherr, der Architekt, die Baumeister und die Architektur. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 25-27.</mixed-citation>
+            </ref>
+            <ref id="bib3">
+               <label>Bruch, Rittersitze, 1962</label>
+               <mixed-citation>Bruch, Rudolf von: Die Rittersitze des Emslandes. Münster 1962.</mixed-citation>
+            </ref>
+            <ref id="bib4">
+               <label>Dehio, Niedersachsen, 1992</label>
+               <mixed-citation>Dehio, Georg: Bremen - Niedersachsen (Handbuch der deutschen Kunstdenkmäler). Bearbeitet von Gerd Weiß. München/Berlin 1992.</mixed-citation>
+            </ref>
+            <ref id="bib5">
+               <label>Guhe, Altenkamp, 2000</label>
+               <mixed-citation>Guhe, Franz: Altenkamp in einer Zeit politischer Veränderungen (1767-1856). In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 17-19.</mixed-citation>
+            </ref>
+            <ref id="bib6">
+               <label>Heckes/Hornschuch/Moskopp, Bestandserfassung, 2000</label>
+               <mixed-citation>Heckes, Jürgen/Hornschuch, Annette/Moskopp, Maro: Fotografische/visuelle Bestanderfassung und Dokumentation. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 69-72.</mixed-citation>
+            </ref>
+            <ref id="bib7">
+               <label>Lilge, Altenkamp, 2000</label>
+               <mixed-citation>Lilge, Rüdiger: Die historischen Raumausstattungen von Haus Altenkamp. Eine Bestandaufnahme der Archivalien. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 57-60.</mixed-citation>
+            </ref>
+            <ref id="bib8">
+               <label>Michael, Wohnverhältnisse, 2000</label>
+               <mixed-citation>Michael, Sonja: Die Wohnverhältnisse am Ende des 18. Jahrhunderts. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 35-38.</mixed-citation>
+            </ref>
+            <ref id="bib9">
+               <label>Schmid-Engbrodt, Entrée, 2000</label>
+               <mixed-citation>Schmid-Engbrodt, Anja: Die historische und stilistische Einordnung der Malereien im Entrée des Herrenhauses. In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 28-32.</mixed-citation>
+            </ref>
+            <ref id="bib10">
+               <label>Schomann, Altenkamp, 1996</label>
+               <mixed-citation>Schomann, Rainer: Haus Altenkamp. Kulturdenkmal im Emsland (Veröffentlichung des Niedersächsischen Landesverwaltungsamtes, Institut für Denkmalpflege). Hannover 1996.</mixed-citation>
+            </ref>
+            <ref id="bib11">
+               <label>Thoben, Altenkamp, 2000</label>
+               <mixed-citation>Thoben, Paul: Hermann Anton Bernhard von Velen und der Altenkamp (1723-1767). In: Segers-Glocke, Christiane (Hrsg.): Haus Altenkamp — ein Herrensitz im Emsland. Denkmalpflege und Kulturgeschichte (Arbeitshefte zur Denkmalpflege in Niedersachsen, 18). Hannover/Hameln 2000, S. 13-16.</mixed-citation>
+            </ref>
+            <ref id="bib12">
+               <label>Wagner, Altenkamp, 1993</label>
+               <mixed-citation>Wagner, Eckard: Haus Altenkamp. In: Kulturführer des Landkreises Emsland. Baudenkmale. Meppen 1993, S. 91-94.</mixed-citation>
+            </ref>
+            <ref id="bib13">
+               <label>Wagner, Schlösser, 1993</label>
+               <mixed-citation>Wagner, Eckard: Schlösser und Herrensitze im Emsland. In: Kulturführer des Landkreises Emsland. Baudenkmale. Meppen 1993, S. 35-47.</mixed-citation>
+            </ref>
+            <ref id="bib14">
+               <label>Warnecke, Schlösser, 1980</label>
+               <mixed-citation>Warnecke, Edgar F.: Das große Buch der Burgen und Schlösser im Land von Hase und Ems. Oldenburg 1980.</mixed-citation>
+            </ref>
+         </ref-list>
       </ref-list>
    </back>
 </article>

@@ -41,6 +41,11 @@ class _JatsBuilder(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.blocks: list[str] = []  # finished block-level XML
+        # Parallel to ``blocks`` but typed: ``("block", xml)`` for ordinary
+        # block-level XML and ``("heading", text)`` for HTML headings. Lets the
+        # generator turn in-text headings into nested ``<sec>`` elements (see
+        # ``JatsConverter.convert_blocks``).
+        self.struct: list[tuple[str, str]] = []
         self.buffer: list[str] = []  # current inline content
         self.list_type: str | None = None  # 'bullet' or 'order'
         self.items: list[str] = []  # accumulated <list> item contents
@@ -52,7 +57,9 @@ class _JatsBuilder(HTMLParser):
         content = "".join(self.buffer).strip()
         self.buffer = []
         if content:
-            self.blocks.append(f"<p>{content}</p>")
+            block = f"<p>{content}</p>"
+            self.blocks.append(block)
+            self.struct.append(("block", block))
 
     # -- HTMLParser hooks ---------------------------------------------
     def handle_starttag(self, tag, attrs):
@@ -65,7 +72,7 @@ class _JatsBuilder(HTMLParser):
         elif tag in self.HEADERS:
             self._flush_paragraph()
             self.in_header = True
-            self.buffer.append("<bold>")
+            self.buffer = []  # collect the heading's inline content on its own
         elif tag == "br":
             self.buffer.append("<break/>")
         elif tag in ("ul", "ol"):
@@ -99,9 +106,15 @@ class _JatsBuilder(HTMLParser):
                 return  # matching suppressed open tag inside heading
             self.buffer.append(self.INLINE[tag][1])
         elif tag in self.HEADERS:
-            self.buffer.append("</bold>")
+            content = "".join(self.buffer).strip()
+            self.buffer = []
             self.in_header = False
-            self._flush_paragraph()
+            if content:
+                # ``convert()`` keeps rendering headings as a bold paragraph for
+                # backwards compatibility; ``struct`` records them as headings so
+                # ``convert_blocks`` callers can promote them to ``<sec>``.
+                self.blocks.append(f"<p><bold>{content}</bold></p>")
+                self.struct.append(("heading", content))
         elif tag == "a":
             self.buffer.append("</ext-link>")
         elif tag == "xref":
@@ -118,7 +131,9 @@ class _JatsBuilder(HTMLParser):
                     f"<list-item><p>{item}</p></list-item>" for item in self.items
                 )
                 parts.append("</list>")
-                self.blocks.append("".join(parts))
+                block = "".join(parts)
+                self.blocks.append(block)
+                self.struct.append(("block", block))
             self.list_type = None
             self.items = []
 
@@ -142,6 +157,22 @@ class JatsConverter:
         builder.feed(html.replace("­", ""))  # strip soft hyphens
         builder.close()
         return builder.result()
+
+    def convert_blocks(self, html: str) -> list[tuple[str, str]]:
+        """Convert *html* to a typed list of block-level entries.
+
+        Each entry is ``("block", xml)`` for an ordinary block (``<p>``,
+        ``<list>`` …) or ``("heading", text)`` for an HTML heading. Callers use
+        this to promote in-text headings into nested ``<sec>`` elements while
+        ``convert`` keeps emitting headings as bold paragraphs.
+        """
+        if not html:
+            return []
+        builder = _JatsBuilder()
+        builder.feed(html.replace("­", ""))  # strip soft hyphens
+        builder.close()
+        builder._flush_paragraph()  # flush any trailing inline content
+        return builder.struct
 
     def convert_inline(self, html: str) -> str:
         """Convert *html* to inline JATS markup (no block ``<p>`` wrappers).

@@ -51,11 +51,31 @@ _MIME = {
     ".gif": "image/gif",
 }
 
-#: DOCTYPE copied verbatim from the reference sample (JATS Publishing 1.3).
+#: DOCTYPE for JATS Journal Publishing DTD 1.4. The publisher's review asked us
+#: to emit 1.4-conformant files from the start (notably for ``<kwd>``).
 _DOCTYPE = (
     '<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD '
-    'v1.3 20210610//EN" "https://jats.nlm.nih.gov/publishing/1.3/'
-    'JATS-journalpublishing1-3-mathml3.dtd">'
+    'v1.4 20241031//EN" "https://jats.nlm.nih.gov/publishing/1.4/'
+    'JATS-journalpublishing1-4-mathml3.dtd">'
+)
+
+#: Controlled-vocabulary descriptors for ``<kwd>`` term identifiers. Each tuple
+#: is ``(vocab, vocab-identifier, term-base-URL)``; a concrete identifier is the
+#: term base with the source id/QID/GND number appended.
+_VOCAB_DECKENMALEREI = (
+    "deckenmalerei.eu",
+    "https://deckenmalerei.eu",
+    "https://www.deckenmalerei.eu/",
+)
+_VOCAB_WIKIDATA = (
+    "Wikidata",
+    "http://www.wikidata.org",
+    "http://www.wikidata.org/entity/",
+)
+_VOCAB_GND = (
+    "GND",
+    "https://d-nb.info/standards/elementset/gnd#",
+    "https://d-nb.info/gnd/",
 )
 
 
@@ -81,6 +101,90 @@ class JatsArticleGenerator:
         """Indent every non-empty line of *block* by *level* units."""
         pad = IND * level
         return "\n".join(pad + line if line else line for line in block.split("\n"))
+
+    @staticmethod
+    def _kwd(vocab: Tuple[str, str, str], term: str, level: int) -> str:
+        """Render a single ``<kwd>`` controlled-vocabulary term identifier.
+
+        *vocab* is one of the ``_VOCAB_*`` tuples; *term* is the bare id/QID/GND
+        number appended to the vocabulary's term-base URL.
+        """
+        name, vocab_id, term_base = vocab
+        term_uri = term_base + term
+        return (
+            f'{IND * level}<kwd vocab="{name}" vocab-identifier="{vocab_id}" '
+            f"vocab-term-identifier={quoteattr(term_uri)}/>"
+        )
+
+    # ------------------------------------------------------------------
+    # Journal metadata
+    # ------------------------------------------------------------------
+
+    def _journal_meta(self, level: int) -> List[str]:
+        """Render the static ``<journal-meta>`` block.
+
+        The data is the same for every CbDD article, so it is hard-coded here.
+        ISSN and the homepage URLs are not yet assigned; they are emitted as
+        visible placeholders and flagged with TODOs below.
+        """
+        pad = IND * level
+        return [
+            f"{pad}<journal-meta>",
+            f'{pad}{IND}<journal-id journal-id-type="publisher-id">CbDD</journal-id>',
+            f"{pad}{IND}<journal-title-group>",
+            f"{pad}{IND * 2}<journal-title>Corpus der barocken Deckenmalerei "
+            "in Deutschland</journal-title>",
+            f"{pad}{IND}</journal-title-group>",
+            # TODO: ISSN eintragen, sobald sie beantragt/zugeteilt ist.
+            f'{pad}{IND}<issn pub-type="epub">####-####</issn>',
+            f"{pad}{IND}<publisher>",
+            f"{pad}{IND * 2}<publisher-name>arthistoricum.net - eJournals"
+            "</publisher-name>",
+            f"{pad}{IND * 2}<publisher-loc>Heidelberg</publisher-loc>",
+            f"{pad}{IND}</publisher>",
+            # TODO: finale CbDD-Homepage-URLs (de/en) eintragen.
+            f'{pad}{IND}<self-uri xlink:href="https://####" xml:lang="de">Homepage '
+            "des Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>",
+            f'{pad}{IND}<self-uri xlink:href="https://####" xml:lang="en">Homepage '
+            "of the Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>",
+            f"{pad}</journal-meta>",
+        ]
+
+    def _permissions(self, year: str, level: int) -> List[str]:
+        """Render the CC BY-SA 4.0 ``<permissions>`` block.
+
+        The licence text is fixed; only the copyright year varies per article.
+        """
+        pad = IND * level
+        yr = escape(year) if year else ""
+        cc = "https://creativecommons.org/licenses/by-sa/4.0/"
+        out = [
+            f"{pad}<permissions>",
+            f"{pad}{IND}<copyright-statement>Text © {yr} by the author(s)."
+            "</copyright-statement>",
+        ]
+        if year:
+            out.append(f"{pad}{IND}<copyright-year>{yr}</copyright-year>")
+        out.extend(
+            [
+                f'{pad}{IND}<license license-type="open-access" '
+                f'xlink:href="{cc}" xml:lang="de">',
+                f'{pad}{IND * 2}<license-p><inline-graphic xlink:href="by-sa.svg"/>'
+                "Diese Publikation ist unter der Creative Commons Lizenz 4.0 "
+                "(CC BY-SA 4.0) veröffentlicht. Der Umschlagentwurf unterliegt der "
+                "Creative-Commons-Lizenz CC BY-ND 4.0.</license-p>",
+                f"{pad}{IND}</license>",
+                f'{pad}{IND}<license license-type="open-access" '
+                f'xlink:href="{cc}" xml:lang="en">',
+                f'{pad}{IND * 2}<license-p><inline-graphic xlink:href="by-sa.svg"/>'
+                "This journal article is published under the Creative Commons "
+                "License 4.0 (CC BY-SA 4.0). The cover is subject to the Creative "
+                "Commons License CC BY-ND 4.0.</license-p>",
+                f"{pad}{IND}</license>",
+                f"{pad}</permissions>",
+            ]
+        )
+        return out
 
     # ------------------------------------------------------------------
     # Front matter
@@ -116,30 +220,44 @@ class JatsArticleGenerator:
         return out
 
     def _front(self, text_entity: Dict) -> List[str]:
-        """Build ``<front>`` (id, title, authors, date, abstract).
+        """Build ``<front>`` (journal-meta, id, title, authors, date, abstract).
 
-        Differences from the reference sample: there is no ``<journal-meta>``,
-        ``<article-categories>``, ``<kwd-group>``, ``<permissions>`` or
-        page/volume metadata (no source data for those); the article id is the
-        Deckenmalerei UUID (``pub-id-type="other"``) rather than a DOI; and the
-        publication date carries only ``<year>`` (the source has no full date).
+        Notes on the metadata that has no per-article source data yet and is
+        emitted with TODO placeholders for the publisher to fill in:
+
+        * the DOI (assigned manually in the publisher's OJS once the article is
+          created) — emitted as ``pub-id-type="doi"`` with a ``###`` placeholder;
+        * the optional front cover (``<supplementary-material>``);
+        * ISSN and homepage URLs (in ``<journal-meta>``).
+
+        The Deckenmalerei UUID is no longer the ``<article-id>`` but a
+        controlled-vocabulary ``<kwd>`` in the article-level ``<kwd-group>``.
         """
         title = text_entity.get("appellation") or f"Untitled {text_entity['ID']}"
-        out = [
-            f"{IND}<front>",
-            f"{IND * 2}<article-meta>",
-            f'{IND * 3}<article-id pub-id-type="other">{escape(text_entity["ID"])}</article-id>',
-            f"{IND * 3}<title-group>",
-            f"{IND * 4}<article-title>{escape(title)}</article-title>",
-            f"{IND * 3}</title-group>",
-        ]
+        year = _modification_year(text_entity)
+
+        out = [f"{IND}<front>"]
+        out.extend(self._journal_meta(level=2))
+        out.append(f"{IND * 2}<article-meta>")
+        # TODO: DOI aus dem OJS eintragen. Er wird dort beim Anlegen des
+        # Beitrags generiert (manueller Redaktionsschritt beim Verlag).
+        out.append(f'{IND * 3}<article-id pub-id-type="doi">https://doi.org/###</article-id>')
+        out.append(f"{IND * 3}<title-group>")
+        out.append(f"{IND * 4}<article-title>{escape(title)}</article-title>")
+        out.append(f"{IND * 3}</title-group>")
         out.extend(self._contrib_group(text_entity, level=3))
 
-        year = _modification_year(text_entity)
         if year:
             out.append(f"{IND * 3}<pub-date>")
             out.append(f"{IND * 4}<year>{escape(year)}</year>")
             out.append(f"{IND * 3}</pub-date>")
+
+        # TODO: optionales Front-Cover einbinden, sobald eine Cover-Datei
+        # vorliegt, z. B.:
+        # <supplementary-material content-type="front_cover" xlink:href="cover.jpg"
+        #     position="float" orientation="portrait"/>
+
+        out.extend(self._permissions(year, level=3))
 
         short_text = text_entity.get("shortText")
         if short_text:
@@ -149,6 +267,11 @@ class JatsArticleGenerator:
             if body:
                 out.append(self._indent(body, level=4))
             out.append(f"{IND * 3}</abstract>")
+
+        # The Deckenmalerei UUID of the article moves here as a <kwd>.
+        out.append(f"{IND * 3}<kwd-group>")
+        out.append(self._kwd(_VOCAB_DECKENMALEREI, text_entity["ID"], level=4))
+        out.append(f"{IND * 3}</kwd-group>")
 
         out.append(f"{IND * 2}</article-meta>")
         out.append(f"{IND}</front>")
@@ -282,17 +405,32 @@ class JatsArticleGenerator:
         if lead and lead.get("resProvider"):
             body.extend(self._figures([(lead_entity_id, lead)], fig_counter, level=2))
 
+        # TEXT_PART entities carry a ``_depth`` (1 = top level, 2 = nested …);
+        # parts deeper than their predecessor are nested inside it, so a
+        # text-less parent like "Malerei" becomes the enclosing <sec> of its
+        # children (e.g. "Die Wandmalerei im Vestibül"). ``open_depths`` is the
+        # stack of currently open section depths.
+        open_depths: List[int] = []
         for part in text_parts:
-            body.append(f"{IND * 2}<sec>")
+            depth = part.get("_depth", 1)
+            while open_depths and open_depths[-1] >= depth:
+                body.append(f"{IND * (1 + len(open_depths))}</sec>")
+                open_depths.pop()
+            sec_level = 2 + len(open_depths)
+            content_level = sec_level + 1
+            body.append(f"{IND * sec_level}<sec>")
+            open_depths.append(depth)
 
             documented_id = self.loader.get_documented_entity_id(part["ID"])
             if documented_id:
                 qid = self.wikidata_mapping.get(documented_id)
-                body.extend(self._strukturdaten(documented_id, qid, level=3))
+                body.extend(self._sec_meta(documented_id, qid, level=content_level))
 
             appellation = part.get("appellation", "")
             if appellation:
-                body.append(f"{IND * 3}<title>{escape(appellation)}</title>")
+                body.append(
+                    f"{IND * content_level}<title>{escape(appellation)}</title>"
+                )
 
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
@@ -302,14 +440,15 @@ class JatsArticleGenerator:
                 resources.append((part_lead_entity_id, part_lead))
             for img in self.loader.get_images(part["ID"]):
                 resources.append((img["ID"], img))
-            body.extend(self._figures(resources, fig_counter, level=3))
+            body.extend(self._figures(resources, fig_counter, level=content_level))
 
             text = replace_refs(part_texts[part["ID"]], part["ID"])
-            converted = self.converter.convert(text)
-            if converted:
-                body.append(self._indent(converted, level=3))
+            blocks = self.converter.convert_blocks(text)
+            body.extend(self._render_part_blocks(blocks, content_level))
 
-            body.append(f"{IND * 2}</sec>")
+        while open_depths:
+            body.append(f"{IND * (1 + len(open_depths))}</sec>")
+            open_depths.pop()
         body.append(f"{IND}</body>")
 
         back = self._back(text_entity, deduplicated_citations, fn_registry, fn_order)
@@ -317,7 +456,7 @@ class JatsArticleGenerator:
         out = [
             '<?xml version="1.0" encoding="UTF-8" standalone="no"?>',
             _DOCTYPE,
-            '<article xml:lang="de">',
+            '<article xml:lang="de" xmlns:xlink="http://www.w3.org/1999/xlink">',
         ]
         out.extend(self._front(text_entity))
         out.extend(body)
@@ -325,35 +464,54 @@ class JatsArticleGenerator:
         out.append("</article>")
         return self._assign_ids("\n".join(out))
 
-    def _strukturdaten(
+    def _sec_meta(
         self, entity_id: str, qid: Optional[str], level: int
     ) -> List[str]:
-        """Render structural data as a section-level ``<custom-meta-group>``.
+        """Render structural data as a section-level ``<kwd-group>``.
 
-        This has no equivalent in the reference sample: it is a
-        Deckenmalerei-specific extension carrying the source entity UUID and the
-        linked Wikidata QID. ``<custom-meta>`` is valid JATS within ``<sec-meta>``.
+        Per the publisher's review the source entity UUID, the linked Wikidata
+        QID and (when available) the GND number are emitted as controlled
+        ``<kwd>`` term identifiers inside ``<sec-meta>`` rather than as the
+        former ``<custom-meta-group>``. The GND number comes from the documented
+        entity's ``normdata.gnd``.
         """
         pad = IND * level
-        out = [
-            f"{pad}<sec-meta>",
-            f"{pad}{IND}<custom-meta-group>",
-            f"{pad}{IND * 2}<custom-meta>",
-            f"{pad}{IND * 3}<meta-name>entity_id</meta-name>",
-            f"{pad}{IND * 3}<meta-value>{escape(entity_id)}</meta-value>",
-            f"{pad}{IND * 2}</custom-meta>",
-        ]
+        out = [f"{pad}<sec-meta>", f"{pad}{IND}<kwd-group>"]
+        out.append(self._kwd(_VOCAB_DECKENMALEREI, entity_id, level + 2))
         if qid:
-            out.extend(
-                [
-                    f"{pad}{IND * 2}<custom-meta>",
-                    f"{pad}{IND * 3}<meta-name>wikidata_qid</meta-name>",
-                    f"{pad}{IND * 3}<meta-value>{escape(qid)}</meta-value>",
-                    f"{pad}{IND * 2}</custom-meta>",
-                ]
-            )
-        out.append(f"{pad}{IND}</custom-meta-group>")
+            out.append(self._kwd(_VOCAB_WIKIDATA, qid, level + 2))
+        entity = self.loader.entities.get(entity_id) or {}
+        gnd = (entity.get("normdata") or {}).get("gnd")
+        if gnd:
+            out.append(self._kwd(_VOCAB_GND, gnd, level + 2))
+        out.append(f"{pad}{IND}</kwd-group>")
         out.append(f"{pad}</sec-meta>")
+        return out
+
+    def _render_part_blocks(
+        self, blocks: List[Tuple[str, str]], level: int
+    ) -> List[str]:
+        """Render a TEXT_PART's converted *blocks* at indentation *level*.
+
+        Ordinary blocks are emitted directly. An in-text heading (originally an
+        HTML ``<h*>``, e.g. "Die Erstfassung") opens a nested ``<sec>`` whose
+        ``<title>`` carries the heading text; the blocks that follow it belong to
+        that subsection until the next heading. This satisfies the review note
+        that such headings "müsste in ein /sec geschachtelt werden".
+        """
+        out: List[str] = []
+        sub_open = False
+        for kind, payload in blocks:
+            if kind == "heading":
+                if sub_open:
+                    out.append(f"{IND * level}</sec>")
+                out.append(f"{IND * level}<sec>")
+                out.append(f"{IND * (level + 1)}<title><bold>{payload}</bold></title>")
+                sub_open = True
+            else:
+                out.append(self._indent(payload, level + 1 if sub_open else level))
+        if sub_open:
+            out.append(f"{IND * level}</sec>")
         return out
 
     def _back(
@@ -381,25 +539,67 @@ class JatsArticleGenerator:
 
         bibliography = text_entity.get("bibliography")
         if bibliography:
-            # The bibliography is newline-separated reference strings. The
-            # reference sample has no bibliography list; JATS' idiomatic home for
-            # one is <ref-list>/<mixed-citation>, used here.
-            entries = [
-                self.converter.convert_inline(line)
-                for line in bibliography.split("\n")
-                if line.strip()
-            ]
-            sections.append(f"{IND * 2}<ref-list>")
-            sections.append(f"{IND * 3}<title>Bibliographie</title>")
-            for i, entry in enumerate(entries, start=1):
-                sections.append(f'{IND * 3}<ref id="bib{i}">')
-                sections.append(f"{IND * 4}<mixed-citation>{entry}</mixed-citation>")
-                sections.append(f"{IND * 3}</ref>")
-            sections.append(f"{IND * 2}</ref-list>")
+            sections.extend(self._bibliography(bibliography, level=2))
 
         if not sections:
             return []
         return [f"{IND}<back>", *sections, f"{IND}</back>"]
+
+    #: Separates the short citation (Sigle) from the full reference in a
+    #: bibliography line, e.g. ``"Ahlers, Restaurierung, 2000. – Ahlers, …"``.
+    _SIGLE_SEP = ". – "
+
+    def _bibliography(self, bibliography: str, level: int) -> List[str]:
+        """Render the article bibliography as a nested ``<ref-list>``.
+
+        Per the publisher's review the bibliography is wrapped in an outer
+        ``<ref-list><title>Bibliographie</title>`` containing one inner
+        ``<ref-list>`` per heading line (e.g. "Literatur:"). Each reference is
+        split on ``". – "`` into a ``<label>`` (the Sigle, kept for later
+        string-matching/linking) and a ``<mixed-citation>`` with the full text;
+        lines without that separator are treated as the inner list's heading.
+        """
+        pad = IND * level
+        out = [f"{pad}<ref-list>", f"{pad}{IND}<title>Bibliographie</title>"]
+
+        inner_open = False
+        ref_counter = count(1)
+
+        def open_inner(title: Optional[str]) -> None:
+            nonlocal inner_open
+            if inner_open:
+                out.append(f"{pad}{IND}</ref-list>")
+            out.append(f"{pad}{IND}<ref-list>")
+            if title:
+                out.append(f"{pad}{IND * 2}<title>{escape(title)}</title>")
+            inner_open = True
+
+        for line in bibliography.split("\n"):
+            line = line.strip()
+            if not line:
+                continue
+            if self._SIGLE_SEP in line:
+                if not inner_open:
+                    open_inner(None)
+                sigle, _, full = line.partition(self._SIGLE_SEP)
+                label = self.converter.convert_inline(sigle.strip())
+                citation = self.converter.convert_inline(full.strip())
+                i = next(ref_counter)
+                out.append(f'{pad}{IND * 2}<ref id="bib{i}">')
+                out.append(f"{pad}{IND * 3}<label>{label}</label>")
+                out.append(
+                    f"{pad}{IND * 3}<mixed-citation>{citation}</mixed-citation>"
+                )
+                out.append(f"{pad}{IND * 2}</ref>")
+            else:
+                # A line without a Sigle separator heads a new inner list
+                # (e.g. "Literatur:", "Quellen:").
+                open_inner(self.converter.convert_inline(line))
+
+        if inner_open:
+            out.append(f"{pad}{IND}</ref-list>")
+        out.append(f"{pad}</ref-list>")
+        return out
 
     @staticmethod
     def _assign_ids(xml: str) -> str:
