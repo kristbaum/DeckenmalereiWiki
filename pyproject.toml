@@ -31,3 +31,11 @@ dev = [
     "ruff>=0.16.1",
     "ty>=0.0.66",
 ]
+
+[tool.ruff.lint]
+ignore = [
+    # Import/upload/network code deliberately catches broad Exception at batch
+    # boundaries (per-article generation, per-file upload) so one bad item logs
+    # and the run continues instead of aborting the whole batch.
+    "BLE001",
+]

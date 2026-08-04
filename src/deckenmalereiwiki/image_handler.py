@@ -44,7 +44,7 @@ class ImageHandler:
         self._existing_filenames: set[str] | None = None
 
     @staticmethod
-    def _is_cc_license(license: str) -> bool:
+    def is_cc_license(license: str) -> bool:
         return license.strip().upper().startswith("CC")
 
     def is_external(self, url: str) -> bool:
@@ -54,6 +54,19 @@ class ImageHandler:
     def source_url(self, url: str, resource_id: str) -> str | None:
         """Return the URL of the original image's source page, or ``None``."""
         return self.resolver.source_url(url, resource_id)
+
+    def resolved_source_url(self, entity_id: str, url: str, resource_id: str) -> str | None:
+        """Like :meth:`source_url`, but prefers the entity's metadata sidecar.
+
+        ``source_url`` on a provider like BADW EasyDB needs a network call to
+        resolve and returns ``None`` in offline mode (used by the generator).
+        The ``download-images`` step already resolved and cached this URL in
+        the ``{entity_id}.json`` sidecar, so check there first.
+        """
+        sidecar = self.read_sidecar(entity_id)
+        if sidecar and sidecar.get("source_url"):
+            return sidecar["source_url"]
+        return self.source_url(url, resource_id)
 
     def _existing_download(self, entity_id: str) -> Path | None:
         """Return the already-downloaded image for *entity_id*, if any.
@@ -182,7 +195,7 @@ class ImageHandler:
             params["rechteinhaber"] = ", ".join(rights_holders)
         if license_info:
             params["lizenz"] = license_info
-        params["cc"] = "ja" if ImageHandler._is_cc_license(license_info) else "nein"
+        params["cc"] = "ja" if ImageHandler.is_cc_license(license_info) else "nein"
         if source_url:
             params["quelle"] = source_url
         lines = ["{{BildMeta"]

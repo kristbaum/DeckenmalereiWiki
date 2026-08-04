@@ -26,11 +26,15 @@ uv run pytest tests/ -v                # run regression tests against generated 
 docker compose up -d                   # local MediaWiki at http://localhost:8080
 ```
 
-**After every code change, run both commands in order** — regenerate first so the tests reflect fresh output:
+**After every code change, run all three commands in order** — regenerate first so the tests reflect fresh output, then lint and type-check:
 
 ```bash
 uv run deckenmalereiwiki && uv run pytest tests/ -v
+uv run ruff check .
+uv run ty check
 ```
+
+Fix every issue both report before considering the change done. `ruff check .` runs with no project-specific rule config beyond `pyproject.toml`'s `[tool.ruff.lint]` (currently only `BLE001` is ignored, for the deliberate log-and-continue `except Exception` pattern used at batch boundaries in the importer/generator — see the comment there before adding more ignores). Mixin classes (`*Mixin` in `importer_*.py`) that read attributes provided by `MediaWikiImporter` must declare those attributes with a bare class-level type annotation (e.g. `site: APISite`) so `ty` can resolve them.
 
 ## Source Data Schema
 

@@ -4,6 +4,7 @@ Uploads articles and images to a MediaWiki instance via the API.
 """
 
 from pathlib import Path
+from typing import cast
 
 import pywikibot
 from pywikibot.site import APISite
@@ -67,7 +68,9 @@ class MediaWikiImporter(PageImportMixin, CategoryImportMixin, EntityImageImportM
         self.enable_images = enable_images
         self.max_articles = max_articles
 
-        self.site = site or pywikibot.Site()
+        # pywikibot.Site() is typed as BaseSite, but always returns an APISite
+        # for MediaWiki wikis with the API enabled (the only kind we target).
+        self.site = site or cast(APISite, pywikibot.Site())
 
         self.downloads_dir = Path("downloads")
         self.downloads_dir.mkdir(exist_ok=True)

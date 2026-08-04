@@ -16,6 +16,7 @@ verbatim so inline references survive the conversion.
 
 import re
 from html.parser import HTMLParser
+from typing import ClassVar
 from xml.sax.saxutils import escape, quoteattr
 
 XLINK_NS = "http://www.w3.org/1999/xlink"
@@ -25,7 +26,7 @@ class _JatsBuilder(HTMLParser):
     """Streaming HTML parser that emits block-level JATS XML."""
 
     #: HTML inline tags mapped to their (open, close) JATS markup.
-    INLINE = {
+    INLINE: ClassVar[dict[str, tuple[str, str]]] = {
         "b": ("<bold>", "</bold>"),
         "strong": ("<bold>", "</bold>"),
         "i": ('<italic toggle="yes">', "</italic>"),
@@ -35,8 +36,8 @@ class _JatsBuilder(HTMLParser):
     }
     #: Bold-producing tags. Suppressed inside headings, whose own bold rendering
     #: already covers them (mirrors the MediaWiki converter).
-    BOLD = {"b", "strong"}
-    HEADERS = {"h1", "h2", "h3", "h4", "h5", "h6"}
+    BOLD: ClassVar[set[str]] = {"b", "strong"}
+    HEADERS: ClassVar[set[str]] = {"h1", "h2", "h3", "h4", "h5", "h6"}
 
     def __init__(self):
         super().__init__(convert_charrefs=True)

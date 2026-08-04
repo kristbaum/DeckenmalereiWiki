@@ -30,10 +30,21 @@ def title_to_filename(title: str) -> str:
 class ArticleGenerator:
     """Generates MediaWiki articles from loaded source data."""
 
-    def __init__(self, loader: DataLoader):
+    def __init__(self, loader: DataLoader, replace_non_cc_images: bool = False):
+        """Initialise the generator.
+
+        Args:
+            loader: A loaded :class:`~deckenmalereiwiki.loader.DataLoader`.
+            replace_non_cc_images: When ``True``, images whose ``resLicense`` is
+                not a Creative Commons license are rendered via
+                ``{{ExternesBild}}`` (a link to the original) instead of being
+                embedded as an uploaded ``File:``, the same treatment already
+                used for source-link-only providers.
+        """
         self.loader = loader
         self.converter = HtmlConverter()
         self.wikidata_mapping = load_wikidata_mapping(str(loader.sources_dir))
+        self.replace_non_cc_images = replace_non_cc_images
         # No MediaWiki site needed: used only to resolve image filenames so the
         # ``File:`` references match the downloaded/uploaded files' extensions.
         # ``offline`` keeps ``parse`` from querying any provider API: filenames
@@ -52,15 +63,30 @@ class ArticleGenerator:
         """Whether *resource* is a source-link-only image (not uploaded)."""
         return self.image_handler.is_external(resource.get("resProvider", ""))
 
-    def _externes_bild(self, resource: dict) -> str:
-        """Render an ``{{ExternesBild}}`` call for a source-link-only resource.
+    def _use_externes_bild(self, resource: dict) -> bool:
+        """Whether *resource* should be rendered via ``{{ExternesBild}}``.
 
-        These providers (see :data:`~deckenmalereiwiki.image_providers.\
-EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
-        a link to the original instead of an embedded ``File:``.
+        True for source-link-only providers, and — when
+        :attr:`replace_non_cc_images` is enabled — also for any resource whose
+        ``resLicense`` is not a Creative Commons license, so non-CC images are
+        linked to their source instead of re-hosted on the wiki.
         """
-        quelle = self.image_handler.source_url(
-            resource.get("resProvider", ""), resource["ID"]
+        if self._is_external_resource(resource):
+            return True
+        if self.replace_non_cc_images:
+            return not ImageHandler.is_cc_license(resource.get("resLicense", ""))
+        return False
+
+    def _externes_bild(self, entity_id: str, resource: dict) -> str:
+        """Render an ``{{ExternesBild}}`` call for a resource referenced by link.
+
+        Used both for providers with no downloadable binary (see
+        :data:`~deckenmalereiwiki.image_providers.EXTERNAL_PROVIDERS`) and,
+        with :attr:`replace_non_cc_images`, for non-CC-licensed images that
+        would otherwise be uploaded.
+        """
+        quelle = self.image_handler.resolved_source_url(
+            entity_id, resource.get("resProvider", ""), resource["ID"]
         )
         lines = ["{{ExternesBild"]
         beschreibung = resource.get("appellation", "")
@@ -88,8 +114,8 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
             text_entity["ID"]
         )
         if text_lead and text_lead.get("resProvider"):
-            if self._is_external_resource(text_lead):
-                parts_out.append(self._externes_bild(text_lead))
+            if self._use_externes_bild(text_lead):
+                parts_out.append(self._externes_bild(text_lead_entity_id, text_lead))
             else:
                 lead_file = self._image_filename(text_lead_entity_id, text_lead)
                 parts_out.append(
@@ -146,8 +172,9 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
                 parts_out.append("")
 
             # Per-part images: lead_resource first, then IMAGE resources.
-            # Uploaded images go into a gallery; source-link-only providers are
-            # referenced via {{ExternesBild}} since they have no File: page.
+            # Uploaded images go into a gallery; source-link-only providers (and,
+            # with replace_non_cc_images, non-CC-licensed images) are referenced
+            # via {{ExternesBild}} instead of a File: page.
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
             )
@@ -158,10 +185,10 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
                 part_resources.append((img["ID"], img))
 
             part_gallery: list[tuple] = []
-            external_resources: list[dict] = []
+            external_resources: list[tuple] = []
             for res_entity_id, resource in part_resources:
-                if self._is_external_resource(resource):
-                    external_resources.append(resource)
+                if self._use_externes_bild(resource):
+                    external_resources.append((res_entity_id, resource))
                 else:
                     part_gallery.append(
                         (
@@ -181,8 +208,8 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
                 parts_out.append("</gallery>")
                 parts_out.append("")
 
-            for resource in external_resources:
-                parts_out.append(self._externes_bild(resource))
+            for ext_entity_id, resource in external_resources:
+                parts_out.append(self._externes_bild(ext_entity_id, resource))
                 parts_out.append("")
 
             text = replace_citation_refs(

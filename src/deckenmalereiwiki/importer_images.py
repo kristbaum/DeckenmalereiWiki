@@ -2,6 +2,9 @@
 Per-entity image uploading for :class:`MediaWikiImporter`.
 """
 
+from pathlib import Path
+
+from .image_handler import ImageHandler
 from .loader import DataLoader
 
 
@@ -12,6 +15,9 @@ class EntityImageImportMixin:
     provides the ``self.image_handler`` and ``self.downloads_dir`` attributes
     these methods rely on.
     """
+
+    image_handler: ImageHandler
+    downloads_dir: Path
 
     def _process_entity_images(
         self, loader: DataLoader, entity: dict, overwrite_existing: bool = False

@@ -5,6 +5,7 @@ Page, template and article publishing for :class:`MediaWikiImporter`.
 from pathlib import Path
 
 import pywikibot
+from pywikibot.site import APISite
 
 from .wikitext import sanitize_wikitext
 
@@ -19,6 +20,8 @@ class PageImportMixin:
     Mixed into :class:`~deckenmalereiwiki.importer.MediaWikiImporter`, which
     provides the ``self.site`` attribute these methods rely on.
     """
+
+    site: APISite
 
     def _is_old_corpus(self, page: "pywikibot.Page") -> bool:
         """Whether *page* belongs to the protected old corpus.

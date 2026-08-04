@@ -10,11 +10,17 @@ from deckenmalereiwiki.jats_generator import JatsArticleGenerator
 from deckenmalereiwiki.loader import DataLoader
 
 
-def parse_command():
-    """Parse data and save articles as .wiki files."""
+def parse_command(replace_non_cc_images: bool = False):
+    """Parse data and save articles as .wiki files.
+
+    When *replace_non_cc_images* is ``True``, images whose license is not a
+    Creative Commons license are rendered as ``{{ExternesBild}}`` links to
+    their source instead of being embedded as an uploaded ``File:``.
+    """
     loader = DataLoader()
     loader.load_data()
-    ArticleGenerator(loader).save_articles_to_files()
+    generator = ArticleGenerator(loader, replace_non_cc_images=replace_non_cc_images)
+    generator.save_articles_to_files()
     print("\nDone!")
 
 
@@ -141,7 +147,8 @@ def main():
     if len(sys.argv) > 1:
         command = sys.argv[1]
         if command == "parse":
-            parse_command()
+            replace_non_cc = "--replace-non-cc-images" in sys.argv[2:]
+            parse_command(replace_non_cc_images=replace_non_cc)
         elif command == "parse-jats":
             parse_jats_command()
         elif command == "import":
@@ -162,7 +169,8 @@ def main():
             print(f"Unknown command: {command}")
             print(
                 "Usage: python -m deckenmalereiwiki "
-                "[parse|parse-jats|import|import-templates|import-categories|"
+                "[parse [--replace-non-cc-images]|parse-jats|import|"
+                "import-templates|import-categories|"
                 "import-images [--overwrite-descriptions]|"
                 "download-images]"
             )

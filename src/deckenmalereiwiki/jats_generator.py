@@ -131,21 +131,29 @@ class JatsArticleGenerator:
             f"{pad}<journal-meta>",
             f'{pad}{IND}<journal-id journal-id-type="publisher-id">CbDD</journal-id>',
             f"{pad}{IND}<journal-title-group>",
-            f"{pad}{IND * 2}<journal-title>Corpus der barocken Deckenmalerei "
-            "in Deutschland</journal-title>",
+            (
+                f"{pad}{IND * 2}<journal-title>Corpus der barocken Deckenmalerei "
+                "in Deutschland</journal-title>"
+            ),
             f"{pad}{IND}</journal-title-group>",
             # TODO: ISSN eintragen, sobald sie beantragt/zugeteilt ist.
             f'{pad}{IND}<issn pub-type="epub">####-####</issn>',
             f"{pad}{IND}<publisher>",
-            f"{pad}{IND * 2}<publisher-name>arthistoricum.net - eJournals"
-            "</publisher-name>",
+            (
+                f"{pad}{IND * 2}<publisher-name>arthistoricum.net - eJournals"
+                "</publisher-name>"
+            ),
             f"{pad}{IND * 2}<publisher-loc>Heidelberg</publisher-loc>",
             f"{pad}{IND}</publisher>",
             # TODO: finale CbDD-Homepage-URLs (de/en) eintragen.
-            f'{pad}{IND}<self-uri xlink:href="https://####" xml:lang="de">Homepage '
-            "des Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>",
-            f'{pad}{IND}<self-uri xlink:href="https://####" xml:lang="en">Homepage '
-            "of the Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>",
+            (
+                f'{pad}{IND}<self-uri xlink:href="https://####" xml:lang="de">Homepage '
+                "des Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>"
+            ),
+            (
+                f'{pad}{IND}<self-uri xlink:href="https://####" xml:lang="en">Homepage '
+                "of the Corpus der barocken Deckenmalerei in Deutschland (CbDD)</self-uri>"
+            ),
             f"{pad}</journal-meta>",
         ]
 
@@ -159,26 +167,36 @@ class JatsArticleGenerator:
         cc = "https://creativecommons.org/licenses/by-sa/4.0/"
         out = [
             f"{pad}<permissions>",
-            f"{pad}{IND}<copyright-statement>Text © {yr} by the author(s)."
-            "</copyright-statement>",
+            (
+                f"{pad}{IND}<copyright-statement>Text © {yr} by the author(s)."
+                "</copyright-statement>"
+            ),
         ]
         if year:
             out.append(f"{pad}{IND}<copyright-year>{yr}</copyright-year>")
         out.extend(
             [
-                f'{pad}{IND}<license license-type="open-access" '
-                f'xlink:href="{cc}" xml:lang="de">',
-                f'{pad}{IND * 2}<license-p><inline-graphic xlink:href="by-sa.svg"/>'
-                "Diese Publikation ist unter der Creative Commons Lizenz 4.0 "
-                "(CC BY-SA 4.0) veröffentlicht. Der Umschlagentwurf unterliegt der "
-                "Creative-Commons-Lizenz CC BY-ND 4.0.</license-p>",
+                (
+                    f'{pad}{IND}<license license-type="open-access" '
+                    f'xlink:href="{cc}" xml:lang="de">'
+                ),
+                (
+                    f'{pad}{IND * 2}<license-p><inline-graphic xlink:href="by-sa.svg"/>'
+                    "Diese Publikation ist unter der Creative Commons Lizenz 4.0 "
+                    "(CC BY-SA 4.0) veröffentlicht. Der Umschlagentwurf unterliegt der "
+                    "Creative-Commons-Lizenz CC BY-ND 4.0.</license-p>"
+                ),
                 f"{pad}{IND}</license>",
-                f'{pad}{IND}<license license-type="open-access" '
-                f'xlink:href="{cc}" xml:lang="en">',
-                f'{pad}{IND * 2}<license-p><inline-graphic xlink:href="by-sa.svg"/>'
-                "This journal article is published under the Creative Commons "
-                "License 4.0 (CC BY-SA 4.0). The cover is subject to the Creative "
-                "Commons License CC BY-ND 4.0.</license-p>",
+                (
+                    f'{pad}{IND}<license license-type="open-access" '
+                    f'xlink:href="{cc}" xml:lang="en">'
+                ),
+                (
+                    f'{pad}{IND * 2}<license-p><inline-graphic xlink:href="by-sa.svg"/>'
+                    "This journal article is published under the Creative Commons "
+                    "License 4.0 (CC BY-SA 4.0). The cover is subject to the Creative "
+                    "Commons License CC BY-ND 4.0.</license-p>"
+                ),
                 f"{pad}{IND}</license>",
                 f"{pad}</permissions>",
             ]

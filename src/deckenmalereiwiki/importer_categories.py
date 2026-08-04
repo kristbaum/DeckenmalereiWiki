@@ -3,6 +3,7 @@ Category-page creation for :class:`MediaWikiImporter`.
 """
 
 import pywikibot
+from pywikibot.site import APISite
 
 from .artikel_modern import get_author_names, get_building, get_ort
 from .loader import DataLoader
@@ -27,6 +28,8 @@ class CategoryImportMixin:
     Mixed into :class:`~deckenmalereiwiki.importer.MediaWikiImporter`, which
     provides the ``self.site`` attribute these methods rely on.
     """
+
+    site: APISite
 
     def create_category_if_missing(self, name: str, content: str = "") -> bool:
         """Create ``Kategorie:<name>`` with *content* unless it already exists.

@@ -69,7 +69,7 @@ class ImageDownloader:
             "resource_id": resource_id,
             "provider": resource.get("resProvider", ""),
             "license": license_info,
-            "is_cc": ImageHandler._is_cc_license(license_info),
+            "is_cc": ImageHandler.is_cc_license(license_info),
             "description": resource.get("appellation", ""),
             "rights_holders": self.loader.get_resource_actors(
                 resource_id, "RIGHTS_HOLDERS"
