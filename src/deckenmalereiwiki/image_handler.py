@@ -55,7 +55,9 @@ class ImageHandler:
         """Return the URL of the original image's source page, or ``None``."""
         return self.resolver.source_url(url, resource_id)
 
-    def resolved_source_url(self, entity_id: str, url: str, resource_id: str) -> str | None:
+    def resolved_source_url(
+        self, entity_id: str, url: str, resource_id: str
+    ) -> str | None:
         """Like :meth:`source_url`, but prefers the entity's metadata sidecar.
 
         ``source_url`` on a provider like BADW EasyDB needs a network call to
