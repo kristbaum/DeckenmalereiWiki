@@ -3,9 +3,8 @@ Data loading and entity queries for DeckenmalereiWiki JSON sources.
 """
 
 import json
-from pathlib import Path
-from typing import Dict, List, Optional
 from collections import defaultdict
+from pathlib import Path
 
 # Public base URL for actor (and other) records in the Deckenmalerei portal.
 # Actor links in {{BildMeta}} point here, using the actor's source ID.
@@ -17,14 +16,14 @@ class DataLoader:
 
     def __init__(self, sources_dir: str = "sources"):
         self.sources_dir = Path(sources_dir)
-        self.entities: Dict[str, Dict] = {}
-        self.relations: List[Dict] = []
-        self.resources: Dict[str, Dict] = {}
-        self.relations_by_source: Dict[str, List[Dict]] = defaultdict(list)
+        self.entities: dict[str, dict] = {}
+        self.relations: list[dict] = []
+        self.resources: dict[str, dict] = {}
+        self.relations_by_source: dict[str, list[dict]] = defaultdict(list)
         # Relations stored in the reverse ("<-") direction, indexed by their
         # ``relTar``. These mirror a "->" relation in most cases, but some only
         # exist in this direction, so actor lookups must consult both indexes.
-        self.relations_by_target: Dict[str, List[Dict]] = defaultdict(list)
+        self.relations_by_target: dict[str, list[dict]] = defaultdict(list)
 
     def load_data(self):
         """Load all JSON files from sources directory."""
@@ -51,11 +50,11 @@ class DataLoader:
             self.resources = {r["ID"]: r for r in resources_list}
         print(f"Loaded {len(self.resources)} resources")
 
-    def get_text_entities(self) -> List[Dict]:
+    def get_text_entities(self) -> list[dict]:
         """Get all TEXT type entities."""
         return [e for e in self.entities.values() if e.get("sType") == "TEXT"]
 
-    def get_relations_by_type(self, entity_id: str, rel_type: str) -> List[Dict]:
+    def get_relations_by_type(self, entity_id: str, rel_type: str) -> list[dict]:
         """Get all outgoing relations of a specific type for an entity."""
         return [
             r
@@ -63,11 +62,11 @@ class DataLoader:
             if r.get("sType") == rel_type
         ]
 
-    def get_text_parts(self, text_entity_id: str) -> List[Dict]:
+    def get_text_parts(self, text_entity_id: str) -> list[dict]:
         """Get all TEXT_PART entities for a TEXT entity, ordered by relOrd.
         Recursively collects nested TEXT_PART entities."""
 
-        def collect_parts_recursive(entity_id: str, depth: int = 1) -> List[Dict]:
+        def collect_parts_recursive(entity_id: str, depth: int = 1) -> list[dict]:
             part_relations = self.get_relations_by_type(entity_id, "PART")
             part_relations.sort(key=lambda r: r.get("relOrd", 0))
 
@@ -83,7 +82,7 @@ class DataLoader:
 
         return collect_parts_recursive(text_entity_id)
 
-    def get_lead_resource(self, entity_id: str) -> Optional[Dict]:
+    def get_lead_resource(self, entity_id: str) -> dict | None:
         """Get the LEAD_RESOURCE for an entity."""
         lead_rels = self.get_relations_by_type(entity_id, "LEAD_RESOURCE")
         if lead_rels:
@@ -93,7 +92,7 @@ class DataLoader:
 
     def get_lead_resource_via_documents(
         self, entity_id: str
-    ) -> tuple[str, Optional[Dict]]:
+    ) -> tuple[str, dict | None]:
         """Return ``(name_entity_id, resource)`` for the lead resource.
 
         Tries the LEAD_RESOURCE relation directly on *entity_id* first; if
@@ -112,7 +111,7 @@ class DataLoader:
                     return object_id, lead
         return entity_id, None
 
-    def get_images(self, entity_id: str) -> List[Dict]:
+    def get_images(self, entity_id: str) -> list[dict]:
         """Get all IMAGE resources for an entity.
 
         IMAGE relations are stored on OBJECT_* entities, not directly on TEXT or
@@ -136,7 +135,7 @@ class DataLoader:
                     images.append(self.resources[resource_id])
         return images
 
-    def get_entity_image_resources(self, entity_id: str) -> List[tuple]:
+    def get_entity_image_resources(self, entity_id: str) -> list[tuple]:
         """Return ``[(name_entity_id, resource), ...]`` for a TEXT entity.
 
         Collects every downloadable image resource associated with the TEXT
@@ -148,9 +147,9 @@ class DataLoader:
         (``{name_entity_id}.jpg``). Only resources that carry a ``resProvider``
         (i.e. are actually downloadable) are included.
         """
-        results: List[tuple] = []
+        results: list[tuple] = []
 
-        def _add(name_entity_id: str, resource: Optional[Dict]):
+        def _add(name_entity_id: str, resource: dict | None):
             if resource and resource.get("resProvider"):
                 results.append((name_entity_id, resource))
 
@@ -169,7 +168,7 @@ class DataLoader:
 
         return results
 
-    def get_documented_entity_id(self, entity_id: str) -> Optional[str]:
+    def get_documented_entity_id(self, entity_id: str) -> str | None:
         """Return the ID of the first entity linked via a DOCUMENTS relation."""
         doc_rels = self.get_relations_by_type(entity_id, "DOCUMENTS")
         if doc_rels:
@@ -189,7 +188,7 @@ class DataLoader:
         label = (entity.get("appellation") if entity else None) or actor_id
         return f"[{DECKENMALEREI_BASE_URL}{actor_id} {label}]"
 
-    def get_resource_actors(self, resource_id: str, rel_type: str) -> List[str]:
+    def get_resource_actors(self, resource_id: str, rel_type: str) -> list[str]:
         """Return Deckenmalerei links for the actors linked to *resource_id*.
 
         Actor relations are recorded in both directions: a forward ("->")
@@ -208,7 +207,7 @@ class DataLoader:
             List of distinct MediaWiki external links (see :meth:`actor_link`),
             in discovery order.
         """
-        result: List[str] = []
+        result: list[str] = []
         seen: set = set()
 
         def _add(actor_id: str) -> None:

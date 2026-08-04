@@ -3,11 +3,11 @@
 import sys
 from pathlib import Path
 
-from deckenmalereiwiki.loader import DataLoader
 from deckenmalereiwiki.generator import ArticleGenerator, title_to_filename
-from deckenmalereiwiki.jats_generator import JatsArticleGenerator
-from deckenmalereiwiki.importer import MediaWikiImporter
 from deckenmalereiwiki.image_downloader import ImageDownloader
+from deckenmalereiwiki.importer import MediaWikiImporter
+from deckenmalereiwiki.jats_generator import JatsArticleGenerator
+from deckenmalereiwiki.loader import DataLoader
 
 
 def parse_command():

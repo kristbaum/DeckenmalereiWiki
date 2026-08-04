@@ -27,16 +27,15 @@ and summarised in the module's accompanying notes.
 import re
 from itertools import count
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
 from xml.sax.saxutils import escape, quoteattr
 
-from .loader import DataLoader
-from .jats_converter import JatsConverter, XLINK_NS
+from .artikel_modern import _modification_year, get_author_names
 from .citations import parse_citations
-from .strukturdaten import load_wikidata_mapping
-from .artikel_modern import get_author_names, _modification_year
-from .image_handler import ImageHandler
 from .generator import title_to_filename
+from .image_handler import ImageHandler
+from .jats_converter import XLINK_NS, JatsConverter
+from .loader import DataLoader
+from .strukturdaten import load_wikidata_mapping
 
 #: Three-space indentation unit, matching the reference sample.
 IND = "   "
@@ -103,7 +102,7 @@ class JatsArticleGenerator:
         return "\n".join(pad + line if line else line for line in block.split("\n"))
 
     @staticmethod
-    def _kwd(vocab: Tuple[str, str, str], term: str, level: int) -> str:
+    def _kwd(vocab: tuple[str, str, str], term: str, level: int) -> str:
         """Render a single ``<kwd>`` controlled-vocabulary term identifier.
 
         *vocab* is one of the ``_VOCAB_*`` tuples; *term* is the bare id/QID/GND
@@ -120,7 +119,7 @@ class JatsArticleGenerator:
     # Journal metadata
     # ------------------------------------------------------------------
 
-    def _journal_meta(self, level: int) -> List[str]:
+    def _journal_meta(self, level: int) -> list[str]:
         """Render the static ``<journal-meta>`` block.
 
         The data is the same for every CbDD article, so it is hard-coded here.
@@ -150,7 +149,7 @@ class JatsArticleGenerator:
             f"{pad}</journal-meta>",
         ]
 
-    def _permissions(self, year: str, level: int) -> List[str]:
+    def _permissions(self, year: str, level: int) -> list[str]:
         """Render the CC BY-SA 4.0 ``<permissions>`` block.
 
         The licence text is fixed; only the copyright year varies per article.
@@ -190,7 +189,7 @@ class JatsArticleGenerator:
     # Front matter
     # ------------------------------------------------------------------
 
-    def _contrib_group(self, text_entity: Dict, level: int) -> List[str]:
+    def _contrib_group(self, text_entity: dict, level: int) -> list[str]:
         """Render ``<contrib-group>`` from the entity's authors.
 
         Author appellations are stored "Surname, Given"; that maps onto the
@@ -219,7 +218,7 @@ class JatsArticleGenerator:
         out.append(f"{pad}</contrib-group>")
         return out
 
-    def _front(self, text_entity: Dict) -> List[str]:
+    def _front(self, text_entity: dict) -> list[str]:
         """Build ``<front>`` (journal-meta, id, title, authors, date, abstract).
 
         Notes on the metadata that has no per-article source data yet and is
@@ -241,7 +240,9 @@ class JatsArticleGenerator:
         out.append(f"{IND * 2}<article-meta>")
         # TODO: DOI aus dem OJS eintragen. Er wird dort beim Anlegen des
         # Beitrags generiert (manueller Redaktionsschritt beim Verlag).
-        out.append(f'{IND * 3}<article-id pub-id-type="doi">https://doi.org/###</article-id>')
+        out.append(
+            f'{IND * 3}<article-id pub-id-type="doi">https://doi.org/###</article-id>'
+        )
         out.append(f"{IND * 3}<title-group>")
         out.append(f"{IND * 4}<article-title>{escape(title)}</article-title>")
         out.append(f"{IND * 3}</title-group>")
@@ -281,15 +282,15 @@ class JatsArticleGenerator:
     # Figures
     # ------------------------------------------------------------------
 
-    def _graphic_href(self, entity_id: str, resource: Dict) -> str:
+    def _graphic_href(self, entity_id: str, resource: dict) -> str:
         """Return the image filename for an uploaded *resource*."""
         return self.image_handler.image_filename(
             entity_id, resource.get("resProvider", ""), resource["ID"]
         )
 
     def _fig(
-        self, entity_id: str, resource: Dict, fig_num: int, level: int
-    ) -> List[str]:
+        self, entity_id: str, resource: dict, fig_num: int, level: int
+    ) -> list[str]:
         """Render a single ``<fig>`` for *resource*.
 
         External (source-link-only) providers have no downloadable binary, so
@@ -333,10 +334,10 @@ class JatsArticleGenerator:
         return out
 
     def _figures(
-        self, resources: List[tuple], fig_counter: count, level: int
-    ) -> List[str]:
+        self, resources: list[tuple], fig_counter: count, level: int
+    ) -> list[str]:
         """Render *resources* as consecutive ``<fig>`` siblings."""
-        out: List[str] = []
+        out: list[str] = []
         for entity_id, resource in resources:
             out.extend(self._fig(entity_id, resource, next(fig_counter), level))
         return out
@@ -345,14 +346,14 @@ class JatsArticleGenerator:
     # Article body + back
     # ------------------------------------------------------------------
 
-    def generate_article(self, text_entity: Dict) -> str:
+    def generate_article(self, text_entity: dict) -> str:
         """Generate a complete JATS XML article for *text_entity*."""
         fig_counter = count(1)
 
         # --- First pass: collect and deduplicate citations ---
         text_parts = self.loader.get_text_parts(text_entity["ID"])
-        all_citations: Dict[str, str] = {}
-        part_texts: Dict[str, str] = {}
+        all_citations: dict[str, str] = {}
+        part_texts: dict[str, str] = {}
         for part in text_parts:
             if part.get("text"):
                 cleaned, citations = parse_citations(part["text"], part["ID"])
@@ -361,8 +362,8 @@ class JatsArticleGenerator:
             else:
                 part_texts[part["ID"]] = ""
 
-        citation_text_to_name: Dict[str, str] = {}
-        ref_name_mapping: Dict[str, str] = {}
+        citation_text_to_name: dict[str, str] = {}
+        ref_name_mapping: dict[str, str] = {}
         for ref_name, citation_text in all_citations.items():
             if citation_text in citation_text_to_name:
                 ref_name_mapping[ref_name] = citation_text_to_name[citation_text]
@@ -375,10 +376,10 @@ class JatsArticleGenerator:
 
         # Footnotes are numbered sequentially in order of first appearance in
         # the body text, mirroring the reference sample's <fn-group>.
-        fn_registry: Dict[str, Tuple[int, str]] = {}
-        fn_order: List[str] = []
+        fn_registry: dict[str, tuple[int, str]] = {}
+        fn_order: list[str] = []
 
-        def footnote(canonical_name: str) -> Tuple[int, str]:
+        def footnote(canonical_name: str) -> tuple[int, str]:
             if canonical_name not in fn_registry:
                 number = len(fn_order) + 1
                 fn_registry[canonical_name] = (number, f"fn{number}")
@@ -410,7 +411,7 @@ class JatsArticleGenerator:
         # text-less parent like "Malerei" becomes the enclosing <sec> of its
         # children (e.g. "Die Wandmalerei im Vestibül"). ``open_depths`` is the
         # stack of currently open section depths.
-        open_depths: List[int] = []
+        open_depths: list[int] = []
         for part in text_parts:
             depth = part.get("_depth", 1)
             while open_depths and open_depths[-1] >= depth:
@@ -435,7 +436,7 @@ class JatsArticleGenerator:
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
             )
-            resources: List[tuple] = []
+            resources: list[tuple] = []
             if part_lead and part_lead.get("resProvider"):
                 resources.append((part_lead_entity_id, part_lead))
             for img in self.loader.get_images(part["ID"]):
@@ -464,9 +465,7 @@ class JatsArticleGenerator:
         out.append("</article>")
         return self._assign_ids("\n".join(out))
 
-    def _sec_meta(
-        self, entity_id: str, qid: Optional[str], level: int
-    ) -> List[str]:
+    def _sec_meta(self, entity_id: str, qid: str | None, level: int) -> list[str]:
         """Render structural data as a section-level ``<kwd-group>``.
 
         Per the publisher's review the source entity UUID, the linked Wikidata
@@ -489,8 +488,8 @@ class JatsArticleGenerator:
         return out
 
     def _render_part_blocks(
-        self, blocks: List[Tuple[str, str]], level: int
-    ) -> List[str]:
+        self, blocks: list[tuple[str, str]], level: int
+    ) -> list[str]:
         """Render a TEXT_PART's converted *blocks* at indentation *level*.
 
         Ordinary blocks are emitted directly. An in-text heading (originally an
@@ -499,7 +498,7 @@ class JatsArticleGenerator:
         that subsection until the next heading. This satisfies the review note
         that such headings "müsste in ein /sec geschachtelt werden".
         """
-        out: List[str] = []
+        out: list[str] = []
         sub_open = False
         for kind, payload in blocks:
             if kind == "heading":
@@ -516,13 +515,13 @@ class JatsArticleGenerator:
 
     def _back(
         self,
-        text_entity: Dict,
-        deduplicated_citations: Dict[str, str],
-        fn_registry: Dict[str, Tuple[int, str]],
-        fn_order: List[str],
-    ) -> List[str]:
+        text_entity: dict,
+        deduplicated_citations: dict[str, str],
+        fn_registry: dict[str, tuple[int, str]],
+        fn_order: list[str],
+    ) -> list[str]:
         """Build ``<back>`` with the footnote group and bibliography list."""
-        sections: List[str] = []
+        sections: list[str] = []
 
         if fn_order:
             sections.append(f"{IND * 2}<fn-group>")
@@ -549,7 +548,7 @@ class JatsArticleGenerator:
     #: bibliography line, e.g. ``"Ahlers, Restaurierung, 2000. – Ahlers, …"``.
     _SIGLE_SEP = ". – "
 
-    def _bibliography(self, bibliography: str, level: int) -> List[str]:
+    def _bibliography(self, bibliography: str, level: int) -> list[str]:
         """Render the article bibliography as a nested ``<ref-list>``.
 
         Per the publisher's review the bibliography is wrapped in an outer
@@ -565,7 +564,7 @@ class JatsArticleGenerator:
         inner_open = False
         ref_counter = count(1)
 
-        def open_inner(title: Optional[str]) -> None:
+        def open_inner(title: str | None) -> None:
             nonlocal inner_open
             if inner_open:
                 out.append(f"{pad}{IND}</ref-list>")
@@ -587,9 +586,7 @@ class JatsArticleGenerator:
                 i = next(ref_counter)
                 out.append(f'{pad}{IND * 2}<ref id="bib{i}">')
                 out.append(f"{pad}{IND * 3}<label>{label}</label>")
-                out.append(
-                    f"{pad}{IND * 3}<mixed-citation>{citation}</mixed-citation>"
-                )
+                out.append(f"{pad}{IND * 3}<mixed-citation>{citation}</mixed-citation>")
                 out.append(f"{pad}{IND * 2}</ref>")
             else:
                 # A line without a Sigle separator heads a new inner list
@@ -621,7 +618,7 @@ class JatsArticleGenerator:
     # ------------------------------------------------------------------
 
     def save_articles_to_files(
-        self, output_dir: str = "output_jats", max_articles: Optional[int] = 500000
+        self, output_dir: str = "output_jats", max_articles: int | None = 500000
     ):
         """Save generated articles as individual ``.xml`` files.
 

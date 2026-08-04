@@ -3,7 +3,6 @@ Page, template and article publishing for :class:`MediaWikiImporter`.
 """
 
 from pathlib import Path
-from typing import Dict
 
 import pywikibot
 
@@ -116,7 +115,7 @@ class PageImportMixin:
                 success += 1
         print(f"Successfully imported {success}/{len(page_files)} pages")
 
-    def import_articles(self, articles: Dict[str, str]):
+    def import_articles(self, articles: dict[str, str]):
         """Push *articles* dict ``{title: wikitext}`` to MediaWiki."""
         print(f"\nImporting {len(articles)} articles...")
         success = 0

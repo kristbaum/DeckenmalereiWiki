@@ -2,8 +2,6 @@
 Per-entity image uploading for :class:`MediaWikiImporter`.
 """
 
-from typing import Dict
-
 from .loader import DataLoader
 
 
@@ -16,7 +14,7 @@ class EntityImageImportMixin:
     """
 
     def _process_entity_images(
-        self, loader: DataLoader, entity: Dict, overwrite_existing: bool = False
+        self, loader: DataLoader, entity: dict, overwrite_existing: bool = False
     ):
         """Upload all images associated with *entity*.
 
@@ -59,7 +57,7 @@ class EntityImageImportMixin:
         )
 
     def _upload_resource_image(
-        self, loader: DataLoader, name_entity_id: str, resource: Dict
+        self, loader: DataLoader, name_entity_id: str, resource: dict
     ):
         """Download (if needed) and re-upload one image, refreshing its metadata.
 

@@ -5,7 +5,6 @@ the image-handling pipeline.
 
 import json
 from pathlib import Path
-from typing import Dict, List, Optional
 
 from .image_handler import ImageHandler
 
@@ -32,12 +31,12 @@ class ImageDownloader:
         # site is unused for downloading, so no MediaWiki connection is needed.
         self.handler = ImageHandler(site=None, downloads_dir=downloads_dir)
 
-    def download_entity_images(self, entity: Dict) -> List[Dict]:
+    def download_entity_images(self, entity: dict) -> list[dict]:
         """Download every image for *entity* and write metadata sidecars.
 
         Returns the list of metadata dicts that were written.
         """
-        written: List[Dict] = []
+        written: list[dict] = []
         for name_entity_id, resource in self.loader.get_entity_image_resources(
             entity["ID"]
         ):
@@ -60,8 +59,8 @@ class ImageDownloader:
         return written
 
     def _build_metadata(
-        self, name_entity_id: str, resource: Dict, filepath: Optional[Path]
-    ) -> Dict:
+        self, name_entity_id: str, resource: dict, filepath: Path | None
+    ) -> dict:
         """Assemble the metadata sidecar contents for one image."""
         resource_id = resource["ID"]
         license_info = resource.get("resLicense", "")
@@ -83,7 +82,7 @@ class ImageDownloader:
             "image_file": filepath.name if filepath else None,
         }
 
-    def _write_metadata(self, name_entity_id: str, metadata: Dict) -> Path:
+    def _write_metadata(self, name_entity_id: str, metadata: dict) -> Path:
         """Write *metadata* to ``{name_entity_id}.json`` in the downloads dir."""
         path = self.downloads_dir / f"{name_entity_id}.json"
         with open(path, "w", encoding="utf-8") as f:

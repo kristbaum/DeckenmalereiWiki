@@ -2,13 +2,11 @@
 Category-page creation for :class:`MediaWikiImporter`.
 """
 
-from typing import Dict
-
 import pywikibot
 
+from .artikel_modern import get_author_names, get_building, get_ort
 from .loader import DataLoader
 from .wikitext import sanitize_wikitext
-from .artikel_modern import get_author_names, get_building, get_ort
 
 # Static category that every modern article is filed under (see the
 # ``{{Artikel-modern}}`` template). Created once by ``import-categories``.
@@ -49,7 +47,7 @@ class CategoryImportMixin:
             print(f"  Failed to create category {name}: {e}")
             return False
 
-    def collect_category_names(self, loader: DataLoader) -> Dict[str, str]:
+    def collect_category_names(self, loader: DataLoader) -> dict[str, str]:
         """Return ``{category_name: page_content}`` for every required category.
 
         Gathers the static :data:`ROOT_CATEGORY` and the
@@ -64,7 +62,7 @@ class CategoryImportMixin:
         navigable.
         """
         under_root = f"[[Kategorie:{ROOT_CATEGORY}]]"
-        categories: Dict[str, str] = {
+        categories: dict[str, str] = {
             ROOT_CATEGORY: (
                 "Artikel des Corpus der barocken Deckenmalerei in Deutschland (CbDD)."
             ),

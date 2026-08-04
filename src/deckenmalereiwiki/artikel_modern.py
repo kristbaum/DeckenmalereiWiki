@@ -7,12 +7,11 @@ from the title).
 """
 
 import datetime
-from typing import Dict, List, Optional
 
 from .loader import DataLoader
 
 
-def get_author_names(loader: DataLoader, text_entity: Dict) -> List[str]:
+def get_author_names(loader: DataLoader, text_entity: dict) -> list[str]:
     """Return the appellations of the entity's authors (``AUTHORS`` relation).
 
     Authors missing from ``entities.json`` or without an appellation are
@@ -27,7 +26,7 @@ def get_author_names(loader: DataLoader, text_entity: Dict) -> List[str]:
     ]
 
 
-def get_ort(text_entity: Dict) -> Optional[str]:
+def get_ort(text_entity: dict) -> str | None:
     """Return the location of *text_entity*: the title before the first comma.
 
     Returns ``None`` when the entity has no title or an empty location part.
@@ -39,7 +38,7 @@ def get_ort(text_entity: Dict) -> Optional[str]:
     return ort or None
 
 
-def get_building(loader: DataLoader, text_entity: Dict) -> Optional[Dict]:
+def get_building(loader: DataLoader, text_entity: dict) -> dict | None:
     """Return the building documented by *text_entity*.
 
     A TEXT entity reaches its physical object through ``DOCUMENTS`` relations.
@@ -50,7 +49,7 @@ def get_building(loader: DataLoader, text_entity: Dict) -> Optional[Dict]:
     is preferred but an ``OBJECT_ENSEMBLE`` is accepted as a fallback. Returns
     ``None`` when no such object is documented.
     """
-    fallback: Optional[Dict] = None
+    fallback: dict | None = None
     for rel in loader.get_relations_by_type(text_entity["ID"], "DOCUMENTS"):
         obj = loader.entities.get(rel.get("relTar"))
         if not obj:
@@ -62,14 +61,14 @@ def get_building(loader: DataLoader, text_entity: Dict) -> Optional[Dict]:
     return fallback
 
 
-def _building_lines(building: Dict) -> List[str]:
+def _building_lines(building: dict) -> list[str]:
     """Return the ``{{Artikel-modern}}`` parameter lines for *building*.
 
     Each address/location field is emitted only when present. ``functions`` is
     an array and is spread across numbered ``Funktion1``, ``Funktion2`` …
     parameters, mirroring how authors are handled.
     """
-    lines: List[str] = []
+    lines: list[str] = []
     simple_params = [
         ("Bundesland", "addressState"),
         ("Gemeinde", "addressLocality"),
@@ -91,7 +90,7 @@ def _building_lines(building: Dict) -> List[str]:
     return lines
 
 
-def _modification_year(text_entity: Dict) -> str:
+def _modification_year(text_entity: dict) -> str:
     """Return the entity's modification year as a string, or ``""`` if unknown.
 
     ``modificationDate`` is a millisecond epoch timestamp in the source data.
@@ -104,7 +103,7 @@ def _modification_year(text_entity: Dict) -> str:
     )
 
 
-def generate_artikel_modern(loader: DataLoader, text_entity: Dict) -> str:
+def generate_artikel_modern(loader: DataLoader, text_entity: dict) -> str:
     """Build the ``{{Artikel-modern}}`` template call for *text_entity*.
 
     Each author is emitted as a separate numbered parameter (``AutorIn1``,

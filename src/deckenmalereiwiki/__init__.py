@@ -1,7 +1,7 @@
 """DeckenmalereiWiki - Parser and importer for Deckenmalerei.eu data."""
 
-from deckenmalereiwiki.loader import DataLoader
 from deckenmalereiwiki.generator import ArticleGenerator
 from deckenmalereiwiki.importer import MediaWikiImporter
+from deckenmalereiwiki.loader import DataLoader
 
-__all__ = ["DataLoader", "ArticleGenerator", "MediaWikiImporter"]
+__all__ = ["ArticleGenerator", "DataLoader", "MediaWikiImporter"]

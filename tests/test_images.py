@@ -18,11 +18,10 @@ import json
 from pathlib import Path
 
 import pytest
-
 from conftest import (
     BAD_BUCHAU,
-    EGLOFFSTEIN,
     DOWNLOADS_DIR,
+    EGLOFFSTEIN,
     image_filenames,
     image_stems,
 )

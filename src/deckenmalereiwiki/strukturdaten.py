@@ -4,7 +4,6 @@ Generator for the {{Strukturdaten}} MediaWiki template.
 
 import csv
 from pathlib import Path
-from typing import Optional
 
 
 def load_wikidata_mapping(sources_dir: str = "sources") -> dict:
@@ -24,7 +23,7 @@ def load_wikidata_mapping(sources_dir: str = "sources") -> dict:
 
 def generate_strukturdaten(
     deckenmalerei_eu_id: str,
-    wikidata_qid: Optional[str] = None,
+    wikidata_qid: str | None = None,
 ) -> str:
     """Return the ``{{Strukturdaten}}`` wikitext for a section."""
     params = [f"entity_id={deckenmalerei_eu_id}"]

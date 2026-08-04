@@ -3,8 +3,6 @@ Citation parsing and reference replacement for MediaWiki output.
 """
 
 import re
-from typing import Dict, Optional
-
 
 # Some texts wrap the [x] markers in footnote anchors instead of writing the
 # bracket directly. Definitions point at "#_ftnref<n>" and inline references at
@@ -24,7 +22,7 @@ def _normalize_footnote_anchors(text: str) -> str:
     return _FOOTNOTE_ANCHOR_PATTERN.sub(r"[\1]", text)
 
 
-def parse_citations(text: str, part_id: str) -> tuple[str, Dict[str, str]]:
+def parse_citations(text: str, part_id: str) -> tuple[str, dict[str, str]]:
     """Parse citations from text and return cleaned text with citation map.
 
     Citations are marked as [x] in text with definitions at the end like:
@@ -69,7 +67,7 @@ def parse_citations(text: str, part_id: str) -> tuple[str, Dict[str, str]]:
     if paragraph_pattern.sub("", tail).strip():
         return text, {}
 
-    citations: Dict[str, str] = {}
+    citations: dict[str, str] = {}
     current_num = None
     for para in paragraph_pattern.finditer(tail):
         block = para.group(0)
@@ -98,9 +96,9 @@ def parse_citations(text: str, part_id: str) -> tuple[str, Dict[str, str]]:
 def replace_citation_refs(
     text: str,
     part_id: str,
-    all_citations: Dict[str, str],
-    used_refs: Dict[str, bool],
-    ref_name_mapping: Optional[Dict[str, str]] = None,
+    all_citations: dict[str, str],
+    used_refs: dict[str, bool],
+    ref_name_mapping: dict[str, str] | None = None,
 ) -> str:
     """Replace [x] references with MediaWiki <ref> tags.
 

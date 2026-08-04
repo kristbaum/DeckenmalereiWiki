@@ -9,7 +9,6 @@ the upload machinery.
 
 import time
 from pathlib import Path
-from typing import Optional
 from urllib.parse import urlparse
 
 import requests
@@ -35,7 +34,7 @@ class SourceResolver:
         self.offline = offline
         # Cache of EasyDB resolutions:
         #   resource_id -> (download_url, source_url, extension).
-        self._easydb_cache: dict[str, tuple[Optional[str], Optional[str], str]] = {}
+        self._easydb_cache: dict[str, tuple[str | None, str | None, str]] = {}
 
     @staticmethod
     def is_external(url: str) -> bool:
@@ -48,9 +47,7 @@ class SourceResolver:
         """
         return any(provider in url for provider in EXTERNAL_PROVIDERS)
 
-    def _easydb_source(
-        self, resource_id: str
-    ) -> tuple[Optional[str], Optional[str], str]:
+    def _easydb_source(self, resource_id: str) -> tuple[str | None, str | None, str]:
         """Resolve a BADW EasyDB resource to ``(download_url, source_url, ext)``.
 
         The result is cached per ``resource_id`` so generation and download
@@ -70,7 +67,7 @@ class SourceResolver:
         api_data = api_response.json()
         versions = api_data.get("assets", {}).get("datei", [{}])[0].get("versions", {})
 
-        image_url: Optional[str] = None
+        image_url: str | None = None
         for quality in ("full", "huge", "preview"):
             v = versions.get(quality, {})
             if v.get("_download_allowed"):
@@ -85,7 +82,7 @@ class SourceResolver:
 
     def resolve_source(
         self, url: str, resource_id: str
-    ) -> tuple[Optional[str], Optional[str], str]:
+    ) -> tuple[str | None, str | None, str]:
         """Return ``(download_url, source_url, extension)`` for a resource.
 
         ``download_url`` is the URL the binary is fetched from, or ``None`` when
@@ -126,7 +123,7 @@ class SourceResolver:
             print(f"  Could not resolve extension for {resource_id}: {e}; using .jpg")
             return ".jpg"
 
-    def source_url(self, url: str, resource_id: str) -> Optional[str]:
+    def source_url(self, url: str, resource_id: str) -> str | None:
         """Return the URL of the original image's source page, or ``None``.
 
         This is recorded in ``{{BildMeta}}`` as a link back to the original (the

@@ -4,35 +4,34 @@ Uploads articles and images to a MediaWiki instance via the API.
 """
 
 from pathlib import Path
-from typing import Dict, Optional
 
 import pywikibot
 from pywikibot.site import APISite
 
-from .loader import DataLoader
 from .generator import ArticleGenerator
 from .image_handler import ImageHandler
-from .wikitext import sanitize_wikitext
-from .importer_pages import PageImportMixin, PROTECTED_CATEGORY
 from .importer_categories import (
-    CategoryImportMixin,
-    ROOT_CATEGORY,
     AUTHOR_ROOT_CATEGORY,
     LOCATION_ROOT_CATEGORY,
-    STATE_ROOT_CATEGORY,
     MODULE_ROOT_CATEGORY,
+    ROOT_CATEGORY,
+    STATE_ROOT_CATEGORY,
+    CategoryImportMixin,
 )
 from .importer_images import EntityImageImportMixin
+from .importer_pages import PROTECTED_CATEGORY, PageImportMixin
+from .loader import DataLoader
+from .wikitext import sanitize_wikitext
 
 __all__ = [
-    "MediaWikiImporter",
-    "sanitize_wikitext",
-    "PROTECTED_CATEGORY",
-    "ROOT_CATEGORY",
     "AUTHOR_ROOT_CATEGORY",
     "LOCATION_ROOT_CATEGORY",
-    "STATE_ROOT_CATEGORY",
     "MODULE_ROOT_CATEGORY",
+    "PROTECTED_CATEGORY",
+    "ROOT_CATEGORY",
+    "STATE_ROOT_CATEGORY",
+    "MediaWikiImporter",
+    "sanitize_wikitext",
 ]
 
 
@@ -55,7 +54,7 @@ class MediaWikiImporter(PageImportMixin, CategoryImportMixin, EntityImageImportM
         self,
         enable_images: bool = True,
         max_articles: int = 50000,
-        site: Optional[APISite] = None,
+        site: APISite | None = None,
     ):
         """Initialise the MediaWiki connection.
 
@@ -113,7 +112,7 @@ class MediaWikiImporter(PageImportMixin, CategoryImportMixin, EntityImageImportM
             print(f"No .wiki files found in {folder}")
             return
 
-        articles: Dict[str, str] = {}
+        articles: dict[str, str] = {}
         for wf in wiki_files[: self.max_articles] if self.max_articles else wiki_files:
             title = wf.stem.replace("_", " ")
             articles[title] = wf.read_text(encoding="utf-8")

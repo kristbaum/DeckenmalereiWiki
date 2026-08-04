@@ -6,14 +6,13 @@ ready-to-import MediaWiki wikitext.
 
 import re
 from pathlib import Path
-from typing import Dict, List, Optional
 
-from .loader import DataLoader
-from .converter import HtmlConverter
-from .citations import parse_citations, replace_citation_refs
-from .strukturdaten import load_wikidata_mapping, generate_strukturdaten
 from .artikel_modern import generate_artikel_modern
+from .citations import parse_citations, replace_citation_refs
+from .converter import HtmlConverter
 from .image_handler import ImageHandler
+from .loader import DataLoader
+from .strukturdaten import generate_strukturdaten, load_wikidata_mapping
 
 
 def title_to_filename(title: str) -> str:
@@ -43,17 +42,17 @@ class ArticleGenerator:
             site=None, downloads_dir=Path("downloads"), offline=True
         )
 
-    def _image_filename(self, entity_id: str, resource: Dict) -> str:
+    def _image_filename(self, entity_id: str, resource: dict) -> str:
         """Resolve the ``File:`` filename for *resource* (matching the upload)."""
         return self.image_handler.image_filename(
             entity_id, resource.get("resProvider", ""), resource["ID"]
         )
 
-    def _is_external_resource(self, resource: Dict) -> bool:
+    def _is_external_resource(self, resource: dict) -> bool:
         """Whether *resource* is a source-link-only image (not uploaded)."""
         return self.image_handler.is_external(resource.get("resProvider", ""))
 
-    def _externes_bild(self, resource: Dict) -> str:
+    def _externes_bild(self, resource: dict) -> str:
         """Render an ``{{ExternesBild}}`` call for a source-link-only resource.
 
         These providers (see :data:`~deckenmalereiwiki.image_providers.\
@@ -76,9 +75,9 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
     # Article
     # ------------------------------------------------------------------
 
-    def generate_article(self, text_entity: Dict) -> str:
+    def generate_article(self, text_entity: dict) -> str:
         """Generate a complete MediaWiki article for *text_entity*."""
-        parts_out: List[str] = []
+        parts_out: list[str] = []
 
         parts_out.append(generate_artikel_modern(self.loader, text_entity))
         parts_out.append("")
@@ -101,8 +100,8 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
 
         # --- First pass: collect citations from all text parts ---
         text_parts = self.loader.get_text_parts(text_entity["ID"])
-        all_citations: Dict[str, str] = {}
-        part_texts: Dict[str, str] = {}
+        all_citations: dict[str, str] = {}
+        part_texts: dict[str, str] = {}
 
         for part in text_parts:
             if part.get("text"):
@@ -113,8 +112,8 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
                 part_texts[part["ID"]] = ""
 
         # Deduplicate citations by content; map duplicates to canonical name
-        citation_text_to_name: Dict[str, str] = {}
-        ref_name_mapping: Dict[str, str] = {}
+        citation_text_to_name: dict[str, str] = {}
+        ref_name_mapping: dict[str, str] = {}
 
         for ref_name, citation_text in all_citations.items():
             if citation_text in citation_text_to_name:
@@ -128,7 +127,7 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
         }
 
         # --- Second pass: emit article sections ---
-        used_refs: Dict[str, bool] = {}
+        used_refs: dict[str, bool] = {}
 
         for part in text_parts:
             # Some TEXT_PART entities are empty stubs with no appellation; skip
@@ -152,14 +151,14 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
             part_lead_entity_id, part_lead = (
                 self.loader.get_lead_resource_via_documents(part["ID"])
             )
-            part_resources: List[tuple] = []
+            part_resources: list[tuple] = []
             if part_lead and part_lead.get("resProvider"):
                 part_resources.append((part_lead_entity_id, part_lead))
             for img in self.loader.get_images(part["ID"]):
                 part_resources.append((img["ID"], img))
 
-            part_gallery: List[tuple] = []
-            external_resources: List[Dict] = []
+            part_gallery: list[tuple] = []
+            external_resources: list[dict] = []
             for res_entity_id, resource in part_resources:
                 if self._is_external_resource(resource):
                     external_resources.append(resource)
@@ -214,9 +213,7 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
     # Batch generation
     # ------------------------------------------------------------------
 
-    def generate_all_articles(
-        self, max_articles: Optional[int] = None
-    ) -> Dict[str, str]:
+    def generate_all_articles(self, max_articles: int | None = None) -> dict[str, str]:
         """Generate all (or up to *max_articles*) articles.
 
         Returns:
@@ -227,7 +224,7 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
             text_entities = text_entities[:max_articles]
 
         print(f"\nGenerating {len(text_entities)} articles...")
-        articles: Dict[str, str] = {}
+        articles: dict[str, str] = {}
         for entity in text_entities:
             title = entity.get("appellation", f"Untitled_{entity['ID']}")
             articles[title] = self.generate_article(entity)
@@ -236,7 +233,7 @@ EXTERNAL_PROVIDERS`) have no downloadable binary, so the image is referenced by
         return articles
 
     def save_articles_to_files(
-        self, output_dir: str = "output", max_articles: Optional[int] = 500000
+        self, output_dir: str = "output", max_articles: int | None = 500000
     ):
         """Save generated articles as individual ``.wiki`` files.
 

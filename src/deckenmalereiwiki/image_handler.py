@@ -5,7 +5,6 @@ Image download and upload handling for DeckenmalereiWiki.
 import json
 import time
 from pathlib import Path
-from typing import Optional
 
 import pywikibot
 import requests
@@ -42,7 +41,7 @@ class ImageHandler:
         # Normalised set of file names that exist on the wiki, fetched once via
         # ``load_existing_filenames``. ``None`` means "not loaded": uploads then
         # fall back to a per-file check.
-        self._existing_filenames: Optional[set[str]] = None
+        self._existing_filenames: set[str] | None = None
 
     @staticmethod
     def _is_cc_license(license: str) -> bool:
@@ -52,11 +51,11 @@ class ImageHandler:
         """Whether *url*'s provider is referenced by link, not uploaded."""
         return self.resolver.is_external(url)
 
-    def source_url(self, url: str, resource_id: str) -> Optional[str]:
+    def source_url(self, url: str, resource_id: str) -> str | None:
         """Return the URL of the original image's source page, or ``None``."""
         return self.resolver.source_url(url, resource_id)
 
-    def _existing_download(self, entity_id: str) -> Optional[Path]:
+    def _existing_download(self, entity_id: str) -> Path | None:
         """Return the already-downloaded image for *entity_id*, if any.
 
         Ignores ``.json`` metadata sidecars written alongside images.
@@ -72,7 +71,7 @@ class ImageHandler:
             None,
         )
 
-    def read_sidecar(self, entity_id: str) -> Optional[dict]:
+    def read_sidecar(self, entity_id: str) -> dict | None:
         """Return this entity's ``{entity_id}.json`` metadata sidecar, or ``None``.
 
         The ``download-images`` step writes one sidecar next to every image,
@@ -89,7 +88,7 @@ class ImageHandler:
         except (json.JSONDecodeError, OSError):
             return None
 
-    def _sidecar_image_file(self, entity_id: str) -> Optional[str]:
+    def _sidecar_image_file(self, entity_id: str) -> str | None:
         """Return the ``image_file`` recorded in this entity's metadata sidecar.
 
         The ``download-images`` step writes ``{entity_id}.json`` next to each
@@ -116,9 +115,7 @@ class ImageHandler:
             return sidecar_file
         return f"{entity_id}{self.resolver.resolve_extension(url, resource_id)}"
 
-    def download_image(
-        self, url: str, entity_id: str, resource_id: str
-    ) -> Optional[Path]:
+    def download_image(self, url: str, entity_id: str, resource_id: str) -> Path | None:
         """Download an image from *url* and save it locally.
 
         Images are downloaded regardless of license; the license is recorded in
@@ -152,8 +149,7 @@ class ImageHandler:
             response = requests.get(image_url, timeout=30, stream=True)
             response.raise_for_status()
             with open(filepath, "wb") as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
+                f.writelines(response.iter_content(chunk_size=8192))
 
             print(f"  Saved: {filename}")
             time.sleep(0.5)
