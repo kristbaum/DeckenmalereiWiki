@@ -42,6 +42,10 @@ class ImageHandler:
         # ``load_existing_filenames``. ``None`` means "not loaded": uploads then
         # fall back to a per-file check.
         self._existing_filenames: set[str] | None = None
+        # entity_id -> downloaded file Path, indexed once from downloads_dir on
+        # first use instead of re-scanning the (potentially huge) directory on
+        # every lookup. ``None`` means "not built yet".
+        self._downloaded_files: dict[str, Path] | None = None
 
     @staticmethod
     def is_cc_license(license: str) -> bool:
@@ -73,18 +77,27 @@ class ImageHandler:
     def _existing_download(self, entity_id: str) -> Path | None:
         """Return the already-downloaded image for *entity_id*, if any.
 
-        Ignores ``.json`` metadata sidecars written alongside images.
+        Ignores ``.json`` metadata sidecars written alongside images. Backed by
+        a one-time index of ``downloads_dir`` (see :meth:`_downloaded_files_index`)
+        rather than a fresh directory scan per call: with tens of thousands of
+        downloaded files, ``glob()``-ing per lookup dominated generation time.
         """
-        if not self.downloads_dir.is_dir():
-            return None
-        return next(
-            (
-                p
-                for p in self.downloads_dir.glob(f"{entity_id}.*")
-                if p.suffix != ".json"
-            ),
-            None,
-        )
+        return self._downloaded_files_index().get(entity_id)
+
+    def _downloaded_files_index(self) -> dict[str, Path]:
+        """Build (once) and return an ``entity_id -> Path`` index of downloads.
+
+        Entity IDs are UUIDs without dots, so a file's stem (name minus its
+        final extension) is exactly the entity ID it belongs to.
+        """
+        if self._downloaded_files is None:
+            index: dict[str, Path] = {}
+            if self.downloads_dir.is_dir():
+                for p in self.downloads_dir.iterdir():
+                    if p.suffix != ".json" and p.is_file():
+                        index[p.stem] = p
+            self._downloaded_files = index
+        return self._downloaded_files
 
     def read_sidecar(self, entity_id: str) -> dict | None:
         """Return this entity's ``{entity_id}.json`` metadata sidecar, or ``None``.
@@ -167,6 +180,7 @@ class ImageHandler:
                 f.writelines(response.iter_content(chunk_size=8192))
 
             print(f"  Saved: {filename}")
+            self._downloaded_files_index()[entity_id] = filepath
             time.sleep(0.5)
             return filepath
 
