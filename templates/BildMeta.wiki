@@ -22,7 +22,7 @@
 </tr>}}{{#if:{{{quelle|}}}|
 <tr>
 <th>Quelle</th>
-<td>{{{quelle|}}}</td>
+<td>{{#ifeq:{{#titleparts:{{{quelle|}}}|1|3}}|previous.bildindex.de|Bildindex.de ID: {{#titleparts:{{{quelle|}}}|1|-1}}|{{{quelle|}}}}}</td>
 </tr>}}
 </table>[[Kategorie:CbDD]]</includeonly><noinclude>
 == Verwendung ==
@@ -49,7 +49,7 @@ Jede Datei, die diese Vorlage verwendet, wird automatisch der Kategorie ''CbDD''
 * '''rechteinhaber''' – Inhaber der Bildrechte
 * '''lizenz''' – Lizenz, z.B. CC BY-ND 4.0
 * '''cc''' – ''ja'' wenn die Lizenz eine Creative-Commons-Lizenz ist, sonst ''nein''
-* '''quelle''' – Link zum Originalbild beim Anbieter
+* '''quelle''' – Link zum Originalbild beim Anbieter oder Bildindex ID für Bildindex Aufnahmen.
 
 Alle Parameter sind optional.
 
