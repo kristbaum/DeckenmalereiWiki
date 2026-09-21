@@ -1,10 +1,40 @@
-<div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">'''Experimenteller Aufbau:''' Diese Wiki-Instanz ist ein Forschungsprototyp. Die Artikel wurden automatisch aus den gedruckten Bänden des CbDD extrahiert und sind nur grob für menschliche Leser formatiert. Einige Abbildungen fehlen. Inhaltliche Fehler und Formatierungsprobleme sind zu erwarten.</div>
+<div style="background-color:var(--background-color-notice-subtle,#eaf3fb); border-left:4px solid var(--border-color-progressive,#3a6ea5); color:var(--color-base,inherit); padding:0.5em 1em; margin:0 0 1em 0; font-size:0.9em;">'''Experimenteller Aufbau:''' Diese Wiki-Instanz ist ein Forschungsprototyp, für interaktive Abfragen dur LLM-Chat Systeme und Experimente Extraktion von Strukturdaten. Die Artikel wurden automatisch aus den beiden Beständen des CbDD übernommen: aus den gedruckten Bänden und aus der Datenbank von deckenmalerei.eu, und sind nur leicht aufbereitet und für menschliche Leser formatiert. Einige Abbildungen fehlen. Inhaltliche Fehler und Formatierungsprobleme sind zu erwarten; maßgeblich bleiben die Originalveröffentlichungen.</div>
 
-Das ''Corpus der barocken Deckenmalerei in Deutschland'' (CbDD) umfasste 15 Druckbände (14 Sachbände und einen Gesamtindex), erschienen von 1976 bis 2010 im Hirmer Verlag. Sie dokumentieren die barocke Deckenmalerei in Oberbayern. Zur [[Zur Benutzung|Benutzung]].
+Das ''Corpus der barocken Deckenmalerei in Deutschland'' besteht aus '''zwei Beständen''', die in diesem Wiki nebeneinander zugänglich sind: den '''15 gedruckten Bänden''' (1976–2010), die die barocke Deckenmalerei in Oberbayern dokumentieren, und dem modernen [https://deckenmalerei.badw.de/das-projekt.html Akademieprojekt] mit dem erweiterten Fokus auf alle 16 Bundesländer, von dem ein Teil der Datenbank unter [https://www.deckenmalerei.eu deckenmalerei.eu] hier eingebunden ist.
+
+{| class="wikitable" style="width:100%"
+!
+! gedruckte Bände (CBD)
+! deckenmalerei.eu Datenbank (CbDD)
+|-
+! style="width:20%" | Grundlage
+| 15 Druckbände (14 Sachbände, 1 Gesamtindex), Hirmer Verlag
+| Datenbank [https://www.deckenmalerei.eu deckenmalerei.eu]
+|-
+! Zeitraum
+| Erschienen 1976–2010
+| Bearbeitungsstand 2020–2026, laufend erweitert
+|-
+! Räumlicher Schwerpunkt
+| Oberbayern
+| Gesamtes Bundesgebiet, alle 16 Bundesländer
+|-
+! Umfang in diesem Wiki
+| 14 Sachbände, nach Landkreisen gegliedert
+| 1.366 Artikel zu 836 Orten von 57 AutorInnen
+|-
+! Erschließung
+| nach Band, Gebäudetyp, Ort und AutorIn
+| nach Bundesland, Ort, Modul und AutorIn
+|}
 
 ----
 
-=== Nach Band durchsuchen ===
+=== CBD-Bände ===
+
+Die 15 Druckbände (14 Sachbände und ein Gesamtindex) erschienen von 1976 bis 2010 im Hirmer Verlag und dokumentieren die barocke Deckenmalerei in Oberbayern. Jeder Sachband erschließt einen oder mehrere Landkreise; die Artikel dieses Bestands wurden automatisch aus den Bänden extrahiert.
+
+==== Nach Band durchsuchen ====
 
 {| class="wikitable" style="width:100%"
 |-
@@ -33,12 +63,59 @@ Das ''Corpus der barocken Deckenmalerei in Deutschland'' (CbDD) umfasste 15 Druc
 | [[:Kategorie:Band 14|Band 14]] – Landkreise Ingolstadt und Pfaffenhofen (2010)
 |}
 
-=== Nach Gebäudetyp ===
+==== Nach Gebäudetyp ====
 
 * [[:Kategorie:Sakral|Sakralbauten]]
 * [[:Kategorie:Profan|Profanbauten]]
 
-=== Nach Autorinnen und Autoren ===
+----
+
+=== CbDD Datenbank auf deckenmalerei.eu ===
+
+Der moderne Bestand setzt das Corpus digital fort. Herausgegeben von Stephan Hoppe, Hubert Locher und Matteo Burioni, erfasst er die barocke Deckenmalerei über Oberbayern hinaus im gesamten Bundesgebiet. Die hier gespiegelten '''1.366 Artikel''' zu '''836 Orten''' stammen von '''57 AutorInnen'''.
+
+Jeder Artikel dieses Bestands trägt oben einen Zitationsblock mit Link auf die Originalfassung unter <code>deckenmalerei.eu</code>, dazu Inventarnummer und Lage auf OpenStreetMap. '''Wichtig:''' Dieses Wiki ist nur eine Kopie und kann veraltet sein; maßgeblich ist stets die Originalveröffentlichung. Die Texte stehen unter [https://creativecommons.org/licenses/by/4.0/ CC BY 4.0]; die Abbildungen sind unterschiedlich lizenziert und werden, wo eine Spiegelung nicht zulässig ist, statt eingebunden auf die Quelle verlinkt.
+
+==== Nach Bundesland ====
+
+Übersicht aller Bundesländer unter [[:Kategorie:Bundesländer|Bundesländer]]:
+
+{| class="wikitable" style="width:100%"
+! Bundesland !! Artikel !! Bundesland !! Artikel
+|-
+| [[:Kategorie:Bayern|Bayern]] || 543 || [[:Kategorie:Mecklenburg-Vorpommern|Mecklenburg-Vorpommern]] || 39
+|-
+| [[:Kategorie:Schleswig-Holstein|Schleswig-Holstein]] || 183 || [[:Kategorie:Hessen|Hessen]] || 33
+|-
+| [[:Kategorie:Niedersachsen|Niedersachsen]] || 105 || [[:Kategorie:Hamburg|Hamburg]] || 30
+|-
+| [[:Kategorie:Thüringen|Thüringen]] || 104 || [[:Kategorie:Sachsen-Anhalt|Sachsen-Anhalt]] || 27
+|-
+| [[:Kategorie:Baden-Württemberg|Baden-Württemberg]] || 92 || [[:Kategorie:Brandenburg|Brandenburg]] || 20
+|-
+| [[:Kategorie:Nordrhein-Westfalen|Nordrhein-Westfalen]] || 86 || [[:Kategorie:Rheinland-Pfalz|Rheinland-Pfalz]] || 16
+|-
+| [[:Kategorie:Sachsen|Sachsen]] || 69 || [[:Kategorie:Berlin|Berlin]] || 12
+|-
+| [[:Kategorie:Bremen|Bremen]] || 6 || [[:Kategorie:Saarland|Saarland]] || 1
+|}
+
+==== Nach Modul ====
+
+Der moderne Bestand ist in Arbeitsmodule gegliedert; die Modulnummer stammt aus den Gebäudedaten der Datenbank. Alle Module unter [[:Kategorie:Module|Module]].
+
+[[:Kategorie:Modul 0|Modul 0]] (368) · [[:Kategorie:Modul 1|Modul 1]] (501) · [[:Kategorie:Modul 2|Modul 2]] (438) · [[:Kategorie:Modul 3|Modul 3]] (19) · [[:Kategorie:Modul 4|Modul 4]] (8)
+
+----
+
+=== Nach Ort ===
+
+Beide Bestände sind nach Ort erschlossen, in 836 Ortskategorien, gesammelt unter [[:Kategorie:Ort|Ort]].
+
+
+=== Nach AutorInnen und Autoren ===
+
+Beide Bestände sind nach AutorInnen erschlossen; die vollständige Liste steht unter [[:Kategorie:AutorInnen|AutorInnen]].
 
 [[:Kategorie:Bauer-Wild, Anna|Bauer-Wild, Anna]] · [[:Kategorie:Böhm, Cordula|Böhm, Cordula]] · [[:Kategorie:Lüdicke, Lore|Lüdicke, Lore]] · [[:Kategorie:Werner-Clementschitsch, Heide|Werner-Clementschitsch, Heide]] · [[:Kategorie:Sinkel, Kristin|Sinkel, Kristin]] · [[:Kategorie:Bachter, Falk|Bachter, Falk]] · [[:Kategorie:Volk-Knüttel, Brigitte|Volk-Knüttel, Brigitte]] · [[:Kategorie:Sauerländer, Brigitte|Sauerländer, Brigitte]] · [[:Kategorie:Grimminger, Christina|Grimminger, Christina]] · [[:Kategorie:Langenstein, Eva|Langenstein, Eva]] · [[:Kategorie:Rupprecht, Bernhard|Rupprecht, Bernhard]] · [[:Kategorie:Baur, Eva-Gesine|Baur, Eva-Gesine]] · [[:Kategorie:Tezmen-Siegel, Jutta|Tezmen-Siegel, Jutta]] · [[:Kategorie:Büttner, Frank|Büttner, Frank]] · [[:Kategorie:Bauer, Hermann|Bauer, Hermann]] · [[:Kategorie:Holler, Wolfgang|Holler, Wolfgang]] · [[:Kategorie:Hamacher, Bärbel|Hamacher, Bärbel]] · [[:Kategorie:Gluderer, Martin|Gluderer, Martin]]
 
