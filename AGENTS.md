@@ -31,6 +31,7 @@ docker compose up -d                   # local MediaWiki at http://localhost:808
 ```bash
 uv run deckenmalereiwiki && uv run pytest tests/ -v
 uv run ruff check .
+uv run ruff format .
 uv run ty check
 ```
 
