@@ -2,9 +2,12 @@
 
 Deckenmalereien prägten die Innenräume der Frühen Neuzeit wie kaum ein anderes künstlerisches Element. Das ''Corpus der barocken Deckenmalerei in Deutschland'' widmet sich der systematischen Erfassung, Dokumentation und Erforschung dieser Kunstschätze. Im Fokus stehen die erhaltenen und historisch überlieferten Werke aus der Zeit zwischen 1550 und 1800 – von Kirchen und Klöstern über Schlösser und Adelspalais bis hin zu bürgerlichen Gebäuden.
 
-Das Corpus besteht aus '''zwei Beständen''', die in diesem Wiki nebeneinander zugänglich sind: den '''15 gedruckten Bänden''' (1976–2010), die die barocke Deckenmalerei in Oberbayern dokumentieren, und dem modernen [https://deckenmalerei.badw.de/das-projekt.html Akademieprojekt] mit dem erweiterten Fokus auf alle 16 Bundesländer, von dem ein Teil der Datenbank unter [https://www.deckenmalerei.eu deckenmalerei.eu] hier eingebunden ist.
-
 Das moderne [https://deckenmalerei.badw.de/das-projekt.html Corpus der barocken Deckenmalerei in Deutschland] ist ein Projekt der [https://badw.de Bayerischen Akademie der Wissenschaften], gefördert im Akademienprogramm der Union der deutschen Akademien der Wissenschaften vom Bund sowie den Ländern Bayern und Hessen. Es sichert die vielfältigen, komplexen Bildprogramme durch hochauflösende Fotografien und 3D-Modelle und verbindet Methoden der Computational Humanities mit Zukunftstechnologien wie Virtual Reality und Künstlicher Intelligenz. '''Das Deckenmalerei-Lab wurde in diesem Rahmen vom Akademieprojekt aufgebaut''' – als Experimentierumgebung, in der beide Bestände für KI-gestützte Abfragen und die Extraktion von Strukturdaten erprobt werden.
+
+Das Corpus besteht aus '''zwei Beständen''', die in diesem Wiki zugänglich sind: den '''15 gedruckten Bänden''' (1976–2010), die die barocke Deckenmalerei in Oberbayern dokumentieren, und dem [https://deckenmalerei.badw.de/das-projekt.html Akademieprojekt] mit dem erweiterten Fokus auf alle 16 Bundesländer, von dem ein Teil der Datenbank unter [https://www.deckenmalerei.eu deckenmalerei.eu] hier eingebunden ist.
+
+Das [https://deckenmalerei.badw.de/das-projekt.html Corpus der barocken Deckenmalerei in Deutschland] ist ein Projekt der [https://badw.de Bayerischen Akademie der Wissenschaften], gefördert im Akademienprogramm der Union der deutschen Akademien der Wissenschaften vom Bund sowie den Ländern Bayern und Hessen. Es sichert die vielfältigen, komplexen Bildprogramme durch hochauflösende Fotografien und 3D-Modelle und verbindet Methoden der Computational Humanities mit Zukunftstechnologien wie Virtual Reality und Künstlicher Intelligenz. '''Das Deckenmalerei-Lab dient in diesem Rahmen – als Experimentierumgebung''', in der beide Bestände für KI-gestützte Abfragen und die Extraktion von Strukturdaten erprobt werden.
+
 
 {| class="wikitable" style="width:100%"
 !
@@ -12,7 +15,7 @@ Das moderne [https://deckenmalerei.badw.de/das-projekt.html Corpus der barocken 
 ! deckenmalerei.eu Datenbank (CbDD)
 |-
 ! style="width:20%" | Grundlage
-| 15 Druckbände (14 Sachbände, 1 Gesamtindex), Hirmer Verlag
+| 15 Druckbände (14 Sachbände, 1 Gesamtindex)
 | Datenbank [https://www.deckenmalerei.eu deckenmalerei.eu]
 |-
 ! Zeitraum
@@ -36,7 +39,7 @@ Das moderne [https://deckenmalerei.badw.de/das-projekt.html Corpus der barocken 
 
 === CBD-Bände ===
 
-Die 15 Druckbände (14 Sachbände und ein Gesamtindex) erschienen von 1976 bis 2010 im Hirmer Verlag und dokumentieren die barocke Deckenmalerei in Oberbayern. Jeder Sachband erschließt einen oder mehrere Landkreise; die Artikel dieses Bestands wurden automatisch aus den Bänden extrahiert.
+Die 15 Druckbände (14 Sachbände und ein Gesamtindex) erschienen von 1976 bis 2010 und dokumentieren die barocke Deckenmalerei in Oberbayern. Jeder Sachband erschließt einen oder mehrere Landkreise; die Artikel dieses Bestands wurden automatisch aus den Bänden extrahiert.
 
 ==== Nach Band durchsuchen ====
 
@@ -76,7 +79,7 @@ Die 15 Druckbände (14 Sachbände und ein Gesamtindex) erschienen von 1976 bis 2
 
 === CbDD Datenbank auf deckenmalerei.eu ===
 
-Der moderne Bestand setzt das Corpus digital fort. Herausgegeben von Stephan Hoppe, Hubert Locher und Matteo Burioni, erfasst er die barocke Deckenmalerei über Oberbayern hinaus im gesamten Bundesgebiet. Die hier gespiegelten '''1.366 Artikel''' zu '''836 Orten''' stammen von '''57 AutorInnen'''.
+Der Bestand setzt das Corpus digital fort. Herausgegeben von Stephan Hoppe, Hubert Locher und Matteo Burioni, erfasst er die barocke Deckenmalerei über Oberbayern hinaus im gesamten Bundesgebiet. Die hier gespiegelten '''1.366 Artikel''' zu '''836 Orten''' stammen von '''57 AutorInnen'''.
 
 Jeder Artikel dieses Bestands trägt oben einen Zitationsblock mit Link auf die Originalfassung unter <code>deckenmalerei.eu</code>, dazu Inventarnummer und Lage auf OpenStreetMap. '''Wichtig:''' Dieses Wiki ist nur eine Kopie und kann veraltet sein; maßgeblich ist stets die Originalveröffentlichung. Die Texte stehen unter [https://creativecommons.org/licenses/by/4.0/ CC BY 4.0]; die Abbildungen sind unterschiedlich lizenziert und werden, wo eine Spiegelung nicht zulässig ist, statt eingebunden auf die Quelle verlinkt.
 
@@ -106,7 +109,7 @@ Jeder Artikel dieses Bestands trägt oben einen Zitationsblock mit Link auf die 
 
 ==== Nach Modul ====
 
-Der moderne Bestand ist in Arbeitsmodule gegliedert; die Modulnummer stammt aus den Gebäudedaten der Datenbank. Alle Module unter [[:Kategorie:Module|Module]].
+Der Bestand ist in Arbeitsmodule gegliedert; die Modulnummer stammt aus den Gebäudedaten der Datenbank. Alle Module unter [[:Kategorie:Module|Module]].
 
 [[:Kategorie:Modul 0|Modul 0]] (368) · [[:Kategorie:Modul 1|Modul 1]] (501) · [[:Kategorie:Modul 2|Modul 2]] (438) · [[:Kategorie:Modul 3|Modul 3]] (19) · [[:Kategorie:Modul 4|Modul 4]] (8)
 
