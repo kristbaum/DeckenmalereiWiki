@@ -30,7 +30,11 @@ from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 
 from .artikel_modern import _modification_year, get_author_names
-from .citations import build_ref_name_mapping, parse_citations
+from .citations import (
+    build_ref_name_mapping,
+    parse_citations,
+    rewrite_internal_note_refs,
+)
 from .generator import title_to_filename
 from .image_handler import ImageHandler
 from .jats_converter import XLINK_NS, JatsConverter
@@ -528,6 +532,30 @@ class JatsArticleGenerator:
             out.append(f"{IND * level}</sec>")
         return out
 
+    @staticmethod
+    def _link_note_refs(
+        canonical_name: str,
+        citation_text: str,
+        fn_registry: dict[str, tuple[int, str]],
+    ) -> str:
+        """Turn "wie Anm. N" into an ``<xref>`` to the renumbered footnote.
+
+        Footnote names are ``{part_id}_{n}`` with *n* counted per TEXT_PART,
+        so "Anm. N" refers to ``{part_id}_N`` and is rewritten to that note's
+        article-wide label. This is the reviewer's preferred pattern for
+        repeated citations: a new footnote pointing to the earlier one.
+        """
+        part_id, own = canonical_name.rsplit("_", 1)
+
+        def replace(number: int) -> str | None:
+            target = fn_registry.get(f"{part_id}_{number}")
+            if target is None:
+                return None
+            label, fn_id = target
+            return f'<xref ref-type="fn" rid="{fn_id}">{label}</xref>'
+
+        return rewrite_internal_note_refs(citation_text, int(own), replace)
+
     def _back(
         self,
         text_entity: dict,
@@ -542,7 +570,10 @@ class JatsArticleGenerator:
             sections.append(f"{IND * 2}<fn-group>")
             for canonical_name in fn_order:
                 number, fn_id = fn_registry[canonical_name]
-                content = self.converter.convert_inline(footnote_texts[canonical_name])
+                text = self._link_note_refs(
+                    canonical_name, footnote_texts[canonical_name], fn_registry
+                )
+                content = self.converter.convert_inline(text)
                 sections.append(f'{IND * 3}<fn id="{fn_id}">')
                 sections.append(f"{IND * 4}<label>{number}</label>")
                 sections.append(f"{IND * 4}<p>{content}</p>")

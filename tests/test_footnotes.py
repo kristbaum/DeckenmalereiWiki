@@ -17,6 +17,7 @@ from deckenmalereiwiki.citations import (
     build_ref_name_mapping,
     is_relative_citation,
     parse_citations,
+    rewrite_internal_note_refs,
 )
 
 ROOT = Path(__file__).parent.parent
@@ -119,6 +120,53 @@ def test_definitions_followed_by_real_heading_are_left_alone():
     assert cleaned == text
 
 
+def _label(number: int) -> str:
+    return f"<{number + 60}>"
+
+
+@pytest.mark.parametrize(
+    ("text", "own", "expected"),
+    [
+        ("Wie Anm. 1.", 3, "Wie Anm. <61>."),
+        (
+            "Beschreibung von 1614 (wie Anm. 4).",
+            6,
+            "Beschreibung von 1614 (wie Anm. <64>).",
+        ),
+        ("Vgl. Anmerkung 2.", 5, "Vgl. Anmerkung <62>."),
+        # Self-reference / forward reference: editorial leftover, keep.
+        (
+            "Grundriss bei Albrecht (wie Anm. 3).",
+            3,
+            "Grundriss bei Albrecht (wie Anm. 3).",
+        ),
+        (
+            "Dehio, Sachsen I (wie Anm. 2), S. 599f.",
+            1,
+            "Dehio, Sachsen I (wie Anm. 2), S. 599f.",
+        ),
+        # Notes in a cited book, not internal references.
+        (
+            "Isphording, Göz, 1997, S. 58, Anmerkung 314.",
+            9,
+            "Isphording, Göz, 1997, S. 58, Anmerkung 314.",
+        ),
+        (
+            "Vgl. Fittschen, Caracalla, 2021, S. 362, dort auch Anm. 27.",
+            30,
+            "Vgl. Fittschen, Caracalla, 2021, S. 362, dort auch Anm. 27.",
+        ),
+        ("Schickhardt (wie Anm. ##).", 5, "Schickhardt (wie Anm. ##)."),
+    ],
+)
+def test_rewrite_internal_note_refs(text, own, expected):
+    assert rewrite_internal_note_refs(text, own, _label) == expected
+
+
+def test_rewrite_internal_note_refs_keeps_unresolvable_target():
+    assert rewrite_internal_note_refs("Wie Anm. 1.", 2, lambda n: None) == "Wie Anm. 1."
+
+
 # ---------------------------------------------------------------------------
 # Corpus checks on generated JATS
 # ---------------------------------------------------------------------------
@@ -194,6 +242,28 @@ def test_jats_unconverted_markers_stay_rare():
                 for m in marker.finditer("".join(p.itertext()))
             )
     assert len(leftovers) < 150, f"{len(leftovers)} leftovers, e.g. {leftovers[:10]}"
+
+
+def test_jats_note_to_note_xrefs_point_backwards():
+    """ "wie Anm. N" links inside footnotes must hit an earlier, existing note."""
+    failures = []
+    linked = 0
+    for path in _jats_files():
+        root = ET.parse(path).getroot()
+        labels = {
+            fn.get("id"): int(fn.findtext("label") or 0)
+            for fn in root.findall("back/fn-group/fn")
+        }
+        for fn in root.findall("back/fn-group/fn"):
+            for x in fn.iter("xref"):
+                linked += 1
+                target = labels.get(x.get("rid"))
+                if target is None or target >= labels[fn.get("id")]:
+                    failures.append(f"{path.name}: {fn.get('id')} -> {x.get('rid')}")
+                elif x.text != str(target):
+                    failures.append(f"{path.name}: xref text {x.text!r} != {target}")
+    assert not failures, failures[:10]
+    assert linked >= 8, "internal 'wie Anm. N' references are no longer linked"
 
 
 def test_jats_repeated_fn_references_are_rare():
