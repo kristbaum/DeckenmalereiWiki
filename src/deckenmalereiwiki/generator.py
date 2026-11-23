@@ -8,7 +8,11 @@ import re
 from pathlib import Path
 
 from .artikel_modern import generate_artikel_modern
-from .citations import parse_citations, replace_citation_refs
+from .citations import (
+    build_ref_name_mapping,
+    parse_citations,
+    replace_citation_refs,
+)
 from .converter import HtmlConverter
 from .image_handler import ImageHandler
 from .loader import DataLoader
@@ -137,20 +141,11 @@ class ArticleGenerator:
             else:
                 part_texts[part["ID"]] = ""
 
-        # Deduplicate citations by content; map duplicates to canonical name
-        citation_text_to_name: dict[str, str] = {}
-        ref_name_mapping: dict[str, str] = {}
-
-        for ref_name, citation_text in all_citations.items():
-            if citation_text in citation_text_to_name:
-                ref_name_mapping[ref_name] = citation_text_to_name[citation_text]
-            else:
-                citation_text_to_name[citation_text] = ref_name
-                ref_name_mapping[ref_name] = ref_name
-
-        deduplicated_citations = {
-            canonical: text for text, canonical in citation_text_to_name.items()
-        }
+        # Wiki style: footnotes with identical text share one <ref name>
+        # (relative notes such as "Ebd." are kept separate).
+        ref_name_mapping, deduplicated_citations = build_ref_name_mapping(
+            all_citations, merge_duplicates=True
+        )
 
         # --- Second pass: emit article sections ---
         used_refs: dict[str, bool] = {}

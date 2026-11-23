@@ -17,9 +17,23 @@ _FOOTNOTE_ANCHOR_PATTERN = re.compile(
 )
 
 
+# Markers that the editor wrapped in inline formatting, e.g. "<u>[7]</u>" or
+# "<sup>[3] </sup>" (the space may sit inside the tag).
+_FORMATTED_MARKER_PATTERN = re.compile(
+    r"<(u|sup|strong|b|em|i|span)\b[^>]*>\s*\[\s*(\d+)\s*\](\s*)</\1>",
+    flags=re.IGNORECASE,
+)
+
+# Empty headings (e.g. a stray "<h5></h5>" after the footnote block) carry no
+# content but would otherwise stop the trailing definitions from being parsed.
+_EMPTY_HEADING_PATTERN = re.compile(r"<h[1-6][^>]*>\s*</h[1-6]>", re.IGNORECASE)
+
+
 def _normalize_footnote_anchors(text: str) -> str:
-    """Replace footnote anchor markers with bare "[n]" brackets."""
-    return _FOOTNOTE_ANCHOR_PATTERN.sub(r"[\1]", text)
+    """Replace anchored/formatted footnote markers with bare "[n]" brackets."""
+    text = _FOOTNOTE_ANCHOR_PATTERN.sub(r"[\1]", text)
+    text = _FORMATTED_MARKER_PATTERN.sub(r"[\2]\3", text)
+    return _EMPTY_HEADING_PATTERN.sub("", text)
 
 
 def parse_citations(text: str, part_id: str) -> tuple[str, dict[str, str]]:
@@ -136,3 +150,50 @@ def replace_citation_refs(
     text = re.sub(r"(?<!^)\[\s*(\d+)\s*\]", replace_ref, text, flags=re.MULTILINE)
 
     return text
+
+
+# Footnotes whose meaning depends on their position: "Ebd."/"Ibid." point to the
+# preceding note, "Ders."/"Dies." repeat the preceding author, "a. a. O." the
+# previously cited work, and "wie Anm. 5" names a note by its (per-TEXT_PART)
+# number. Two such notes with identical text in different sections usually
+# mean different things, so they must never be merged.
+_RELATIVE_CITATION_PATTERN = re.compile(
+    r"^\s*(?:Ebd|Ebenda|Ibid|Ibidem|Ders|Dies|a\.\s*a\.\s*O)\b"
+    r"|\b(?:Anm|Fn|Fußnote)\.?\s*\d",
+    flags=re.IGNORECASE,
+)
+
+
+def is_relative_citation(citation_text: str) -> bool:
+    """Return True if *citation_text* only makes sense relative to its position."""
+    return bool(_RELATIVE_CITATION_PATTERN.search(citation_text))
+
+
+def build_ref_name_mapping(
+    all_citations: dict[str, str], merge_duplicates: bool
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Map each footnote to its canonical name.
+
+    With *merge_duplicates* (wiki style), footnotes with identical text share
+    one canonical name, so the article cites a single ``<ref name>`` several
+    times. Relative notes (see :func:`is_relative_citation`) are never merged.
+    Without it (scholarly/JATS style), every source footnote stays unique.
+
+    Returns:
+        tuple: (ref_name_mapping, canonical_citations) where ref_name_mapping maps
+        every original ref name to its canonical one and canonical_citations maps
+        canonical names to their text.
+    """
+    ref_name_mapping: dict[str, str] = {}
+    canonical_citations: dict[str, str] = {}
+    text_to_name: dict[str, str] = {}
+    for ref_name, citation_text in all_citations.items():
+        mergeable = merge_duplicates and not is_relative_citation(citation_text)
+        if mergeable and citation_text in text_to_name:
+            ref_name_mapping[ref_name] = text_to_name[citation_text]
+            continue
+        if mergeable:
+            text_to_name[citation_text] = ref_name
+        ref_name_mapping[ref_name] = ref_name
+        canonical_citations[ref_name] = citation_text
+    return ref_name_mapping, canonical_citations

@@ -30,7 +30,7 @@ from pathlib import Path
 from xml.sax.saxutils import escape, quoteattr
 
 from .artikel_modern import _modification_year, get_author_names
-from .citations import parse_citations
+from .citations import build_ref_name_mapping, parse_citations
 from .generator import title_to_filename
 from .image_handler import ImageHandler
 from .jats_converter import XLINK_NS, JatsConverter
@@ -380,17 +380,14 @@ class JatsArticleGenerator:
             else:
                 part_texts[part["ID"]] = ""
 
-        citation_text_to_name: dict[str, str] = {}
-        ref_name_mapping: dict[str, str] = {}
-        for ref_name, citation_text in all_citations.items():
-            if citation_text in citation_text_to_name:
-                ref_name_mapping[ref_name] = citation_text_to_name[citation_text]
-            else:
-                citation_text_to_name[citation_text] = ref_name
-                ref_name_mapping[ref_name] = ref_name
-        deduplicated_citations = {
-            canonical: text for text, canonical in citation_text_to_name.items()
-        }
+        # Scholarly footnote convention: every source footnote becomes its own
+        # <fn>, even when its text repeats one from another section. Only a
+        # footnote cited several times within its own TEXT_PART gets several
+        # <xref>s (valid JATS). Merging by text would also corrupt relative
+        # notes ("Ebd.") – see build_ref_name_mapping.
+        ref_name_mapping, footnote_texts = build_ref_name_mapping(
+            all_citations, merge_duplicates=False
+        )
 
         # Footnotes are numbered sequentially in order of first appearance in
         # the body text, mirroring the reference sample's <fn-group>.
@@ -408,12 +405,12 @@ class JatsArticleGenerator:
             def repl(match):
                 num = match.group(1)
                 name = ref_name_mapping.get(f"{part_id}_{num}", f"{part_id}_{num}")
-                if name not in deduplicated_citations:
+                if name not in footnote_texts:
                     return match.group(0)
                 number, fn_id = footnote(name)
                 return f'<xref ref-type="fn" rid="{fn_id}">{number}</xref>'
 
-            return re.sub(r"(?<!^)\[(\d+)\]", repl, text, flags=re.MULTILINE)
+            return re.sub(r"(?<!^)\[\s*(\d+)\s*\]", repl, text, flags=re.MULTILINE)
 
         # --- Body ---
         body = [f"{IND}<body>"]
@@ -470,7 +467,7 @@ class JatsArticleGenerator:
             open_depths.pop()
         body.append(f"{IND}</body>")
 
-        back = self._back(text_entity, deduplicated_citations, fn_registry, fn_order)
+        back = self._back(text_entity, footnote_texts, fn_registry, fn_order)
 
         out = [
             '<?xml version="1.0" encoding="UTF-8" standalone="no"?>',
@@ -534,7 +531,7 @@ class JatsArticleGenerator:
     def _back(
         self,
         text_entity: dict,
-        deduplicated_citations: dict[str, str],
+        footnote_texts: dict[str, str],
         fn_registry: dict[str, tuple[int, str]],
         fn_order: list[str],
     ) -> list[str]:
@@ -545,9 +542,7 @@ class JatsArticleGenerator:
             sections.append(f"{IND * 2}<fn-group>")
             for canonical_name in fn_order:
                 number, fn_id = fn_registry[canonical_name]
-                content = self.converter.convert_inline(
-                    deduplicated_citations[canonical_name]
-                )
+                content = self.converter.convert_inline(footnote_texts[canonical_name])
                 sections.append(f'{IND * 3}<fn id="{fn_id}">')
                 sections.append(f"{IND * 4}<label>{number}</label>")
                 sections.append(f"{IND * 4}<p>{content}</p>")
